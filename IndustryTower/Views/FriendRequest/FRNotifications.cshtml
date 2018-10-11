@@ -1,0 +1,61 @@
+﻿@model IEnumerable<IndustryTower.Models.FriendRequest>
+
+@if (Model.Count() > 0)
+{
+
+            foreach (var item in Model)
+            {
+            <div class="fr-Notif col-md-12 bg-default margin-top-bot-xs">
+                <div class="inline-block col-md-3 col-xs-4">
+                    @Html.ProfilePic(user: item.RequesterUser)
+                </div>
+                <div class="col-md-9 col-xs-8">
+                    <div class="margin-top-bot-xs">
+                        @Html.DisplayTextFor(model => item.message)
+                    </div>
+                    <div>
+                        @using (Html.BeginForm("ConfirmFriendRequest", "FriendRequest",
+                            FormMethod.Post,
+                            new { @Class = "friendRequest-notif-form inline-block" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary()
+
+                            @Html.Hidden("user", EncryptionHelper.Protect(item.RequesterUser.UserId))
+                            @Html.Hidden("request", EncryptionHelper.Protect(item.requestID))
+                            <input type="submit" value="@Resource.friendRequestConfirm" id="friensRequest-botton" class="btn btn-primary btn-xs" data-loading-text="@Resource.loading" />
+                        }
+
+                        @using (Html.BeginForm("DenyFriendRequest", "FriendRequest",
+                            FormMethod.Post,
+                            new { @Class = "friendRequest-notif-form inline-block" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary()
+
+                            @Html.Hidden("user", EncryptionHelper.Protect(item.RequesterUser.UserId))
+                            @Html.Hidden("request", EncryptionHelper.Protect(item.requestID))
+    <input type="submit" value="@Resource.friendRequestDeny" id="friensRequest-botton" class="btn btn-primary btn-xs" data-loading-text="@Resource.loading" />
+                        }
+                    </div>
+                </div>
+            </div>
+
+            }
+    
+    <script>
+        //$(document).ready(function () {
+        //    notifMenuScrollSize("div#friendRequestNotifs.hasScrolBar", ".fr-Notif", 5);
+        //});
+    </script>
+
+}
+else
+{
+    <div class="text-center" style="width:363px">
+        @Resource.noResult
+    </div>
+
+}
+
+

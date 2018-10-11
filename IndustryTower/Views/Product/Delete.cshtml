@@ -1,0 +1,48 @@
+﻿@model IndustryTower.Models.Product
+
+
+<div id="productDelete" class="row dir">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                @Resource.deleteProduct
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm(null, null, new { PTD = EncryptionHelper.Protect(Model.productID) }, FormMethod.Post, new { @class = "deletequestion-form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.Hidden("P", EncryptionHelper.Protect(Model.productID))
+
+                    <div class="col-md-4">
+                        @Html.ProfilePic(product: Model)
+                    </div>
+                    <div class="col-md-8">
+                        <p>
+                            @Html.DisplayFor(model => model.CultureProductName)
+                        </p>
+                        <p>
+                            <strong class="label label-info">@Resource.brandName</strong>
+                            @Html.DisplayFor(model => model.CultureBrandName)
+                        </p>
+                        <p>
+                            @Html.DisplayAbstractFor(Model.CultureAbout)
+                        </p>
+                    </div>
+                    <div class="alert alert-danger col-md-12 margin-top-bot-md">
+                        @Resource.deleteProductCaution
+                    </div>
+                    <input type="submit" value="@Resource.deleteService" class="btn btn-primary col-md-12" data-loading-text="@Resource.loading" />
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+@section scripts{
+@Scripts.Render("~/bundles/Product")
+    }

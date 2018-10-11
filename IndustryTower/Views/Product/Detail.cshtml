@@ -1,0 +1,223 @@
+﻿@model IndustryTower.Models.Product
+@{
+    ViewBag.Title = Model.CultureProductName + "-" + Model.company.CultureCoName;
+    var prid = EncryptionHelper.Protect(Model.productID);
+}
+
+@section head{
+    <meta name="description" content="@Model.CultureAbout">
+<meta name="keywords" content="@String.Join(",", Model.categories.Select(d=>d.CultureCatName))">
+}
+<div class="row dir">
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @Resource.relatedCategories
+                    </div>
+                    <div class="panel-body">
+                        @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { PrId = Model.productID }))
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @Resource.relatedProducts
+                    </div>
+                    <div class="panel-body">
+                        @Html.AjaxPrtialLoader(Url.Action("RelatedProducts", "Product", new { PrId = Model.productID }))
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @Resource.relatedServices
+                    </div>
+                    <div class="panel-body">
+                        @Html.AjaxPrtialLoader(Url.Action("RelatedServices", "Service", new { PrId = Model.productID }))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-5">
+                @Html.ProfilePic(company: Model.company)
+                
+            </div>
+            <div class="col-md-7">
+                @if (Model.company.Admins.Any(f => AuthorizationHelper.isRelevant(f.UserId)))
+                {
+                    <div class="pull-left">
+                        @Html.ModifyIcons("Edit", "Delete", "Product", new { PrId = prid, PrName = StringHelper.URLName(Model.CultureProductName) }, editAjax: false, deleteAjax: false)
+                    </div>
+
+                }
+                <h3>
+                    @Html.ActionLink(Model.company.CultureCoName, "CProfile", "Company", new { CoId = Model.company.coID, CoName = StringHelper.URLName(Model.company.CultureCoName) })
+                </h3>
+                <h1>
+                    @Html.DisplayFor(model => model.CultureProductName)
+                </h1>
+                
+                
+                <ul id="productLike" class="nav nav-pills nav-stacked">
+                    @{Html.RenderAction("Like", "Like", new
+                      {
+                          model = new IndustryTower.ViewModels.likeVars
+                          {
+                              elemId = Model.productID,
+                              typ = IndustryTower.ViewModels.LikeType.LikeProduct
+                          }
+                      });}
+                </ul>
+            </div>
+        </div>
+
+        <div class="row margin-top-bot-md">
+                 @if (Model.image != null)
+                 {
+                     Html.RenderAction("FileSlideshow", "Home", new { folder = "Product", fileNamesString = Model.image });
+                 }
+                 else
+                 {
+                     Html.ProfilePic(product: Model);
+                 }
+
+            <div class="col-md-12">
+                @if (Model.document != null)
+                {
+                    Html.RenderAction("FileList", "Home", new { folder = "Product", fileNamesString = Model.document });
+                }
+            </div>
+                 
+        </div>
+
+       
+        <div class="row dir">
+                <table class="table">
+                    @*<thead>
+                        <tr>
+                            <th>ddddd</th>
+                            <th>vcvvv</th>
+                        </tr>
+                    </thead>*@
+                    
+                    <tbody>
+                        
+                        <tr>
+                            <td class="no-wrap">@Html.DisplayNameFor(model => model.CultureBrandName)</td>
+                            <td>@Html.DisplayFor(model => model.CultureBrandName)</td>
+                        </tr>
+                        <tr>
+                            <td class="no-wrap">@Html.DisplayNameFor(model => model.productionCountryID)</td>
+                            <td>@Html.DisplayFor(model => model.productionCountry.CultureStateName)</td>
+                        </tr>
+                        <tr>
+                            <td class="no-wrap">@Html.DisplayNameFor(model => model.CultureAbout)</td>
+                            <td>@Html.DisplayFor(model => model.CultureAbout)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="bottom-border-blue text-center"><strong>@Resource.support</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="no-wrap">@Html.DisplayNameFor(model => model.afterSale)</td>
+                            <td>@Html.DisplayFor(model => model.afterSale)</td>
+                        </tr>
+                        <tr>
+                            <td class="no-wrap">@Html.DisplayNameFor(model => model.guarantee)</td>
+                            <td>@Html.DisplayFor(model => model.guarantee)</td>
+                        </tr>
+                        <tr>
+                            <td class="no-wrap">@Html.DisplayNameFor(model => model.wuarantee)</td>
+                            <td>@Html.DisplayFor(model => model.wuarantee)</td>
+                        </tr>
+                        <tr>
+                            <td class="no-wrap">@Html.DisplayNameFor(model => model.shipFree)</td>
+                            <td>@(Model.shipFree == true ? Resource.yes : Resource.no)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="bottom-border-blue text-center"><strong>@Resource.economic</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="no-wrap">@Html.DisplayNameFor(model => model.price)</td>
+                            <td>@Html.DisplayFor(model => model.price)</td>
+                        </tr>
+                        <tr>
+                            <td class="no-wrap">@Html.DisplayNameFor(model => model.shabnam)</td>
+                            <td>@Html.DisplayFor(model => model.shabnam)</td>
+                        </tr>
+                        <tr>
+                            <td class="no-wrap">@Html.DisplayNameFor(model => model.iranCode)</td>
+                            <td>@Html.DisplayFor(model => model.iranCode)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="bottom-border-blue text-center"><strong>@Resource.specs</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="no-wrap">@Html.DisplayNameFor(model => model.height)</td>
+                            <td>@Html.DisplayFor(model => model.height)</td>
+                        </tr>
+                        <tr>
+                            <td class="no-wrap">@Html.DisplayNameFor(model => model.length)</td>
+                            <td>@Html.DisplayFor(model => model.length)</td>
+                        </tr>
+                        <tr>
+                            <td class="no-wrap">@Html.DisplayNameFor(model => model.width)</td>
+                            <td>@Html.DisplayFor(model => model.width)</td>
+                        </tr>
+                        <tr>
+                            <td class="no-wrap">@Html.DisplayNameFor(model => model.packCount)</td>
+                            <td>@Html.DisplayFor(model => model.packCount)</td>
+                        </tr>
+                        <tr>
+                            <td class="no-wrap">@Html.DisplayNameFor(model => model.PorT)</td>
+                            <td>@(EnumTypes.ResourceManager.GetString(Model.PorT.ToString()))</td>
+                        </tr>
+                        <tr>
+                            <td class="no-wrap">@Html.DisplayNameFor(model => model.power)</td>
+                            <td>@Html.DisplayFor(model => model.power)</td>
+                        </tr>
+                    </tbody>
+                </table>
+        </div>
+
+        
+
+
+        <div id="productComments" class="bg-default col-md-12">
+            @{
+                var se = new MvcSerializer();
+                var mod = new IndustryTower.ViewModels.commentVars
+                {
+                    elemId = Model.productID,
+                    typ = IndustryTower.ViewModels.CommentType.CommentProduct
+                };
+                var tt = se.Serialize(mod, SerializationMode.Plaintext);
+            }
+            @Html.AjaxPrtialLoader(Url.Action("Comments", "Comment", new { model = tt }))
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/Social")
+@Scripts.Render("~/bundles/SlideShow")
+<script>
+    $(document).ready(function () {
+        SlideShowArrowKeys();
+    })
+    </script>
+}

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<IndustryTower.ViewModels.FilesBarViewModel>
+
+<div id="FilesList" class="panel panel-default margin-top-bot-md">
+    <div class="panel-heading">
+        <h3 class="panel-title">@Resource.files</h3>
+    </div>
+    <div class="panel-body">
+        @foreach (var file in Model)
+        {
+            <a id="fileContainer" class="inline-block icn-30" href="@Url.Content(file.filepath)">
+                <span class="icn-30 @file.fileIcon"></span>
+                
+            </a>
+        }
+    </div>
+</div>
+    @*<div id="FilesList" class="">
+        <div id="filesLabel">
+            @Resource.files
+        </div>
+        
+    </div>*@

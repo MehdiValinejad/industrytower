@@ -1,0 +1,9 @@
+﻿@model DateTime
+@if (Model != null)
+{
+    var time = Model > DateTime.UtcNow ? TimeHelper.TimeLater(Model) : TimeHelper.TimeAgo(Model);
+
+        @time;
+    
+    
+}

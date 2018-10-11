@@ -1,0 +1,108 @@
+﻿@model IEnumerable<IndustryTower.ViewModels.AnswerViewModel>
+
+
+@foreach (var a in Model)
+{
+    var aid = EncryptionHelper.Protect(a.answerID);
+
+    var containerClass = "notacc-ans-box";
+    var btnClass = "btn-default";
+    var btnText = Resource.NotmarkedAsAnswer;
+    if (a.accept)
+    {
+
+        containerClass = "acc-ans-box";
+        btnClass = "btn-success";
+        btnText = Resource.markedAsAnswer;
+    }
+    <div id="answerBodyDisplay" class="col-md-12 panel panel-default @containerClass">
+
+        <div id="answerDetail">
+            @if (AuthorizationHelper.isRelevant(a.answererID))
+            {
+                @Html.ModifyIcons("Edit", "Delete", "Answer", new { AId = aid })
+            }
+            <div class="margin-top-bot-md">
+                @Html.DisplayTextFor(model => a.answerBody)
+            </div>
+            <small class="margin-lf-r8-md">
+                @Html.DisplayFor(model => a.answerDate)
+            </small>
+        </div>
+
+
+        <div class="row margin-top-bot-md">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="dirltr col-md-8 col-xs-6 margin-top-bot-md">
+                        @{Html.RenderPartial("~/Views/Score/Main.cshtml", new IndustryTower.ViewModels.ScoreVars
+                            {
+                                elemId = a.answerID,
+                                type = IndustryTower.Models.ScoreType.Avote,
+                                count = a.Scores == null ? 0 : (int)a.Scores
+                            });}
+                        <ul id="answerLike" class="nav nav-pills nav-stacked inline-block no-pad">
+                            @{Html.RenderAction("Like", "Like", new { model = new IndustryTower.ViewModels.likeVars { elemId = a.answerID, typ = IndustryTower.ViewModels.LikeType.LikeAnswer } });}
+                        </ul>
+                        <div class="inline-block">
+                            @if (AuthorizationHelper.isRelevant(a.questionerID))
+                            {
+                                <div id="markAsAnswer">
+                                    @using (Html.BeginForm("AnswerAccept", "Answer",
+                                            new { AId = aid }, FormMethod.Post,
+                                            new { @class = "accept-nswer" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <button type="button" id="ansacc" data-marked="@Resource.markedAsAnswer" data-notmarked="@Resource.NotmarkedAsAnswer" class="btn  btn-xs @btnClass">
+                                            <span class="glyphicon glyphicon-ok"></span> <i>@btnText</i>
+                                        </button>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                if (a.accept)
+                                {
+                                    <div id="markAsAnswer" class="marked btn btn-success disabled">
+                                        @Resource.markedAsAnswer
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-6  pull-right">
+                        @{Html.RenderPartial("~/Views/UserProfile/AvatarPartial.cshtml", new IndustryTower.Models.ActiveUser
+                    {
+                        UserId = a.answererID,
+                        firstName = a.senderName,
+                        firstNameEN = a.senderName,
+                        image = a.senderImage
+                    });}
+                    </div>
+               </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div id="offerComments" class="col-md-12 col-xs-12 bg-default">
+                @{
+                    var se = new MvcSerializer();
+                    var mod = new IndustryTower.ViewModels.commentVars
+                    {
+                        elemId = a.answerID,
+                        typ = IndustryTower.ViewModels.CommentType.CommentAnswer
+                    };
+                    var tt = se.Serialize(mod, SerializationMode.Plaintext);
+                }
+                @Html.AjaxPrtialLoader(Url.Action("Comments", "Comment", new { model = tt }))
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+}

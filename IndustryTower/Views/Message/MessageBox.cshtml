@@ -1,0 +1,23 @@
+﻿@model IEnumerable<IndustryTower.ViewModels.MessageViewModel>
+
+@foreach (var group in Model)
+{
+   <ul>
+       
+       @Html.DisplayFor(model=>group.user.UserId)
+        @Html.DisplayFor(model=>group.company.coID)
+       @Html.DisplayFor(model=>group.store.storeID)
+    
+    @foreach(var message in group.message)
+    {
+    <li>
+        @Html.DisplayFor(model=>message.body)
+    </li>
+    <li>
+        @Html.DisplayFor(model=>message.messageDate)
+    </li>
+    
+    }
+   </ul>
+    
+}

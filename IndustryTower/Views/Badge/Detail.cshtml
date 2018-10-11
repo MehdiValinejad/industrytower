@@ -1,0 +1,43 @@
+﻿@model IndustryTower.Models.Badge
+@{
+    ViewBag.Title = Model.name;
+}
+
+@section head{
+    <meta name="description" content="@Model.desc">
+    <meta name="keywords" content="@String.Join(",", Model.name.Split(new char [] {' '}))">
+    @if (ViewContext.RouteData.Values["BgName"] as string != StringHelper.URLName(Model.name))
+    {
+        <link rel="canonical" href="@Url.Action("Detail", "Badge", new { WId = Model.badgeId, BgName = StringHelper.URLName(Model.name) })" />
+    }
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default dir">
+            <div class="panel-heading">
+                <h2>
+                    @Html.DisplayFor(model => model.name)
+                    <span class="glyphicon glyphicon-cog bdg_@Model.color pull-left" title="@EnumTypes.ResourceManager.GetString(Model.color.ToString())"></span>
+                </h2>
+            </div>
+            <div class="panel-body">
+                <div>
+                    @Html.DisplayFor(model => model.desc)
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default dir">
+            <div class="panel-heading">
+                <h4>
+                    @Resource.usersHaveBadge
+                    <span class="glyphicon glyphicon-user pull-left"></span>
+                </h4>
+            </div>
+            <div class="panel-body">
+                @{Html.RenderAction("BadgeUsers", "Badge", new { BgId = Model.badgeId });}
+            </div>
+        </div>
+    </div>
+</div>
+

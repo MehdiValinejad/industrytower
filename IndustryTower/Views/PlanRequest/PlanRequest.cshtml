@@ -1,0 +1,98 @@
+﻿@model IndustryTower.ViewModels.PlanRequestViewModel
+@{
+    ViewBag.Title = Resource.planRequest;
+}
+<div class="row dir">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div>
+                    <h2>@Resource.planRequest</h2>
+                    <h4>
+                        <strong> <u>@ModelDisplayName.plan</u></strong>
+                        @if (Request.QueryString["plan"] != null)
+                        {
+                            @EnumTypes.ResourceManager.GetString(Request.QueryString["plan"].ToLower());
+                        }
+                    </h4>
+                    <h4>
+                        <strong> <u>@ModelDisplayName.planType</u></strong>
+                        @if (Request.QueryString["plantype"] != null)
+                        {
+                            @EnumTypes.ResourceManager.GetString(Request.QueryString["plantype"].ToLower())
+                        }
+                    </h4>
+                </div>
+            </div>
+            <div class=panel-body>
+                <div id="planreuqest" class="row">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        <div class="form-group col-md-6">
+                            @Html.TextBoxFor(model => model.name, new { @placeholder = Html.DisplayNameFor(model => model.name), @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.name)
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.TextBoxFor(model => model.regCode, new { @Value = String.Empty, @placeholder = Html.DisplayNameFor(model => model.regCode), @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.regCode)
+                        </div>
+                        <div class="form-group col-md-12">
+                            @Html.TextAreaFor(model => model.about, new { @placeholder = Html.DisplayNameFor(model => model.about), @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.about)
+                        </div>
+    <div class="form-group col-md-6 dirltr">
+        <div class="input-group">
+            @Html.EditorFor(model => model.email, "Email", new { @placeholder = Html.DisplayNameFor(model => model.email), @class = "form-control" })
+        </div>
+        @Html.ValidationMessageFor(model => model.email)
+    </div>
+    <div class="form-group col-md-6 dirltr">
+        <div class="input-group">
+            @Html.EditorFor(model => model.phoneNo, "Tel", new { @Value = String.Empty, @placeholder = Html.DisplayNameFor(model => model.phoneNo), @class = "form-control" })
+        </div>
+        @Html.ValidationMessageFor(model => model.phoneNo)
+    </div>
+                        <div class="form-group col-md-12">
+                            @Html.TextAreaFor(model => model.address, new { @placeholder = Html.DisplayNameFor(model => model.address), @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.address)
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.DropDownList("countries", Model.country, Resource.selectCountry, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.DropDownListFor(model => model.stateID, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.stateID)
+                        </div>
+                        @Html.HiddenFor(model => model.plan)
+                        @*<div>
+                                @Html.DropDownListFor(model => model.payType, Model.payTypeToSelectList)
+                            </div>
+                            <div>
+                                @Html.DropDownListFor(model => model.payBank, Model.bankTypeToSelectList)
+                            </div>*@
+
+                        <input type="submit" value="@Resource.save" class="btn btn-primary col-md-8 col-md-offset-2" data-loading-text="@Resource.loading" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+@Scripts.Render("~/bundles/PlanRequest")
+@Scripts.Render("~/bundles/CountryDropDown")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        AjaxStateDropDown('@Url.Action("populateDopDownStates", "Home")', '@Resource.selectState');
+    });
+</script>

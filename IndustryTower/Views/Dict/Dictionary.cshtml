@@ -1,0 +1,160 @@
+﻿@model IndustryTower.Models.Dict
+@{
+    ViewBag.Title = Model.name;
+}
+@section head{
+    <meta name="description" content="@Model.desc">
+    <meta name="keywords" content="@String.Join(",", Model.name.Split(new char [] {' '}))">
+    @if (ViewContext.RouteData.Values["DName"] as string != StringHelper.URLName(Model.name))
+    {
+        <link rel="canonical" href="@Url.Action("Dictionary", "Dict", new { DId = Model.dicId, DName = StringHelper.URLName(Model.name) })" />
+    }
+}
+<div class="row dir">
+    <div class="col-md-4 col-xs-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="bottom-border-blue">
+                    @Resource.topContributors
+                </div>
+                <div class="col-md-12">
+                    @Html.AjaxPrtialLoader(Url.Action("TopConts", "Dict", new { DId = Model.dicId }))
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1>
+                    @Html.DisplayFor(model => model.name)
+                    @if ((bool)ViewData["isAdmin"])
+                    {
+                        <span class="pull-left">
+                            @Html.ModifyIcons("Edit", "", "Dict", new { DId = Model.dicId }, deleteClass: "display-none", editAjax: false)
+                        </span>
+                    }
+                    @Html.ActionLink(Resource.createWord, "Create", "Word", new { DId = Model.dicId }, new { @class = "btn btn-default" })
+                </h1>
+
+            </div>
+            <div class="panel-body">
+                @Html.DisplayFor(model => model.desc)
+                <div class="col-md-12 margin-top-bot-md">
+                    @Html.TextBox("wordSearch", null,
+                    new
+                    {
+                        @class = "form-control has-mini-search dir pos-rel",
+                        data_minisearch = Url.Action("_SearchPartial", "Word", new { DId = Model.dicId }),
+                        autocomplete = "off",
+                        placeholder = Resource.searchWord
+                    })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row bg-default">
+
+    <div class="col-md-7 margin-top-bot-md">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading dir">
+                        @Resource.meanning
+                    </div>
+                    <div class="panel-body">
+                        <div id="Meanning" class="col-md-12 margin-top-bot-md">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5 margin-top-bot-md">
+        <div class="row">
+            <div class="col-md-12">
+                <ul id="Letters" class="pagination pagination-sm">
+                    <li></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "a" })" data-ajax="true">A</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "b" })" data-ajax="true">B</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "c" })" data-ajax="true">C</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "d" })" data-ajax="true">D</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "e" })" data-ajax="true">E</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "f" })" data-ajax="true">F</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "g" })" data-ajax="true">G</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "h" })" data-ajax="true">H</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "i" })" data-ajax="true">I</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "j" })" data-ajax="true">J</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "k" })" data-ajax="true">K</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "l" })" data-ajax="true">L</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "m" })" data-ajax="true">M</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "n" })" data-ajax="true">N</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "o" })" data-ajax="true">O</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "p" })" data-ajax="true">P</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "q" })" data-ajax="true">Q</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "r" })" data-ajax="true">R</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "s" })" data-ajax="true">S</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "t" })" data-ajax="true">T</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "u" })" data-ajax="true">U</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "v" })" data-ajax="true">V</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "w" })" data-ajax="true">W</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "x" })" data-ajax="true">X</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "y" })" data-ajax="true">Y</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "z" })" data-ajax="true">Z</a></li>
+                    <li></li>
+                </ul>
+                <ul id="Letters" class="faletters pagination pagination-sm pagination-right">
+                    <li></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ا" })" data-ajax="true">الف</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ب" })" data-ajax="true">ب</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "پ" })" data-ajax="true">پ</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ت" })" data-ajax="true">ت</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ث" })" data-ajax="true">ث</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ج" })" data-ajax="true">ج</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "چ" })" data-ajax="true">چ</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ح" })" data-ajax="true">ح</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "خ" })" data-ajax="true">خ</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "د" })" data-ajax="true">د</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ذ" })" data-ajax="true">ذ</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ر" })" data-ajax="true">ر</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ز" })" data-ajax="true">ز</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ژ" })" data-ajax="true">ژ</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "س" })" data-ajax="true">س</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ش" })" data-ajax="true">ش</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ص" })" data-ajax="true">ص</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ض" })" data-ajax="true">ض</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ط" })" data-ajax="true">ط</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ظ" })" data-ajax="true">ظ</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ع" })" data-ajax="true">ع</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "غ" })" data-ajax="true">غ</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ف" })" data-ajax="true">ف</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ق" })" data-ajax="true">ق</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ک" })" data-ajax="true">ک</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "گ" })" data-ajax="true">گ</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ل" })" data-ajax="true">ل</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "م" })" data-ajax="true">م</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ن" })" data-ajax="true">ن</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "و" })" data-ajax="true">و</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ه" })" data-ajax="true">ه</a></li>
+                    <li><a href="@Url.Action("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "ی" })" data-ajax="true">ی</a></li>
+                    <li></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="row margin-top-bot-md">
+            <div id="Words" class="col-md-12">
+                @{Html.RenderAction("WordsByLetter", "Word", new { DId = Model.dicId, ltr = "a" });}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/Dict")
+}

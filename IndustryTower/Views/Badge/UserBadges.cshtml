@@ -1,0 +1,17 @@
+﻿@model IList<IndustryTower.ViewModels.UserBadgesViewModel>
+
+<div class="row dirltr">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 margin-top-bot-md">
+            <a href="@Url.Action("Detail", "Badge", new {  BgId = item.bdgId, BgName = StringHelper.URLName(item.name) })" class="btn btn-default margin-lf-r8-md">
+                @Html.DisplayFor(model => item.name)
+                <span class="glyphicon glyphicon-cog inline-block bdg_@item.color"></span>
+            </a>
+            ×
+            <span class="inline-block">@item.count</span>
+        </div>
+    }
+</div>
+
+

@@ -1,0 +1,18 @@
+﻿@model IndustryTower.Models.Patent
+<div id="patItem" class="list-group-item">
+   @Html.ModifyIcons("Edit", "Delete", "Patent", new { patID = EncryptionHelper.Protect(Model.patentID) })
+
+    <strong>
+        @Html.ActionLink(Model.CulturePatentTitle,
+                     "Detail", "Patent", new { patId = Model.patentID, PtName = StringHelper.URLName(Model.CulturePatentTitle) }, null)
+    </strong>
+    <div>
+        @Resource.issueStatus: @EnumTypes.ResourceManager.GetString(Html.DisplayFor(model => Model.status).ToString())
+    </div>
+    <div>
+        @Html.ActionLink(Resource.details, "Detail", "Patent", new { patId = Model.patentID, PtName = StringHelper.URLName(Model.CulturePatentTitle) }, null)
+    </div>
+    <div>
+        @Html.DisplayFor(model => Model.issueDate, "MonthYearOnly")
+    </div>
+</div>

@@ -1,0 +1,15 @@
+﻿/*
+@import this file directly into your existing Scss files to use these mixins
+*/
+@mixin sprite-O_Company_Luxury() {
+/* You may have to set 'display: block' */
+	width: 800px;
+	height: 500px;
+	background: url('Sprite.office.jpg') 0 0;
+}
+@mixin sprite-O_Store_FirstFloor() {
+/* You may have to set 'display: block' */
+	width: 700px;
+	height: 460px;
+	background: url('Sprite.office.jpg') 0 -500px;
+}

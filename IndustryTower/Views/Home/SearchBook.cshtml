@@ -1,0 +1,41 @@
+﻿@model List<IndustryTower.ViewModels.BookSearchViewModel>
+@foreach (var item in Model)
+{
+    
+    
+    <div class="search-grid-box row margin-top-bot-md bg-default border-radius">
+        
+        <div class=" col-md-2 col-xs-4 margin-top-bot-md">
+            @Html.ProfilePic(book: item.bookResult)
+        </div>
+
+        <div class="col-md-10 margin-top-bot-md">
+            <strong>
+                @Html.ActionLink(item.bookResult.title, "Detail", "Book", new { BID = item.bookResult.BookId, BName = StringHelper.URLName(item.bookResult.title) }, new { @class = "questionLink" })
+            </strong>
+
+            <div>
+                @Html.DisplayAbstractFor(item.bookResult.abtrct, 150)
+            </div>
+            <div class="col-md-12 margin-top-bot-md">
+                <div class="inline-block bottom-border-blue">
+                    @Resource.professions
+                </div>
+                
+                    @Html.AjaxPrtialLoader(Url.Action("RelatedProfessions", "Profession", new { BId = item.bookResult.BookId }))
+            </div>
+        </div>
+    </div>
+}
+
+@if ((bool)ViewData["finalPage"] == false)
+{
+    var pagenumber = (int)ViewData["pageNum"];
+    <div id="nextSearchResults" data-nextpage="@(pagenumber + 1)">
+        @Html.NextItems("TotalSearch", "Home", new
+   {
+       page = pagenumber + 1,
+       currentFilter = ViewData["currentFilter"]
+   })
+    </div>
+}

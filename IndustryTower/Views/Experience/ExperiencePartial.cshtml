@@ -1,0 +1,34 @@
+﻿@model IndustryTower.Models.Experience
+<div id="expItem" class="list-group-item">
+   
+
+    <div>
+        @Html.ModifyIcons("Edit", "Delete", "Experience", new { expID = EncryptionHelper.Protect(Model.experienceID) })
+        <strong>
+            @Html.DisplayFor(model => Model.CultureTitle)
+        </strong>
+        @Resource.at
+        @if (Model.CoId != null)
+        {
+            <strong>
+                @Html.ActionLink(Model.Company.CultureCoName, "CProfile", "Company", new { CoId = Model.Company.coID, CoName = StringHelper.URLName(Model.Company.CultureCoName) }, null)
+            </strong>
+        }
+        else
+        {
+            <strong>
+                @Html.DisplayFor(model => Model.CultureCoName)
+            </strong>
+        }
+    </div>
+
+    
+    <div class="clear-left">
+        @Html.DisplayFor(model => model.State.CultureFullState)
+    </div>
+    <div>
+        <small>
+            @Html.DatePeriod(Model.attendDate, Model.untilDate)
+        </small>
+    </div>
+</div>

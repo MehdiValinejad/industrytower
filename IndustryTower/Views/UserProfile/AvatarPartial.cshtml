@@ -1,0 +1,35 @@
+﻿@model IndustryTower.Models.ActiveUser
+
+    
+<div id="avatarContainer" class="row margin-lf-r8-md" itemscope itemtype="http://schema.org/Person">
+    <span class="display-none" itemprop="name">@Model.CultureFullName</span>
+
+    <div id="avatarPic" class="avatar inline-block">
+        @Html.ProfilePic(user: Model)
+    </div>
+    <div class="inline-block">
+        <table class="text-center">
+            <tr>
+                <td colspan="3">
+                    @Html.ActionLink(Model.CultureFullName, "UProfile", "UserProfile", new { UId = Model.UserId, UName = StringHelper.URLName(Model.CultureFullName) },null)
+                </td>
+                <td title="@Resource.score">
+                    (@Model.ScoresSum) 
+                </td>
+            </tr>
+            <tr>
+                <td>@Model.Bdg_Golds</td>
+                <td>@Model.Bdg_Silvers</td>
+                <td>@Model.Bdg_Bronzes</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><span title="@Resource.bdgGoldTitle" class="glyphicon glyphicon-cog bdg_Gold"></span></td>
+                <td><span title="@Resource.bdgSilverTitle" class="glyphicon glyphicon-cog bdg_Silver"></span></td>
+                <td><span title="@Resource.bdgBronzeTitle" class="glyphicon glyphicon-cog bdg_Bronze"></span></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+
+</div>

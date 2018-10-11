@@ -1,0 +1,18 @@
+{
+  "images": [
+    {
+      "name": "/Images/Office/O_Company_Luxury.jpg",
+      "width": 800,
+      "height": 500,
+      "offsetX": 0,
+      "offsetY": 0
+    },
+    {
+      "name": "/Images/Office/O_Store_FirstFloor.jpg",
+      "width": 700,
+      "height": 460,
+      "offsetX": 0,
+      "offsetY": 500
+    }
+  ]
+}

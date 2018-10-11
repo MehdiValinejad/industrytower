@@ -1,0 +1,75 @@
+﻿@model IEnumerable<IndustryTower.Models.Payment>
+@{
+    ViewBag.Title = Resource.payments;
+}
+
+<div class="float-left full-width">
+    @*<h2>@Resource.payments</h2>*@
+    
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @ModelDisplayName.payBank
+                </th>
+                <th>
+                    @ModelDisplayName.payCode
+                </th>
+                <th>
+                    @ModelDisplayName.payDate
+                </th>
+                <th>
+                    @ModelDisplayName.payAcceptDate
+                </th>
+                <th>
+                    @ModelDisplayName.payAmount
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+                <tr>
+                    <td class="subject">
+                        @Resource.requestForNew
+                    </td>
+                </tr>
+                foreach (var item in Model)
+                {
+                    <tr class="neat-box">
+                        <td>
+                            @Html.DisplayFor(model => item.payBank)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.payCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.payDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.payAcceptDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.payAmount)
+                        </td>
+
+                    </tr>
+                }
+
+            }
+        </tbody>
+    </table>
+    <div class="btn btn-default btn-lg">
+        <div class="bottom-border-blue text-center ">
+            @Resource.pocket
+        </div>
+        <div class="text-center">
+            0
+        </div>
+    </div>
+    
+    
+</div>
+
+

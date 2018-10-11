@@ -1,0 +1,57 @@
+﻿@model IndustryTower.Models.Post
+@{
+    ViewBag.Title = Resource.post;
+}
+
+<div class="row dir">
+    <div class="col-md-8 col-xs-12">
+        @{Html.RenderPartial("PostPartial", Model);}
+    </div>
+    <div class="col-md-4 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading ">
+                <h3 class="panel-title">
+                    @Resource.relatedProducts
+                </h3>
+            </div>
+            <div class="panel-body dir list-group">
+                @Html.AjaxPrtialLoader(Url.Action("RelatedProducts", "Product", new { UId = WebSecurity.CurrentUserId }))
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading dirltr">
+                <h3 class="panel-title">
+                    @Resource.relatedProducts
+                </h3>
+            </div>
+            <div class="panel-body dir list-group">
+                @Html.AjaxPrtialLoader(Url.Action("RelatedServices", "Service", new { UId = WebSecurity.CurrentUserId }))
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading dirltr">
+                <h3 class="panel-title">
+                    @Resource.relatedCompanies
+                </h3>
+            </div>
+            <div class="panel-body dir list-group">
+                @Html.AjaxPrtialLoader(Url.Action("RelatedCompanies", "Company", new { UId = WebSecurity.CurrentUserId }))
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/Social")
+    @Scripts.Render("~/bundles/UserProfile")
+    @Scripts.Render("~/bundles/SlideShow")
+    <script>
+    $(document).ready(function () {
+        SlideShowArrowKeys();
+    })
+    </script>
+
+    }
+

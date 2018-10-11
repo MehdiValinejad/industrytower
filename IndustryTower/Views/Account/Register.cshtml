@@ -1,0 +1,133 @@
+﻿@model IndustryTower.Models.RegisterModel
+@using IndustryTower.Models
+@{
+    ViewBag.Title = Resource.register;
+}
+@section head{
+    <meta name="description" content="ثبت نام در برج صنعت، اولین شبکه اجتماعی و پایگاه مدیریت دانش صنعت ایرانیان">
+<meta name="keywords" content="ثبت نام، برج صنعت، شبکه اجتماعی، صنعت، مدیریت دانش">
+}
+<div class="row">
+
+    <div class="col-md-12 reg-pic hidden-xs ">
+        <div class="col-md-12 bg-black">
+            @Html.Sprite("H_BG_Registration", new { @class = "pull-right" })
+        </div>
+    </div>  
+    
+    <div class="col-md-7 margin-top-bot-md " role="alert">
+        <div class="col-md-12">
+            <div class="alert alert-warning dir">
+                @Html.ActionLink(Resource.reReceiveEmailConfirmation, "ResendConfirmationToken", null, new { @class = "alert-link" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7 ">
+        <div class="col-md-12 dir">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, htmlAttributes: new { @role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        <fieldset>
+                            <legend>@Resource.registrationForm</legend>
+
+                            <div class="form-group col-md-6">
+                                @Html.TextBoxFor(m => m.firstName, new { @placeholder = Html.DisplayNameFor(model => model.firstName), @class = "form-control " })
+                                @Html.ValidationMessageFor(m => m.firstName)
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.TextBoxFor(m => m.firstNameEN, new { @placeholder = Html.DisplayNameFor(model => model.firstNameEN), @class = "form-control dirltr" })
+                                @Html.ValidationMessageFor(m => m.firstNameEN)
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.TextBoxFor(m => m.lastName, new { @placeholder = Html.DisplayNameFor(model => model.lastName), @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.lastName)
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.TextBoxFor(m => m.lastNameEN, new { @placeholder = Html.DisplayNameFor(model => model.lastNameEN), @class = "form-control dirltr" })
+                                @Html.ValidationMessageFor(m => m.lastNameEN)
+                            </div>
+                            <div class="form-group col-md-7 dirltr">
+                                <div class="input-group">
+                                    @Html.EditorFor(m => m.Email, "Email", new { @placeholder = Html.DisplayNameFor(model => model.Email), @class = "form-control dirltr" })
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Email)
+                            </div>
+                            <div class="form-group col-md-5">
+                                <span class="margin-lf-r8-md">
+                                    <u>@Resource.gender</u>
+                                </span>
+
+                                <label class="radio-inline" for="gender">
+                                    @Html.RadioButtonFor(model => model.gender, gender.Male, new { @checked = "checked" }) @Resource.male
+                                </label>
+                                <label class="radio-inline" for="gender">
+                                    @Html.RadioButtonFor(model => model.gender, gender.Female)@Resource.female
+                                </label>
+                            </div>
+
+                            @*<div class="form-group">
+                    <span class="neat-box-semi-dark min-padding">
+                        @Resource.gender
+                    </span>
+
+                    @Resource.male @Html.RadioButtonFor(model => model.gender, gender.Male, new { @checked = "checked" })
+                   @Resource.female  @Html.RadioButtonFor(model => model.gender, gender.Female)
+
+                </div>*@
+
+                            
+                            <div class="form-group col-md-7">
+                                @Html.TextBoxFor(m => m.UserName, new { @placeholder = Html.DisplayNameFor(model => model.UserName), @class = "form-control dirltr" })
+                                @Html.ValidationMessageFor(m => m.UserName)
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.PasswordFor(m => m.Password, new { @placeholder = Html.DisplayNameFor(model => model.Password), @class = "form-control dirltr" })
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = Html.DisplayNameFor(model => model.ConfirmPassword), @class = "form-control dirltr" })
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.DropDownList("countries", ViewBag.CountryDropDown as SelectList, Resource.selectCountry, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.DropDownListFor(model => model.stateID, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.stateID)
+                            </div>
+                            <div class="form-group col-md-5">
+                                @Html.EditorFor(m => m.Birthday, "{0:yyyy/MM/dd}", new { @class = "hasDatePick form-control", @placeholder = Html.DisplayNameFor(model => model.Birthday) })
+                                @Html.ValidationMessageFor(m => m.Birthday)
+                            </div>
+                            <input type="submit" class="btn btn-primary col-md-7 col-xs-12" value="@Resource.register" />
+
+                        </fieldset>
+                    }
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+</div>
+
+
+    
+
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/CountryDropDown")
+    @Scripts.Render("~/bundles/DatePicker")
+    <script type="text/javascript">
+        AjaxStateDropDown('@Url.Action("populateDopDownStates", "Home")', '@Resource.selectState');
+
+        CallDatePicker();
+    </script>
+}

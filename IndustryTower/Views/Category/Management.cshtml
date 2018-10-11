@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = Resource.categoryManagement;
+}
+<div class="bottom-border-blue">@Resource.categoryManagement</div>
+
+@{Html.RenderAction("Index", "Category");}
+
+
+@Scripts.Render("~/bundles/Category")
+<script>
+    $(document).ready(function () {
+        CatsColor()
+    })
+</script>

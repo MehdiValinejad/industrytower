@@ -1,0 +1,27 @@
+﻿/*
+This is an example of how to use the image sprite in your own CSS files
+*/
+.H_BG_Registration {
+/* You may have to set 'display: block' */
+	width: 830px;
+	height: 550px;
+	background: url('Sprite.home.png') 0 0;
+}
+.H_Home_Categories {
+/* You may have to set 'display: block' */
+	width: 300px;
+	height: 300px;
+	background: url('Sprite.home.png') 0 -550px;
+}
+.H_Home_CopmanyProfile {
+/* You may have to set 'display: block' */
+	width: 300px;
+	height: 300px;
+	background: url('Sprite.home.png') 0 -850px;
+}
+.H_Home_Professions {
+/* You may have to set 'display: block' */
+	width: 300px;
+	height: 300px;
+	background: url('Sprite.home.png') 0 -1150px;
+}

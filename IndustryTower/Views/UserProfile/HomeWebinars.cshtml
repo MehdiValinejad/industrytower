@@ -1,0 +1,77 @@
+﻿@model IndustryTower.ViewModels.HomeFeedWebinarsClassified
+@using IndustryTower.Models
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <span class="icon-Webinar icn-25"></span>
+            @Resource.homefeedWebinars
+        </h3>
+    </div>
+
+    <div id="tabChangerContainer" class="WSlider panel-body dir">
+        <div id="tabChanger">
+            @if (Model.Now.Count() > 0)
+            {
+                <div class="tab header-box label label-info" id="semoccuring">
+                    @Resource.occurring
+                </div>
+            }
+            @if (Model.attending.Count() > 0)
+            {
+                <div class="tab header-box label label-info">
+                    @Resource.upComming
+                </div>
+            }
+        </div>
+        @if (Model.Now.Count() > 0)
+        {
+            <div class="tab-content list-group">
+                @foreach (var item in Model.Now)
+                {
+                    var action = item is Webinar ? "Webinar" : "Workshop";
+                    <a class="list-group-item" href="@Url.Action(action, "Seminar", new { SnId = EncryptionHelper.Protect(item.seminarId) })">
+                        <div>
+                            <div>
+                                @Html.DisplayFor(model => item.title)
+                            </div>
+
+                            <div class="text-left">
+                                <small>@item.date.Subtract(DateTime.UtcNow).Minutes</small>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        }
+        @if (Model.attending.Count() > 0)
+        {
+            <div class="tab-content list-group">
+
+                @foreach (var item in Model.attending)
+                {
+                    <a class="list-group-item" href="@Url.Action("Detail", "Seminar", new { SnId = item.seminarId })">
+                        <div class="">
+                            <div class="">
+                                @Html.DisplayFor(model => item.title)
+                            </div>
+                            <div class="text-left">
+                                <small>@Html.DisplayFor(model => item.date, "RelativeDate")</small>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        TabChanger($(".WSlider"), "WSlider", 3000);
+
+        setInterval(function () {
+            $("#semOccuring").toggleClass("semOccurring")
+        }, 1000)
+    })
+</script>
+

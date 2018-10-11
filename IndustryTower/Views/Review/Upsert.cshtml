@@ -1,0 +1,48 @@
+﻿@model IndustryTower.ViewModels.ReviewBookUpsertModel
+
+<div class="row dir">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                @Model.book.title
+            </div>
+            <div class="panel-body">
+                @Html.ProfilePic(book: Model.book)
+                <div>
+                    @Model.book.abtrct
+                </div>
+            </div>
+        </div>
+        <div id="BookReviewCreate" class="panel panel-default">
+            <div class="panel panel-heading">
+                @Resource.addReviewBook
+            </div>
+            <div class="panel-body">
+                @if (!String.IsNullOrWhiteSpace(Model.rev))
+                { 
+                    <div class="alert alert-warning">
+                        @Resource.youWroteReviewBefore
+                    </div>
+                }
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary()
+                    @Html.Serialize("model", Model.vars, SerializationMode.Plaintext)
+                    <div class="form-group">
+                        @Html.TextAreaFor(m => m.rev, new { @class = "form-control scroll-y", rows = "15" })
+                        @Html.ValidationMessageFor(m => m.rev)
+                    </div>
+
+                    <input type="submit" value="@Resource.create" class="btn btn-primary col-md-12" data-loading-text="@Resource.loading"/>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/Book")
+}

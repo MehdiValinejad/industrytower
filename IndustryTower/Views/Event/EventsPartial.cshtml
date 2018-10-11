@@ -1,0 +1,47 @@
+﻿@model IEnumerable<IndustryTower.Models.Event>
+
+
+<div id="UPEvents" class=" panel panel-default">
+    <div class="panel-heading dirltr">
+        @if (Request.IsAuthenticated)
+        {
+            @Html.CreateIcon("Create", "Event", dataAjax: false, Class: "pull-right")
+        }
+        <h3 class="panel-title"><span class="glyphicon glyphicon-calendar"></span> @Resource.events</h3>
+    </div>
+    <div class="panel-body dir list-group">
+
+        @foreach (var eventItem in Model)
+        {
+            <a id="eventItem" href="@Url.Action("Detail", "Event", new
+                        {
+                            EvId = eventItem.eventID, 
+                            EvName = StringHelper.URLName(eventItem.CultureEventSubj)
+                        })" class="list-group-item">
+                <div id="eventTitle">
+                    <strong>
+                        @eventItem.CultureEventSubj
+                    </strong>
+                </div>
+                <div>
+                    <small>
+                        @Resource.eventAttendors: @Html.DisplayFor(model => eventItem.Attendors.Count)
+                    </small>
+                </div>
+                <div>
+                    <small>@Html.DisplayFor(model => eventItem.eventDate, "WordDate")</small>
+                </div>
+                <div>
+                    <small>@Resource.until @Html.DisplayFor(model => eventItem.untilDate, "WordDate")</small>
+                </div>
+            </a>
+        }
+    </div>
+
+</div>
+
+
+
+
+
+@Scripts.Render("~/bundles/Event")

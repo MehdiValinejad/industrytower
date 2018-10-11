@@ -1,0 +1,52 @@
+﻿@model IndustryTower.Models.ActiveUser
+
+@{
+    ViewBag.Title = Resource.edit + " - " + Model.CultureFullName;
+}
+
+<div id="userinfoAdvEdit" class="row">
+    <div class="col-md-4 col-md-offset-4">
+        @if (Model.melliCode == null)
+        {
+            <div class="alert alert-warning">
+                @Resource.advRegText
+            </div>
+        }
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend>@Resource.edit @Resource.userInfo</legend>
+                <div class="form-group col-md-12">
+                    @Html.TextBoxFor(model => model.mobile, new { @placeholder = ModelDisplayName.mobile, @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.mobile)
+                </div>
+                @if (Model.melliCode == null)
+                {
+                    <div class="form-group col-md-12">
+                        @Html.TextBoxFor(model => model.melliCode, new { @placeholder = ModelDisplayName.melliCode, @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.melliCode)
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-12">
+                        <div class="alert alert-warning ">
+                            @ModelDisplayName.melliCode @Model.melliCode
+                        </div>
+                    </div>
+                    
+                }
+                <input type="submit" value='@Resource.edit' class="btn btn-primary col-md-12" data-loading-text="@Resource.loading" />
+
+            </fieldset>
+        }
+    </div>
+    
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/UserProfile")
+}

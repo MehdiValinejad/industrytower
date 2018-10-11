@@ -1,0 +1,39 @@
+﻿@model IEnumerable<IndustryTower.Models.Patent>
+
+<div id="UPPatent" class=" panel panel-default">
+    <div class="panel-heading dirltr">
+        @if (AuthorizationHelper.isRelevant((int)ViewData["UId"]))
+        {
+            @Html.CreateIcon("Create", "Patent", Class: "pull-right")
+        }
+        <h3 class="panel-title">
+            <span class="glyphicon glyphicon-list-alt"></span> @Resource.patent
+        </h3>
+    </div>
+    <div class="panel-body dir list-group">
+        @foreach (var patentItem in Model)
+        {
+            <div id="patItem" class="list-group-item">
+                @if (patentItem.Inventors.Any(u => AuthorizationHelper.isRelevant(u.UserId)))
+                {
+                    @Html.ModifyIcons("Edit", "Delete", "Patent", new { patID = EncryptionHelper.Protect(patentItem.patentID) })
+                }
+
+                <strong >
+                    @Html.ActionLink(patentItem.CulturePatentTitle,
+                                  "Detail", "Patent", new { patId = patentItem.patentID, PtName = StringHelper.URLName(patentItem.CulturePatentTitle) }, null)
+                </strong>
+                <div >
+                    @Resource.issueStatus: @EnumTypes.ResourceManager.GetString(Html.DisplayFor(model => patentItem.status).ToString())
+                </div>
+                <div >
+                    @Html.ActionLink(Resource.details, "Detail", "Patent", new { patId = patentItem.patentID, PtName = StringHelper.URLName(patentItem.CulturePatentTitle) }, null)
+                </div>
+                <div >
+                    @Html.DisplayFor(model => patentItem.issueDate, "MonthYearOnly")
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

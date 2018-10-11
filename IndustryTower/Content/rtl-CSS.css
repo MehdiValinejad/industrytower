@@ -1,0 +1,61 @@
+﻿/*@font-face {
+    font-family: 'MJ_TV';
+    src: url('fonts/Mj_TVMedium.eot?qme0qc');
+    src: url('fonts/Mj_TVMedium.eot?#iefixqme0qc') format('embedded-opentype'), url('fonts/Mj_TVMedium.woff?qme0qc') format('woff'), url('fonts/Mj_TVMedium.ttf?qme0qc') format('truetype');
+}*/
+
+
+/*@font-face { 
+    font-family: 'Aabandad';
+    src:url('https://51e586b827e1f6f976ddb74eb1be46da830510f0.googledrive.com/host/0B4od40H5_B_dZUhPNUczcHpnWGs/Font/Aabandad.ttf');
+    src: url('https://51e586b827e1f6f976ddb74eb1be46da830510f0.googledrive.com/host/0B4od40H5_B_dZUhPNUczcHpnWGs/Font/Aabandad.eot') format('embedded-opentype'), 
+         url('https://51e586b827e1f6f976ddb74eb1be46da830510f0.googledrive.com/host/0B4od40H5_B_dZUhPNUczcHpnWGs/Font/Aabandad.woff') format('woff'),
+         url('https://51e586b827e1f6f976ddb74eb1be46da830510f0.googledrive.com/host/0B4od40H5_B_dZUhPNUczcHpnWGs/Font/Aabandad.woff2') format('woff2'),
+         url('https://51e586b827e1f6f976ddb74eb1be46da830510f0.googledrive.com/host/0B4od40H5_B_dZUhPNUczcHpnWGs/Font/Aabandad.ttf') format('truetype');
+    src: url('fonts/Mj_TVMedium.eot?qme0qc');
+    src: url('fonts/Mj_TVMedium.eot?#iefixqme0qc') format('embedded-opentype'), url('fonts/Mj_TVMedium.woff?qme0qc') format('woff'), url('fonts/Mj_TVMedium.ttf?qme0qc') format('truetype');
+}
+
+body {
+    font-family: "Aabandad", tahoma;
+}*/
+
+@font-face { 
+    font-family: 'DroidNaskh';
+    src:url('https://51e586b827e1f6f976ddb74eb1be46da830510f0.googledrive.com/host/0B4od40H5_B_dZUhPNUczcHpnWGs/Font/DroidNaskh.ttf');
+    src: url('https://51e586b827e1f6f976ddb74eb1be46da830510f0.googledrive.com/host/0B4od40H5_B_dZUhPNUczcHpnWGs/Font/DroidNaskh.eot') format('embedded-opentype'), 
+         url('https://51e586b827e1f6f976ddb74eb1be46da830510f0.googledrive.com/host/0B4od40H5_B_dZUhPNUczcHpnWGs/Font/DroidNaskh.woff') format('woff'),
+         url('https://51e586b827e1f6f976ddb74eb1be46da830510f0.googledrive.com/host/0B4od40H5_B_dZUhPNUczcHpnWGs/Font/DroidNaskh.ttf') format('truetype');
+   
+}
+
+body {
+    font-family: "DroidNaskh", tahoma;
+}
+
+.dir {
+    direction: rtl;
+    text-align: right;
+}
+
+.dirltr {
+    direction: ltr !important;
+    text-align: left;
+}
+
+.dir .form-group.pull-left {
+    float: right !important;
+}
+
+.radio-inline input[type=radio], .checkbox-inline input[type=checkbox] {
+    margin-right:-20px;
+}
+
+.radio-inline,.checkbox-inline {
+    padding-right: 20px;
+}
+
+.popover-title, .popover-content {
+    direction:rtl;
+    text-align:right;
+}

@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = Resource.paymentRedirect;
+}
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="alert alert-info text-center" >
+            @Resource.paymentRedirect
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script id="RedirectScript">
+            var form = document.createElement("form");
+            form.setAttribute("method", "POST");
+            form.setAttribute("action", '@ViewData["PgwSite"]');
+            form.setAttribute("target", "_self");
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("name", "RefId");
+            hiddenField.setAttribute("value", '@ViewData["RefId"]');
+            form.appendChild(hiddenField);
+            document.body.appendChild(form);
+            form.submit();
+            document.body.removeChild(form);
+            var script = document.getElementById("RedirectScript");
+            document.body.removeChild(script);
+    </script>
+    }
+

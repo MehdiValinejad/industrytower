@@ -1,0 +1,90 @@
+﻿@model IndustryTower.ViewModels.WordDescEditVM
+@using IndustryTower.Models
+@{
+    ViewBag.Title = Resource.ImproveDesc ;
+    string dir = "dirltr",
+           placeholder = ModelDisplayName.wordEn;
+
+    if (Model.lang == lang.fa)
+    {
+        dir = "dir";
+        placeholder = ModelDisplayName.wordFa;
+    }
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-warning">
+        @TempData["Message"]
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 dir">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="text-center">
+                    <strong>@Resource.ImproveDesc</strong>
+                </div>
+                <div>
+                    <strong>@ModelDisplayName.word:</strong> @Html.ActionLink(Model.word, "Detail", "Word", new { WId = Model.wordId, WName = StringHelper.URLName(Model.word) }, null)
+                </div>
+                <div>
+                    <strong>@ModelDisplayName.dicName:</strong> @Html.ActionLink(Model.dicinfo.name, "Dictionary", "Dict", new { DId = Model.dicinfo.id, DName = StringHelper.URLName(Model.dicinfo.name) }, null)
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    @foreach (var item in Model.DescEdits)
+                    {
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-body @dir ">
+                                    <div class="pull-left margin-lf-r8-md">
+                                        @{Html.RenderPartial("~/Views/Score/Main.cshtml", new IndustryTower.ViewModels.ScoreVars
+                                    {
+                                        elemId = item.editId,
+                                        type = IndustryTower.Models.ScoreType.WDEditvote,
+                                        count = item.Score == null ? 0 : (int)item.Score
+                                    });}
+                                    </div>
+                                    @item.text<br /> - <small>@Html.ActionLink(item.senderName, "UProfile", "UserProfile", new { UId = item.editorId, UName = StringHelper.URLName(item.senderName) }, null)</small>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-md-offset-2 dir">
+        <div id="wordDescEdit" class="panel panel-primary">
+            <div class="panel-heading">
+                @Resource.edit
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Serialize("mdl", new IndustryTower.ViewModels.WordDescVars
+                       {
+                           DId = Model.dicinfo.id,
+                           WdId = int.Parse(Request.QueryString["WdId"])
+                       }, SerializationMode.Plaintext)
+                    <div class="form-group">
+                        @Html.TextAreaFor(model => model.desc, new { @class = "form-control "+ dir })
+                    </div>
+                    <input type="submit" value="@Resource.edit" class="btn btn-primary col-md-12" data-loading-text="@Resource.loading" />
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/Dict")
+    @Scripts.Render("~/bundles/Score")
+}

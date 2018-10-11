@@ -1,0 +1,50 @@
+﻿@model IndustryTower.Models.Category
+@{
+    ViewBag.Title = Model.CultureCatName;
+}
+
+
+<div class="row dir">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Category
+            </div>
+            <div class="panel-body">
+                @Html.ActionLink(Resource.edit, "Edit", "Category", new { catID = EncryptionHelper.Protect(Model.catID) }, new { @class = "btn btn-warning" })
+                <div class="inline-block">
+                    @using (Html.BeginForm("Delete", "Category", new { catId = EncryptionHelper.Protect(Model.catID) }, FormMethod.Post, new { @class = "float-left" }))
+                    {
+                        @Html.ValidationSummary(true)
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value='@Resource.delete' onclick="return confirm('Are you sure?')" class="btn btn-danger" />
+                    }
+                </div>
+                <div class="margin-top-bot-md">
+                    <span class="label label-info margin-lf-r8-md">
+                        <big>@ModelDisplayName.catName</big>
+                    </span>
+                    @Model.catName
+                </div>
+                <div class="margin-top-bot-md">
+                    <span class="label label-info margin-lf-r8-md">
+                        <big>@ModelDisplayName.catNameEN</big>
+                    </span>
+                    @Model.catNameEN
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="bottom-border-blue">
+            @Resource.categories
+        </div>
+        @foreach (var item in Model.Professions)
+        {
+            <div class="float-left min-padding max-margin" style="background-color:#79d1d1">
+                @Html.ActionLink(item.CultureProfessionName, "Detail", "Profession", new { profId = EncryptionHelper.Protect(item.profID) }, null)
+            </div>
+        }
+    </div>
+</div>
+

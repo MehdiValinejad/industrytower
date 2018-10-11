@@ -1,0 +1,45 @@
+﻿@model List<IndustryTower.ViewModels.EventSearchViewModel>
+@foreach (var item in Model)
+{
+    <div class="search-grid-box row margin-top-bot-md bg-default border-radius">
+        <div class="col-md-2 margin-top-bot-md">
+            <div class="col-md-12 text-center no-wrap margin-top-bot-md">
+                @Resource.eventAttendors
+                <span class="badge">
+                    @Html.DisplayFor(model => item.Attendors)
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-10 margin-top-bot-md">
+            <strong>
+                @Html.ActionLink(item.eventResult.CultureEventSubj, "Detail", "Event", new { EvId = item.eventResult.eventID, EvName = StringHelper.URLName(item.eventResult.CultureEventSubj) }, new { @class = "questionLink" })
+                - @Html.DisplayFor(model => item.eventResult.State.CultureFullState)
+            </strong>
+
+            <div>
+                @Html.DisplayAbstractFor(item.eventResult.CultureDescription, 150)
+            </div>
+            <div class="col-md-12 margin-top-bot-md">
+                <div class="inline-block bottom-border-blue">
+                    @Resource.categories
+                </div>
+                
+                    @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { EvId = item.eventResult.eventID }))
+            </div>
+        </div>
+
+    </div>
+        
+}
+@if ((bool)ViewData["finalPage"] == false)
+{
+    var pagenumber = (int)ViewData["pageNum"];
+    <div id="nextSearchResults" data-nextpage="@(pagenumber + 1)">
+        @Html.NextItems("TotalSearch", "Home", new
+   {
+       page = pagenumber + 1,
+       currentFilter = ViewData["currentFilter"]
+   })
+    </div>
+}

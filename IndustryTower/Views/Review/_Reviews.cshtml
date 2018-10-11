@@ -1,0 +1,37 @@
+﻿@model IList<IndustryTower.Models.ReviewBook>
+
+@if (Model.Count > 0)
+{
+    <h3 class="bottom-border-gray">
+        @Resource.reviews
+    </h3>
+    foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row bottom-border-gray">
+                            <div class="col-md-12">
+                                @Html.DisplayAbstractFor(item.review,500)
+                                <div>
+                                    @Html.ActionLink(Resource.details, "Detail", "Review", new { RvId = item.revId }, null)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-ms-12">
+                                    <div class="col-md-4 margin-top-bot-md">
+                                        @{Html.RenderAction("AvatarPartial", "UserProfile", new { UId = item.userId });}
+                                    </div>
+                                <small class="col-md-8 text-right margin-top-bot-md">
+                                    @Html.DisplayFor(m => item.date)
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

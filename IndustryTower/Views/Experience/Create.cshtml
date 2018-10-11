@@ -1,0 +1,82 @@
+﻿@model IndustryTower.Models.Experience
+
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">
+        <span class="glyphicon glyphicon-briefcase"></span>
+        @Resource.experience
+    </h4>
+</div>
+@using (Html.BeginForm())
+{
+    <div id="experienceCreate" class="modal-body dir row">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="form-group col-md-12">
+            @Html.TextBoxFor(model => model.title, new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => Model.title) })
+            @Html.ValidationMessageFor(model => model.title)
+        </div>
+        <div class="form-group col-md-12">
+            @Html.TextBoxFor(model => model.titleEN, new { @class = "form-control dirltr", @placeholder = Html.DisplayNameFor(model => Model.titleEN) })
+            @Html.ValidationMessageFor(model => model.titleEN)
+        </div>
+
+        <div class="company-exp">
+            <div class="form-group col-md-12">
+                @Html.TextBoxFor(model => model.coName, new { @class = "form-control has-mini-search", @placeholder = Html.DisplayNameFor(model => Model.coName), data_minisearch = Url.Action("_CompaniesSearchPartial", "Company") })
+                @Html.ValidationMessageFor(model => model.coName)
+            </div>
+
+            <div class="form-group col-md-12">
+                @Html.TextBoxFor(model => model.coNameEN, new { @class = "form-control has-mini-search dirltr", @placeholder = Html.DisplayNameFor(model => Model.coNameEN), data_minisearch = Url.Action("_CompaniesSearchPartial", "Company") })
+                @Html.ValidationMessageFor(model => model.coNameEN)
+            </div>
+        </div>
+        
+        <div class="form-group col-md-6">
+            @Html.DropDownList("countries", ViewBag.CountryDropDown as SelectList, Resource.selectCountry, new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-6">
+            @Html.DropDownListFor(model => model.stateID, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.stateID)
+        </div>
+
+
+        <div class="form-group col-md-12">
+            @Html.TextAreaFor(model => model.description, new { @placeholder = Html.DisplayNameFor(model => Model.description), @class = "form-control", @onclick = "textAreaAdjust(this)" })
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <div class="form-group col-md-12">
+            @Html.TextAreaFor(model => model.descriptionEN, new { @placeholder = Html.DisplayNameFor(model => Model.descriptionEN), @class = "form-control dirltr", @onclick = "textAreaAdjust(this)" })
+            @Html.ValidationMessageFor(model => model.descriptionEN)
+        </div>
+
+        <div class="form-group col-md-6">
+
+                @Html.EditorFor(model => model.attendDate, "{0:yyyy/MM/dd}", new { @placeholder = Html.DisplayNameFor(model => Model.attendDate), @class = "form-control hasDatePick" })
+
+            @Html.ValidationMessageFor(model => model.attendDate, ModelValidation.datetime)
+        </div>
+        <div class="form-group col-md-6">
+
+                @Html.EditorFor(model => model.untilDate, "{0:yyyy/MM/dd}", new { @placeholder = Html.DisplayNameFor(model => Model.untilDate), @class = "form-control hasDatePickUntil" })
+
+            @Html.ValidationMessageFor(model => model.untilDate, ModelValidation.datetime)
+        </div>
+
+
+    </div>
+    <div class="modal-footer dir">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resource.close</button>
+        <input type="submit" value="@Resource.create" class="btn btn-primary" data-loading-text="@Resource.loading" />
+    </div>
+}
+
+
+
+
+@Scripts.Render("~/bundles/CountryDropDown")
+@Scripts.Render("~/bundles/DatePicker")

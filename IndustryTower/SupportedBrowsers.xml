@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<supportedbrowsers>
+  <supported>
+    <InternetExplorer
+      displayName ="Internet Explorer" MachineType="Windows" MinVersion ="9.0" MaxVersion ="1000"
+      link="http://windows.microsoft.com/en-US/internet-explorer/downloads/ie-8"
+      />
+    <IE
+      displayName ="Internet Explorer" MachineType="Windows" MinVersion ="9.0" MaxVersion ="1000"
+      link="http://windows.microsoft.com/en-US/internet-explorer/downloads/ie-8"
+      />
+    <Firefox
+      displayName ="Mozilla Firefox" MachineType="Windows, Mac" MinVersion ="7.0" MaxVersion ="1000"
+      link="http://www.mozilla.com/en-US/firefox/all-older.html"
+      />
+    <Chrome
+      displayName ="Google Chrome" MachineType="Windows, Mac" MinVersion ="10.0" MaxVersion ="1000"
+      link="https://www.google.com/chrome"
+      />
+    <Safari
+      displayName ="Safari" MachineType="Mac" MinVersion ="5.0" MaxVersion ="1000"
+      link="http://www.apple.com/safari/download/"
+      />
+  </supported>
+  <warning>
+    <ie      MachineType="Windows" MinVersion ="8.0" MaxVersion ="8.0" />
+    <firefox MachineType="Windows, Mac" MinVersion ="3.6" MaxVersion ="7.9" />
+    <firefox MachineType="Windows, Mac" MinVersion ="9.2" MaxVersion ="1000" /> <!--For future versions-->
+    <chrome  MachineType="Windows, Mac" MinVersion ="10.0" MaxVersion ="14.9" />
+    <chrome  MachineType="Windows, Mac" MinVersion ="16.1" MaxVersion ="1000" /> <!--For future versions-->
+    <safari  MachineType="Mac" MinVersion ="4.0" MaxVersion ="4.9" />
+    <safari  MachineType="Mac" MinVersion ="6.1" MaxVersion ="1000" /> <!--For future versions-->
+  </warning>
+  <blocked>
+    <InternetExplorer      MachineType="Windows" MinVersion ="0" MaxVersion ="7.9" />
+    <FireFox MachineType="Windows, Mac" MinVersion ="0" MaxVersion ="3.5" />
+    <Chrome  MachineType="Windows, Mac" MinVersion ="0" MaxVersion ="9.9" />
+    <Safari  MachineType="Mac" MinVersion ="0" MaxVersion ="3.9" />
+    <Safari  MachineType="Windows" MinVersion ="0" MaxVersion ="3.0" />  
+  </blocked>
+</supportedbrowsers>

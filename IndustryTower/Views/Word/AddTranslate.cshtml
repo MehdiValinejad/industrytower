@@ -1,0 +1,104 @@
+﻿@model IndustryTower.ViewModels.WordTranslateVars
+@using IndustryTower.Models
+@{
+    ViewBag.Title = String.Concat(Resource.createWordANDTranslate, " ", ModelDisplayName.word);
+    string enText = String.Empty,
+           faText = String.Empty,
+           prvtxtx = "prv-fa",
+           placeholder = ModelDisplayName.wordFa,
+           descPlaceholder = ModelDisplayName.wordDescFa,
+           dir = "dir";
+           
+    if (Model.mainWord.lang == lang.fa)
+    {
+        faText = Model.mainWord.word;
+        prvtxtx = "prv-en";
+        placeholder = ModelDisplayName.wordEn;
+        descPlaceholder = ModelDisplayName.wordDescEn;
+        dir = "dirltr";
+    }
+    else
+    {
+        enText = Model.mainWord.word;
+    }
+}
+
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-1">
+        <div class="panel panel-primary @dir">
+            <div class="panel-heading">
+                @Resource.addTranslate
+            </div>
+            <div id="wordCreate" class="panel-body">
+                <div class="">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Serialize("info", Model.dicInfo, SerializationMode.Plaintext)
+                        <div class="text-danger dir">@Resource.newWordHelp</div>
+                        <div id="wordChoose" class="form-group pos-rel">
+                            <input type="hidden" name="WId" id="WId" value="@Model.WId" />
+                                   @*@html.hiddenfor(model=> model.WId, new { @class = "form-control" })*@
+                            @Html.TextBoxFor(model => model.word, new { @class = "form-control hasWordShearch", data_prv = prvtxtx, placeholder = placeholder, autocomplete = "off", @style = "padding-right:30px" })
+
+                            <span class="form-control-feedback glyphicon glyphicon-refresh enable-input display-none" title="@Resource.edit"></span>
+                            @Html.ValidationMessageFor(model => model.word)
+                            <div class="currentwords panel panel-default pos-rel col-md-12">
+                                <div id="loading"></div>
+                            </div>
+                        </div>
+                        <div id="wordesc" class="form-group display-none">
+                            @Html.TextAreaFor(model => model.wordDesc, new { @class = "form-control", data_prv = prvtxtx + "-desc", placeholder = descPlaceholder, @onkeyup = "textAreaAdjust(this)", data_phfa = ModelDisplayName.wordDescFa, data_phen = ModelDisplayName.wordDescEn })
+                            @Html.ValidationMessageFor(model => model.wordDesc)
+                        </div>
+                        <input type="submit" value="@Resource.create" class="final-submit btn btn-primary col-md-12 display-none" data-loading-text="@Resource.loading" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 ">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                @Resource.preview
+            </div>
+            <div class="panel-body">
+                <div class="dir bottom-border-blue">
+                    <strong>@ModelDisplayName.dicName</strong> @Model.dicInfo.name
+                </div>
+                <div class="bg-default margin-top-bot-md">
+                    <div>
+                        <strong>@ModelDisplayName.wordEn: </strong>
+                        <span data-prvw="prv-en">
+                            @enText
+                        </span>
+                    </div>
+                    <div>
+                        <span data-prvw="prv-en-desc"></span>
+                    </div>
+                </div>
+                <div class="bg-default margin-top-bot-md dir">
+                    <div>
+                        <strong>@ModelDisplayName.wordFa: </strong>
+                        <span data-prvw="prv-fa">
+                            @faText
+                        </span>
+                    </div>
+                    <div>
+                        <span data-prvw="prv-fa-desc"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/Dict")
+}
+

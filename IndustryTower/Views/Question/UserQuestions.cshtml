@@ -1,0 +1,9 @@
+﻿@model IList<IndustryTower.Models.Question>
+
+<div class="list-group">
+    @foreach (var item in Model)
+    {
+        @Html.ActionLink(item.questionSubject, "Detail", new { QId = item.questionID, QName = StringHelper.URLName(item.questionSubject) }, new { @class = "list-group-item" })
+    }
+</div>
+

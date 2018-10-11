@@ -1,0 +1,60 @@
+﻿@model IndustryTower.Models.Education
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">
+        <span class="glyphicon glyphicon-book"></span>
+        @Resource.education
+    </h4>
+</div>
+@using (Html.BeginForm())
+{
+    <div id="experienceCreate" class="modal-body dir row">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="form-group col-md-12">
+            @Html.TextBoxFor(model => model.fieldOfStudy, new { @class = "form-control", @placeholder = ModelDisplayName.fieldOfStudy })
+            @Html.ValidationMessageFor(model => model.fieldOfStudy)
+        </div>
+        <div class="form-group col-md-12">
+            @Html.TextBoxFor(model => model.fieldOfStudyEN, new { @class = "form-control dirltr", @placeholder = ModelDisplayName.fieldOfStudyEN })
+            @Html.ValidationMessageFor(model => model.fieldOfStudyEN)
+        </div>
+
+        <div class="company-exp">
+            <div class="form-group col-md-12">
+                @Html.TextBoxFor(model => model.school, new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => Model.school) })
+                @Html.ValidationMessageFor(model => model.school)
+            </div>
+
+            <div class="form-group col-md-12">
+                @Html.TextBoxFor(model => model.schoolEN, new { @class = "form-control dirltr", @placeholder = Html.DisplayNameFor(model => Model.schoolEN) })
+                @Html.ValidationMessageFor(model => model.schoolEN)
+            </div>
+        </div>
+
+        <div class="form-group col-md-6 dirltr">
+
+                @Html.EditorFor(model => model.attendDate, "{0:yyyy/MM/dd}", new { @placeholder = Html.DisplayNameFor(model => Model.attendDate), @class = "form-control hasDatePick" })
+                @Html.ValidationMessageFor(model => model.attendDate, ModelValidation.datetime)
+
+        </div>
+        <div class="form-group col-md-6 dirltr">
+
+                @Html.EditorFor(model => model.untilDate, "{0:yyyy/MM/dd}", new { @placeholder = Html.DisplayNameFor(model => Model.untilDate), @class = "form-control hasDatePickUntil" })
+                @Html.ValidationMessageFor(model => model.untilDate, ModelValidation.datetime)
+
+        </div>
+        <div class="form-group col-md-6 col-md-offset-3">
+            @Html.DropDownList("degree", ViewBag.eduDegreeToSelectList as SelectList, new { @class = "form-control" })
+        </div>
+
+    </div>
+    <div class="modal-footer dir">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resource.close</button>
+        <input type="submit" value="@Resource.edit" class="btn btn-primary" data-loading-text="@Resource.loading" />
+    </div>
+}
+
+
+@Scripts.Render("~/bundles/DatePicker")

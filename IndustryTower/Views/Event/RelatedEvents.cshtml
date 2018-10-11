@@ -1,0 +1,13 @@
+﻿@model IEnumerable<IndustryTower.ViewModels.RelatedEventViewModel>
+
+    @foreach (var item in Model)
+    { 
+        <a class="list-group-item" href="@Url.Action("Detail", "Event", new { EvId = item.Event.eventID,  EvName = StringHelper.URLName(item.Event.CultureEventSubj)})">
+            @item.Event.CultureEventSubj
+            <div>
+                <small>
+                    @Html.DisplayFor(model => item.Event.eventDate, "WordDate")
+                </small>
+            </div>
+        </a>
+    }

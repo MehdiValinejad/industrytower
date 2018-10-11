@@ -1,0 +1,19 @@
+﻿@model IEnumerable<IndustryTower.Models.StoreNotExpired>
+
+    @foreach (var item in Model)
+    {
+        <div class="search-mini-item" data-id="@EncryptionHelper.Protect(item.storeID)">
+            <div class="mini-avatar-container float-left">
+                @Html.ProfilePic(store: item)
+            </div>
+
+            <div class="float-left">
+                <span>
+                    @Html.DisplayFor(model => item.CultureStoreName)
+                </span>
+                <p class="dimDate">
+                    @Html.DisplayFor(model=>item.State.CultureFullState)
+                </p>
+            </div>
+        </div>
+    }

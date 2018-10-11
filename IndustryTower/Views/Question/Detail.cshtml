@@ -1,0 +1,165 @@
+﻿@model IndustryTower.ViewModels.QDetailViewModel
+@{
+    var answers = Model.Answers == null ? 0 : (int)Model.Answers;
+    ViewBag.Title = String.Concat(Model.questionSubject, " - ", Resource.answers, " ", answers);
+    var qid = EncryptionHelper.Protect(Model.questionID);
+}
+@section head{
+    <meta name="description" content="@Model.questionBody">
+    <meta name="keywords" content="@String.Join(",", Model.questionSubject.Split(new char [] {' '}))">
+    @if (ViewContext.RouteData.Values["QName"] as string != StringHelper.URLName(Model.questionSubject))
+    {
+        <link rel="canonical" href="@Url.Action("Detail", "Question", new { QId = Model.questionID, QName = StringHelper.URLName(Model.questionSubject) })" />
+    }
+}
+
+<div class="row dir">
+    <div class="col-md-8">
+        <div class="panel panel-default col-md-12 col-xs-12" itemscope itemtype="http://schema.org/Question">
+            <div class="display-none" itemprop="answerCount">
+                @answers
+            </div>
+            <div id="answerDetail" class="row">
+                <div class="col-md-12">
+                    <div class=" margin-top-bot-md">
+                        <a href="@Url.Action("Detail", "Question", new { QId = Model.questionID })">
+                            <h3 itemprop="name">
+                                @Html.DisplayFor(model => model.questionSubject)
+                            </h3>
+                        </a>
+                        @if (AuthorizationHelper.isRelevant(Model.questionerID))
+                        {
+                            <div class="inline-block">
+                                @Html.ModifyIcons("Edit", "Delete", "Question", new { QId = qid, QName = StringHelper.URLName(Model.questionSubject) }, editAjax: false)
+                            </div>
+                        }
+                        <span itemprop="text">
+                            @Html.DisplayTextFor(model => model.questionBody)
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row margin-top-bot-md">
+                @if (Model.image != null)
+                {
+                    <div class="col-md-12 col-xs-12 margin-top-bot-md">
+                        <div class="row">
+                            @{Html.RenderAction("FileSlideshow", "Home", new { folder = "Question", fileNamesString = Model.image });}
+                        </div>
+                    </div>
+
+                }
+
+                @if (Model.docuoment != null)
+                {
+                    <div class="col-md-12 col-xs-12 margin-top-bot-xs">
+                        @{Html.RenderAction("FileList", "Home", new { folder = "Question", fileNamesString = Model.docuoment });}
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <small class="margin-lf-r8-md">
+                        @Html.DisplayFor(model => model.questionDate)
+                    </small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-xs-7">
+                    <div class="row margin-top-bot-md">
+                        <div class="col-md-12 dirltr ">
+                            @{Html.RenderPartial("~/Views/Score/Main.cshtml", new IndustryTower.ViewModels.ScoreVars
+                            {
+                                elemId = Model.questionID,
+                                type = IndustryTower.Models.ScoreType.Qvote,
+                                count = Model.Scores == null ? 0 : (int)Model.Scores
+                            });}
+                            <ul id="offerLike" class="nav nav-pills nav-stacked inline-block">
+                                @Html.Action("Like", "Like", new { model = new IndustryTower.ViewModels.likeVars { elemId = Model.questionID, typ = IndustryTower.ViewModels.LikeType.LikeQuestion } })
+                            </ul>
+                            <div class="margin-top-bot-xs inline-block margin-lf-r8-md">
+                                <script type="IN/Share" data-url="@Url.Action("Detail", "Question", new { QId = Model.questionID, QName = StringHelper.URLName(Model.questionSubject) }, "http")" data-counter="right">
+                                </script>
+                                <div class="g-plusone" data-annotation="inline" data-width="190" data-href="@Url.Action("Detail", "Question", new { QId = Model.questionID, QName = StringHelper.URLName(Model.questionSubject) }, "http")"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-5">
+                    @{Html.RenderPartial("~/Views/UserProfile/AvatarPartial.cshtml",
+                          new IndustryTower.Models.ActiveUser
+                          {
+                              UserId = Model.questionerID,
+                              firstName = Model.senderName,
+                              firstNameEN = Model.senderName,
+                              image = Model.senderImage
+                          });}
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div id="offerComments" class="col-md-12 col-xs-12 bg-default">
+                    @{
+                        var se = new MvcSerializer();
+                        var mod = new IndustryTower.ViewModels.commentVars
+                        {
+                            elemId = Model.questionID,
+                            typ = IndustryTower.ViewModels.CommentType.CommentQuestion
+                        };
+                        var tt = se.Serialize(mod, SerializationMode.Plaintext);
+                    }
+                    @Html.AjaxPrtialLoader(Url.Action("Comments", "Comment", new { model = tt }))
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-12">
+            <div id="questionAnswers" class="row">
+                @{Html.RenderAction("PartialAnswers", "Answer", new { QId = Model.questionID });}
+            </div>
+
+            @if (Request.IsAuthenticated)
+            {
+                Html.RenderAction("Create", "Answer", new { QId = Model.questionID });
+            }
+        </div>
+
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @Resource.relatedProfessions
+                    </div>
+                    <div class="panel-body">
+                        @Html.AjaxPrtialLoader(Url.Action("RelatedProfessions", "Profession", new { QId = Model.questionID }))
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/Question")
+    @Scripts.Render("~/bundles/Social")
+    @Scripts.Render("~/bundles/Answer")
+    @Scripts.Render("~/bundles/SlideShow")
+    @Scripts.Render("~/bundles/Score")
+
+    <script>
+        $(document).ready(function () {
+            SlideShowArrowKeys();
+        })
+    </script>
+}

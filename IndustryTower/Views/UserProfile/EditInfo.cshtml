@@ -1,0 +1,140 @@
+﻿@model IndustryTower.Models.ActiveUser
+
+@{
+    ViewBag.Title = Resource.edit + " - " + Model.CultureFullName;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-warning text-center">
+            @Html.ActionLink(Resource.advReg, "EditAdvInfo", "UserProfile", new { UId = EncryptionHelper.Protect(Model.UserId) }, null)
+        </div>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-md-8 col-md-offset-2 dir">
+        <div id="userinfoEdit" class="hasUpload">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+                    <legend>@Resource.edit @Resource.userInfo</legend>
+
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.firstName, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.firstName, new { @placeholder = ModelDisplayName.firstName, @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.firstName)
+                    </div>
+                    <div class="form-group col-md-6 dirltr">
+                        @Html.LabelFor(model => model.firstNameEN, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.firstNameEN, new { @placeholder = ModelDisplayName.firstNameEN, @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.firstNameEN)
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.lastName, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.lastName, new { @placeholder = ModelDisplayName.lastName, @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.lastName)
+                    </div>
+                    <div class="form-group col-md-6 dirltr">
+                        @Html.LabelFor(model => model.lastNameEN, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.lastNameEN, new { @placeholder = ModelDisplayName.lastNameEN, @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.lastNameEN)
+                    </div>
+                    <div class="form-group col-md-12">
+                        @Html.LabelFor(model => model.about, new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.about, new { @placeholder = ModelDisplayName.aboutUser, @onkeyup = "textAreaAdjust(this)", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.about)
+                    </div>
+                    <div class="form-group col-md-12">
+                        @Html.LabelFor(model => model.aboutEN, new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.aboutEN, new { @placeholder = ModelDisplayName.aboutUserEN, @onkeyup = "textAreaAdjust(this)", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.aboutEN)
+                    </div>
+                    <div class="form-group col-md-6">
+
+                        @Html.DropDownList("countries", ViewBag.CountryDropDown as SelectList, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.DropDownListFor(model => model.stateID, ViewBag.StateDropDown as SelectList, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.stateID)
+                    </div>
+
+                    <div class="form-group col-md-6 col-md-offset-3">
+                           @Html.EditorFor(model => model.birthDay, "{0:yyyy/MM/dd}", new { @placeholder = ModelDisplayName.birthday, @class = "short-input hasDatePick form-control" })
+
+                        @Html.ValidationMessageFor(model => model.birthDay, ModelValidation.datetime)
+                    </div>
+
+
+                    @Html.Hidden("professionTags", String.Join(",", Model.Professions.Select(p => p.profID)))
+
+                    <div id="selectedProfs" class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong>
+                                    @Resource.selectedProfessions
+                                </strong>
+
+                            </div>
+                            <div class="panel-body">
+                                @foreach (var prof in Model.Professions)
+                                {
+                                    <div id='selectedProf' class='pink-tag inline-block' data-id="@prof.profID">
+                                        @Html.DisplayFor(model => prof.CultureProfessionName)
+                                        <button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <span class="bg-info col-md-12 margin-top-bot-md">
+                        @Resource.professionChooseHelp
+                        <div class="form-group">
+                            @*@Html.TextBox("ProfessionSearchBox", null, htmlAttributes: new { @placeholder = Resource.professionTagChoose, @class="form-control" })*@
+                            <input type="text" id="ProfessionSearchBox" value="" placeholder="@Resource.professionTagChoose" class="form-control" />
+                        </div>
+                        <div class="professtionTags-container panel panel-default pos-rel">
+                            <div id="loading">
+
+                            </div>
+                        </div>
+                    </span>
+
+                    <input type="submit" value='@Resource.edit' class="btn btn-primary col-md-12" data-loading-text="@Resource.loading" />
+
+                </fieldset>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+
+    
+    
+
+
+@Scripts.Render("~/bundles/UserProfile")
+@Scripts.Render("~/bundles/Profession")
+@Scripts.Render("~/bundles/CountryDropDown")
+@Scripts.Render("~/bundles/DatePicker")
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        ProfessionsTag('@IndustryTower.App_Start.ITTConfig.MaxProfessionTagsLimit',
+                       '@ModelValidation.YouCanChooseMax5Professions');
+
+        AjaxStateDropDown('@Url.Action("populateDopDownStates", "Home")', '@Resource.selectState');
+        CallDatePicker();
+        
+    });
+
+</script>

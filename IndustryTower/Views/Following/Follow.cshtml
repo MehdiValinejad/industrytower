@@ -1,0 +1,61 @@
+﻿@model IndustryTower.ViewModels.FollowViewModel
+
+
+@{
+    var buttonText = Resource.unFollow;
+    if (Model.followedByUser == false)
+    {
+        buttonText = Resource.follow;
+    }
+}
+<li id="followContainer" class="active pull-left pos-rel">
+
+    @if (Request.IsAuthenticated)
+    {
+        <a id="FollowButton">
+            @using (Html.BeginForm("FollowInsert", "Following", FormMethod.Post, new { @class = "follow-form" }))
+            {
+            @Html.ValidationSummary(true);
+            @Html.AntiForgeryToken();
+
+            if (Model.CoId != null)
+            {
+            @Html.Hidden("company", EncryptionHelper.Protect(Model.CoId));
+            }
+            else if (Model.storeId != null)
+            {
+            @Html.Hidden("store", EncryptionHelper.Protect(Model.storeId));
+            }
+            <span id="likeCount" class="badge pull-right margin-lf-r8-md" data-url="@Url.Action("Followers", new
+        {
+            CoId = Model.CoId,
+            StId = Model.storeId, 
+        })">
+                @Model.Followers.ToString()
+            </span>
+            @buttonText
+            }
+        </a>
+                
+        @*<input type="submit" value="@buttonText" class="followBTN" />*@
+
+    }
+    else
+    {
+        <a href="@Url.Action("Register", "Account")">
+            <span id="likeCount" class="badge pull-right" data-url="@Url.Action("Followers", new
+        {
+            CoId = Model.CoId,
+            StId = Model.storeId, 
+        })">
+
+                @Model.Followers.ToString()
+            </span>
+            @buttonText
+        </a>
+        @*@Html.ActionLink(Resource.follow, "Register", "Account", null, new { @style = "color:white" })*@
+    }
+
+
+</li>
+

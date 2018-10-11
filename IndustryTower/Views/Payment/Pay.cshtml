@@ -1,0 +1,66 @@
+﻿@model IndustryTower.ViewModels.PayViewModel
+@using IndustryTower.Models
+@{
+    ViewBag.Title = "Pay";
+}
+
+<h2>Pay</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    if (Model.companyToPay != null)
+    { 
+        <div>
+            @Html.HiddenFor(model=>EncryptionHelper.Protect(model.companyToPay.coID))
+            @Html.DropDownList("Name", new SelectList( typeof(Company).Assembly.GetTypes().Where(t=>t.BaseType == typeof(Company)).Select(t=> EnumTypes.ResourceManager.GetString(t.Name.ToString()))))
+        </div>
+    }
+    else if (Model.StoreToPay != null)
+    {
+        <div>
+            @Html.HiddenFor(model=>EncryptionHelper.Protect(model.StoreToPay.storeID))
+            @Html.DropDownList("Name", new SelectList( typeof(Company).Assembly.GetTypes().Where(t=>t.BaseType == typeof(Company)).Select(t=>EnumTypes.ResourceManager.GetString(t.Name.ToString()))))
+        </div>
+    }
+    else if (Model.UserToPay != null)
+    {
+        <div>
+            @Html.HiddenFor(model=>EncryptionHelper.Protect(model.UserToPay.UserId))
+            @Html.DropDownList("Name", new SelectList( typeof(Company).Assembly.GetTypes().Where(t=>t.BaseType == typeof(Company)).Select(t=>EnumTypes.ResourceManager.GetString(t.Name.ToString()))))
+        </div>
+    }
+    
+        <div>
+            @Html.TextBoxFor(model=>Model.payCode)
+            @Html.ValidationMessageFor(model=>Model.payCode)
+        </div>
+        <div>
+            @Html.DropDownListFor(model=>model.payType,Model.payTypeToSelectList)
+        </div>
+        <div>
+            @Html.DropDownListFor(model=>model.payBank,Model.bankTypeToSelectList)
+        </div>
+    <p>
+        <input type="submit" value="@Resource.save" />
+    </p>
+}
+<div id="list">
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("inpu[type='text']").keyup(function () {
+            var searchText = $(this).val();
+            var id = $(this).id;
+            $.get('@Url.Action("CompaniesPartial")',
+                  {q: searchText},
+                  function (data) {
+                      $("#list").html(data);
+                  }
+                 )
+        });
+    });
+</script>

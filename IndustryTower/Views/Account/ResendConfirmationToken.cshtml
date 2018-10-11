@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = Resource.resendConfirmationEmail;
+}
+
+
+
+<div class="row dir">
+    <div class="col-md-offset-4 col-md-4 margin-top-bot-lg">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>@Resource.resendConfirmationEmail</strong>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary()
+
+                    <div class="form-group">
+                        @Html.TextBox("email", null, new { @placeholder = @ModelDisplayName.email, @class = "form-control dirltr" })
+                    </div>
+                    <input type="submit"  class=" btn btn-primary col-md-12 col-xs-12" value="@Resource.resendConfirmationEmail" />
+
+                }
+
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+

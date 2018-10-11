@@ -1,0 +1,74 @@
+﻿@model IndustryTower.ViewModels.PlanToApprove
+@{
+    ViewBag.Title = Resource.requestAudit;
+}
+
+<div class="row dir">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>@Resource.requestAudit</h2>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <strong>
+                        @Html.DisplayNameFor(model => model.requesterUser.CultureFullName)
+                    </strong>
+                    @Html.DisplayTextFor(model => model.requesterUser.CultureFullName)
+                </div>
+                <div>
+                    <strong>
+                        @Html.DisplayNameFor(model => model.plan)
+                    </strong>
+                    @Html.DisplayFor(model => model.plan)
+                </div>
+                <div>
+                    <strong>
+                        @Html.DisplayNameFor(model => model)
+                    </strong>
+                    @Html.DisplayFor(model => model.plan)
+                </div>
+                <div>
+                    <strong>
+                        @Html.DisplayNameFor(model => model.requestDate)
+                    </strong>
+                    @Html.DisplayFor(model => model.requestDate)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row dir bg-default margin-top-bot-lg">
+    <div class="col-md-10 col-md-offset-1">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            @Html.HiddenFor(model => model.requester)
+            @Html.HiddenFor(model => model.req)
+            @Html.HiddenFor(model => Model.plan)
+            @Html.HiddenFor(model => Model.plantype)
+
+            <div id="planRequestApprove" class="col-md-3">
+                <div>
+                    <label class="radio-inline">
+                        @Html.RadioButtonFor(model => model.approve, false)
+                        @Resource.notApprove
+                    </label>
+                </div>
+                <div>
+                    <label class="radio-inline">
+                        @Html.RadioButtonFor(model => model.approve, true)
+                        @Resource.approve
+                    </label>
+                </div>
+            </div>
+
+            <input type="submit" value="@Resource.save" class="btn btn-primary col-md-9 btn-lg" />
+        }
+    </div>
+</div>
+
+

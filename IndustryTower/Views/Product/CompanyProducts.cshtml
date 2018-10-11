@@ -1,0 +1,88 @@
+﻿@model IEnumerable<IndustryTower.Models.Product>
+@if (Model.Count() > 0)
+{
+    var Company = Model.Select(p => p.company).First();
+    ViewBag.Title = Company.CultureCoName + " - " + Resource.products;
+    
+    <div class="row">
+        <div class="col-md-12">
+            @{Html.RenderPartial("~/Views/Company/CompanyPartial.cshtml", Company);}
+        </div>
+        
+    </div>
+    
+    <div class="row dir">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            @Resource.relatedCategories
+                        </div>
+                        <div class="panel-body">
+                            @{Html.RenderAction("RelatedCategories", "Category", new { CoId = Company.coID });}
+                        </div>
+                    </div>
+                </div>
+                 
+            </div>
+            
+            <div class="row">
+                
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            @Resource.relatedProducts
+                        </div>
+                        <div class="panel-body list-group">
+                            @Html.AjaxPrtialLoader(Url.Action("RelatedProducts", "Product", new { CoId = Company.coID }))
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-md-8">
+            <div class="bottom-border-blue dir">
+                @Resource.products
+            </div>
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6 margin-top-bot-md">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="col-md-4">
+                                        @Html.ProfilePic(product: item)
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h4>
+                                            @Html.ActionLink(item.CultureProductName, "Detail", new { PrId = item.productID, PrName = StringHelper.URLName(item.CultureProductName) },null)
+                                        </h4>
+                                        <p>
+                                                <strong class="label label-info margin-lf-r8-md">
+                                                    @Resource.brandName
+                                                </strong>
+                                            @Html.DisplayFor(model => item.CultureBrandName)
+                                        </p>
+                                        <p>
+                                            @Html.DisplayAbstractFor(item.CultureAbout)
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            }
+        </div>
+    </div>
+}
+
+
+

@@ -1,0 +1,38 @@
+﻿@model List<IndustryTower.ViewModels.SearchViewModel>
+@foreach (var item in Model)
+{
+    <div class="row margin-top-bot-md bg-default border-radius">
+        <div class="col-md-12 margin-top-bot-md">
+            <div class=" col-md-2 col-xs-4">
+                @Html.ProfilePic(store: item.store)
+            </div>
+            <strong>
+                @Html.ActionLink(item.store.CultureStoreName, "SProfile", "Store", new { StID = item.store.storeID, StName = StringHelper.URLName(item.store.CultureStoreName) }, null)
+            </strong>
+            <div class="margin-top-bot-md">
+
+                @Html.DisplayAbstractFor(item.store.CultureAbout)
+
+            </div>
+            <div class=" margin-top-bot-md">
+                <div class="inline-block bottom-border-blue">
+                    @Resource.categories
+                </div>
+
+                @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { StID = item.store.storeID }))
+            </div>
+        </div>
+    </div>
+    
+}
+@if ((bool)ViewData["finalPage"] == false)
+{
+    var pagenumber = (int)ViewData["pageNum"];
+    <div id="nextSearchResults" data-nextpage="@(pagenumber + 1)">
+        @Html.NextItems("TotalSearch", "Home", new
+   {
+       page = pagenumber + 1,
+       currentFilter = ViewData["currentFilter"]
+   })
+    </div>
+}

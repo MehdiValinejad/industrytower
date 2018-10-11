@@ -1,0 +1,19 @@
+﻿@model IEnumerable<IndustryTower.ViewModels.RelatedCompanyViewModel>
+           
+@if (Model.Count() > 0)
+{
+    <p class="neat-title">
+        @Resource.relatedCompanies
+    </p>
+    <div class="similar-products">
+        @foreach (var item in Model)
+        {
+            <div class="similar-product-container neat-box">
+                @Html.ProfilePic(company: item.company)
+                <span>
+                    @Html.ActionLink(item.company.CultureCoName, "Cprofile", "Company", new { CoId = item.company.coID, CoName = StringHelper.URLName(item.company.CultureCoName) }, null)
+                </span>
+            </div>
+        }
+    </div>
+}

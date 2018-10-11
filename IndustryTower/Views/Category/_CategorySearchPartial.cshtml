@@ -1,0 +1,11 @@
+﻿@model IEnumerable<IndustryTower.Models.Category>
+
+@foreach (var item in Model)
+{
+    <div class="search-nano-item" data-id="@item.catID">
+            @Html.DisplayFor(model => item.CultureCatName)
+    </div>
+}
+
+
+

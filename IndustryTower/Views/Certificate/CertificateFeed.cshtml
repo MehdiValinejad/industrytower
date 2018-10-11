@@ -1,0 +1,22 @@
+﻿@model IndustryTower.Models.Certificate
+
+
+
+<div class="col-md-12 col-xs-12">
+    <p>
+        @Html.DisplayFor(model => model.CultureCertificateName)
+    </p>
+    <p>
+        <strong><u>@Resource.certificateAutority</u></strong> @Html.DisplayFor(model => model.CultureCertificator)
+    </p>
+
+    @if (Model.certificatorURL != null)
+    {
+        <a href="@Model.certificatorURL">
+            <span class="glyphicon glyphicon-globe"></span>
+            @Resource.certificateURL
+        </a>
+    }
+</div>
+
+

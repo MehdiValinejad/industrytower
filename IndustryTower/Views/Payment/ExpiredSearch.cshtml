@@ -1,0 +1,22 @@
+﻿@model IndustryTower.ViewModels.ExpiredViewModel
+
+<div id="expiredCompanies">
+     <ul>
+            @foreach (var co in Model.expiredCompanies)
+            { 
+                <li>
+                    @Html.ActionLink(co.coName, "Pay", new { CoId = EncryptionHelper.Protect(co.coID) })
+                </li>
+            }
+     </ul>
+</div>
+<div id="expiredStores">
+     <ul>
+            @foreach (var st in Model.expiredStores)
+            { 
+                <li>
+                    @Html.ActionLink(st.storeName, "Pay", new { StId = EncryptionHelper.Protect(st.storeID) })
+                </li>
+            }
+     </ul>
+</div>

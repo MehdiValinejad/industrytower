@@ -1,0 +1,308 @@
+[
+  {
+    "outputFileName": "Scripts/Datepicker/DPMgr.min.js",
+    "inputFiles": [
+      "Scripts/Datepicker/DPMgr.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Answer.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Answer.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Badge.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Badge.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Book.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Book.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Category.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Category.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Comment.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Comment.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Certificate.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Certificate.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Company.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Company.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Dict.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Dict.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Education.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Education.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Event.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Event.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Experience.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Experience.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Following.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Following.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/FriendRequest.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/FriendRequest.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Group.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Group.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Like.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Like.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Patent.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Patent.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/PlanRequest.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/PlanRequest.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Post.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Post.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Product.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Product.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/ProfessionTags.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/ProfessionTags.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Question.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Question.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Score.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Score.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Seminar.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Seminar.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Service.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Service.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Share.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Share.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/UserProfile.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/UserProfile.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/Store.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/Store.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PageSpesific/UserTags.min.js",
+    "inputFiles": [
+      "Scripts/PageSpesific/UserTags.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/__AjaxInterval.min.js",
+    "inputFiles": [
+      "Scripts/__AjaxInterval.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/AJAX.min.js",
+    "inputFiles": [
+      "Scripts/AJAX.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Cookie.min.js",
+    "inputFiles": [
+      "Scripts/Cookie.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/CountryDropDown.min.js",
+    "inputFiles": [
+      "Scripts/CountryDropDown.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/GoogleAnalytic.min.js",
+    "inputFiles": [
+      "Scripts/GoogleAnalytic.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/holder.min.js",
+    "inputFiles": [
+      "Scripts/holder.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Loading.min.js",
+    "inputFiles": [
+      "Scripts/Loading.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Modal.min.js",
+    "inputFiles": [
+      "Scripts/Modal.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Notification.min.js",
+    "inputFiles": [
+      "Scripts/Notification.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/PartialLoader.min.js",
+    "inputFiles": [
+      "Scripts/PartialLoader.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/ScrollDetector.min.js",
+    "inputFiles": [
+      "Scripts/ScrollDetector.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Search.min.js",
+    "inputFiles": [
+      "Scripts/Search.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/SlideShow.min.js",
+    "inputFiles": [
+      "Scripts/SlideShow.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/TabChanger.min.js",
+    "inputFiles": [
+      "Scripts/TabChanger.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/TagMenu.min.js",
+    "inputFiles": [
+      "Scripts/TagMenu.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Upload.min.js",
+    "inputFiles": [
+      "Scripts/Upload.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/UserCompanyStore.min.js",
+    "inputFiles": [
+      "Scripts/UserCompanyStore.js"
+    ]
+  },
+  {
+    "outputFileName": "Content/CSS.min.css",
+    "inputFiles": [
+      "Content/CSS.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/icn.min.css",
+    "inputFiles": [
+      "Content/icn.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/rtl-CSS.min.css",
+    "inputFiles": [
+      "Content/rtl-CSS.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/rtl-Site.min.css",
+    "inputFiles": [
+      "Content/rtl-Site.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/Site.min.css",
+    "inputFiles": [
+      "Content/Site.css"
+    ]
+  }
+]

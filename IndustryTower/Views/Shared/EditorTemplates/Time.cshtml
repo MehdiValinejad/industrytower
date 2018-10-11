@@ -1,0 +1,71 @@
+﻿@{DateTime? modelDate = (Model == null) ? (DateTime?)null : Model;}
+@{
+    string Class = "form-control ";
+    string TimeClass = "form-control clockpicker ";
+    string PlaceHolder = Resource.date;
+    string TimePlaceHolder = Resource.time;
+    string TimeName = "Time";
+    if (ViewData["Class"] != null)
+    {
+        Class = Class + ViewData["Class"].ToString();
+    }
+    if (ViewData["Placeholder"] != null)
+    {
+        PlaceHolder = ViewData["Placeholder"].ToString();
+    }
+    if (ViewData["TimeClass"] != null)
+    {
+        TimeClass = TimeClass + ViewData["TimeClass"].ToString();
+    }
+    if (ViewData["TimePlaceHolder"] != null)
+    {
+        TimePlaceHolder = ViewData["TimePlaceHolder"].ToString();
+    }
+    if (ViewData["TimeName"] != null)
+    {
+        TimeName = ViewData["TimeName"].ToString();
+    }
+    
+}
+@if (modelDate != null)
+{
+
+        <div class="form-group col-md-5 col-md-offset-1">
+            <div class="input-group dirltr">
+                @Html.TextBox("", String.Format(modelDate.Value.Date.ToLocalTime().ToShortDateString())
+                     , htmlAttributes: new { @class = Class, @placeholder = PlaceHolder, @readonly = "readonly" })
+                <div class="dpickerSign input-group-addon cursor-point"><span class="glyphicon glyphicon-calendar"></span></div>
+            </div>
+            <span class="form-control-feedback glyphicon glyphicon-remove clear-input"></span>
+        </div>
+        <div class="form-group col-md-5">
+            <div class="input-group dirltr">
+                <input type="text" name="@TimeName" id="Time" value="@modelDate.Value.ToLocalTime().ToString("hh:mm")" placeholder="@TimePlaceHolder" class="@TimeClass" readonly/>
+                <div class="input-group-addon cursor-point"><span class="glyphicon glyphicon-time"></span></div>
+            </div>
+            <span class="form-control-feedback glyphicon glyphicon-remove clear-input"></span>
+        </div>
+
+    
+}
+else
+{
+    <div class="form-group col-md-5 col-md-offset-1 ">
+        <div class="input-group dirltr">
+            @Html.TextBox("", null, htmlAttributes: new { @class = Class, @placeholder = PlaceHolder, @readonly = "readonly" })
+            <div class="dpickerSign input-group-addon cursor-point"><span class="glyphicon glyphicon-calendar"></span></div>
+        </div>
+        <span class="form-control-feedback glyphicon glyphicon-remove clear-input"></span>
+    </div>
+    <div class="form-group col-md-5">
+        <div class="input-group dirltr">
+            <input type="text" name="@TimeName" id="Time" value="" placeholder="@TimePlaceHolder" class="@TimeClass" readonly />
+            <div class="input-group-addon cursor-point"><span class="glyphicon glyphicon-time"></span></div>
+        </div>
+        <span class="form-control-feedback glyphicon glyphicon-remove clear-input"></span>
+    </div>
+
+
+}
+
+

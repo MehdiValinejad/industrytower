@@ -1,0 +1,59 @@
+﻿@model IList<IndustryTower.Models.Category>
+@foreach (var item in Model)
+{
+    <div id="relatedCategory" class="dropdown inline-block margin-top-bot-xs">
+        <button type="button" class="btn btn-xs btn-default green-tag dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-th"></span>
+            <strong>@item.CultureCatName</strong>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li role="presentation">
+                @Html.ActionLink(EnumTypes.Total, "TotalSearch", "Home", new
+                                                                   {
+                                                                       searchType = "All",
+                                                                       searchCats = item.catID
+                                                                   }, null)
+            </li>
+            <li>
+                @Html.ActionLink(EnumTypes.company, "TotalSearch", "Home", new
+                                                                   {
+                                                                       searchType = "Company",
+                                                                       searchCats = item.catID
+                                                                   }, null)
+            </li>
+            <li>
+                @Html.ActionLink(EnumTypes.store, "TotalSearch", "Home", new
+                                                                   {
+                                                                       searchType = "Store",
+                                                                       searchCats = item.catID
+                                                                   }, null)
+            </li>
+            <li>
+                @Html.ActionLink(EnumTypes.Product, "TotalSearch", "Home", new
+                                                                   {
+                                                                       searchType = "Product",
+                                                                       searchCats = item.catID
+                                                                   }, null)
+
+            </li>
+            <li>
+                @Html.ActionLink(EnumTypes.Service, "TotalSearch", "Home", new
+                                                                   {
+                                                                       searchType = "Service",
+                                                                       searchCats = item.catID
+                                                                   }, null)
+            </li>
+            <li>
+                @Html.ActionLink(EnumTypes.Webinar, "TotalSearch", "Home", new
+                                                                   {
+                                                                       searchType = "Webinar",
+                                                                       searchCats = item.catID
+                                                                   }, null)
+            </li>
+
+        </ul>
+    </div>
+
+}
+

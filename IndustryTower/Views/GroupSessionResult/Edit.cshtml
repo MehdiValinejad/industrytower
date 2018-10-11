@@ -1,0 +1,48 @@
+﻿@model IndustryTower.Models.GroupSesssionResult
+
+@{
+    ViewBag.Title = Resource.edit;
+}
+
+
+
+<div class="row">
+    <div class="dir col-md-8 col-md-offset-2">
+        <div class="panel panel-default dir">
+            <div class="panel-heading">
+                <h4>@Resource.edit</h4>
+
+                @Html.DisplayNameFor(model => model.creationDate) @Resource.create
+                @Html.DisplayFor(model=> model.creationDate)
+            </div>
+
+            <div class="panel-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.Hidden("S", EncryptionHelper.Protect(Model.sessionId))
+
+                    <div class="form-group">
+
+                            @Html.TextAreaFor(model => model.SessionResult, new {  @class = "form-control"  })
+                            @Html.ValidationMessageFor(model => model.SessionResult, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="form-group">
+
+                            <input type="submit" value="@Resource.edit" class="btn btn-primary col-md-12" />
+
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    
+
+
+

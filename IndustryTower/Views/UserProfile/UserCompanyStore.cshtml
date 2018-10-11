@@ -1,0 +1,70 @@
+﻿@model IndustryTower.Models.ActiveUser
+           @using IndustryTower.Models
+
+@if (Model != null)
+{
+    if (Model.adminCompanies != null || Model.adminStores != null)
+    {
+        <div id="postSenderContainer" class="has-choose-CoStore dropdown">
+
+                @Html.ProfilePic(user: Model, linkhtmlAttributes: new { @class = "curr-costor dropdown-toggle glyphicon glyphicon-chevron-down inline-block", data_toggle = "dropdown" }, imghtmlAttributes: new { @class = "user-choose-img inline-block" })
+                @*<span class="caret"></span>*@
+
+            <ul class="dropdown-menu user-costre" role="menu">
+                @foreach (var co in Model.adminCompanies.OfType<CompanyNotExpired>())
+                {
+
+                    <li role="presentation" class="select-user-comStore text-center">
+                        @Html.ProfilePic(company: co,
+                        linkhtmlAttributes:
+                        new
+                        {
+                            tabindex = "-1",
+                            role = "menuitem",
+                            @class = "inline-block",
+                            data_sender = "co",
+                            data_id = EncryptionHelper.Protect(co.coID)
+                        }, imghtmlAttributes: new { @class = "user-choose-img inline-block" })
+                    </li>
+                }
+                <li role="presentation" class="divider"></li>
+                @foreach (var st in Model.adminStores.OfType<StoreNotExpired>())
+                {
+                    <li role="presentation" class="select-user-comStore text-center">
+                        @Html.ProfilePic(store: st,
+                        linkhtmlAttributes: new
+                        {
+                            tabindex = "-1",
+                            role = "menuitem",
+                            @class = "inline-block",
+                            data_sender = "st",
+                            data_id = EncryptionHelper.Protect(st.storeID)
+                        }, imghtmlAttributes: new { @class = "user-choose-img inline-block" })
+                    </li>
+                }
+            </ul>
+
+
+
+            @*@if (Model.adminCompanies != null)
+            {
+                foreach (var co in Model.adminCompanies.OfType<CompanyNotExpired>())
+                {
+                    <div class="select-user-comStore" title="@co.CultureCoName" sender="co" data-ajax="@EncryptionHelper.Protect(co.coID)" style="display:none;">
+                        @Html.ProfilePic(company: co)
+                    </div>
+                }
+            }
+            @if (Model.adminStores != null)
+            {
+                foreach (var st in Model.adminStores.OfType<StoreNotExpired>())
+                {
+                    <div class="select-user-comStore" title="@st.CultureStoreName" sender="st" data-ajax="@EncryptionHelper.Protect(st.storeID)" style="display:none;">
+                        @Html.ProfilePic(store: st)
+                    </div>
+                }
+            }*@
+        </div>
+    }
+}
+

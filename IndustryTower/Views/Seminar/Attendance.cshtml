@@ -1,0 +1,45 @@
+﻿@model IndustryTower.Models.Seminar
+@{
+    bool isAttending = Model.Audiences.Any(a => a.UserId == WebSecurity.CurrentUserId);
+    var buttonText = isAttending ? Resource.webinarNotAttend : Resource.webinarAttending;
+
+    ViewBag.Title = buttonText + " - " + Model.title;
+}
+<div class="row dir">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>@Model.title</h2>
+            </div>
+            <div class="panel-body">
+                <div class="label label-info pull-right">
+                    <strong>@Resource.semModerator : @Model.Moderator.CultureFullName</strong>
+                </div>
+                <div class="col-md-12 margin-top-bot-md alert alert-warning">
+                    @if (isAttending)
+                    {
+                        @Resource.webinarAttendingText
+                    }
+                    else
+                    {
+                        @Resource.webinarNotAttendText
+                    }
+                </div>
+
+
+                @using (Html.BeginForm("Attendance", "Seminar", FormMethod.Post, new { SnId = EncryptionHelper.Protect(Model.seminarId) }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary()
+                    @Html.Hidden("SnId", EncryptionHelper.Protect(Model.seminarId))
+                    @Html.Hidden("WN", EncryptionHelper.Protect(Model.seminarId))
+
+                    <input type="submit" value="@buttonText" class="btn btn-primary col-md-6 col-md-offset-3 " />
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+

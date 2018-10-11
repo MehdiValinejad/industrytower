@@ -1,0 +1,46 @@
+﻿@model IndustryTower.Models.Badge
+@{
+    ViewBag.Title = Resource.create;
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 dir">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-cog pull-left"></span>
+                @Resource.badge
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary()
+                    
+                    <div class="form-group col-md-6">
+                        @Html.TextBoxFor(model => model.name, new { @class = "form-control", placeholder = ModelDisplayName.badgeName })
+                        @Html.ValidationMessageFor(model => model.name)
+                    </div>
+                    <div class="form-group col-md-6 dirltr">
+                        @Html.TextBoxFor(model => model.nameEN, new { @class = "form-control", placeholder = ModelDisplayName.badgeNameEN })
+                        @Html.ValidationMessageFor(model => model.nameEN)
+                    </div>
+                    <div class="form-group col-md-6 ">
+                        @Html.TextAreaFor(model => model.desc, new { @class = "form-control", placeholder = ModelDisplayName.badgeDesc })
+                        @Html.ValidationMessageFor(model => model.desc)
+                    </div>
+                    <div class="form-group col-md-6 dirltr">
+                        @Html.TextAreaFor(model => model.descEN, new { @class = "form-control", placeholder = ModelDisplayName.badgeDescEN })
+                        @Html.ValidationMessageFor(model => model.descEN)
+                    </div>
+                    <div class="form-group col-md-4">
+                        @Html.DropDownList("color", ViewData["badgeColSL"] as SelectList, ModelDisplayName.badgeColor, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.color)
+                    </div>
+                    <input type="submit" class="btn btn-primary col-md-8 col-md-offset-2" value="@Resource.create" />
+                }
+                
+            </div>
+        </div>
+    </div>
+</div>
+

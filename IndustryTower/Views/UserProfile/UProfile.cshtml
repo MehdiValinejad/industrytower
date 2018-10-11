@@ -1,0 +1,201 @@
+﻿@model IndustryTower.Models.ActiveUser
+@{
+    ViewBag.Title = Model.CultureFullName;
+    //Layout = "~/Views/UserProfile/_UPLayout.cshtml";
+    var uid = EncryptionHelper.Protect(Model.UserId);
+    bool isAdmin = AuthorizationHelper.isAdmin();
+    bool isUserHimSelf = Model.UserId == WebSecurity.CurrentUserId;
+    var Friends = Model.Friends.Select(f => f.friendID);
+    var FriendsImIn = Model.FriendsImIn.Select(f => f.userID);
+    bool isFriend = Friends.Concat(FriendsImIn).Any(id => id == WebSecurity.CurrentUserId);
+}
+@section head{
+    <meta name="description" content="@Model.CultureAbout">
+    <meta name="keywords" content="@String.Join(",", Model.CultureFullName.Split(new char [] {' '}))">
+    @if (ViewContext.RouteData.Values["UName"] as string != StringHelper.URLName(Model.CultureFullName))
+    {
+        <link rel="canonical" href="@Url.Action("UProfile", "UserProfile", new { UId = Model.UserId, UName = StringHelper.URLName(Model.CultureFullName) })" />
+    }
+}
+<input type="hidden" id="toururl" value="tuprofilefa">
+<div class="row">
+    <div class="col-md-4 col-xs-12 dir">
+        @if (isUserHimSelf || isAdmin)
+        {
+            @Html.ModifyIcons("ProfilePic", "ProfilePicDelete", "UserProfile", new { UId = uid }, "changeprofilepic-link pull-left", "deleteprofilepic-link pull-left")
+        }
+        
+
+        @Html.ProfilePic(user: Model)
+        <div class="margin-top-bot-md">
+            @Html.AjaxPrtialLoader(Url.Action("ExperiencesPartial", "Experience", new { UId = Model.UserId }))
+            @Html.AjaxPrtialLoader(Url.Action("EducationsPartial", "Education", new { UId = Model.UserId }))
+            @Html.AjaxPrtialLoader(Url.Action("CertificatesPartial", "Certificate", new { UId = Model.UserId }))
+            @Html.AjaxPrtialLoader(Url.Action("PatentsPartial", "Patent", new { UId = Model.UserId }))
+            @Html.AjaxPrtialLoader(Url.Action("EventsPartial", "Event", new { UId = Model.UserId }))
+            @Html.AjaxPrtialLoader(Url.Action("UQuestionsPartial", "Question", new { UId = Model.UserId }))
+        </div>
+
+    </div>
+    <div class="col-md-8 col-xs-12">
+        <div class="dir panel panel-default" itemscope itemtype="http://data-vocabulary.org/Person">
+            <div class="panel-heading">
+                <h4>
+                    @if (isUserHimSelf || isAdmin)
+                    {
+                        @Html.ModifyIcons("EditInfo", "", "UserProfile", new { UId = uid }, "editUserInfo-link", "display-none", editAjax: false, deletevis: false)
+                    }
+                    <span itemprop="name">
+                        @Html.ActionLink(Model.CultureFullName,
+                         "UProfile",
+                         "UserProfile",
+                                                    new { UId = Model.UserId, UName = StringHelper.URLName(Model.CultureFullName) },
+                         null)
+                </span>
+
+            </h4>
+
+            </div>
+            <div class="panel-body">
+                <p>
+                    <span itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
+                        <span itemprop="locality">@Html.Raw(Model.State.CultureFullState)</span> - 
+                        <span itemprop="region">@ModelDisplayName.birthday @Html.DisplayFor(model => model.birthDay, "MonthYearOnly")</span> 
+                    </span>
+                    
+                </p>
+                <p>
+                    <span itemprop="organization">@Html.PresentExperience(Model.UserId)</span>
+                </p>
+
+                <div class="row">
+                    <div class="col-md-6 col-xs-6 margin-top-bot-md dir">
+                        <a id="friends" class="pull-left btn btn-default btn-xs margin-lf-r8-md" title="@Resource.friends"  href="@Url.Action("Friends", "Friendship", new
+                                                            {
+                                                                UId = Model.UserId,
+                                                            })" data-ajax="true">
+                            <span class="icon-Friends"></span>
+                        </a>
+                        @if (Request.IsAuthenticated && !isAdmin)
+                        {
+                            Html.RenderAction("FriendsRequest", "FriendRequest", new { UId = uid });
+                        }
+                        
+                    </div>
+                    <div class="col-md-6 col-xs-6">
+                        <a id="userinfo" href="@Url.Action("UserInfo", "UserProfile", new { UId = Model.UserId, UName = StringHelper.URLName(Model.CultureFullName),RType = "badges" })" class="pull-right dir btn btn-default">
+                            <div class="inline-block">
+                                <table class="text-center">
+                                    <tr>
+                                        <td>@Model.Bdg_Golds</td>
+                                        <td>@Model.Bdg_Silvers</td>
+                                        <td>@Model.Bdg_Bronzes</td>
+                                        <td>
+                                            <span class="badge">
+                                                @Model.ScoresSum
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span title="@Resource.bdgGoldTitle" class="glyphicon glyphicon-cog bdg_Gold"></span></td>
+                                        <td><span title="@Resource.bdgSilverTitle" class="glyphicon glyphicon-cog bdg_Silver"></span></td>
+                                        <td><span title="@Resource.bdgBronzeTitle" class="glyphicon glyphicon-cog bdg_Bronze"></span></td>
+                                        <td title="@Resource.score">
+                                            <span class="glyphicon glyphicon-star score" title="@Resource.score"></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            @*<a href="#"> <span class="icon-Question" title="@Resource.questionsAnswered"></span><span class="badge">@Model.Answers.Count(a => a.accept == true)</span></a>*@
+                        </a>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="bottom-border-blue margin-lf-r8-md margin-top-bot-xs">
+                        @Resource.professions
+                    </div>
+                    <div class="col-md-12">
+                        @if (Model.Professions.Count != 0)
+                        {
+                            Html.RenderAction("RelatedProfessions", "Profession", new { UId = Model.UserId });
+                        }
+                        else if (isUserHimSelf)
+                        {
+                            <span class="text-danger">@Html.Raw(Resource.noProffSelected)</span>
+                        }
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+
+                @if (isFriend || isUserHimSelf)
+                {
+                    Html.RenderAction("Create", "Post", new
+                    {
+                        model = new IndustryTower.ViewModels.postVars
+                        {
+                            UId = Model.UserId
+                        }
+                    });
+                }
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div id="postsContainer" class="col-md-12 col-xs-12 dir">
+                <div class="bottom-border-blue dir margin-top-bot-xs">
+                    @Resource.posts
+                </div>
+                @Html.AjaxPrtialLoader(Url.Action("ProfilePostFeed", "Post", new { UId = Model.UserId }))
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/Social")
+    @Scripts.Render("~/bundles/Upload")
+    @Scripts.Render("~/bundles/FriendRequest")
+    @Scripts.Render("~/bundles/TabChanger")
+    @Scripts.Render("~/bundles/UserProfile")
+    @Scripts.Render("~/bundles/SlideShow")
+
+    <script>
+        $(document).ready(function () {
+
+            //Call Upload File
+            UploadFile('@IndustryTower.App_Start.ITTConfig.FileSizeLimit',
+                       '@IndustryTower.App_Start.ITTConfig.MaxFilesCountPost',
+                       '@ModelValidation.maxUploadFileLimit',
+                       '@ModelValidation.maxUploadFileCount',
+                       '@ModelValidation.fileTypeLimit');
+
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            SlideShowArrowKeys();
+        })
+    </script>
+
+}
+
+
+
+

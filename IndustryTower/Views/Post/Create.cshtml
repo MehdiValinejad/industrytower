@@ -1,0 +1,77 @@
+﻿@model IndustryTower.ViewModels.PostViewModel
+
+<div id="newPost" class="hasUpload margin-top-bot-lg panel panel-default">
+    <div class="panel-body">
+        @using (Html.BeginForm("Create", "Post",
+                        FormMethod.Post,
+                        new { @class = "newpost-form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+
+            @*<legend>@Resource.post</legend>*@
+            @Html.Hidden("filesToUpload")
+            
+            @Html.Serialize("model", Model.prams, SerializationMode.Plaintext)
+            @*if (ViewContext.RouteData.Values["UId"] != null)
+            { @Html.Hidden("UP", ViewContext.RouteData.Values["UId"])}
+            if (ViewContext.RouteData.Values["CoId"] != null)
+            { @Html.Hidden("CP", ViewContext.RouteData.Values["CoId"])}
+            if (ViewContext.RouteData.Values["StId"] != null)
+            { @Html.Hidden("SP", ViewContext.RouteData.Values["StId"])}
+            if (ViewContext.RouteData.Values["pstrCoId"] != null)
+            { @Html.Hidden("PrC", ViewContext.RouteData.Values["pstrCoId"])}
+            if (ViewContext.RouteData.Values["pstrStId"] != null)
+            { @Html.Hidden("PrS", ViewContext.RouteData.Values["pstrStId"])}*@
+
+
+                                                                        <div class="postEditorField">
+                                                                            @Html.ValidationMessageFor(model => model.post)
+                                                                            @Html.TextAreaFor(model => model.post, new { @onkeyup = "textAreaAdjust(this)", @placeholder = Resource.writeYourPost, @class = "form-control dir" })
+                                                                            <div>
+                                                                                <div class="progress">
+                                                                                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                                                                        <span class="sr-only">0% complete</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div id="postButton">
+
+                                                                            <div class=" no-wrap ">
+                                                                                <div class="col-lg-2 col-md-3 col-xs-6 ">
+                                                                                    <div class="row">
+                                                                                        <input type="submit" value="@Resource.post" class="inline-block btn btn-default " data-loading-text="@Resource.loading" />
+
+                                                                                        <div id="senderCount" class="inline-block" title="@Resource.sendAsChoose" data-placement="bottom">
+                                                                                            @{Html.RenderAction("UserCompanyStore", "UserProfile");}
+                                                                                            @Html.Hidden("PrC")
+                                                                                            @Html.Hidden("PrS")
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-lg-10 col-md-9 col-xs-6">
+                                                                                    <div id="uploadButton" class="fileUpload-button glyphicon glyphicon-upload btn btn-lg btn-default" title="@Resource.upload" data-placement="bottom">
+                                                                                        @Html.TextBox("postFiles", null, new { @type = "file", @name = "files[]", @class = "post-files" })
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <ul id="uploadedFiles" class="col-md-12 col-xs-12 margin-top-bot-md"></ul>
+
+        }
+    </div>
+</div>
+
+
+
+
+
+@Scripts.Render("~/bundles/UserCompanyStore")
+
+
+

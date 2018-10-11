@@ -1,0 +1,156 @@
+﻿@model IndustryTower.Models.Group
+@{
+    ViewBag.Title = Model.groupName;
+    var membershipText = Model.Members.Any(a => a.UserId == WebSecurity.CurrentUserId) ? Resource.groupLeave : Resource.groupMembership;
+    var protectedGID = EncryptionHelper.Protect(Model.groupId);
+    bool isGroupAdmin = Model.Admins.Any(a => AuthorizationHelper.isRelevant(a.UserId));
+    var MembersLink = isGroupAdmin ? Url.Action("AddUsers", "Group", new { GId = protectedGID }) : Url.Action("Members", "Group", new { GId = Model.groupId });
+}
+@section head{
+    <meta name="description" content="@Model.groupDesc">
+    <meta name="keywords" content="@String.Join(",", Model.groupName.Split(new char [] {' '}))">
+    @if (ViewContext.RouteData.Values["GName"] as string != StringHelper.URLName(Model.groupName))
+    {
+        <link rel="canonical" href="@Url.Action("GroupPage", "Group", new { GId = Model.groupId, GName = StringHelper.URLName(Model.groupName) })" />
+    }
+}
+
+
+<div class="row dir">
+    <div class="group-right-panel col-md-4 col-xs-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @Resource.relatedProfessions
+                    </div>
+                    <div class="panel-body">
+                        @if (Model.Professions.Count != 0)
+                        {
+                            Html.RenderAction("RelatedProfessions", "Profession", new { GId = Model.groupId });
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @Resource.relatedCategories
+                    </div>
+                    <div class="panel-body">
+                        @if (Model.Categories.Count != 0)
+                        {
+                            Html.RenderAction("RelatedCategories", "Category", new { GId = Model.groupId });
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-8 col-xs-12">
+        <div class="col-md-12 panel panel-default">
+            <div>
+                <a href="@Url.Action("GroupPage", "Group", new { GId = Model.groupId })">
+                    <h2>
+                        @Html.DisplayFor(model => model.groupName)
+                        @if (isGroupAdmin)
+                        {
+                            @Html.ModifyIcons("Edit", "", "Group", new { GId = protectedGID }, deleteClass: "display-none", editAjax: false, deletevis: false)
+                        }
+                    </h2>
+                </a>
+                <p class="">
+                    @Html.DisplayTextFor(model => model.groupDesc)
+                </p>
+                
+            </div>
+            
+            <div class="row margin-top-bot-md">
+                <div class="col-md-12">
+                    <a id="groupMembers" href="@MembersLink" title="@Resource.members" class="inline-block text-center btn btn-default" data-ajax="@(isGroupAdmin ? "false" : "true")">
+                        <span class="icon-Friends"></span>
+                        <span class="badge">
+                            @Model.Members.Count
+                        </span>
+                    </a>
+                    <a id="groupAdmins" href="@Url.Action("Admins", "Group", new { GId = Model.groupId })" title="@Resource.admins" class="inline-block  text-center btn btn-default" data-ajax="true">
+                        <span class="icon-Admins"></span>
+                        <span class="badge">
+                            @Model.Admins.Count
+                        </span>
+
+                    </a>
+                    @if (isGroupAdmin)
+                    {
+                        @Html.ActionLink(Resource.newSession, "Create", "GroupSession", new { GId = protectedGID }, new { @class = "btn btn-primary" })
+                    }
+                    <div id="GroupMembership" class="inline-block">
+                        @if (Model.isPublic && Request.IsAuthenticated && !isGroupAdmin)
+                        {
+                            using (Html.BeginForm("Membership", "Group", FormMethod.Post, null))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary()
+                                @Html.Hidden("GId", Model.groupId);
+                            <input type="submit" value="@membershipText" class="btn btn-default" />
+
+                            }
+                        }
+                    </div>
+                    <div class="pull-left margin-top-bot-xs">
+                        <div class="g-plusone" data-annotation="inline" data-width="150" data-href="@Url.Action("GroupPage", "Group", new { GId = Model.groupId, GName = StringHelper.URLName(Model.groupName) }, "http")"></div>
+                        <script type="IN/Share" data-url="@Url.Action("GroupPage", "Group", new { GId = Model.groupId, GName = StringHelper.URLName(Model.groupName) }, "http")" data-counter="right">
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        @*<div class="group-main panel panel-default">
+            <div class="panel-body">
+                
+                
+                <div class="margin-top-bot-md col-md-12">
+                    @Html.DisplayTextFor(model => model.groupDesc)
+                </div>
+                <div class="group-menu col-md-12">
+                    
+
+                </div>
+            </div>
+        </div>*@
+
+        @if (AuthorizationHelper.isRelevant(WebSecurity.CurrentUserId, "UserPerGSView", new System.Data.SqlClient.SqlParameter("GID", Model.groupId), new System.Data.SqlClient.SqlParameter("U", WebSecurity.CurrentUserId)))
+        { 
+        <div>
+            <ul class="sesstion-type-choose nav nav-tabs nav-justified no-pad" role="tablist">
+                <li class="active"><a data-sessiontype="@IndustryTower.Controllers.SessionType.Current" href="@Url.Action("PartialList", "GroupSession", new { GId = Model.groupId, sessionType = IndustryTower.Controllers.SessionType.Current })" class="sessionType-active-header" data-ajax="true">@EnumTypes.Current</a></li>
+                <li><a data-sessiontype="@IndustryTower.Controllers.SessionType.Fisnished" href="@Url.Action("PartialList", "GroupSession", new { GId = Model.groupId, sessionType = IndustryTower.Controllers.SessionType.Fisnished })" data-ajax="true">@EnumTypes.Fisnished</a></li>
+                <li><a data-sessiontype="@IndustryTower.Controllers.SessionType.NoResult" href="@Url.Action("PartialList", "GroupSession", new { GId = Model.groupId, sessionType = IndustryTower.Controllers.SessionType.NoResult })" data-ajax="true">@EnumTypes.NoResult</a></li>
+            </ul>
+
+            <div id="SessionContainer" class="list-group active" data-sessiontype="@IndustryTower.Controllers.SessionType.Current">
+                @Html.AjaxPrtialLoader(Url.Action("PartialList", "GroupSession", new { GId = Model.groupId, sessionType = IndustryTower.Controllers.SessionType.Current }))
+            </div>
+            <div id="SessionContainer" class="display-none list-group" data-sessiontype="@IndustryTower.Controllers.SessionType.Fisnished">
+
+            </div>
+            <div id="SessionContainer" class="display-none list-group" data-sessiontype="@IndustryTower.Controllers.SessionType.NoResult">
+
+            </div>
+        </div>
+        }
+
+
+    </div>
+    
+</div>
+
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/Group")
+}

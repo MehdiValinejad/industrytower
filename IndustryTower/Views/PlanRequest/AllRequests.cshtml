@@ -1,0 +1,116 @@
+﻿@model IEnumerable<IndustryTower.Models.PlanRequest>
+@{
+    ViewBag.Title = Resource.allRequests;
+}
+<div class="row dir">
+    <div class="col-md-12">
+        <div id="allPlanRequests" class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="text-center">@Resource.allRequests</h4>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td><a>requester</a></td>
+                            <td><a>PayCode</a></td>
+                            <td><a>Bank</a></td>
+                            <td><a>planType</a></td>
+                            <td><a>Plan</a></td>
+                            <td><a>Date</a></td>
+                            <td><a>Audit</a></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var req in Model)
+                        {
+
+                            <tr>
+                                <td>@Html.DisplayFor(model => req.requesterUser.CultureFullName)</td>
+                                <td>@Html.DisplayFor(model => req.payment.payCode)</td>
+                                <td>@Html.DisplayFor(model => req.payment.payBank)</td>
+                                <td>@Html.DisplayFor(model => req.planType)</td>
+                                <td>@Html.DisplayFor(model => req.plan)</td>
+                                <td>@Html.DisplayFor(model => req.reqDate)</td>
+                                <td>
+                                    <a href="@Url.Action("RequestAudit", "PlanRequest", new { reqId = EncryptionHelper.Protect(req.reqID) })">
+                                        Accept
+                                    </a>
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@*<div id="allPlanRequests">
+
+        <div class ="table-header">
+            <a>
+                requester
+            </a>
+        </div>
+        <div class="table-header">
+            <a>
+                planType
+            </a>
+
+        </div>
+        <div class="table-header">
+            <a>
+                Plan
+            </a>
+        </div>
+        <div class="table-header">
+            <a>
+                Date
+            </a>
+        </div>
+        <a></a>
+
+    </div>*@
+
+
+@*<div id="CompanyRequests">
+         <ul>
+                @foreach (var co in Model.CompanyRequests)
+                {
+                    <li>
+                        <div>
+                            @Html.ActionLink(co.requesterUser.CultureFullName, "RequestAudit", new { reqId = co.reqID })
+                        </div>
+                        <div>
+
+                        </div>
+                    </li>
+                }
+         </ul>
+    </div>
+    <div id="StoreRequests">
+         <ul>
+                @foreach (var st in Model.StoreRequests)
+                {
+                    <li>
+                        @Html.ActionLink(st.requesterUser.CultureFullName, "RequestAudit", new { reqId = st.reqID })
+                    </li>
+                }
+         </ul>
+    </div>
+    <div id="UserRequests">
+         <ul>
+                @foreach (var ur in Model.UserRequests)
+                {
+                    <li>
+                        @Html.ActionLink(ur.requesterUser.CultureFullName, "RequestAudit", new { reqId = ur.reqID })
+                    </li>
+                }
+         </ul>
+    </div>*@

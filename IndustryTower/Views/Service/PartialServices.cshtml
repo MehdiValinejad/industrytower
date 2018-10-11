@@ -1,0 +1,54 @@
+﻿@model PagedList.IPagedList<IndustryTower.ViewModels.ServiceSearchViewModel>
+@using PagedList.Mvc;
+
+@foreach (var item in Model)
+{
+    <div id="companyRow" class="search-grid-box">
+        <div class="search-grid-header">
+            @item.service.Count() @Resource.services @Html.ActionLink(item.company.CultureCoName, "CProfile", "Company", new { CoId = item.company.coID, CoName = StringHelper.URLName(item.company.CultureCoName) }, null)
+        </div>
+        <div class="search-grid-company-logo">
+            @Html.ProfilePic(company: item.company)
+        </div>
+        <div class="search-grid-product neat-box">
+            @foreach (var service in item.service)
+            {
+                Html.ProfilePic(service: service.serviceResult);
+                <div class="search-product-pic">
+                        @Html.ProfilePic(service: service.serviceResult)
+                </div>
+                <div class="search-product-desc">
+                    <div class="search-product-desc-pic">
+                        @Html.ProfilePic(service: service.serviceResult)
+                    </div>
+                    <p>
+                        @Html.DisplayFor(model => service.serviceResult.CultureBrandName)
+                    </p>
+                    <p>
+                        @Html.DisplayAbstractFor(service.serviceResult.CultureAbout)
+                    </p>
+                    <div class="search-box-categories">
+                        <span>@Resource.categories:</span>@Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { SrId = service.serviceResult.serviceID }))
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="search-grid-desc neat-box-dark">
+
+        </div>
+    </div>
+}
+@if (Model.PageCount > Model.PageNumber)
+{
+    <div id="nextCompanies">
+        @Html.NextItems("AllProducts", "Product", new
+           {
+               cat = ViewData["currentCat"],
+               page = Model.PageNumber + 1,
+               sortOrder = ViewData["currentSort"],
+               currentFilter = ViewData["currentFilter"]
+           })
+    </div>
+}
+
+

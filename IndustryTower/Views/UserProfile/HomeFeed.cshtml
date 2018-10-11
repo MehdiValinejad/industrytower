@@ -1,0 +1,397 @@
+﻿@model IList<IndustryTower.Models.Feed>
+           @using IndustryTower.Models
+@using IndustryTower.ViewModels
+@using Newtonsoft.Json;
+@if (Model != null)
+{
+    foreach (var C in Model)
+    {
+        switch (C.feedType)
+        {
+            case FeedType.Post:
+                
+                Html.RenderAction("PostPartial", "Post", new { PId = C.elemId });
+                break;
+            case FeedType.Share:
+                <div id="postDesc" class="panel panel-default  col-md-12 col-xs-12">
+                    <div class="row">
+                        <div id="postContainer" class="col-xs-12 col-md-12 margin-top-bot-md">
+                            <div id="postDescText" class="row dir">
+                                <div id="postAvatar" class="col-md-2 col-xs-4 margin-top-bot-md">
+                                    @Html.ProfilePic(user: C.adjUser)
+                                </div>
+                                <div class="col-md-10 col-xs-8 bottom-border-gray">
+                                    @Html.ActionLink(C.adjUser.CultureFullName,
+                                                        "UProfile",
+                                                        "UserProfile",
+                                                        new { UId = C.adjId, UName = StringHelper.URLName(C.adjUser.CultureFullName) },
+                                                        null)
+                                    @Resource.hasSharedThis
+                                </div>
+                                <div class="col-md-10 col-xs-12">
+                                    <div class="row">
+                                        @if (C.data != null)
+                                        {
+                                            <p id="shareN" class="expandable col-md-12 col-xs-12">
+                                                <strong><u>@Resource.shareNote</u></strong> @Html.DisplayFor(model => C.data)
+
+                                            </p>
+                                        }
+                                        <div class="col-md-12">
+                                            @{Html.RenderAction("PostPartial", "Post", new { PId = C.elemId });}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 break;
+            case FeedType.PostLike:
+            
+                <div class="panel panel-default col-md-12 col-xs-12 dir">
+                    <div class="row margin-top-bot-md">
+                        <div class="col-md-2 col-xs-4 text-center">
+                            @Html.ProfilePic(user: C.adjUser)
+                            <i class="glyphicon glyphicon-thumbs-up icn-30 margin-top-bot-md"></i>
+                        </div>
+                        <div class="col-md-10 col-xs-8 bottom-border-gray">
+                            @Html.ActionLink(C.adjUser.CultureFullName,
+                                                                        "UProfile",
+                                                                        "UserProfile",
+                                                                         new { UId = C.adjId, UName = StringHelper.URLName(C.adjUser.CultureFullName) },
+                                                                        null)
+                            @Resource.likesThis
+                        </div>
+
+                            <div class="col-md-10 col-xs-12 margin-top-bot-md">
+                                @{Html.RenderAction("PostPartial", "Post", new { PId = C.elemId });}
+                            </div>
+                    </div>
+                </div>
+                                  break;
+            case FeedType.AnswerLike:
+            <div class="panel panel-default col-md-12 col-xs-12 dir">
+                <div class="row margin-top-bot-md">
+                    <div class="col-md-2 col-xs-4 text-center">
+                        @Html.ProfilePic(user: C.adjUser)
+                        <i class="glyphicon glyphicon-thumbs-up icn-30 margin-top-bot-md"></i>
+                    </div>
+                    <div class="col-md-10 col-xs-8 bottom-border-gray">
+                        @Html.ActionLink(C.adjUser.CultureFullName,
+                                                                        "UProfile",
+                                                                        "UserProfile",
+                                                                         new { UId = C.adjId, UName = StringHelper.URLName(C.adjUser.CultureFullName) },
+                                                                        null)
+                        @Resource.likesThis
+                    </div>
+
+                    <div class="col-md-10 col-xs-12 margin-top-bot-md">
+                        @{Html.RenderAction("AnswerPartial", "Answer", new { AId = C.elemId });}
+                    </div>
+                </div>
+            </div>
+                          break;
+            case FeedType.QuestionLike:
+            <div class="panel panel-default col-md-12 col-xs-12 dir">
+                <div class="row margin-top-bot-md">
+                    <div class="col-md-2 col-xs-4 text-center">
+                        @Html.ProfilePic(user: C.adjUser)
+                        <i class="glyphicon glyphicon-thumbs-up icn-30 margin-top-bot-md"></i>
+                    </div>
+                    <div class="col-md-10 col-xs-8 bottom-border-gray">
+                        @Html.ActionLink(C.adjUser.CultureFullName,
+                                                                        "UProfile",
+                                                                        "UserProfile",
+                                                                         new { UId = C.adjId, UName = StringHelper.URLName(C.adjUser.CultureFullName) },
+                                                                        null)
+                        @Resource.likesThis
+                    </div>
+
+                    <div class="col-md-10 col-xs-12 margin-top-bot-md">
+                        @{Html.RenderAction("QuestionPartial", "Question", new { QId = C.elemId });}
+                    </div>
+                </div>
+            </div>
+                          break;
+            case FeedType.SessionOfferLike:
+            <div class="panel panel-default col-md-12 col-xs-12 dir">
+                <div class="row margin-top-bot-md">
+                    <div class="col-md-2 col-xs-4 text-center">
+                        @Html.ProfilePic(user: C.adjUser)
+                        <i class="glyphicon glyphicon-thumbs-up icn-30 margin-top-bot-md"></i>
+                    </div>
+                    <div class="col-md-10 col-xs-8 bottom-border-gray">
+                        @Html.ActionLink(C.adjUser.CultureFullName,
+                                                                        "UProfile",
+                                                                        "UserProfile",
+                                                                         new { UId = C.adjId, UName = StringHelper.URLName(C.adjUser.CultureFullName) },
+                                                                        null)
+                        @Resource.likesThis
+                    </div>
+
+                    <div class="col-md-10 col-xs-12 margin-top-bot-md">
+                        @{Html.RenderAction("PartialOfferFeed", "GroupSessionOffer", new { GSOId = C.elemId });}
+                    </div>
+                </div>
+            </div>
+                              break;
+            case FeedType.PostComment:
+            <div class="panel panel-default col-md-12 col-xs-12 dir">
+                <div class="row margin-top-bot-md">
+                    <div class="col-md-2 col-xs-4 text-center">
+                        @Html.ProfilePic(user: C.adjUser)
+                        <i class="glyphicon glyphicon-comment icn-30 margin-top-bot-md"></i>
+                    </div>
+                    <div class="col-md-10 col-xs-8 bottom-border-gray">
+                        @Html.ActionLink(C.adjUser.CultureFullName,
+                                                                        "UProfile",
+                                                                        "UserProfile",
+                                                                         new { UId = C.adjId, UName = StringHelper.URLName(C.adjUser.CultureFullName) },
+                                                                        null)
+                        @Resource.commentedOnThis
+                    </div>
+                        <div class="col-md-10 col-xs-12 margin-top-bot-md">
+                            @{Html.RenderAction("PostPartial", "Post", new { PId = C.elemId });}
+                        </div>
+                </div>
+            </div>
+                              break;
+            case FeedType.QuestionComment:
+            <div class="panel panel-default col-md-12 col-xs-12 dir">
+                <div class="row margin-top-bot-md">
+                    <div class="col-md-2 col-xs-4 text-center">
+                        @Html.ProfilePic(user: C.adjUser)
+                        <i class="glyphicon glyphicon-comment icn-30 margin-top-bot-md"></i>
+                    </div>
+                    <div class="col-md-10 col-xs-8 bottom-border-gray">
+                        @Html.ActionLink(C.adjUser.CultureFullName,
+                                                                        "UProfile",
+                                                                        "UserProfile",
+                                                                         new { UId = C.adjId, UName = StringHelper.URLName(C.adjUser.CultureFullName) },
+                                                                        null)
+                        @Resource.commentedOnThis
+                    </div>
+                    <div class="col-md-10 col-xs-12 margin-top-bot-md">
+                        @{Html.RenderAction("QuestionPartial", "Question", new { QId = C.elemId });}
+                    </div>
+                </div>
+            </div>
+                          break;
+            case FeedType.AnswerComment:
+            <div class="panel panel-default col-md-12 col-xs-12 dir">
+                <div class="row margin-top-bot-md">
+                    <div class="col-md-2 col-xs-4 text-center">
+                        @Html.ProfilePic(user: C.adjUser)
+                        <i class="glyphicon glyphicon-comment icn-30 margin-top-bot-md"></i>
+                    </div>
+                    <div class="col-md-10 col-xs-8 bottom-border-gray">
+                        @Html.ActionLink(C.adjUser.CultureFullName,
+                              "UProfile",
+                              "UserProfile",
+                              new { UId = C.adjId, UName = StringHelper.URLName(C.adjUser.CultureFullName) },
+                              null)
+                        @Resource.commentedOnThis
+                    </div>
+                    <div class="col-md-10 col-xs-12 margin-top-bot-md">
+                        @{Html.RenderAction("AnswerPartial", "Answer", new { AId = C.elemId });}
+                    </div>
+                </div>
+            </div>
+                          break;
+            case FeedType.SessionOfferComment:
+            <div class="panel panel-default col-md-12 col-xs-12 dir">
+                <div class="row margin-top-bot-md">
+                    <div class="col-md-2 col-xs-4 text-center">
+                        @Html.ProfilePic(user: C.adjUser)
+                        <i class="glyphicon glyphicon-comment icn-30 margin-top-bot-md"></i>
+                    </div>
+                    <div class="col-md-10 col-xs-8 bottom-border-gray">
+                        @Html.ActionLink(C.adjUser.CultureFullName,
+                              "UProfile",
+                              "UserProfile",
+                              new { UId = C.adjId, UName = StringHelper.URLName(C.adjUser.CultureFullName) },
+                              null)
+                        @Resource.commentedOnThis
+                    </div>
+                    <div class="col-md-10 col-xs-12 margin-top-bot-md">
+                        @{Html.RenderAction("PartialOfferFeed", "GroupSessionOffer", new { GSOId = C.elemId });}
+                    </div>
+                </div>
+            </div>
+                          break;
+            case FeedType.SessionOfferAccept:
+            <div class="panel panel-default col-md-12 col-xs-12 dir">
+                <div class="row margin-top-bot-md">
+                    <div class="col-md-2 col-xs-4 text-center">
+                        @Html.ProfilePic(user: C.adjUser)
+                        <i class="glyphicon glyphicon-comment icn-30 margin-top-bot-md"></i>
+                    </div>
+                    <div class="col-md-10 col-xs-8 bottom-border-gray">
+                        @Html.ActionLink(C.adjUser.CultureFullName,
+                                                                        "UProfile",
+                                                                        "UserProfile",
+                                                                         new { UId = C.adjId, UName = StringHelper.URLName(C.adjUser.CultureFullName) },
+                                                                        null)
+                        @Resource.offerGotAccepted
+                    </div>
+                    <div class="col-md-10 col-xs-12 margin-top-bot-md">
+                        @{Html.RenderAction("PartialOfferFeed", "GroupSessionOffer", new { GSOId = C.elemId });}
+                    </div>
+                </div>
+            </div>
+                        break;
+            case FeedType.Question:
+            <div class="panel panel-default col-md-12 col-xs-12 dir">
+                <div class="row">
+                    <div id="postDescText" class="margin-top-bot-md">
+                        <div class="col-md-2 col-xs-4 text-center">
+                            @Html.ProfilePic(user: C.adjUser)
+                            <i class="glyphicon glyphicon-question-sign icn-30 margin-top-bot-md"></i>
+                        </div>
+                        <div class="col-md-10 col-xs-8 bottom-border-gray">
+                            @Html.ActionLink(C.adjUser.CultureFullName,
+                                                                        "UProfile",
+                                                                        "UserProfile",
+                                                                        new { UId = C.elemId, UName = StringHelper.URLName(C.adjUser.CultureFullName) },
+                                                                        null)
+                            @Resource.asked
+                        </div>
+                    </div>
+                    <div class="col-md-10 col-xs-12">
+                        <div class="row margin-top-bot-md">
+                            @*<div class="col-md-2 col-xs-4">
+                                    @Html.ProfilePic(user: C.question.Questioner)
+                                </div>*@
+                            @{Html.RenderAction("QuestionPartial", "Question", new { QId = C.elemId });}
+                        </div>
+                    </div>
+                </div>
+            </div>
+                              break;
+            case FeedType.Answer:
+            <div class="panel panel-default col-md-12 col-xs-12 dir">
+                <div class="row">
+                    <div id="postDescText" class="margin-top-bot-md">
+                        <div class="col-md-2 col-xs-4 text-center">
+                            @Html.ProfilePic(user: C.adjUser)
+                            <i class="icon-Question icn-30 margin-top-bot-md"></i>
+                        </div>
+                        <div class="col-md-10 col-xs-8 bottom-border-gray">
+                            @Html.ActionLink(C.adjUser.CultureFullName,
+                                                                        "UProfile",
+                                                                        "UserProfile",
+                                                                        new { UId = C.adjId, UName = StringHelper.URLName(C.adjUser.CultureFullName) },
+                                                                        null)
+                            @Resource.answered
+                        </div>
+
+                    </div>
+                    <div class="col-md-10 col-xs-12">
+                        <div class="row margin-top-bot-md">
+                            @*<div class="col-md-2 col-xs-4">
+                                    @Html.ProfilePic(user: C.question.Questioner)
+                                </div>*@
+                            @{Html.RenderAction("AnswerPartial", "Answer", new { AId = C.elemId });}
+                        </div>
+                    </div>
+                </div>
+            </div>
+                              break;
+            case FeedType.AnswerAccept:
+            <div class="panel panel-default col-md-12 col-xs-12 dir">
+                <div class="row">
+                    <div id="postDescText" class="margin-top-bot-md">
+                        <div class="col-md-2 col-xs-4 text-center">
+                            @Html.ProfilePic(user: C.adjUser)
+                            <i class="icon-Question icn-30 margin-top-bot-md"></i>
+                        </div>
+                        <div class="col-md-10 col-xs-8 bottom-border-gray">
+
+                            @Html.ActionLink(C.adjUser.CultureFullName,
+                                                                        "UProfile",
+                                                                        "UserProfile",
+                                                                        new { UId = C.adjId, UName = StringHelper.URLName(C.adjUser.CultureFullName) },
+                                                                        null)
+                            @Resource.answerGotAccepted
+                        </div>
+
+                    </div>
+                    <div class="col-md-10 col-xs-12">
+                        <div class="row margin-top-bot-md">
+                            @*<div class="col-md-2 col-xs-4">
+                                    @Html.ProfilePic(user: C.question.Questioner)
+                                </div>*@
+                            @{Html.RenderAction("AnswerPartial", "Answer", new { AId = C.elemId });}
+                        </div>
+                    </div>
+                </div>
+            </div>
+                            break;
+            case FeedType.UserCertificate:
+                <div class="panel panel-default col-md-12 col-xs-12 dir">
+                    <div class="row">
+                        <div id="postDescText" class="margin-top-bot-md">
+                            @{var certUserPic = C.adjUser;}
+                            <div class="col-md-2 col-xs-4 text-center">
+                                @Html.ProfilePic(user: C.adjUser)
+                                <i class="glyphicon glyphicon-certificate icn-30 margin-top-bot-md"></i>
+                            </div>
+                            <div class="col-md-10 col-xs-8 bottom-border-gray">
+                                @Html.ActionLink(C.adjUser.CultureFullName,
+                                                                            "UProfile",
+                                                                            "UserProfile",
+                                                                            new { UId = C.adjId, UName = StringHelper.URLName(C.adjUser.CultureFullName) },
+                                                                            null)
+                                @Resource.addedCertificate
+                            </div>
+                        </div>
+                        <div class="col-md-10 col-xs-12">
+                            <div class="row margin-top-bot-md">
+                                @{Html.RenderAction("CertificateFeed", "Certificate", new { certId = C.elemId});}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                  break;
+            case FeedType.Experience:
+            <div class="panel panel-default col-md-12 col-xs-12 dir">
+                <div class="row">
+                    <div id="postDescText" class="margin-top-bot-md">
+                        <div class="col-md-2 col-xs-4 text-center">
+                            @Html.ProfilePic(user: C.adjUser)
+                            <i class="glyphicon glyphicon-briefcase icn-30 margin-top-bot-md"></i>
+                        </div>
+                        <div class="col-md-10 col-xs-8 bottom-border-gray">
+                            @Html.ActionLink(C.adjUser.CultureFullName,
+                                                                            "UProfile",
+                                                                            "UserProfile",
+                                                                            new { UId = C.adjId, UName = StringHelper.URLName(C.adjUser.CultureFullName) },
+                                                                            null)
+                            @Resource.addedExperience
+                        </div>
+
+                    </div>
+                    <div class="col-md-10 col-xs-12">
+                        <div class="row margin-top-bot-md">
+
+                            @{Html.RenderAction("ExperienceFeed","Experience", new{expId = C.elemId});}
+                        </div>
+                    </div>
+                </div>
+            </div>
+                              break;
+            
+        }
+    }
+    <li id="nextPosts" class="col-md-12 col-xs-12 list-unstyled">
+
+        @if (!(bool)ViewData["finalPage"])
+        {
+            @Html.NextItems("HomeFeed", "UserProfile", new
+                    {
+                        page = (int)ViewData["pageNum"] + 1
+                    }, "next-posts-link btn btn-default col-md-12 col-xs-12 btn btn-default btn-lg text-center")
+        }
+    </li>
+}

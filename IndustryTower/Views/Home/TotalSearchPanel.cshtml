@@ -1,0 +1,187 @@
+﻿@model IndustryTower.ViewModels.SearchPanelViewModel
+@using IndustryTower.ViewModels
+@{
+    var searchtype = (SearchType)ViewData["searchType"];
+    SearchType[] categorySearchTypes = { SearchType.Company, SearchType.Store, SearchType.Product, SearchType.Service, SearchType.Event, SearchType.Group, SearchType.Webinar };
+    SearchType[] professionSearchTypes = { SearchType.People, SearchType.Job, SearchType.Question, SearchType.Project, SearchType.Group, SearchType.Webinar, SearchType.Dictionary, SearchType.Book };
+    SearchType[] stateSearchTypes = { SearchType.Company, SearchType.Store, SearchType.Product, SearchType.Service, SearchType.People, SearchType.Job, SearchType.Project, SearchType.Event };
+}
+
+
+
+<div class="search-menu-criteria">
+    @if (stateSearchTypes.Contains(searchtype))
+    {
+        <div class="criteria-box panel panel-default">
+            <div class="panel-heading">
+                @Resource.location
+            </div>
+            <div class="panel-body">
+                @foreach (var item in Model.StatePanel)
+                {
+                    <div class="criteria-item">
+                        @Html.CheckBox("searchPanelState", item.checkedBox, new { @value = item.state.stateID })
+                        <span>@item.state.CultureFullState (@item.count)</span>
+                    </div>
+                }
+                <div class="margin-top-bot-md">
+                    @Html.TextBox("newState", null, new
+                {
+                    @class = "has-mini-search form-control",
+                    data_minisearch = Url.Action("_StatesSearchPartial", "Home"),
+                    checkboxName = "searchPanelState",
+                    placeholder = Resource.typeToSearchState
+                })
+                    </div>
+                </div>
+        </div>
+    }
+
+    @if (professionSearchTypes.Contains(searchtype))
+    {
+        <div class="criteria-box panel panel-default">
+            <div class="panel-heading">
+                @Resource.professions
+            </div>
+            <div class="panel-body">
+                @foreach (var item in Model.ProfessionPanel)
+                {
+                    <div class="criteria-item cursor-point">
+                        @Html.CheckBox("searchPanelProf", item.checkedBox, new { @value = item.profession.profID })
+                        <span>@item.profession.CultureProfessionName  (@item.count)</span>
+                    </div>
+                }
+                <div class="margin-top-bot-md">
+                    @Html.TextBox("newProfession", null, new
+                    {
+                        @class = "has-mini-search form-control",
+                        data_minisearch = Url.Action("_ProfessionSearchPartial", "Profession"),
+                        checkboxName = "searchPanelProf",
+                        placeholder = Resource.typeToSearchProfession
+                    })
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+    @if (categorySearchTypes.Contains(searchtype))
+    {
+       <div class="criteria-box panel panel-default">
+           <div class="panel-heading">
+               @Resource.categories
+           </div>
+           <div class="panel-body">
+               @foreach (var item in Model.CategoryPanel)
+            {
+                   <div class="criteria-item">
+                       @Html.CheckBox("searchPanelCats", item.checkedBox, new { @value = item.category.catID })
+                       <span>@item.category.CultureCatName  (@item.count)</span>
+                   </div>
+            }
+               <div class="margin-top-bot-md">
+                   @Html.TextBox("newCategory", null, new
+        {
+            @class = "has-mini-search form-control",
+            data_minisearch = Url.Action("_CategorySearchPartial", "Category"),
+            checkboxName = "searchPanelCats",
+            placeholder = Resource.typeToSearchCategory
+        })
+               </div>
+               </div>
+           </div>
+    }
+
+    @if (searchtype == SearchType.Company)
+    {
+        <div class="criteria-box panel panel-default">
+            <div class="panel-heading">
+                @Resource.companySize
+            </div>
+            <div class="panel-body">
+                @foreach (var item in Model.CompanySizePanel)
+                {
+                    <div class="criteria-item">
+                        @Html.CheckBox("searchPanelCoSize", item.checkedBox, new { @value = item.companySize })
+                        <span>@EnumTypes.ResourceManager.GetString(item.companySize.ToString())  (@item.count)</span>
+                    </div>
+                }
+            </div>
+            
+        </div>
+    }
+
+    @if (searchtype == SearchType.People)
+    {
+         <div class="criteria-box panel panel-default">
+             <div class="panel-heading">
+                 @Resource.companies
+             </div>
+             <div class="panel-body">
+                 @foreach (var item in Model.CompanyPanel)
+                 {
+                     <div class="criteria-item">
+                         @Html.CheckBox("searchPanelCos", item.checkedBox, new { @value = item.company.coID })
+                         <span>@item.company.CultureCoName  (@item.count)</span>
+                     </div>
+                 }
+                 <div class="margin-top-bot-md">
+                     @Html.TextBox("newCompany", null, new
+        {
+            @class = "has-mini-search form-control",
+            data_minisearch = Url.Action("_CompaniesSearchPartial", "Company"),
+            checkboxName = "searchPanelCos",
+            placeholder = Resource.typeToSearchExpco
+        })
+                 </div>
+                
+             </div>
+             </div>
+    }
+
+    @if (searchtype == SearchType.Question)
+    {
+        <div class="sort-box panel panel-default">
+            <div class="panel-heading">
+                @Resource.sortOrder
+            </div>
+            <div class="panel-body">
+                <div class="sort-item cursor-point" data-order="@ViewData["DateSortParm"]">
+                    @SortParm.ResourceManager.GetString(ViewData["DateSortParm"] as string)
+                </div>
+                <div class="sort-item cursor-point" data-order="@ViewData["recentAnswerSortParm"]">
+                    @SortParm.ResourceManager.GetString(ViewData["recentAnswerSortParm"] as string)
+                </div>
+                <div class="sort-item cursor-point" data-order="@ViewData["unAnswerSortParm"]">
+                    @SortParm.ResourceManager.GetString(ViewData["unAnswerSortParm"] as string)
+                </div>
+                <div class="sort-item cursor-point" data-order="@ViewData["langSortParm"]">
+                    @SortParm.ResourceManager.GetString(ViewData["langSortParm"] as string)
+                </div>
+            </div>
+
+        </div>
+    }
+
+    @if (searchtype == SearchType.Event)
+    {
+        <div class="sort-box panel panel-default">
+            <div class="panel-heading">
+                @Resource.sortOrder
+            </div>
+            <div class="panel-body">
+                <div class="sort-item cursor-point" data-order="@ViewData["DateSortParm"]">
+                    @SortParm.ResourceManager.GetString(ViewData["DateSortParm"] as string)
+                </div>
+                <div class="sort-item cursor-point" data-order="@ViewData["recentAttendorsSortParm"]">
+                    @SortParm.ResourceManager.GetString(ViewData["recentAttendorsSortParm"] as string)
+                </div>
+                <div class="sort-item cursor-point" data-order="@ViewData["expiredSortParm"]">
+                    @SortParm.ResourceManager.GetString(ViewData["expiredSortParm"] as string)
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

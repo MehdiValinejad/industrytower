@@ -1,0 +1,54 @@
+﻿@model PagedList.IPagedList<IndustryTower.ViewModels.ProductSearchViewModel>
+@using PagedList.Mvc;
+
+@foreach (var item in Model)
+{
+    <div id="companyRow" class="search-grid-box">
+        <div class="search-grid-header">
+            @item.product.Count() @Resource.products @Html.ActionLink(item.company.CultureCoName, "CProfile", "Company", new { CoId = item.company.coID, coName = StringHelper.URLName(item.company.CultureCoName) }, null)
+        </div>
+        <div class="search-grid-company-logo">
+            @Html.ProfilePic(company: item.company)
+        </div>
+        <div class="search-grid-product neat-box">
+            @foreach (var product in item.product)
+            {
+                Html.ProfilePic(product: product.productResult);
+                <div class="search-product-pic">
+                        @Html.ProfilePic(product: product.productResult, linkClass: "center-image", imgClass: "center-image")
+                </div>
+                <div class="search-product-desc">
+                    <div class="search-product-desc-pic">
+                        @Html.ProfilePic(product: product.productResult, linkClass: "center-image", imgClass: "center-image")
+                    </div>
+                    <p>
+                        @Html.DisplayFor(model => product.productResult.CultureProductName)
+                    </p>
+                    <p>
+                        @Html.DisplayAbstractFor(product.productResult.CultureAbout)
+                    </p>
+                    <div class="search-box-categories">
+                        <span>@Resource.categories:</span>@Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { PrId = product.productResult.productID }))
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="search-grid-desc neat-box-dark">
+
+        </div>
+    </div>
+}
+@if (Model.PageCount > Model.PageNumber)
+{
+    <div id="nextCompanies">
+        @Html.NextItems("AllProducts", "Product", new
+           {
+               cat = ViewData["currentCat"],
+               page = Model.PageNumber + 1,
+               sortOrder = ViewData["currentSort"],
+               currentFilter = ViewData["currentFilter"]
+           })
+    </div>
+}
+
+

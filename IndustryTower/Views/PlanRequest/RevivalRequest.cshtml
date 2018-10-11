@@ -1,0 +1,71 @@
+﻿@model IndustryTower.ViewModels.PlanReivalRequestViewModel
+@{
+    ViewBag.Title = Resource.revivalRequest;
+}
+@using System.Data.Entity.Core.Objects;
+<div id="currentPlanRequest">
+    <h2>@Resource.revivalRequest</h2>
+@{
+    if (Model.companyToRevive != null)
+        {
+        
+            @Html.ProfilePic(company: Model.companyToRevive)
+            <div class ="inline-block">
+                <h3>
+                    @Html.DisplayFor(model => model.companyToRevive.coName)
+                </h3>
+                <p class="inline-block">
+                    @Resource.lastPlan: @EnumTypes.ResourceManager.GetString(ObjectContext.GetObjectType(Model.companyToRevive.GetType()).Name)
+                </p>
+            </div>
+    
+        }
+    else if (Model.storeToRevive != null)
+    {
+            <h3>
+                @Html.DisplayFor(model => model.storeToRevive.storeName)
+            </h3>
+        }
+        else if (Model.storeToRevive != null)
+        {
+            <h3>
+                @Html.DisplayFor(model => model.userToRevive.UserName)
+            </h3>
+        }
+}
+    <div>
+        <span>
+            @ModelDisplayName.plan:
+        </span>
+        @EnumTypes.ResourceManager.GetString(Request.QueryString["plan"] != null ? Request.QueryString["plan"].ToLower(): null)
+    </div>
+    <div>
+        <span>
+            @ModelDisplayName.planType:
+        </span>
+        @EnumTypes.ResourceManager.GetString(Request.QueryString["plantype"] != null ? Request.QueryString["plantype"].ToLower() : null)
+    </div>
+</div>
+
+
+
+<div id="RevivalForm" class="single-page-form">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => Model.plan)
+            @Html.HiddenFor(model => model.planType)
+            @Html.Hidden("coId", Model.coId)
+            @Html.Hidden("storeId", Model.storeId)
+            @Html.Hidden("userId", Model.userId)
+        
+        <div class="planrequest-button">
+            <input type="submit" value="@Resource.revivalRequestInsert" />
+        </div>
+    }
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/PlanRequest")
+    }

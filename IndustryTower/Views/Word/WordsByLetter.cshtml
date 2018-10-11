@@ -1,0 +1,9 @@
+﻿@model IList<IndustryTower.Models.Word>
+
+<div class="list-group">
+    @foreach (var item in Model)
+    {
+        @Html.ActionLink(item.word, "DetailByLetter", "Word", new { WId = item.wordId, DId = Request.QueryString["DId"] },
+                                                              new { @class = "list-group-item WordByLet", data_ajax="true" })
+    }
+</div>

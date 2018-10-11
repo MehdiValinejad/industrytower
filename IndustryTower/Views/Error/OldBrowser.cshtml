@@ -1,0 +1,53 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "OldBrowser";
+}
+
+<html>
+<head>
+    <style>
+        .caution {
+            margin: 200px 5px;
+            padding: 10px;
+            background-color: #aecddb;
+            font-size: 16px;
+        }
+        .links {
+            margin-top: 50px;
+        } 
+        .links a {
+            display: block;
+            padding: 3px;
+        }
+    </style>
+    <title>@Resource.oldBrowser</title>
+</head>
+<body style="text-align:center;">
+    <div style ="width: 600px; display:inline-block">
+        <div class="caution">
+            @ControllerError.OldBrowserHelp
+            <div class="links">
+                <a href="https://www.google.com/chrome/browser/index.html?system=true&standalone=1">
+                    Google Chrome
+                </a>
+                <a href="http://www.mozilla.org/en-US/firefox/all/">
+                    Mozilla Firefox
+                </a>
+                <a href="http://www.opera.com/download/get/?partner=www&opsys=Windows">
+                    Opera
+                </a>
+                <a href="http://download-euro.oldapps.com/Safari/SafariSetup517.exe">
+                    Safari
+                </a>
+                <a href="http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages">
+                    Internet Explorer
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

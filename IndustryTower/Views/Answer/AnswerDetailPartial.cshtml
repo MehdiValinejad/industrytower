@@ -1,0 +1,10 @@
+﻿@model IndustryTower.Models.Answer
+<div id="answerDetail">
+    @if (WebSecurity.CurrentUserId == Model.answererID)
+    {
+        @Html.ModifyIcons("Edit", "Delete", "Answer", new { AId = EncryptionHelper.Protect(Model.answerID) })
+
+    }
+    @Html.DisplayTextFor(model => Model.answerBody)
+</div> 
+    

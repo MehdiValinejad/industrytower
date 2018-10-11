@@ -1,0 +1,33 @@
+﻿@model IEnumerable<IndustryTower.ViewModels.HomeFeedEvents>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        @Html.CreateIcon("Create", "Event", dataAjax: false, Class: "pull-right")
+        <h3 class="panel-title">
+            <span class="icon-Event icn-25"></span>
+            @Resource.homefeedEvents
+        </h3>
+       
+    </div>
+    <div class="panel-body dir">
+        @if (Model.Count() > 0)
+        {
+            foreach (var item in Model)
+            {
+                <a href="@Url.Action("Detail", "Event", new { EvId = item.Event.eventID, EvName = StringHelper.URLName(item.Event.CultureEventSubj) })">
+                    <div>
+                        <div>
+                            @Html.DisplayFor(model => item.Event.CultureEventSubj)
+                        </div>
+
+                        <div class="text-left">
+                            <small>@Html.DisplayFor(model => item.Event.eventDate, "WordDate")</small>
+                        </div>
+                    </div>
+                </a>
+            }
+        }
+    </div>
+
+</div>

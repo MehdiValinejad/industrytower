@@ -1,0 +1,217 @@
+﻿@model List<IndustryTower.ViewModels.SearchViewModel>
+@foreach (var item in Model)
+{
+    if (item.user != null)
+    {
+        <div class="row margin-top-bot-md bg-default border-radius">
+            <div class="col-md-12 margin-top-bot-md">
+                <div class=" col-md-2 col-xs-4">
+                    @Html.ProfilePic(user: item.user)
+                </div>
+                <strong>
+                    @Html.ActionLink(item.user.CultureFullName, "UProfile", "UserProfile", new { UId = item.user.UserId, UName = StringHelper.URLName(item.user.CultureFullName) }, null)
+                </strong>
+                <div class="margin-top-bot-md">
+                    <div>
+                        @Html.PresentExperience(item.user.UserId)
+                    </div>
+                    @*<div>
+                        @Html.Raw(item.user.State.CultureFullState)
+                    </div>*@
+
+                </div>
+                <div class=" margin-top-bot-md">
+                    <div class="inline-block bottom-border-blue">
+                        @Resource.professions
+                    </div>
+
+                    @Html.AjaxPrtialLoader(Url.Action("RelatedProfessions", "Profession", new { UId = item.user.UserId }))
+                </div>
+            </div>
+        </div>
+
+    }
+    else if (item.question != null)
+    {
+        <div class="search-grid-box row margin-top-bot-md bg-default border-radius">
+           <div class="col-md-12 margin-top-bot-md">
+                <strong>
+                    @Html.ActionLink(item.question.questionResult.questionSubject, "Detail", "Question", new { QID = item.question.questionResult.questionID, QName = StringHelper.URLName(item.question.questionResult.questionSubject) }, new { @class = "questionLink" })
+                </strong>
+                <div class="col-md-12 margin-top-bot-md">
+                    <div class="inline-block bottom-border-blue">
+                        @Resource.professions
+                    </div>
+
+                    @Html.AjaxPrtialLoader(Url.Action("RelatedProfessions", "Profession", new { QId = item.question.questionResult.questionID }))
+                </div>
+            </div>
+        </div>
+    }
+    else if (item.company != null)
+    {
+        <div class="row margin-top-bot-md bg-default border-radius">
+            <div class="col-md-12 margin-top-bot-md">
+                <div class=" col-md-2 col-xs-4">
+                    @Html.ProfilePic(company: item.company)
+                </div>
+                <strong>
+                    @Html.ActionLink(item.company.CultureCoName, "CProfile", "Company", new { CoId = item.company.coID, CoName = StringHelper.URLName(item.company.CultureCoName) }, null)
+                </strong>
+                <div class=" margin-top-bot-md">
+                    <div class="inline-block bottom-border-blue">
+                        @Resource.categories
+                    </div>
+                    @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { CoId = item.company.coID }))
+                </div>
+            </div>
+        </div>
+    }
+    else if (item.store != null)
+    {
+        <div class="row margin-top-bot-md bg-default border-radius">
+            <div class="col-md-12 margin-top-bot-md">
+                <div class="col-md-2 col-xs-4">
+                    @Html.ProfilePic(store: item.store)
+                </div>
+                <strong>
+                    @Html.ActionLink(item.store.CultureStoreName, "SProfile", "Store", new { StId = item.store.storeID, StName = StringHelper.URLName(item.store.CultureStoreName) }, null)
+                </strong>
+                <div class=" margin-top-bot-md">
+                    <div class="inline-block bottom-border-blue">
+                        @Resource.categories
+                    </div>
+                    @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { StId = item.store.storeID }))
+                </div>
+
+            </div>
+        </div>
+    }
+    else if (item.products != null)
+    {
+        <div class="row margin-top-bot-md bg-default border-radius">
+            <div class="col-md-12">
+
+                <div class="row margin-lf-r8-md  margin-top-bot-md ">
+                    <div class="col-md-2 col-xs-5 pull-right">
+                        @Html.ProfilePic(product: item.products)
+                    </div>
+                    <div class=" desc col-md-10 col-xs-12 dir">
+                        <div>
+                            @Html.ActionLink(item.products.CultureProductName, "Detail", "Product", new { PrId = item.products.productID, PrName = StringHelper.URLName(item.products.CultureProductName) }, null)
+                        </div>
+                        <div class="margin-top-bot-md">
+                            <div class="inline-block bottom-border-blue">
+                                @Resource.categories
+                            </div>
+
+                            @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { PrId = item.products.productID }))
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (item.services != null)
+    {
+        <div class="row margin-top-bot-md bg-default border-radius">
+            <div class="col-md-12">
+                <div class="row margin-lf-r8-md  margin-top-bot-md ">
+                    <div class="col-md-2 col-xs-5 pull-right">
+                        @Html.ProfilePic(service: item.services)
+                    </div>
+                    <div class=" desc col-md-10 col-xs-12 dir">
+                        <div>
+                            @Html.ActionLink(item.services.CultureServiceName, "Detail", "Service", new { SrId = item.services.serviceID, SrName = StringHelper.URLName(item.services.CultureServiceName) }, null)
+                        </div>
+                        <div class="margin-top-bot-md">
+                            <div class="inline-block bottom-border-blue">
+                                @Resource.categories
+                            </div>
+
+                            @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { SrId = item.services.serviceID }))
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (item.events != null)
+    {
+        <div class="search-grid-box row margin-top-bot-md bg-default border-radius">
+            <div class="col-md-12 margin-top-bot-md">
+                <strong>
+                    @Html.ActionLink(item.events.CultureEventSubj, "Detail", "Event", new { EvId = item.events.eventID, EvName = StringHelper.URLName(item.events.CultureEventSubj) }, new { @class = "questionLink" })
+                </strong>
+                <div class="col-md-12 margin-top-bot-md">
+                    <div class="inline-block bottom-border-blue">
+                        @Resource.categories
+                    </div>
+                    @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { EvId = item.events.eventID }))
+                </div>
+            </div>
+        </div>
+    }
+    else if (item.groups != null)
+    {
+        <div class="search-grid-box row margin-top-bot-md bg-default border-radius">
+            <div class="col-md-12 margin-top-bot-md">
+                <strong>
+                    @Html.ActionLink(item.groups.groupName, "GroupPage", "Group", new { GId = item.groups.groupId, GName = StringHelper.URLName(item.groups.groupName) }, new { @class = "questionLink" })
+                </strong>
+                <div class="margin-top-bot-md">
+                    <div class="col-md-12">
+                        <div class="inline-block bottom-border-blue">
+                            @Resource.professions
+                        </div>
+                        @Html.AjaxPrtialLoader(Url.Action("RelatedProfessions", "Profession", new { GId =  item.groups.groupId })) 
+                    </div>
+                    <div class="col-md-12">
+                        <div class="inline-block bottom-border-blue">
+                            @Resource.categories
+                        </div>
+                        @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { GId = item.groups.groupId }))
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (item.webinars != null)
+    {
+        <div class="search-grid-box row margin-top-bot-md bg-default border-radius">
+            <div class="col-md-12 margin-top-bot-md">
+                <strong>
+                    @Html.ActionLink(item.webinars.title, "Detail", "Seminar", new { SnId = item.webinars.seminarId, SnName = StringHelper.URLName(item.webinars.title) }, new { @class = "questionLink" })
+                </strong>
+                <div class="margin-top-bot-md">
+                    <div class="col-md-12">
+                        <div class="inline-block bottom-border-blue">
+                            @Resource.professions
+                        </div>
+                        @Html.AjaxPrtialLoader(Url.Action("RelatedProfessions", "Profession", new { SnId = item.webinars.seminarId }))
+                    </div>
+                    <div class="col-md-12">
+                        <div class="inline-block bottom-border-blue">
+                            @Resource.categories
+                        </div>
+                        @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { SnId = item.webinars.seminarId }))
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+
+}
+
+@if ((bool)ViewData["finalPage"] == false)
+{
+    var pagenumber = (int)ViewData["pageNum"];
+    <div id="nextSearchResults" data-nextpage="@(pagenumber + 1)">
+        @Html.NextItems("TotalSearch", "Home", new
+   {
+       page = pagenumber + 1,
+       currentFilter = ViewData["currentFilter"]
+   })
+    </div>
+}

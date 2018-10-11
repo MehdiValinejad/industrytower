@@ -1,0 +1,58 @@
+﻿@model IEnumerable<IndustryTower.Models.Profession>
+@{
+    ViewBag.Title = Resource.professionManagement;
+}
+<div class="row dir">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>
+                    @Resource.professions
+                    @Html.ActionLink(Resource.create, "Create", "Profession", null, new { @class = "pull-left" })
+                </h3>
+
+            </div>
+            <div class="panel-body">
+                <div class="col-md-6 col-md-offset-3">
+                    @Html.TextBox("ProfessionSearchBox", null, new { @class = "form-control", @placeholder = Resource.search })
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div id="ProfessionList" class="row dir bg-default">
+
+</div>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            url: '@Url.Action("List","Profession")',
+            type: "GET",
+            cache: false,
+            success: function (data) {
+                $('#ProfessionList').html(data);
+            }
+        })
+
+        $('#ProfessionSearchBox').keyup(function () {
+            var searchText = $(this).val();
+            $.ajax({
+                url: '@Url.Action("List","Profession")',
+                type: "GET",
+                data: { q: searchText },
+                cache: false,
+                success: function (data) {
+                    $('#ProfessionList').html(data);
+                }
+            })
+        });
+
+    });
+
+</script>

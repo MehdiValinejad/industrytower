@@ -1,0 +1,381 @@
+﻿/*
+@import this file directly into your existing Scss files to use these mixins
+*/
+@mixin sprite-I_Add() {
+/* You may have to set 'display: block' */
+	width: 15px;
+	height: 15px;
+	background: url('Sprite.icons.png') -1px -1px;
+}
+@mixin sprite-I_AddNotif() {
+/* You may have to set 'display: block' */
+	width: 25px;
+	height: 25px;
+	background: url('Sprite.icons.png') -1px -17px;
+}
+@mixin sprite-I_Admin() {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -43px;
+}
+@mixin sprite-I_ArrowDown() {
+/* You may have to set 'display: block' */
+	width: 10px;
+	height: 10px;
+	background: url('Sprite.icons.png') -1px -76px;
+}
+@mixin sprite-I_attachment() {
+/* You may have to set 'display: block' */
+	width: 20px;
+	height: 20px;
+	background: url('Sprite.icons.png') -1px -87px;
+}
+@mixin sprite-I_Certificate() {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -108px;
+}
+@mixin sprite-I_CertificateLarge() {
+/* You may have to set 'display: block' */
+	width: 64px;
+	height: 64px;
+	background: url('Sprite.icons.png') -1px -141px;
+}
+@mixin sprite-I_close() {
+/* You may have to set 'display: block' */
+	width: 15px;
+	height: 15px;
+	background: url('Sprite.icons.png') -1px -206px;
+}
+@mixin sprite-I_CompanySize() {
+/* You may have to set 'display: block' */
+	width: 17px;
+	height: 17px;
+	background: url('Sprite.icons.png') -1px -222px;
+}
+@mixin sprite-I_Education() {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -240px;
+}
+@mixin sprite-I_Email() {
+/* You may have to set 'display: block' */
+	width: 20px;
+	height: 13px;
+	background: url('Sprite.icons.png') -1px -273px;
+}
+@mixin sprite-I_Event() {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -287px;
+}
+@mixin sprite-I_Eventlight() {
+/* You may have to set 'display: block' */
+	width: 27px;
+	height: 25px;
+	background: url('Sprite.icons.png') -1px -320px;
+}
+@mixin sprite-I_Experience() {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -346px;
+}
+@mixin sprite-I_ExperienceLarge() {
+/* You may have to set 'display: block' */
+	width: 64px;
+	height: 64px;
+	background: url('Sprite.icons.png') -1px -379px;
+}
+@mixin sprite-I_Fax() {
+/* You may have to set 'display: block' */
+	width: 17px;
+	height: 17px;
+	background: url('Sprite.icons.png') -1px -444px;
+}
+@mixin sprite-I_Free() {
+/* You may have to set 'display: block' */
+	width: 86px;
+	height: 64px;
+	background: url('Sprite.icons.png') -1px -462px;
+}
+@mixin sprite-I_Freefa() {
+/* You may have to set 'display: block' */
+	width: 86px;
+	height: 64px;
+	background: url('Sprite.icons.png') -1px -527px;
+}
+@mixin sprite-I_Friends() {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -592px;
+}
+@mixin sprite-I_Group() {
+/* You may have to set 'display: block' */
+	width: 25px;
+	height: 25px;
+	background: url('Sprite.icons.png') -1px -625px;
+}
+@mixin sprite-I_Home() {
+/* You may have to set 'display: block' */
+	width: 26px;
+	height: 26px;
+	background: url('Sprite.icons.png') -1px -651px;
+}
+@mixin sprite-I_Job() {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -678px;
+}
+@mixin sprite-I_Logo() {
+/* You may have to set 'display: block' */
+	width: 51px;
+	height: 51px;
+	background: url('Sprite.icons.png') -1px -711px;
+}
+@mixin sprite-I_Logout() {
+/* You may have to set 'display: block' */
+	width: 16px;
+	height: 16px;
+	background: url('Sprite.icons.png') -1px -763px;
+}
+@mixin sprite-I_MarkedAsAnswer() {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -780px;
+}
+@mixin sprite-I_Money() {
+/* You may have to set 'display: block' */
+	width: 16px;
+	height: 16px;
+	background: url('Sprite.icons.png') -1px -813px;
+}
+@mixin sprite-I_More() {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 10px;
+	background: url('Sprite.icons.png') -1px -830px;
+}
+@mixin sprite-I_Notif_AnswerAcept() {
+/* You may have to set 'display: block' */
+	width: 20px;
+	height: 20px;
+	background: url('Sprite.icons.png') -1px -841px;
+}
+@mixin sprite-I_Notif_Comment() {
+/* You may have to set 'display: block' */
+	width: 20px;
+	height: 20px;
+	background: url('Sprite.icons.png') -1px -862px;
+}
+@mixin sprite-I_Notif_Follow() {
+/* You may have to set 'display: block' */
+	width: 24px;
+	height: 24px;
+	background: url('Sprite.icons.png') -1px -883px;
+}
+@mixin sprite-I_Notif_FriendReq() {
+/* You may have to set 'display: block' */
+	width: 20px;
+	height: 20px;
+	background: url('Sprite.icons.png') -1px -908px;
+}
+@mixin sprite-I_Notif_Like() {
+/* You may have to set 'display: block' */
+	width: 20px;
+	height: 20px;
+	background: url('Sprite.icons.png') -1px -929px;
+}
+@mixin sprite-I_Notif_Post() {
+/* You may have to set 'display: block' */
+	width: 20px;
+	height: 20px;
+	background: url('Sprite.icons.png') -1px -950px;
+}
+@mixin sprite-I_Notif_QAnswer() {
+/* You may have to set 'display: block' */
+	width: 20px;
+	height: 20px;
+	background: url('Sprite.icons.png') -1px -971px;
+}
+@mixin sprite-I_Notifications() {
+/* You may have to set 'display: block' */
+	width: 28px;
+	height: 25px;
+	background: url('Sprite.icons.png') -1px -992px;
+}
+@mixin sprite-I_NotificationsFA() {
+/* You may have to set 'display: block' */
+	width: 28px;
+	height: 25px;
+	background: url('Sprite.icons.png') -1px -1018px;
+}
+@mixin sprite-I_Office() {
+/* You may have to set 'display: block' */
+	width: 17px;
+	height: 17px;
+	background: url('Sprite.icons.png') -1px -1044px;
+}
+@mixin sprite-I_Patent() {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -1062px;
+}
+@mixin sprite-I_Pencil() {
+/* You may have to set 'display: block' */
+	width: 15px;
+	height: 15px;
+	background: url('Sprite.icons.png') -1px -1095px;
+}
+@mixin sprite-I_Question() {
+/* You may have to set 'display: block' */
+	width: 64px;
+	height: 64px;
+	background: url('Sprite.icons.png') -1px -1111px;
+}
+@mixin sprite-I_Question_Purple() {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -1176px;
+}
+@mixin sprite-I_QuestionAsked() {
+/* You may have to set 'display: block' */
+	width: 48px;
+	height: 48px;
+	background: url('Sprite.icons.png') -1px -1209px;
+}
+@mixin sprite-I_QuestionsAnswered() {
+/* You may have to set 'display: block' */
+	width: 26px;
+	height: 26px;
+	background: url('Sprite.icons.png') -1px -1258px;
+}
+@mixin sprite-I_QuestionsAnsweredLarge() {
+/* You may have to set 'display: block' */
+	width: 48px;
+	height: 48px;
+	background: url('Sprite.icons.png') -1px -1285px;
+}
+@mixin sprite-I_QuestionUP() {
+/* You may have to set 'display: block' */
+	width: 13px;
+	height: 26px;
+	background: url('Sprite.icons.png') -1px -1334px;
+}
+@mixin sprite-I_RecycleBin() {
+/* You may have to set 'display: block' */
+	width: 15px;
+	height: 16px;
+	background: url('Sprite.icons.png') -1px -1361px;
+}
+@mixin sprite-I_Search() {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1378px;
+}
+@mixin sprite-I_Search_All() {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1401px;
+}
+@mixin sprite-I_Search_ArrowDown() {
+/* You may have to set 'display: block' */
+	width: 10px;
+	height: 10px;
+	background: url('Sprite.icons.png') -1px -1424px;
+}
+@mixin sprite-I_Search_Company() {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 23px;
+	background: url('Sprite.icons.png') -1px -1435px;
+}
+@mixin sprite-I_Search_Event() {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1459px;
+}
+@mixin sprite-I_Search_Group() {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1482px;
+}
+@mixin sprite-I_Search_Job() {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1505px;
+}
+@mixin sprite-I_Search_People() {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1528px;
+}
+@mixin sprite-I_Search_Product() {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1551px;
+}
+@mixin sprite-I_Search_project() {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1574px;
+}
+@mixin sprite-I_Search_Question() {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1597px;
+}
+@mixin sprite-I_Search_Services() {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1620px;
+}
+@mixin sprite-I_Search_Store() {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1643px;
+}
+@mixin sprite-I_Search_Webinar() {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1666px;
+}
+@mixin sprite-I_Settings() {
+/* You may have to set 'display: block' */
+	width: 16px;
+	height: 16px;
+	background: url('Sprite.icons.png') -1px -1689px;
+}
+@mixin sprite-I_Telephone() {
+/* You may have to set 'display: block' */
+	width: 17px;
+	height: 16px;
+	background: url('Sprite.icons.png') -1px -1706px;
+}
+@mixin sprite-I_WebSite() {
+/* You may have to set 'display: block' */
+	width: 17px;
+	height: 17px;
+	background: url('Sprite.icons.png') -1px -1723px;
+}

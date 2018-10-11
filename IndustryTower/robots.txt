@@ -1,0 +1,9 @@
+Sitemap: http://www.industrytower.com/sitemap.xml
+User-agent: Googlebot
+Disallow: /fa/friendship/*
+Disallow: /en/friendship/*
+Disallow: /en/Home/populateDopDownStates
+Disallow: /en/Home/populateDopDownStates
+Disallow: /Home/Index
+User-agent: Libwww-perl
+Disallow: /

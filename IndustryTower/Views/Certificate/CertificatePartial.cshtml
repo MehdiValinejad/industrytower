@@ -1,0 +1,25 @@
+﻿@model IndustryTower.Models.Certificate
+
+
+<div id="certificateItem" class="list-group-item">
+@if ((Model.coID != null && Model.Company.Admins.Any(a => a.UserId == WebSecurity.CurrentUserId))
+                    || WebSecurity.CurrentUserId == Model.userID)
+                {
+    @Html.ModifyIcons("Edit", "Delete", "Certificate", new { CertID = EncryptionHelper.Protect(Model.certID) })
+}
+
+    <strong>
+        @Html.DisplayFor(model => Model.CultureCertificateName)
+    </strong>
+    <div>
+        <strong>
+            @Resource.authority:
+        </strong> @Html.DisplayFor(model => Model.CultureCertificator)
+    </div>
+    <div>
+        <small>
+            @Html.DisplayFor(model => Model.certificationDate, "MonthYearOnly")
+        </small>
+    </div>
+</div>
+

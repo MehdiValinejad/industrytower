@@ -1,0 +1,23 @@
+﻿@model IEnumerable<IndustryTower.Models.Category>
+
+
+
+    @if (Model != null)
+    {   
+         <ul>
+            @foreach (var child in Model)
+            {
+                var parentid = EncryptionHelper.Protect(child.catID);
+                <li id="childCat" data-url="@Url.Action("PartialCategories", new { parentId = parentid })">
+                    <p>@Html.ActionLink(child.CultureCatName,
+                                        "CompaniesByCategory",  
+                                        "Company",
+                                      new { CatId = parentid })
+
+                    </p>
+                    <ul></ul>
+               </li>
+          
+            }
+         </ul> 
+    }

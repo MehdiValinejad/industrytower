@@ -1,0 +1,19 @@
+﻿@model IndustryTower.ViewModels.MailResendConfirmationViewModel
+
+<h4 style="font-weight:bold">
+    @Model.UserName,
+</h4>
+<p>
+    @Emails.confirmationEmailPassage
+</p>
+<p style="text-align:center;">
+    <a href="@Url.Abs(Url.Action("RegisterConfirmation", "Account", new { CToken = Model.Token }))">
+        @Resource.confirmation
+    </a>
+</p>
+
+
+
+
+
+

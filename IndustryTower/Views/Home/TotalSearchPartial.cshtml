@@ -1,0 +1,315 @@
+﻿@model PagedList.IPagedList<IndustryTower.ViewModels.SearchViewModel>
+@using IndustryTower.ViewModels
+@using PagedList.Mvc;
+
+@foreach (var item in Model)
+{
+    if (item.user != null)
+    {
+        var uid = EncryptionHelper.Protect(item.user.UserId);
+        <div class="row margin-top-bot-md bg-default border-radius">
+            <div class="col-md-12 margin-top-bot-md">
+                <div class=" col-md-2 col-xs-4">
+                    @Html.ProfilePic(user: item.user)
+                </div>
+                <strong>
+                    @Html.ActionLink(item.user.CultureFullName, "UProfile", "UserProfile", new { UId = item.user.UserId, UName = StringHelper.URLName(item.user.CultureFullName) }, null)
+                </strong>
+                <div class="margin-top-bot-md">
+                    <div>
+                        @Html.PresentExperience(item.user)
+                    </div>
+                    <div>
+                        @Html.Raw(item.user.State.CultureFullState)
+                    </div>
+                </div>
+                <div class=" margin-top-bot-md">
+                    <div class="inline-block bottom-border-blue">
+                        @Resource.professions
+                    </div>
+                    @Html.AjaxPrtialLoader(Url.Action("RelatedProfessions", "Profession", new { UId = item.user.UserId }))
+                </div>
+            </div>
+
+            @*<div class="col-md-10 col-xs-8 margin-top-bot-md">
+
+                </div>*@
+        </div>
+    }
+    else if (item.question != null)
+    {
+        var qid = EncryptionHelper.Protect(item.question.questionID);
+        <div class="search-grid-box row margin-top-bot-md bg-default border-radius">
+
+            <div class="col-md-2 margin-top-bot-md">
+                <div class="col-md-12 text-center no-wrap margin-top-bot-md">
+                    @Resource.answers
+                    <span class="badge">
+                        @Html.DisplayFor(model => item.question.Answers.Count)
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-10 margin-top-bot-md">
+                <strong>
+                    @Html.ActionLink(item.question.questionSubject, "Detail", "Question", new { QID = qid, QName = StringHelper.URLName(item.question.questionSubject) }, new { @class = "questionLink" })
+                </strong>
+
+                <div>
+                    @Html.DisplayAbstractFor(item.question.questionBody, 150)
+                </div>
+                <div class="col-md-12 margin-top-bot-md">
+                    <div class="inline-block bottom-border-blue">
+                        @Resource.professions
+                    </div>
+
+                    @Html.AjaxPrtialLoader(Url.Action("RelatedProfessions", "Profession", new { QId = qid }))
+                </div>
+            </div>
+
+        </div>
+    }
+    else if (item.company != null)
+    {
+        <div class="row margin-top-bot-md bg-default border-radius">
+            <div class="col-md-12 margin-top-bot-md">
+                <div class=" col-md-2 col-xs-4">
+                    @Html.ProfilePic(company: item.company)
+                </div>
+                <strong>
+                    @Html.ActionLink(item.company.CultureCoName, "CProfile", "Company", new { CoId = item.company.coID, CoName = StringHelper.URLName(item.company.CultureCoName) }, null)
+                </strong>
+                <div class="margin-top-bot-md">
+
+                    @Html.DisplayAbstractFor(item.company.CultureAbout)
+
+                </div>
+                <div class=" margin-top-bot-md">
+                    <div class="inline-block bottom-border-blue">
+                        @Resource.categories
+                    </div>
+
+                    @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { CoId = coid }))
+                </div>
+            </div>
+        </div>
+    }
+    else if (item.store != null)
+    {
+        var stid = EncryptionHelper.Protect(item.store.storeID);
+        <div class="row margin-top-bot-md bg-default border-radius">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-2 col-xs-5 margin-top-bot-md">
+                        @Html.ProfilePic(company: item.products.company)
+                    </div>
+                    <div class="col-md-10 margin-top-bot-md">
+                        <div class="col-md-12">
+                            <span class="badge">@item.products.product.Count()</span> @Resource.products @Html.ActionLink(item.products.company.CultureCoName, "CProfile", "Company", new { CoId = item.products.company.coID, coName = StringHelper.URLName(item.products.company.CultureCoName) }, null)
+                        </div>
+                        @foreach (var product in item.products.product)
+                        {
+                            var prid = EncryptionHelper.Protect(product.productResult.productID);
+
+                            <div class="sch-pr-avatar pull-left margin-lf-r8-md  margin-top-bot-md ">
+                                @Html.ProfilePic(product: product.productResult, linkhtmlAttributes: new { @class = "full-height" }, imghtmlAttributes: new { @class = "full-height" })
+                                <div class=" desc " style="display:none;">
+
+                                    <div class="">
+                                        @Html.ActionLink(product.productResult.CultureProductName, "Detail", "Product", new { PrId = prid, PrName = StringHelper.URLName(product.productResult.CultureProductName) }, null)
+                                    </div>
+                                    <div class="">
+                                        @Html.DisplayAbstractFor(product.productResult.CultureAbout)
+                                    </div>
+                                    <div class=" margin-top-bot-md">
+                                        <div class="inline-block bottom-border-blue">
+                                            @Resource.categories
+                                        </div>
+
+                                        @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { PrId = prid }))
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (item.products != null)
+    {
+
+        <div class="row margin-top-bot-md bg-default border-radius">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-2 col-xs-5 margin-top-bot-md">
+                        @Html.ProfilePic(company: item.products.company)
+                    </div>
+                    <div class="col-md-10 margin-top-bot-md">
+                        <div class="col-md-12">
+                            <span class="badge">@item.products.product.Count()</span> @Resource.products @Html.ActionLink(item.products.company.CultureCoName, "CProfile", "Company", new { CoId = item.products.company.coID, coName = StringHelper.URLName(item.products.company.CultureCoName) }, null)
+                        </div>
+                        @foreach (var product in item.products.product)
+                        {
+                            var prid = EncryptionHelper.Protect(product.productResult.productID);
+
+                            <div class="sch-pr-avatar pull-left margin-lf-r8-md  margin-top-bot-md ">
+                                @Html.ProfilePic(product: product.productResult, linkhtmlAttributes: new { @class = "full-height" }, imghtmlAttributes: new { @class = "full-height" })
+                                <div class=" desc " style="display:none;">
+
+                                    <div class="">
+                                        @Html.ActionLink(product.productResult.CultureProductName, "Detail", "Product", new { PrId = prid, PrName = StringHelper.URLName(product.productResult.CultureProductName) }, null)
+                                    </div>
+                                    <div class="">
+                                        @Html.DisplayAbstractFor(product.productResult.CultureAbout)
+                                    </div>
+                                    <div class=" margin-top-bot-md">
+                                        <div class="inline-block bottom-border-blue">
+                                            @Resource.categories
+                                        </div>
+
+                                        @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { PrId = prid }))
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (item.services != null)
+    {
+        <div class="row margin-top-bot-md bg-default border-radius">
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-2 col-xs-5 margin-top-bot-md">
+                        @Html.ProfilePic(company: item.services.company)
+                    </div>
+                    <div class="col-md-10 margin-top-bot-md">
+                        <div class="col-md-12">
+                            <span class="badge">@item.services.service.Count()</span> @Resource.services @Html.ActionLink(item.services.company.CultureCoName, "CProfile", "Company", new { CoId = item.services.company.coID, CoName = StringHelper.URLName(item.services.company.CultureCoName) }, null)
+                        </div>
+                        @foreach (var service in item.services.service)
+                        {
+                            var srid = EncryptionHelper.Protect(service.serviceResult.serviceID);
+
+                            <div class="sch-pr-avatar pull-left margin-lf-r8-md  margin-top-bot-md ">
+                                @Html.ProfilePic(service: service.serviceResult, linkhtmlAttributes: new { @class = "full-height" }, imghtmlAttributes: new { @class = "full-height" })
+                                <div class=" desc " style="display:none;">
+
+                                    <div class="">
+                                        @Html.ActionLink(service.serviceResult.CultureServiceName, "Detail", "Service", new { SrId = srid, SrName = StringHelper.URLName(service.serviceResult.CultureServiceName) }, null)
+                                    </div>
+                                    <div class="">
+                                        @Html.DisplayAbstractFor(service.serviceResult.CultureAbout)
+                                    </div>
+                                    <div class=" margin-top-bot-md">
+                                        <div class="inline-block bottom-border-blue">
+                                            @Resource.categories
+                                        </div>
+
+                                        @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { PrId = srid }))
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+    else if (item.events != null)
+    {
+        var evid = EncryptionHelper.Protect(item.events.eventID);
+        <div class="search-grid-box row margin-top-bot-md bg-default border-radius">
+            <div class="col-md-2 margin-top-bot-md">
+                <div class="col-md-12 text-center no-wrap margin-top-bot-md">
+                    @Resource.eventAttendors
+                    <span class="badge">
+                        @Html.DisplayFor(model => item.events.Attendors.Count)
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-10 margin-top-bot-md">
+                <strong>
+                    @Html.ActionLink(item.events.CultureEventSubj, "Detail", "Event", new { EvId = evid, EvName = StringHelper.URLName(item.events.CultureEventSubj) }, new { @class = "questionLink" })
+                    - @Html.DisplayFor(model => item.events.State.CultureFullState)
+                </strong>
+
+                <div>
+                    @Html.DisplayAbstractFor(item.events.CultureDescription, 150)
+                </div>
+                <div class="col-md-12 margin-top-bot-md">
+                    <div class="inline-block bottom-border-blue">
+                        @Resource.categories
+                    </div>
+
+                    @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { EvId = evid }))
+                </div>
+            </div>
+
+        </div>
+    }
+    else if (item.groups != null)
+    {
+        var gid = EncryptionHelper.Protect(item.groups.groupId);
+        <div class="search-grid-box row margin-top-bot-md bg-default border-radius">
+            <div class="col-md-2 margin-top-bot-md">
+                <div class="col-md-12 col-xs-6 text-center no-wrap margin-top-bot-md">
+                    @Resource.members
+                    <span class="badge">
+                        @Html.DisplayFor(model => item.groups.Members.Count)
+                    </span>
+                </div>
+                <div class="col-md-12 col-xs-6 text-center no-wrap margin-top-bot-md">
+                    @Resource.sessions
+                    <span class="badge">
+                        @Html.DisplayFor(model => item.groups.Sessions.Count)
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-10 margin-top-bot-md">
+                <strong>
+                    @Html.ActionLink(item.groups.groupName, "GroupPage", "Group", new { GId = item.groups.groupId, GName = StringHelper.URLName(item.groups.groupName) }, new { @class = "questionLink" })
+                </strong>
+                <div>
+                    @Html.DisplayAbstractFor(item.groups.groupDesc, 150)
+                </div>
+                <div class="margin-top-bot-md">
+                    <div class="col-md-12">
+                        <div class="inline-block bottom-border-blue">
+                            @Resource.professions
+                        </div>
+
+                        @Html.AjaxPrtialLoader(Url.Action("RelatedProfessions", "Profession", new { GId = gid }))
+                    </div>
+                    <div class="col-md-12">
+                        <div class="inline-block bottom-border-blue">
+                            @Resource.categories
+                        </div>
+
+                        @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { GId = gid }))
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+}
+@if (Model.PageCount > Model.PageNumber)
+{
+    <div id="nextSearchResults" data-nextpage="@(Model.PageNumber + 1)">
+        @Html.NextItems("TotalSearch", "Home", new
+   {
+       page = Model.PageNumber + 1,
+       currentFilter = ViewData["currentFilter"]
+   })
+    </div>
+}

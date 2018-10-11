@@ -1,0 +1,67 @@
+﻿@model IndustryTower.Models.Profession
+@{
+    ViewBag.Title = Model.CultureProfessionName;
+}
+
+
+<div class="row dir">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Profession
+            </div>
+            <div class="panel-body">
+                @Html.ActionLink(Resource.edit, "Edit", "Profession", new { proffID = EncryptionHelper.Protect(Model.profID) }, new { @class = "btn btn-warning" })
+                <div class="inline-block">
+                    @using (Html.BeginForm(Resource.delete, "Profession", new { ProfId = EncryptionHelper.Protect(Model.profID) }, FormMethod.Post, null))
+                    {
+                        @Html.ValidationSummary(true)
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value='@Resource.delete' onclick="return confirm('Are you sure?')" class="btn btn-danger" />
+                    }
+                </div>
+                <div class="margin-top-bot-md">
+                    <span class="label label-info margin-lf-r8-md">
+                        <big>@ModelDisplayName.professionName</big>
+                    </span>
+                    @Model.professionName
+                </div>
+                <div class="margin-top-bot-md">
+                    <span class="label label-info margin-lf-r8-md">
+                        <big>@ModelDisplayName.professionNameEN</big>
+                    </span>
+                    @Model.professionNameEN
+                </div>
+                <div class="margin-top-bot-md">
+                    <span class="label label-info margin-lf-r8-md">
+                        <big>@ModelDisplayName.professionDescription</big>
+                    </span>
+                    @Model.professionDescription
+                </div>
+                <div class="margin-top-bot-md">
+                    <span class="label label-info margin-lf-r8-md">
+                        <big>@ModelDisplayName.professionDescriptionEN</big>
+                    </span>
+                    @Model.professionDescriptionEN
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="bottom-border-blue">
+            @Resource.categories
+        </div>
+        @foreach (var item in Model.categories)
+        {
+            <div class="float-left min-padding max-margin" style="background-color:#d0bfe2">
+                @Html.ActionLink(item.CultureCatName, "Detail", "Category", new { catId = EncryptionHelper.Protect(item.catID) }, null)
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+
+

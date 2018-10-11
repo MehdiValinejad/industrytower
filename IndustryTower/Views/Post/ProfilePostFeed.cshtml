@@ -1,0 +1,39 @@
+﻿@model PagedList.IPagedList<IndustryTower.ViewModels.ProfileFeed>
+@using PagedList.Mvc;
+
+@if (Model.Count > 0)
+{
+
+    foreach (var C in Model)
+    {
+        if (C.Posts != null)
+        {
+            Html.RenderPartial("PostPartial", C.Posts);
+        }
+        else if (C.Shares != null)
+        {
+            Html.RenderPartial("~/Views/Share/SharePartial.cshtml", C.Shares);
+        }
+    }
+    <div id="nextPosts" class="col-md-12 col-xs-12">
+
+        @if (Model.PageCount > Model.PageNumber)
+        {
+            @Html.NextItems("ProfilePostFeed", "Post", new
+           {
+               UId = ViewData["UId"],
+               CoId = ViewData["CoId"],
+               StId = ViewData["StId"],
+               page = Model.PageNumber + 1
+           }, "next-posts-link")
+        }
+    </div>
+
+}
+else
+{
+    <div class="alert alert-info text-center">
+        @Resource.noResult
+    </div>
+}
+

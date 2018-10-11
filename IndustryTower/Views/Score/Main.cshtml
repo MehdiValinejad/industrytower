@@ -1,0 +1,40 @@
+﻿@model IndustryTower.ViewModels.ScoreVars
+
+<div class="inline-block text-center btn btn-default pos-rel votebtn">
+    <table class="vote">
+        <tr>
+            <td class="text-center">
+                <span class="glyphicon glyphicon-chevron-up voteup" title="@Resource.voteUp" data-ctn="@Resource.votedBefore" data-lowscore="@Resource.voteLow" data-container="body">
+                    @using (Html.BeginForm("Update", "Score"))
+                    {
+                        Model.sign = 1;
+                        @Html.Serialize("model", Model, SerializationMode.Plaintext)
+                        @Html.AntiForgeryToken()
+                        <input type="submit" class="display-none" />
+                    }
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-center">
+                <span class="voteconter">
+                    @Model.count
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-center">
+                <span class="glyphicon glyphicon-chevron-down votedn" title="@Resource.voteDn" data-ctn="@Resource.votedBefore" data-lowscore="@Resource.voteLow" data-container="body">
+                    @using (Html.BeginForm("Update", "Score"))
+                    {
+                        Model.sign = -1;
+                        @Html.Serialize("model", Model, SerializationMode.Plaintext)
+                        @Html.AntiForgeryToken()
+                        <input type="submit" class="display-none" />
+                    }
+                </span>
+            </td>
+        </tr>
+    </table>
+</div>
+

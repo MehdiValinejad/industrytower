@@ -1,0 +1,37 @@
+﻿@model IEnumerable<IndustryTower.Models.Badge>
+@{
+    ViewBag.Title = Resource.badge;
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 ">
+        <div class="table-responsive">
+            <table class="table dir">
+                <thead>
+                    <tr>
+                        <th class="dir">@ModelDisplayName.badgeName</th>
+                        <th class="dir">@ModelDisplayName.badgeDesc</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@Url.Action("Detail", "Badge", new { BgId = item.badgeId, BgName = StringHelper.URLName(item.name) })" class="btn btn-default">
+                                @Html.DisplayFor(model => item.name)
+                                <span class="glyphicon glyphicon-cog inline-block bdg_@item.color"></span>
+                                </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.desc)
+                            </td>
+                        </tr>
+                    }
+                <tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+

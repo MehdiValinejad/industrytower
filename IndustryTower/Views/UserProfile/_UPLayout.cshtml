@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+            <div id="UPRight">
+                <div id="UPTop">
+                @RenderSection("TOP", required: false)
+                </div>
+
+                <div id="UPPost">
+                @RenderSection("Post", required: false)
+                </div>
+            </div>
+
+            <div id="UPLeft">
+                @RenderSection("UPLeft", required: false)
+                    @RenderSection("Education", required: false)
+                    @RenderSection("Certificate", required: false)
+                    @RenderSection("Patent", required: false)
+                    @RenderSection("Webinars", required: false)
+                    @RenderSection("Events", required: false)
+                    @RenderSection("Question", required: false)
+            </div>
+
+            @section scripts{
+                @RenderSection("scripts", required: false)
+                }

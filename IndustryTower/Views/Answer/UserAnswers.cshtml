@@ -1,0 +1,9 @@
+﻿@model IEnumerable<IndustryTower.ViewModels.UserAnswerViewModel>
+
+
+<div class="list-group">
+    @foreach (var item in Model)
+    {
+        @Html.ActionLink(Html.DisplayAbstractFor(item.answer,100).ToString(), "Detail", "Question", new { QId = item.qId, QName = StringHelper.URLName(item.qsubj) }, new { @class = "ugroup list-group-item" })
+    }
+</div>

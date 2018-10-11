@@ -1,0 +1,106 @@
+﻿@model IndustryTower.ViewModels.CommentViewModel
+
+
+
+@if (Model.Comments != null)
+{
+    if (Model.Comments.Count() > 0)
+    {
+        <h5 class=" dir bottom-border-blue">
+            @Resource.popularComments
+        </h5>
+
+        <ul id="popularComments" class="list-unstyled row no-pad">
+
+            @foreach (var comment in Model.Comments)
+            {
+                <li id="comment" class="comment-cont col-md-12 col-xs-12">
+                    <div id="commentBody" class="row">
+                        <div class="col-md-12">
+                            <blockquote id="commentBody" class="blockquote-reverse font-mini col-md-12 col-xs-12">
+                                <div class="row">
+                                    @Html.ProfilePic(user: comment.CommenterUser, linkhtmlAttributes: new { @class = "col-md-1 col-xs-2 margin-lf-r8-md" })
+                                    <div class="comment-text dir">
+                                        <p>
+                                            @if (AuthorizationHelper.isRelevant(comment.CommenterUser.UserId))
+                                            {
+                                                @Html.ModifyIcons("", "Delete", "Comment", new { CmtId = EncryptionHelper.Protect(comment.cmtID) }, "display-none",editvis:false)
+                                            }
+                                            <span>
+                                                @Html.ActionLink(comment.CommenterUser.CultureFullName, "UProfile", "UserProfile", new { UId = comment.CommenterUser.UserId, UName = StringHelper.URLName(comment.CommenterUser.CultureFullName) })
+                                            </span>
+                                            @Html.DisplayFor(model => comment.comment)
+                                        </p>
+                                    </div>
+                                    <footer class="comment-date">
+                                        @Html.DisplayFor(model => comment.date, "RelativeDate")
+                                        <div id="commentLike" class="inline-block">
+                                            @{ Html.RenderAction("LikeComment", "Like", new { model = new IndustryTower.ViewModels.likeVars { elemId = comment.cmtID, typ = IndustryTower.ViewModels.LikeType.LikeComment } }); }
+                                        </div>
+                                    </footer>
+                                </div>
+
+                            </blockquote>
+                        </div>
+                        
+                    </div>
+                </li>
+            }
+
+        </ul>
+        <h5 class=" dir bottom-border-blue">
+            @Resource.allComments
+        </h5>
+    <ul id="allComments" class="list-unstyled row no-pad">
+
+
+        <li id="nextComments" class="col-md-12 col-xs-12">
+            @{
+                var se = new MvcSerializer();
+                var mod = new IndustryTower.ViewModels.commentVars
+                {
+                    elemId = Model.prams.elemId,
+                    typ = Model.prams.typ
+                };
+                var tt = se.Serialize(mod, SerializationMode.Plaintext);
+            }
+            @Html.NextItems("Comments", "Comment", new
+                   {
+                       model = tt,
+                       commentPage = 1
+                   }, "next-comments-link btn btn-default col-md-12 col-xs-12 btn btn-default btn-xs text-center", caption: Resource.nextComments, imgclass: "inline-block")
+        </li>
+    </ul>
+    }
+
+
+
+    <ul id="newComment" class="new-comment list-unstyled col-md-12">
+        <h5 class="comment-label  dir bottom-border-blue display-none">
+            @Resource.newComments
+        </h5>
+    </ul>
+
+    <div id="newCommentFormContainer" class="row margin-top-bot-md">
+        @if (Request.IsAuthenticated)
+        {
+            using (Html.BeginForm("CommentInsert", "Comment", FormMethod.Post, new { @class = "new-comment-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.Serialize("model", Model.prams, SerializationMode.Plaintext)
+                
+                <div id="commentTextContainer" class="col-md-12 col-xs-12">
+                    @Html.TextAreaFor(model => model.comment, new { @placeholder = Resource.writeYourComment, @onkeyup = "textAreaAdjust(this)", @class = "form-control dir" })
+                    @Html.ValidationMessageFor(model => model.comment)
+                    
+                    
+                    <input type="submit" value="@Resource.comment" name="newComment" class="btn btn-default col-md-12 col-xs-12 btn-xs" data-loading-text="@Resource.loading" />
+                </div>
+
+            }
+        }
+
+    </div>
+
+}

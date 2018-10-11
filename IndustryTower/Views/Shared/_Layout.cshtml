@@ -1,0 +1,371 @@
+﻿@using IndustryTower.ViewModels
+@{
+    var _culture = IndustryTower.App_Start.ITTConfig.CurrentCulture;
+}
+
+<!DOCTYPE html>
+<html lang="@_culture" dir="ltr" class="bg-black">
+<head>
+    <meta charset="utf-8" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="author" content="Mehdi Valinejad - vjdmhd@gmail.com">
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>@ViewBag.Title - @Resource.title - @Resource.homeTitle</title>
+
+    @Styles.Render("~/Content/bootstrap", "~/Content/"+Resource.CSS)
+
+    <!--[if lt IE 9]>
+        <link href="//docs.google.com/uc?id=0B4od40H5_B_daURjY01UbUMtN0E&export=download" rel='stylesheet' type='text/css'>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+
+        <link href="//netdna.bootstrapcdn.com/respond-proxy.html" id="respond-proxy" rel="respond-proxy">
+        <link href="/Scripts/vendor/respond.proxy.gif" id="respond-redirect" rel="respond-redirect">
+        <script src="/Scripts/vendor/respond.proxy.min.js"></script>
+    <![endif]-->
+    @RenderSection("head", required: false)
+
+    @Scripts.Render("~/bundles/jqueryOld", "~/bundles/bootstrap", "~/bundles/Total")
+
+    @helper selected(string c, string culture)
+    {
+        if (c == culture)
+        {
+            @:checked="checked"
+                    }
+    }
+    @{
+        var pickerRegional = "";
+        var datePattern = "m/d/yy";
+        
+            <script src="https://apis.google.com/js/platform.js" async defer></script>
+        
+
+}
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">
+    lang: en_US
+    </script>
+</head>
+<body>
+    @Html.Hidden("ROOT", Url.Content("~/" + _culture + "/"))
+
+
+    <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div id="initmodal">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">@Resource.close</span></button>
+                        <h4 class="modal-title">@Resource.title</h4>
+                    </div>
+                    <div class="modal-body dir">
+                        <div id='loading' class="modalLoading"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">@Resource.close</button>
+                        @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                    </div>
+                </div>
+                <div id="newmodal">
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="pull-left bright-blue hidden-xs">
+                    <span class="icon-Logo icn-47"></span>
+                </div>
+                <div id="cultureChoose" class="pull-left">
+                    @using (Html.BeginForm("SetCulture", "Home"))
+                    {
+                        <input name="culture" id="en-us" value="en" type="radio" @selected("en", _culture) />
+                        <label for="en-us" class="bright-blue">En</label>
+                        <input name="culture" id="fa-ir" value="fa" type="radio" @selected("fa", _culture) />
+                        <label for="fa" class="bright-blue">فا</label>
+                    }
+                </div>
+                <ul class="nav navbar-nav margin-lf-r8-md always-vis">
+                    @{Html.RenderAction("_LoginPartial", "UserProfile");}
+
+                </ul>
+            </div>
+            <div class="navbar-collapse collapse ">
+                <ul class="nav navbar-nav navbar-center">
+                    <li class="dropdown search-type-choose">
+                        <a href="#" class="dropdown-toggle active-search-img" data-toggle="dropdown" title="@Resource.searchTypeChoose">
+                            <div class="IMGDIV glyphicon glyphicon-align-left icn-25 inline-block">
+
+                            </div>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dir search-top" role="menu">
+                            <li>
+                                <a href="#" class="search-option">
+                                    <div class="IMGDIV glyphicon glyphicon-align-left icn-25 inline-block" data-search="@SearchType.ALL" data-ph="@Resource.searchEveryThing"></div>
+                                    <span>
+                                        @EnumTypes.Total
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="search-option">
+                                    <div class="IMGDIV icon-Question icn-25 inline-block" data-search="@SearchType.Question" data-ph="@Resource.searchQuestions"></div>
+                                    <span>
+                                        @EnumTypes.Question
+                                    </span>
+                                </a>
+
+                            </li>
+                            <li>
+                                <a href="#" class="search-option">
+                                    <div class="IMGDIV icon-Admins icn-25 inline-block" data-search="@SearchType.People" data-ph="@Resource.searchPeople"></div>
+                                    <span>
+                                        @EnumTypes.People
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="search-option">
+                                    <div class="IMGDIV icon-Company icn-25 inline-block" data-search="@SearchType.Company" data-ph="@Resource.searchCompany"></div>
+                                    @*@Html.Sprite("I_Search_Company", new { @class = "inline-block", data_search = SearchType.Company, data_ph = Resource.searchCompany })*@
+                                    <span>
+                                        @EnumTypes.company
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="search-option">
+                                    <div class="IMGDIV icon-Store icn-25 inline-block" data-search="@SearchType.Store" data-ph="@Resource.searchStore"></div>
+                                    <span>
+                                        @EnumTypes.store
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="search-option">
+                                    <div class="IMGDIV icon-Product icn-25 inline-block" data-search="@SearchType.Product" data-ph="@Resource.searchProduct"></div>
+                                    <span>
+                                        @EnumTypes.Product
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="search-option">
+                                    <div class="IMGDIV icon-Services icn-25 inline-block" data-search="@SearchType.Service" data-ph="@Resource.searchService"></div>
+                                    <span>
+                                        @EnumTypes.Service
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="search-option">
+                                    <div class="IMGDIV icon-Group icn-25 inline-block" data-search="@SearchType.Group" data-ph="@Resource.searchGroup"></div>
+                                    <span>
+                                        @EnumTypes.group
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="search-option">
+                                    <div class="IMGDIV icon-Webinar icn-25 inline-block" data-search="@SearchType.Webinar" data-ph="@Resource.searchWebinar"></div>
+                                    <span>
+                                        @EnumTypes.Webinar
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="search-option">
+                                    <div class="IMGDIV icon-Event icn-25 inline-block" data-search="@SearchType.Event" data-ph="@Resource.searchEvent"></div>
+                                    <span>
+                                        @EnumTypes.Events
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="search-option">
+                                    <div class="IMGDIV glyphicon glyphicon-book icn-25 inline-block" data-search="@SearchType.Book" data-ph="@Resource.searchBook"></div>
+                                    <span>
+                                        @EnumTypes.Book
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="search-option">
+                                    <div class="IMGDIV glyphicon glyphicon-list-alt icn-25 inline-block" data-search="@SearchType.Dictionary" data-ph="@Resource.searchDictionary"></div>
+                                    <span>
+                                        @EnumTypes.Dictionary
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="search-option">
+                                    <div class="IMGDIV glyphicon glyphicon-font icn-25 inline-block" data-search="@SearchType.Word" data-ph="@Resource.searchWord"></div>
+                                    <span>
+                                        @EnumTypes.Word
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li class="pull-right main-search">
+                        
+                        <form class="navbar-form navbar-left " action="@Url.Action("TotalSearch","Home")" role="search">
+                            @Html.Hidden("searchType", ViewData["searchType"] != null ? ViewData["searchType"] : SearchType.ALL)
+                            @*@Html.Hidden("currentFilter", ViewData["currentFilter"] != null ? ViewData["currentFilter"] : null)*@
+                            <input type="hidden" value="@ViewData["currentFilter"]" id="currentFilter" name="currentFilter" />
+                            @*@Html.Hidden("sortOrder", ViewData["sortOrder"] != null ? ViewData["sortOrder"] : null)*@
+                            <input type="hidden" value="@ViewData["sortOrder"]" id="sortOrder" name="sortOrder" />
+                            <div class="form-group no-wrap">
+                                <button type="submit" class="search-btn btn btn-default glyphicon glyphicon-search"></button>
+                                @Html.TextBox("SearchString", ViewData["currentFilter"], htmlAttributes: new
+                                                    {
+                                                        @placeholder = Resource.searchEveryThing,
+                                                        @class = "form-control total-search-box has-mini-search main-search dir pos-rel",
+                                                        data_minisearch = Url.Action("_AllSearchPartial", "Home"),
+                                                        autocomplete = "off"
+                                                    })
+
+                            </div>
+
+                        </form>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav pull-right hidden-xs">
+                    <li class="dropdown">
+                        <a href="# " id="helpSign" data-toggle="dropdown" title="@Resource.help">
+                            <span class="glyphicon glyphicon-question-sign icn-25"></span>
+                        </a>
+
+                        <ul class="dropdown-menu dir search-top right0" role="menu">
+                            <li role="presentation" class="display-none">
+                                <a href="#" id="thispagetour"><span class="glyphicon glyphicon-asterisk"></span>@Resource.thisPageHelp</a>
+                            </li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation">
+                                @Html.ActionLink(Resource.badges, "Index", "Badge")
+                            </li>
+                        </ul>
+                            
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container main-container pos-rel">
+        <div class="row hidden-xs">
+            <div class="top-menu btn-group btn-group-justified col-md-11">
+                <div class="btn-group" data-searchtype="Webinar">
+                    @Html.ActionLink(Resource.webinars, "TotalSearch", "Home", new { searchtype = "Webinar" }, new { @class = "btn btn-default" })
+                </div>
+                <div class="btn-group" data-searchtype="Event">
+                    @Html.ActionLink(Resource.events, "TotalSearch", "Home", new { searchtype = "Event" }, new { @class = "btn btn-default" })
+                </div>
+                <div class="btn-group" data-searchtype="Book">
+                    @Html.ActionLink(Resource.books, "TotalSearch", "Home", new { searchtype = "Book" }, new { @class = "btn btn-default" })
+                </div>
+                <div class="btn-group" data-searchtype="Dictionary">
+                    @Html.ActionLink(Resource.dicts, "TotalSearch", "Home", new { searchtype = "Dictionary" }, new { @class = "btn btn-default" })
+                </div>
+                <div class="btn-group" data-searchtype="Question">
+                    @Html.ActionLink(Resource.questions, "TotalSearch", "Home", new { searchtype = "Question" }, new { @class = "btn btn-default" })
+                </div>
+                <div class="btn-group" data-searchtype="Group">
+                    @Html.ActionLink(Resource.groups, "TotalSearch", "Home", new { searchtype = "Group" }, new { @class = "btn btn-default" })
+                </div>
+                @*<div class="btn-group" data-searchtype="Service">
+                    @Html.ActionLink(Resource.services, "TotalSearch", "Home", new { searchtype = "Service" }, new { @class = "btn btn-default" })
+                </div>
+                <div class="btn-group" data-searchtype="Product">
+                    @Html.ActionLink(Resource.products, "TotalSearch", "Home", new { searchtype = "Product" }, new { @class = "btn btn-default" })
+                </div>
+                <div class="btn-group" data-searchtype="Store">
+                    @Html.ActionLink(Resource.stores, "TotalSearch", "Home", new { searchtype = "Store" }, new { @class = "btn btn-default" })
+                </div>
+                <div class="btn-group" data-searchtype="Company">
+                    @Html.ActionLink(Resource.companies, "TotalSearch", "Home", new { searchtype = "Company" }, new { @class = "btn btn-default" })
+                </div>*@
+                <div class="btn-group" data-searchtype="People">
+                    @Html.ActionLink(Resource.people, "TotalSearch", "Home", new { searchtype = "People" }, new { @class = "btn btn-default" })
+                </div>
+            </div>
+        </div>
+        @RenderSection("SearchPanel", required: false)
+
+        <div id="SearchResult" class="QPJRightContent">
+            @RenderSection("SearchResult", required: false)
+        </div>
+
+        @RenderBody()
+    </div>
+    <div class="container-fluid">
+        <footer class="row dir bg-black text-white">
+            <div class="bottom-border-blue"></div>
+            <div class="col-md-1 col-xs-5 margin-top-bot-md">
+                @Html.ActionLink(Resource.contactUs, "ContactUs", "Home")
+            </div>
+            <div class="col-md-1 col-xs-5 margin-top-bot-md">
+                @Html.ActionLink(Resource.rules, "Rules", "Home")
+            </div>
+
+
+            <div class="col-md-7 col-xs-12 pull-right margin-top-bot-md">
+                <p><span class="glyphicon glyphicon-copyright-mark"></span> @DateTime.Now.Year - @Resource.title - @Resource.obligation</p>
+                <div>
+                    @Resource.designedBy Mehdi Valinejad vjdmhd@gmail.com
+                   
+                </div>
+                <div class="margin-top-bot-md">
+                    <div class="inline-block">
+                        <div class="g-plusone" data-annotation="inline" data-width="190" data-href="http:www.industrytower.com"></div>
+                    </div>
+                    <div class="inline-block">
+                        <script type="IN/FollowCompany" data-id="3718816" data-counter="right">
+                        </script>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+    </div>
+    
+
+
+    <script type="text/javascript">
+
+        function CallPostUpload() {
+            UploadFile('@IndustryTower.App_Start.ITTConfig.FileSizeLimit',
+                           '@IndustryTower.App_Start.ITTConfig.MaxFilesCountPost',
+                           '@ModelValidation.maxUploadFileLimit',
+                           '@ModelValidation.maxUploadFileCount',
+                           '@ModelValidation.fileTypeLimit');
+        }
+
+        function countryLoad() {
+            AjaxStateDropDown('@Url.Action("populateDopDownStates", "Home")', '@Resource.selectState');
+        }
+
+        function CallDatePicker() {
+            DPicker('@pickerRegional', '@datePattern');
+        }
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

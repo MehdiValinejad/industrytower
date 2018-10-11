@@ -1,0 +1,277 @@
+﻿@model IndustryTower.Models.Seminar
+@using IndustryTower.Models
+@{
+    ViewBag.Title = Resource.edit;
+}
+
+<div class="row">
+    <div id="semCreateEdit" class="col-md-offset-2 col-md-8 dir">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>
+                    @Resource.edit @Resource.webinar
+                    <span class="pull-left">
+                        <span class="icon-Webinar"></span>
+                    </span>
+                </h3>
+
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary()
+                    @Html.Hidden("S", EncryptionHelper.Protect(Model.seminarId))
+
+                    var moderatorEnq = EncryptionHelper.Protect(Model.Moderator.UserId);
+                    <div class="seminar-admin-choose hasUserChoose row form-group">
+                        <div class="bottom-border-blue">
+                            @Resource.semModerator
+                        </div>
+                        <ul id="choosedUsers" class="col-md-12 list-unstyled">
+                            <li class="btn btn-default" data-id="@moderatorEnq">
+                                <button type="button" class="close pull-right"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <div class="inline-block">
+                                    <span class="us-txt" data-name="@Html.DisplayFor(model => model.Moderator.CultureFullName)">
+                                        @Html.DisplayFor(model => Model.Moderator.CultureFullName)
+                                    </span>
+                                    <small>
+                                        @Html.AboutUser(Model.Moderator)
+                                    </small>
+                                </div>
+                                <div class="inline-block">
+                                    @Html.ProfilePic(user: Model.Moderator, imghtmlAttributes: new { @class = "min-img" })
+                                </div>
+                            </li>
+                            @Html.Hidden("UserTag", moderatorEnq)
+                        </ul>
+
+                        <div class="form-group col-md-12">
+                            @Html.TextBox("newUser", null, new
+                                            {
+                                                @class = "has-mini-search form-control",
+                                                data_minisearch = Url.Action("_UserSearchPartial", "UserProfile"),
+                                                placeholder = Resource.typeToSearchUser
+                                            })
+                        </div>
+                    </div>
+                    <div class="seminar-member-choose hasUserChoose row form-group">
+                        <div class="bottom-border-blue">
+                            @Resource.semOtherBroadcasters
+                        </div>
+                        <ul id="choosedUsers" class="col-md-12 list-unstyled">
+                            @if (Model.Broadcasters.Count > 0)
+                            {
+                                foreach (var item in Model.Broadcasters)
+                                {
+                                    <li class="btn btn-default" data-id="@EncryptionHelper.Protect(item.UserId)">
+                                        <button type="button" class="close pull-right"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <div class="inline-block">
+                                            <span class="us-txt" data-name="@Html.DisplayFor(model => item.CultureFullName)">
+                                                @Html.DisplayFor(model => item.CultureFullName)
+                                            </span>
+                                            <div class="overflow-hidden" style="max-width:200px">
+                                                <small>
+                                                    @Html.AboutUser(item)
+                                                </small>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="inline-block">
+                                            @Html.ProfilePic(user: item, imghtmlAttributes: new { @class = "min-img" })
+                                        </div>
+                                    </li>
+                                }
+                            }
+                            @Html.Hidden("UserTags")
+                        </ul>
+
+                        <div class="form-group col-md-12">
+                            @Html.TextBox("newUser", null, new
+                                {
+                                    @class = "has-mini-search form-control",
+                                    data_minisearch = Url.Action("_UserSearchPartial", "UserProfile"),
+                                    placeholder = Resource.typeToSearchUser
+                                })
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        @Html.DisplayNameFor(model => model.title)
+                        @Html.TextBoxFor(model => model.title, new { @class = "form-control", placeholder = ModelDisplayName.semTitle })
+                        @Html.ValidationMessageFor(model => model.title)
+                    </div>
+                    <div class="form-group col-md-12">
+                        @Html.DisplayNameFor(model => model.desc)
+                        @Html.TextAreaFor(model => model.desc, new { @class = "form-control", placeholder = ModelDisplayName.semDesc, @onkeyup = "textAreaAdjust(this)" })
+                        @Html.ValidationMessageFor(model => model.desc)
+                    </div>
+                    <div class="form-group col-md-12">
+                        @Html.EditorFor(model => model.date, "Time", new
+                                                                   {
+                                                                       @placeholder = ModelDisplayName.semDate,
+                                                                       @class = "mini-input hasDatePick",
+                                                                       @timeplaceholder = Resource.time,
+                                                                       @timename = "Time"
+                                                                   })
+
+
+                        @Html.ValidationMessageFor(model => model.date, ModelValidation.datetime)
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        @Html.DisplayNameFor(model => model.duration)
+                        @Html.DropDownListFor(model => model.duration, new SelectList(Enumerable.Range(10, 111).Where(d => d % 5 == 0)), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.duration)
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        @Html.DisplayNameFor(model => model.maxAudiences)
+                        @Html.DropDownListFor(model => model.maxAudiences, new SelectList(Enumerable.Range(1, 250), 250), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.maxAudiences)
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        @Html.DisplayNameFor(model => model.price)
+                        @Html.DropDownListFor(model => model.price, new SelectList(Enumerable.Range(1000, 100000).Where(d => d % 1000 == 0).Concat(new[] { 0 }), 0), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.price)
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        @Html.DisplayNameFor(model => model.isPublic):
+                        @Resource.no
+                        @Html.RadioButtonFor(model => model.isPublic, false)
+                        @Resource.yes
+                        @Html.RadioButtonFor(model => model.isPublic, true, new { @checked = "checked" })
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        @{
+                            var list = from SemType item in Enum.GetValues(typeof(SemType))
+                                       select new { ID = item, Name = EnumTypes.ResourceManager.GetString(item.ToString()) };
+
+                            var current = Model.GetType().BaseType.ToString();
+                            var curr = current.Substring(current.ToLower().LastIndexOf(".") + 1);
+                        }
+                        @Html.DropDownList("semtype", new SelectList(list, "ID", "Name", curr))
+                    </div>
+
+
+
+
+                    <div class="form-group col-md-12">
+                        <div class="bottom-border-blue">
+                            @Resource.files
+                        </div>
+                        @foreach (var file in Model.files.Split(new[] { ',' }))
+                        {
+                            @Html.TextBox("fileInsert", file, new { placeholder = Resource.addFile, @class = "form-control" })
+                        }
+                        @Html.TextBox("fileInsert", null, new { placeholder = Resource.addFile, @class = "form-control" })
+                    </div>
+
+
+                    <div class="bg-default col-md-12 margin-top-bot-md">
+                        <div class="col-md-12 margin-top-bot-md">
+                            <div id="SelectedCategories">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <strong>
+                                            @Resource.selectedCategories
+                                        </strong>
+                                    </div>
+                                    <div class="panel-body">
+                                        @*@foreach (var cat in Model.Categories)
+                                            {
+                                                <div id='selectedProf' class='green-tag inline-block' data-value="@cat.catID">
+                                                    @Html.DisplayFor(model => cat.CultureCatName)
+                                                    <button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                </div>
+                                            }*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-border-blue">
+                            @Resource.categoryChooseHelp
+                        </div>
+
+                        @Html.AjaxPrtialLoader(Url.Action("CategoryTags", "Category"), true)
+                    </div>
+
+
+                    <div class="bg-default col-md-12 margin-top-bot-md">
+                        @Html.Hidden("professionTags", String.Join(",", Model.Professions.Select(p => p.profID)))
+                        <div id="selectedProfs" class="col-md-12 margin-top-bot-md">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <strong>
+                                        @Resource.selectedProfessions
+                                    </strong>
+                                </div>
+                                <div class="panel-body">
+                                    @foreach (var prof in Model.Professions)
+                                    {
+                                        <div id='selectedProf' class='pink-tag inline-block selectedtag-marg' data-id="@prof.profID">
+                                            @Html.DisplayFor(model => prof.CultureProfessionName)
+                                            <button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 margin-top-bot-md">
+                            <div class="bottom-border-blue">
+                                @Resource.professionChooseHelp
+                            </div>
+                            <div class="form-group">
+                                @*@Html.TextBox("ProfessionSearchBox", null, htmlAttributes: new { @placeholder = Resource.professionTagChoose, @class="form-control" })*@
+                                <input type="text" id="ProfessionSearchBox" value="" placeholder="@Resource.professionTagChoose" class="form-control" />
+                            </div>
+                            <div class="professtionTags-container panel panel-default pos-rel">
+                                <div id="loading">
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        @Html.Hidden("Cats", ViewData["Cats"] != null ? ViewData["Cats"] : null)
+                    </div>
+                    <input type="submit" value="@Resource.edit" class="btn btn-primary col-md-4 col-md-offset-4" data-loading-text="@Resource.loading" />
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/UserTags")
+    @Scripts.Render("~/bundles/Seminar")
+    @Scripts.Render("~/bundles/Category")
+    @Scripts.Render("~/bundles/Profession")
+    @Scripts.Render("~/bundles/DatePicker")
+    @Scripts.Render("~/bundles/TimePicker")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.clockpicker').clockpicker({
+                align: 'right',
+                donetext: "@Resource.insert"
+            });
+
+            CallDatePicker();
+
+            GategoryTags('@IndustryTower.App_Start.ITTConfig.MaxCategoryTagsLimit',
+                '@ModelValidation.YouCanChooseMaxCategories',
+                '@ModelValidation.categoryParentIsChoosed'
+                );
+
+            ProfessionsTag('@IndustryTower.App_Start.ITTConfig.MaxProfessionTagsLimit',
+                      '@ModelValidation.YouCanChooseMax5Professions');
+        });
+    </script>
+}

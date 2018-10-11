@@ -1,0 +1,86 @@
+﻿@model List<IndustryTower.ViewModels.SearchViewModel>
+@foreach (var item in Model)
+{
+    <div class="row margin-top-bot-md bg-default border-radius">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-1 col-xs-3 margin-top-bot-md">
+                    @Html.ProfilePic(company: item.products.company)
+                </div>
+                <div class="col-md-11 col-xs-5 margin-top-bot-md">
+                    <div class="row margin-lf-r8-md  margin-top-bot-md ">
+                        <div class="col-md-2 col-xs-5 pull-right">
+                            @Html.ProfilePic(product: item.products)
+                        </div>
+                        <div class=" desc col-md-10 col-xs-12 dir">
+                            <div>
+                                @Html.ActionLink(item.products.CultureProductName, "Detail", "Product", new { PrId = item.products.productID, PrName = StringHelper.URLName(item.products.CultureProductName) }, null)
+                            </div>
+                            <div>
+                                @Html.DisplayAbstractFor(item.products.CultureAbout)
+                            </div>
+                            <div class="margin-top-bot-md">
+                                <div class="inline-block bottom-border-blue">
+                                    @Resource.categories
+                                </div>
+
+                                @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { PrId = item.products.productID }))
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="row margin-top-bot-md bg-default border-radius">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-2 col-xs-5 margin-top-bot-md">
+                        @Html.ProfilePic(company: item.products.company)
+                    </div>
+                    <div class="col-md-10 margin-top-bot-md">
+                        <div class="col-md-12">
+                            <span class="badge">@item.products.product.Count()</span> @Resource.products @Html.ActionLink(item.products.company.CultureCoName, "CProfile", "Company", new { CoId = EncryptionHelper.Protect(item.products.company.coID), coName = StringHelper.URLName(item.products.company.CultureCoName) }, null)
+                        </div>
+                            @foreach (var product in item.products.product)
+                            {
+                                var prid = EncryptionHelper.Protect(product.productResult.productID);
+
+                                <div class="sch-pr-avatar pull-left margin-lf-r8-md  margin-top-bot-md " >
+                                    @Html.ProfilePic(product: product.productResult, linkhtmlAttributes: new { @class = "full-height" }, imghtmlAttributes: new { @class = "full-height" })
+                                    <div class=" desc " style="display:none;">
+
+                                        <div class="">
+                                            @Html.ActionLink(product.productResult.CultureProductName, "Detail", "Product", new { PrId = prid, PrName = StringHelper.URLName(product.productResult.CultureProductName) }, null)
+                                        </div>
+                                        <div class="">
+                                            @Html.DisplayAbstractFor(product.productResult.CultureAbout)
+                                        </div>
+                                        <div class=" margin-top-bot-md">
+                                            <div class="inline-block bottom-border-blue">
+                                                @Resource.categories
+                                            </div>
+
+                                            @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { PrId = prid }))
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                    </div>
+                </div>
+            </div>
+        </div>*@
+}
+@if ((bool)ViewData["finalPage"] == false)
+{
+    var pagenumber = (int)ViewData["pageNum"];
+    <div id="nextSearchResults" data-nextpage="@(pagenumber + 1)">
+        @Html.NextItems("TotalSearch", "Home", new
+   {
+       page = pagenumber + 1,
+       currentFilter = ViewData["currentFilter"]
+   })
+    </div>
+}

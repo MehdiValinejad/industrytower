@@ -1,0 +1,42 @@
+﻿@model IndustryTower.Models.Share
+
+<div id="postDesc" class="panel panel-default  col-md-12 col-xs-12">
+    <div class="row">
+        <div id="postContainer" class="col-xs-12 col-md-12 margin-top-bot-md">
+            <div id="postDescText" class="row dir">
+                <div id="postAvatar" class="col-md-2 col-xs-4 margin-top-bot-md">
+                    @Html.ProfilePic(user: Model.sharerUser)
+                </div>
+                <div class="col-md-10 col-xs-8 bottom-border-gray">
+                    @Html.ActionLink(Model.sharerUser.CultureFullName,
+                                                        "UProfile",
+                                                        "UserProfile",
+                                                        new { UId = Model.SharerUserID, UName = StringHelper.URLName(Model.sharerUser.CultureFullName) },
+                                                        null)
+                    @Resource.hasSharedThis
+                </div>
+
+                <div class="col-md-10 col-xs-12">
+                    <div class="row">
+                        @if (AuthorizationHelper.isRelevant(Model.SharerUserID))
+                        {
+                            @Html.ModifyIcons("Edit", "Delete", "Share", new { ShId = EncryptionHelper.Protect(Model.shareID) })
+                        }
+                        @if (Model.shareNote != null)
+                        {
+                            <p id="shareN" class="expandable col-md-12 col-xs-12">
+                                <strong><u>@Resource.shareNote</u></strong> @Html.DisplayFor(model => Model.shareNote)
+
+                            </p>
+                        }
+                        <div class="col-md-12">
+                            @{Html.RenderPartial("~/Views/Post/PostPartial.cshtml", Model.sharedPost);}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

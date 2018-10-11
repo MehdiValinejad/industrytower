@@ -1,0 +1,70 @@
+﻿@model IndustryTower.Models.Post
+@{
+        var imgs = Model.image != null ? Model.image.Split(new char[] { ',' }).Where(f => !String.IsNullOrEmpty(f)) : Enumerable.Empty<string>();
+        var docs = Model.document != null ? Model.document.Split(new char[] { ',' }).Where(f => !String.IsNullOrEmpty(f)) : Enumerable.Empty<string>();
+}
+<div id="postEditorContainer" class="hasUpload">
+    
+    @using (Html.BeginForm(null, null, new { PIN = EncryptionHelper.Protect(Model.postID) }, FormMethod.Post, new { @class = "editpost-form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        @Html.Hidden("P", EncryptionHelper.Protect(Model.postID))
+        @Html.Hidden("filesToUpload", String.Join(",", imgs.Concat(docs)))
+        
+        @Html.ValidationMessageFor(model => model.post)
+        @Html.TextAreaFor(model => model.post, new { @onkeyup = "textAreaAdjust(this)", @placeholder = Resource.writeYourPost, @class = "form-control dir" })
+    <div>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                <span class="sr-only">0% complete</span>
+            </div>
+        </div>
+    </div>
+    <div id="postButton">
+
+        <div class=" no-wrap ">
+            <div class="col-md-2 col-xs-5 ">
+                <input type="submit" value="@Resource.edit" class="inline-block btn btn-default" data-loading-text="@Resource.loading" />
+
+
+            </div>
+
+            <div class="col-md-10 col-xs-7">
+                <div id="uploadButton" class="fileUpload-button glyphicon glyphicon-upload btn btn-lg btn-default" title="@Resource.upload" data-placement="bottom">
+                    @Html.TextBox("postFiles", null, new { @type = "file", @name = "files[]", @class = "post-files" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+        @*<div id="postButton">
+            <input type="submit" value="@Resource.edit" />
+            <div id="uploadShortcut">
+                @Html.Sprite("I_attachment")
+            </div>
+        </div>*@
+    }
+    <ul id="uploadedFiles" class="col-md-12 col-xs-12 margin-top-bot-md">
+        @foreach (var image in imgs)
+        {
+            var ext = image.Substring(image.LastIndexOf('.') + 1);
+            <li data-file="@image">
+                <button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <img src="~/Uploads/@ext/Post/@image" class='full-height thumbnail' />
+            </li>
+        }
+        @foreach (var file in docs)
+        {
+            var ext = file.Substring(file.LastIndexOf('.') + 1);
+            <li data-file="@file">
+                <button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <a href="~/Uploads/@ext/Post/@file">
+                    <span class="@String.Concat("icon-", ext) thumbnail"></span>
+                </a>
+            </li>
+        }
+    </ul>
+
+</div>

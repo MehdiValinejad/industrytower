@@ -1,0 +1,44 @@
+﻿@model IEnumerable<IndustryTower.Models.Profession>
+
+    @foreach (var prof in Model)
+    { 
+        
+    <div id="profession" class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="inline-block">
+                    @using (Html.BeginForm("Delete", "Profession", new { ProfId = EncryptionHelper.Protect(prof.profID) }, FormMethod.Post, new { @class = "float-left" }))
+                    {
+                        @Html.ValidationSummary(true)
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value=@Resource.delete onclick="return confirm('Are you sure?')" class="btn btn-danger" />
+                    }
+                </span>
+                <span class="inline-block">
+                    @Html.ActionLink(Resource.edit, "Edit", "Profession", new { proffID = EncryptionHelper.Protect(prof.profID) }, new { @class="btn btn-warning" })
+                </span>
+                <span class="inline-block">
+                    @Html.ActionLink(Resource.details, "Detail", "Profession", new { profID = EncryptionHelper.Protect(prof.profID) }, new { @class = "btn btn-default" })
+                </span>
+            </div>
+            <div class="panel-body">
+                <div class="margin-top-bot-md">
+                    <span class="label label-info">
+                        @EnumTypes.fa
+                    </span>
+                    @Html.DisplayFor(model => prof.professionName)
+                </div>
+                <div class="margin-top-bot-md">
+                    <span class="label label-info">
+                        @EnumTypes.en
+                    </span>
+                    @Html.DisplayFor(model => prof.professionNameEN)
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+    }
+
+        

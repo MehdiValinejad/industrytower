@@ -1,0 +1,35 @@
+﻿@model IndustryTower.Models.Answer
+
+<div id="questionAnswer" class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>
+                @Resource.answer
+            </strong>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginForm("Create", "Answer",
+                        FormMethod.Post,
+                        htmlAttributes: new { @class = "newanswer-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.Hidden("QA", ViewContext.RouteData.Values["QId"])
+
+                @Html.ValidationMessageFor(model => model.answerBody)
+                @Html.TextAreaFor(model => model.answerBody, new { @class = "form-control", @placeholder = Resource.answerPost, @onkeyup = "textAreaAdjust(this)" })
+
+
+    <input type="submit" value='@Resource.answer' id="answerToQuestion" class="btn btn-primary col-md-12" data-loading-text="@Resource.loading" />
+
+            }
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+

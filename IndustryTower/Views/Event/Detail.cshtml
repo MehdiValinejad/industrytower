@@ -1,0 +1,176 @@
+﻿@model IndustryTower.Models.Event
+@{
+    ViewBag.Title = Model.CultureEventSubj;
+    var attendors = Model.Attendors;
+    var coAttendors = Model.AttendorCompanies;
+    var stAttendors = Model.AttendorStores;
+
+}
+
+@section head{
+    <meta name="description" content="@Model.CultureDescription">
+    <meta name="keywords" content="@String.Join(",", Model.CultureEventSubj.Split(new char [] {' '}))">
+    @if (ViewContext.RouteData.Values["EvName"] as string != StringHelper.URLName(Model.CultureEventSubj))
+    {
+        <link rel="canonical" href="@Url.Action("Detail", "Event", new { EvId = Model.eventID, DName = StringHelper.URLName(Model.CultureEventSubj) })" />
+    }
+}
+
+
+<div class="row dir">
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3>
+                    @Html.DisplayFor(model => Model.CultureEventSubj)
+                    @if (AuthorizationHelper.isRelevant(Model.creatorUserID))
+                    {
+                        <span class="pull-left">
+                            @Html.ModifyIcons("Edit", "Delete", "Event", new { EvId = EncryptionHelper.Protect(Model.eventID) }, editAjax: false)
+                        </span>
+                    }
+                </h3>
+                <div class="margin-top-bot-md">
+                    @Html.DisplayTextFor(model => model.CultureDescription)
+                </div>
+
+                <div class="alert alert-info">
+                    <strong>@Resource.address:</strong>
+                    @Html.DisplayTextFor(model => Model.CultureAddress)<br />
+                    <strong>@Resource.time:</strong>
+                    @Html.DisplayFor(model => Model.eventDate, "WordDate") @Resource.until @Html.DisplayFor(model => Model.untilDate, "WordDate")
+                </div>
+                <div class="col-md-4 col-xs-8 pull-right">
+                    <strong>
+                        @Resource.createdBy
+                    </strong>
+                    @{Html.RenderAction("AvatarPartial", "UserProfile", new { UId = Model.creatorUserID });}
+                </div>
+                <div class="col-md-12">
+                    <small>@Html.DisplayFor(model => Model.createDate, "WordDate")</small>
+                    <div class="margin-top-bot-xs pull-left margin-lf-r8-md">
+                        <div class="g-plusone" data-annotation="inline" data-width="190" data-href="@Url.Action("Detail", "Event", new { EvId = Model.eventID,EvName = Model.CultureEventSubj }, "http")"></div>
+                        <script type="IN/Share" data-url="@Url.Action("Detail", "Event", new { EvId = Model.eventID, EvName = Model.CultureEventSubj }, "http")" data-counter="right">
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="eventAttendors">
+            @if (attendors.Count > 0)
+            {
+            <div class="col-md-12 col-xs-12 bg-default margin-top-bot-xs">
+                <div class="bottom-border-blue ">
+                    @Resource.eventAttendors
+                </div>
+                @{Html.RenderPartial("~/Views/UserProfile/UsersPartial.cshtml", attendors.OrderBy(x => Guid.NewGuid()).Take(10));}
+                @if (attendors.Count > 10)
+                {
+                    <div>
+                        @Ajax.ActionLink(Resource.all, "AttendorsPartial",
+                                new { eventId = Model.eventID  },
+                                new AjaxOptions { },
+                                new { @class = "allAttentors-link" })
+                    </div>
+                }
+            </div>
+            }
+            @if (coAttendors.Count > 0)
+            {
+                <div class="col-md-12 col-xs-12 bg-default margin-top-bot-xs">
+                    <div class="bottom-border-blue ">
+                        @Resource.eventCoAttendors
+                    </div>
+                    @{Html.RenderPartial("~/Views/Company/CompaniesPartial.cshtml", coAttendors.OrderBy(x => Guid.NewGuid()).Take(10));}
+                    @if (coAttendors.Count > 10)
+                    {
+                        <div>
+                            @Ajax.ActionLink(Resource.all, "AttendorsPartial",
+                                new { eventId = Model.eventID },
+                                new AjaxOptions { },
+                                new { @class = "allAttentors-link" })
+                        </div>
+                    }
+                </div>
+
+
+            }
+            @if (stAttendors.Count > 0)
+            {
+
+                <div class="col-md-12 col-xs-12 bg-default margin-top-bot-xs">
+                    <div class="bottom-border-blue ">
+                        @Resource.eventStAttendors
+                    </div>
+                    @{Html.RenderPartial("~/Views/Store/StoresPartial.cshtml", stAttendors.OrderBy(x => Guid.NewGuid()).Take(10));}
+                    @if (stAttendors.Count > 10)
+                    {
+                        <div>
+                            @Ajax.ActionLink(Resource.all, "AttendorsPartial", 
+                                new { eventId = Model.eventID },
+                                new AjaxOptions { },
+                                new { @class = "allAttentors-link" })
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+        <div class="col-md-12">
+
+                @if (Request.IsAuthenticated && !AuthorizationHelper.isAdmin())
+                {
+                    Html.RenderPartial("~/Views/Event/Attend.cshtml", Model);
+                }
+
+        </div>
+
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @Resource.relatedCategories
+                    </div>
+                    <div class="panel-body">
+                        @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { EvId = Model.eventID }))
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @Resource.relatedEvents
+                    </div>
+                    <div class="panel-body list-group">
+                        @{Html.RenderAction("RelatedEvents", "Event", new { EvId = Model.eventID });}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @Resource.relatedQuestions
+                    </div>
+                    <div class="panel-body list-group">
+                        @Html.AjaxPrtialLoader(Url.Action("RelatedQuestions", "Question", new { EvId = Model.eventID }))
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                           @Html.AjaxPrtialLoader(Url.Action("RelatedCompanies", "Company", new { EvId = Model.eventID }))
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/Event")
+}

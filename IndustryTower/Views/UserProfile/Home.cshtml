@@ -1,0 +1,80 @@
+﻿@model PagedList.IPagedList<IndustryTower.ViewModels.UserHomeFeedViewModel>
+@{
+    ViewBag.Title = Resource.homeFeed;
+    //Layout = "~/Views/UserProfile/_UPLayout.cshtml";
+}
+<input type="hidden" id="toururl" value="thomefeedfa">
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.AjaxPrtialLoader(Url.Action("HomeWebinars", "UserProfile"))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 hidden-xs">
+                @Html.AjaxPrtialLoader(Url.Action("HomeQuestions", "UserProfile"))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 hidden-xs">
+                @Html.AjaxPrtialLoader(Url.Action("HomeEvents", "UserProfile"))
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        @{Html.RenderAction("Create", "Post", new
+                          {
+                              model = new IndustryTower.ViewModels.postVars
+                              {
+                                  UId = WebSecurity.CurrentUserId
+                              }
+                          });}
+                    </div>
+                   
+                </div>
+                
+            </div>
+        </div>
+        <div id="postsContainer" class="row margin-top-bot-lg">
+            <div class="col-md-12 ">
+                @Html.AjaxPrtialLoader(Url.Action("HomeFeed", "UserProfile"))
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+            $(document).ready(function () {
+                //Call Upload File
+                UploadFile('@IndustryTower.App_Start.ITTConfig.FileSizeLimit',
+                           '@IndustryTower.App_Start.ITTConfig.MaxFilesCountPost',
+                           '@ModelValidation.maxUploadFileLimit',
+                           '@ModelValidation.maxUploadFileCount',
+                           '@ModelValidation.fileTypeLimit');
+
+
+            });
+
+    </script>
+
+    @Scripts.Render("~/bundles/Social")
+    @Scripts.Render("~/bundles/Upload")
+    @Scripts.Render("~/bundles/FriendRequest")
+    @Scripts.Render("~/bundles/UserProfile")
+    @Scripts.Render("~/bundles/TabChanger")
+    @Scripts.Render("~/bundles/SlideShow")
+<script>
+    $(document).ready(function () {
+        SlideShowArrowKeys();
+    })
+</script>
+
+}
+

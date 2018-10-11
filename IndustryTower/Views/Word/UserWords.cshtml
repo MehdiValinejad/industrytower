@@ -1,0 +1,50 @@
+﻿@model IList<IndustryTower.ViewModels.UserWordsViewModel>
+
+
+<div class="list-group">
+    @foreach (var item in Model)
+    {
+        if (item.typ == 0)
+        {
+            <a href="@Url.Action("Detail", "Word", new { WId = item.wordId })" class="list-group-item">
+                <span class="badge margin-lf-r8-md">@Resource.UIWordAdded</span>
+                @item.text
+            </a>
+        }
+        else if (item.typ == 1)
+        {
+            <a href="@Url.Action("Detail", "Word", new { WId = item.wordId })" class="list-group-item">
+                <span class="badge margin-lf-r8-md">@Resource.UIWordDescAdded</span>
+                @item.text
+            </a>
+        }
+        else if (item.typ == 2)
+        {
+            <a href="@Url.Action("Edit", "Word", new { WId = item.wordId, DId = item.dicId })" class="list-group-item">
+                <span class="badge margin-lf-r8-md">@Resource.UIWordEdit</span>
+                @item.text
+            </a>
+        }
+        else if (item.typ == 3)
+        {
+            <a href="@Url.Action("Edit", "WordDesc", new { WdId = item.wordId })" class="list-group-item">
+                <span class="badge margin-lf-r8-md">@Resource.UIWordDescEdit</span>
+                @item.text
+            </a>
+        }
+    }
+
+    @if (!(bool)ViewData["finalPage"])
+    {
+        var pagenumber = (int)ViewData["pageNum"];
+        <div id="nextUserWords" data-nextpage="@(pagenumber + 1)">
+            @Html.NextItems("UserWords", "Word", new
+               {
+                   page = pagenumber + 1,
+                   UId = ViewData["UId"]
+               }, linkclass: "next-words-users")
+        </div>
+    }
+    
+</div>
+

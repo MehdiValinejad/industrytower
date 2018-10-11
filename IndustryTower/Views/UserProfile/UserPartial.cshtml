@@ -1,0 +1,11 @@
+﻿@model IndustryTower.Models.ActiveUser
+
+    
+    <div>
+        @Html.DisplayFor(model=>Model.firstName)
+        @Html.DisplayFor(model=>Model.lastName)
+        @Html.DisplayFor(model=>Model.age)
+        @Html.DisplayFor(model=>Model.State)
+        @Html.DisplayFor(model=>Model.State.country)
+        <img src="@Model.image" />
+    </div>

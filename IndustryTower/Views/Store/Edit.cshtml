@@ -1,0 +1,176 @@
+﻿@model IndustryTower.Models.StoreNotExpired
+
+@{
+    ViewBag.Title = Resource.editCompany;
+}
+
+<div id="storeEdit">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="single-page-form">
+        <h4>@Resource.editCompany</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.Hidden("store", ViewData["store"])
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.storeName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.storeName, new { @class = "medium-input", @placeholder = Html.DisplayNameFor(model => model.storeName) })
+                @Html.ValidationMessageFor(model => model.storeName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.storeNameEN, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.storeNameEN, new { @class = "medium-input", @placeholder = Html.DisplayNameFor(model => model.storeNameEN) })
+                @Html.ValidationMessageFor(model => model.storeNameEN)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.about, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.about, new { @class = "large-input", @onkeyup = "textAreaAdjust(this)", @placeholder = Html.DisplayNameFor(model => model.about) })
+                @Html.ValidationMessageFor(model => model.about)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.aboutEN, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.aboutEN, new { @class = "large-input", @onkeyup = "textAreaAdjust(this)", @placeholder = Html.DisplayNameFor(model => model.aboutEN) })
+                @Html.ValidationMessageFor(model => model.aboutEN)
+            </div>
+        </div>
+
+        <div class="editor-field">
+            @Html.DropDownList("countries", ViewBag.CountryDropDown as SelectList)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.stateID, ViewBag.StateDropDown as SelectList)
+            @Html.ValidationMessageFor(model => model.stateID)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.address, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.address, new { @class = "large-input", @onkeyup = "textAreaAdjust(this)", @placeholder = Html.DisplayNameFor(model => model.address) })
+                @Html.ValidationMessageFor(model => model.address)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.addressEN, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.addressEN, new { @class = "large-input", @onkeyup = "textAreaAdjust(this)", @placeholder = Html.DisplayNameFor(model => model.addressEN) })
+                @Html.ValidationMessageFor(model => model.addressEN)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.countryCode, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.countryCode, new { @class = "mini-input", @placeholder = Html.DisplayNameFor(model => model.countryCode) })
+                @Html.ValidationMessageFor(model => model.countryCode)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.stateCode, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.stateCode, new { @class = "mini-input", @placeholder = Html.DisplayNameFor(model => model.stateCode) })
+                @Html.ValidationMessageFor(model => model.stateCode)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.regCode, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.regCode, new { @class = "mini-input", @placeholder = Html.DisplayNameFor(model => model.regCode) })
+                @Html.ValidationMessageFor(model => model.regCode)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iranCode, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.iranCode, new { @class = "mini-input", @placeholder = Html.DisplayNameFor(model => model.iranCode) })
+                @Html.ValidationMessageFor(model => model.iranCode)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.phoneNo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.phoneNo, new { @class = "mini-input", @placeholder = Html.DisplayNameFor(model => model.phoneNo) })
+                @Html.ValidationMessageFor(model => model.phoneNo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.faxNo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.faxNo, new { @class = "mini-input", @placeholder = Html.DisplayNameFor(model => model.faxNo) })
+                @Html.ValidationMessageFor(model => model.faxNo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.email, new { @class = "mini-input", @placeholder = Html.DisplayNameFor(model => model.email) })
+                @Html.ValidationMessageFor(model => model.email)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.website, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.website, new { @class = "mini-input", @placeholder = Html.DisplayNameFor(model => model.website) })
+                @Html.ValidationMessageFor(model => model.website)
+            </div>
+        </div>
+
+
+
+        <ul id="SelectedCategories">
+            @Resource.selectedCategories
+        </ul>
+        <span class="helpSentence">
+            @Resource.categoryChooseHelp
+        </span>
+        @Html.AjaxPrtialLoader(Url.Action("CategoryTags", "Category"),true)
+        @Html.Hidden("Cats", ViewData["Cats"] != null ? ViewData["Cats"] : null)
+
+        <div class="form-group">
+            <div class="submitContainer">
+                <input type="submit" value="@Resource.edit" />
+            </div>
+        </div>
+    </div>
+
+    }
+</div>
+
+@section scripts{
+
+@Scripts.Render("~/bundles/Store")
+@Scripts.Render("~/bundles/Category")
+@Scripts.Render("~/bundles/CountryDropDown")
+
+    <script>
+        $(document).ready(function () {
+
+            GategoryTags('@IndustryTower.App_Start.ITTConfig.MaxCategoryTagsLimit',
+                '@ModelValidation.YouCanChooseMaxCategories',
+                '@ModelValidation.categoryParentIsChoosed'
+                );
+
+            AjaxStateDropDown('@Url.Action("populateDopDownStates", "Home")', '@Resource.selectState');
+        });
+    </script>
+}

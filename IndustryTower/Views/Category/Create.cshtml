@@ -1,0 +1,80 @@
+﻿@model IndustryTower.Models.Category
+@{
+    ViewBag.Title = Resource.addCategory;
+}
+<div class="row dir">
+    <div id="breadCrumbContainer" class="col-md-12">
+        <ol class="breadcrumb">
+            @if (Model.parent4 != null)
+            {
+                <li>
+                    <a>
+                        @Html.DisplayFor(model => model.parent4.catName)
+                    </a>
+                </li>
+            }
+            @if (Model.parent3 != null)
+            {
+                <li>
+                    <a>
+                        @Html.DisplayFor(model => model.parent3.catName)
+                    </a>
+                </li>
+            }
+            @if (Model.parent2 != null)
+            {
+                <li>
+                    <a>
+                        @Html.DisplayFor(model => model.parent2.catName)
+                    </a>
+                </li>
+            }
+            @if (Model.parent1 != null)
+            {
+                <li>
+                    <a>
+                        @Html.DisplayFor(model => model.parent1.catName)
+                    </a>
+                </li>
+            }
+        </ol>
+
+    </div>
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>@Resource.editCategory</h3>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.catName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.catName) })
+                        @Html.ValidationMessageFor(model => model.catName)
+                    </div>
+
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.catNameEN, new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.catNameEN) })
+                            @Html.ValidationMessageFor(model => model.catNameEN)
+                        </div>
+
+                        @Html.Hidden("parent1ID", Model.parent1 != null ? Model.parent1.catID : null as int?)
+                        @Html.Hidden("parent2ID", Model.parent2 != null ? Model.parent2.catID : null as int?)
+                        @Html.Hidden("parent3ID", Model.parent3 != null ? Model.parent3.catID : null as int?)
+                        @Html.Hidden("parent4ID", Model.parent4 != null ? Model.parent4.catID : null as int?)
+
+
+                            <input type="submit" value=@Resource.editCategory class="btn btn-primary col-md-12" />
+
+
+                }
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+

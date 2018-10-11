@@ -1,0 +1,52 @@
+﻿@model IEnumerable<IndustryTower.Models.Profession>
+
+<div id="ProfList" class="hasScrolBar ">
+    <ul id="ProfessionList" class="list-unstyled">
+
+        @foreach (var prof in Model)
+        {
+            <li id="profession" data-id="@prof.profID" class="col-md-4 ">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @Html.DisplayFor(model => prof.CultureProfessionName)
+                    </div>
+                    <div class="panel-body">
+                        @Html.DisplayFor(model => prof.CultureProfessionDesc)
+                    </div>
+                </div>
+                @*<div class="professionLink btn btn-default" >
+                        @Html.DisplayFor(model => prof.CultureProfessionName)
+                    </div>
+                    <div class="prodession-tag-desc">
+                        @Html.DisplayFor(model => prof.CultureProfessionDesc)
+                    </div>*@
+            </li>
+        }
+    </ul>
+</div>
+
+
+
+@*<script>
+    $(document).ready(function () {
+
+        ///SCROLBAR\\\\
+        $thisPL = $("div#ProfList.hasScrolBar");
+        $thisPL.append('<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>');
+
+        //if ($thisNF.find(".notif").length > 10) {
+        //    var height = $thisNF.find(".notif").outerHeight() * 10
+        //                 + parseInt($thisNF.css("padding-top"))
+        //                 + parseInt($thisNF.css("padding-bottom"));
+        //    $thisNF.find(".viewport").css("height", height + "px");
+        //}
+        //else {
+        //    var height = ($thisNF.find(".notif").outerHeight() * $thisNF.find(".notif").length)
+        //                 + parseInt($thisNF.css("padding-top"))
+        //                 + parseInt($thisNF.css("padding-bottom"));
+        //    $thisNF.find(".viewport").css("height", height + "px");
+        //}
+        $thisPL.tinyscrollbar();
+        ///SCROLBAR\\\
+    });
+</script>*@

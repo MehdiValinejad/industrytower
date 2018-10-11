@@ -1,0 +1,102 @@
+﻿@model IndustryTower.Models.Event
+@using IndustryTower.DAL
+@{
+    UnitOfWork unitOfWork = new UnitOfWork();
+    var currentUser = unitOfWork.ActiveUserRepository.GetByID(WebSecurity.CurrentUserId);
+    var currentUserCompanies = currentUser.adminCompanies;
+    var currentUserStores = currentUser.adminStores;
+}
+
+<div id="attend" class="row">
+    @if (User.Identity.IsAuthenticated)
+    {
+        string AttendOrNot = Resource.notAttend;
+        string attendClass = "btn-default";
+        if (Model.Attendors.Any(u => u.UserId == WebSecurity.CurrentUserId))
+        {
+            AttendOrNot = Resource.attend;
+            attendClass = "attended btn-success";
+        }
+        <div id="attendContainer" class="col-md-12 margin-top-bot-md">
+
+
+            @using (Html.BeginForm("AttendInsert", "Event",
+                                FormMethod.Post,
+                                htmlAttributes: new { @class = "attend-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.Hidden("ETA", EncryptionHelper.Protect(Model.eventID))
+
+                <div class="attend-avatar inline-block">
+                    @Html.ProfilePic(user: currentUser, imghtmlAttributes: new { @class = "min-img" })
+                </div>
+                <input id="big-button" type="submit" value="@AttendOrNot" class="btn inline-block @attendClass" data-loading-text="@Resource.loading" />
+            }
+
+        </div>
+    }
+
+
+
+    @if (User.Identity.IsAuthenticated && currentUserCompanies != null)
+    {
+        foreach (var item in currentUserCompanies)
+        {
+            string AttendOrNot = item.CultureCoName + " " + Resource.isNotAttending;
+            string attendClass = "btn-default";
+            if (Model.AttendorCompanies.Any(u => u.coID == item.coID))
+            {
+                AttendOrNot = item.CultureCoName + " " + Resource.isAttending;
+                attendClass = "attended btn-success";
+            }
+            <div id="attendContainer" class="col-md-12 margin-top-bot-md">
+
+                @using (Html.BeginForm("AttendInsert", "Event",
+                                FormMethod.Post,
+                                htmlAttributes: new { @class = "attend-form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.Hidden("ETA", EncryptionHelper.Protect(Model.eventID))
+                    <input type="hidden" name="CA" id="CA" value="@EncryptionHelper.Protect(item.coID)" />
+
+                    <div class="attend-avatar inline-block">
+                        @Html.ProfilePic(company: item, imghtmlAttributes: new { @class = "min-img" })
+                    </div>
+                    <input id="big-button" type="submit" value="@AttendOrNot" class="btn inline-block @attendClass" data-loading-text="@Resource.loading" />
+                }
+            </div>
+        }
+    }
+
+    @if (User.Identity.IsAuthenticated && currentUserStores != null)
+    {
+        foreach (var item in currentUserStores)
+        {
+            string AttendOrNot = item.CultureStoreName + " " + Resource.isNotAttending;
+            string attendClass = "btn-default";
+            if (Model.AttendorStores.Any(u => u.storeID == item.storeID))
+            {
+                AttendOrNot = item.CultureStoreName + " " + Resource.isAttending;
+                attendClass = "attended btn-success";
+            }
+            <div id="attendContainer" class="col-md-12 margin-top-bot-md">
+
+                @using (Html.BeginForm("AttendInsert", "Event",
+                                FormMethod.Post,
+                                htmlAttributes: new { @class = "attend-form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.Hidden("ETA", EncryptionHelper.Protect(Model.eventID))
+                    <input type="hidden" name="SA" id="SA" value="@EncryptionHelper.Protect(item.storeID)" />
+                    <div class="attend-avatar inline-block">
+                        @Html.ProfilePic(store: item, imghtmlAttributes: new { @class = "min-img" })
+                    </div>
+                    <input id="big-button" type="submit" value="@AttendOrNot" class="btn inline-block @attendClass" data-loading-text="@Resource.loading" />
+                }
+            </div>
+        }
+    }
+</div>

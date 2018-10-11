@@ -1,0 +1,161 @@
+﻿@model IndustryTower.Models.StoreNotExpired
+@{
+    ViewBag.Title = Model.CultureStoreName;
+    //Layout = "~/Views/Store/_SPLayout.cshtml";
+    var stid = EncryptionHelper.Protect(Model.storeID);
+    bool isAdmin = Model.Admins.Any(u => AuthorizationHelper.isRelevant(u.UserId));
+}
+
+@section head{
+    <meta name="description" content="@Model.CultureAbout">
+<meta name="keywords" content="@String.Join(",", Model.Categories.Select(d=>d.CultureCatName))">
+}
+@section TOP{
+    <div id="CPIMG">
+        @Html.ProfilePic(store: Model)
+        @if (isAdmin)
+        {
+            @Html.ModifyIcons("LogoPic", "LogoPicDelete", "Store", new { StId = stid }, "changeStLogo-link", "deleteStLogo-link")
+        }
+    </div>
+    <div id="CPAbout">
+        @if (isAdmin)
+        {
+            @Html.ModifyIcons("Edit", "Edit", "Store", new { StId = stid }, "s", "display-none", editAjax: false)
+        }
+
+        @{Html.RenderAction("Follow", "Following", new { StId = stid });}
+
+
+
+
+        <p>
+            @Html.ActionLink(Model.CultureStoreName,
+                         "SProfile",
+                         "Store",
+                                                             new { StId = Model.storeID, StName = StringHelper.URLName(Model.CultureStoreName) })
+        </p>
+        <div class="about-item">
+
+            @Html.Sprite("I_Office", new { alt = Resource.officeAddress } )
+            <p class="icon-desc">
+                @Html.DisplayFor(model => model.State.CultureFullState) -
+                @Html.DisplayFor(model => model.CultureAddress)
+            </p>
+        </div>
+        <div class="about-item">
+            @Html.Sprite("I_Telephone", new { alt = Resource.tel })
+            <p class="icon-desc">
+                @Html.DisplayFor(model => model.phoneNo)
+            </p>
+        </div>
+        @if (Model.faxNo != null)
+        {
+            <div class="about-item">
+                @Html.Sprite("I_Fax", new { alt = Resource.fax })
+                <p class="icon-desc">
+                    @Html.DisplayFor(model => model.faxNo)
+                </p>
+            </div>
+        }
+        @if (Model.email != null)
+        {
+            <div class="about-item">
+                @Html.Sprite("I_Email", new { alt = ModelDisplayName.email })
+                <p class="icon-desc">
+                    @Html.DisplayFor(model => model.email)
+                </p>
+            </div>
+        }
+
+        @if (Model.ecoCode != null)
+        {
+            <div class="about-item">
+                @Html.Sprite("I_Email", new { alt = ModelDisplayName.ecoCode })
+                <p class="icon-desc">
+                    @Html.DisplayFor(model => model.ecoCode)
+                </p>
+            </div>
+        }
+        @if (Model.website != null)
+        {
+            <div class="about-item">
+                @Html.Sprite("I_WebSite", new { alt = ModelDisplayName.website })
+                <p class="icon-desc">
+                    <a href="@Model.website">
+                        @Html.DisplayFor(model => model.CultureStoreName)
+                    </a>
+                </p>
+            </div>
+        }
+
+    </div>
+}
+@section Post{
+    @if (Model.Followers.Any(f => f.followerUserID == WebSecurity.CurrentUserId))
+    {
+        Html.RenderAction("Create", "Post", new { StId = Model.storeID });
+    }
+
+    <div id="postsContainer">
+        @Html.AjaxPrtialLoader(Url.Action("ProfilePostFeed", "Post", new { StId = Model.storeID }))
+    </div>
+}
+
+@section Categories{
+    <div class="UPLeftContent">
+        <span class="titr">
+            @Resource.activityCategories
+            @if (isAdmin)
+            {
+                @Html.ModifyIcons("Edit", "Edit", "Store", new { StId = stid }, "s", "display-none", editAjax: false)
+            }
+        </span>
+        @if (Model.Categories.Count != 0)
+        {
+            @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { StId = Model.storeID }))
+        }
+        else if (isAdmin)
+        {
+            <span class="cautionSentence">@Html.Raw(Resource.noProffSelected)</span>
+        }
+    </div>
+}
+
+@section Events{
+    @Html.AjaxPrtialLoader(Url.Action("EventsPartial", "Event", new { StId = Model.storeID }))
+}
+
+
+
+
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+
+            //Call Upload File
+            UploadFile('@IndustryTower.App_Start.ITTConfig.FileSizeLimit',
+                           '@IndustryTower.App_Start.ITTConfig.MaxFilesCountPost',
+                           '@ModelValidation.maxUploadFileLimit',
+                           '@ModelValidation.maxUploadFileCount',
+                           '@ModelValidation.fileTypeLimit');
+
+        });
+
+    </script>
+
+@Scripts.Render("~/bundles/Social")
+@Scripts.Render("~/bundles/Upload")
+@Scripts.Render("~/bundles/Store")
+@Scripts.Render("~/bundles/Following")
+@Scripts.Render("~/bundles/TabChanger")
+@Scripts.Render("~/bundles/SlideShow")
+<script>
+    $(document).ready(function () {
+        SlideShowArrowKeys();
+    })
+</script>
+
+}

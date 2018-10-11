@@ -1,0 +1,179 @@
+﻿@model IndustryTower.Models.CompanyNotExpired
+
+@{
+    ViewBag.Title = Resource.editCompany;
+}
+
+<div id="companyEdit" class="row dir">
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+
+
+            <div class="single-page-form">
+                <h4>@Resource.editCompany</h4>
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.Hidden("company", EncryptionHelper.Protect(ViewData["company"]))
+
+                <fieldset>
+                    <legend>@Resource.edit @Resource.editCompany</legend>
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.coName, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.coName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.coName) })
+                        @Html.ValidationMessageFor(model => model.coName)
+                    </div>
+
+                    <div class="form-group col-md-6 dirltr">
+                        @Html.LabelFor(model => model.coNameEN, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.coNameEN, new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.coNameEN) })
+                        @Html.ValidationMessageFor(model => model.coNameEN)
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        @Html.LabelFor(model => model.about, new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.about, new { @class = "form-control", @onkeyup = "textAreaAdjust(this)", @placeholder = Html.DisplayNameFor(model => model.about) })
+                        @Html.ValidationMessageFor(model => model.about)
+                    </div>
+
+                    <div class="form-group col-md-12 dirltr">
+                        @Html.LabelFor(model => model.aboutEN, new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.aboutEN, new { @class = "form-control", @onkeyup = "textAreaAdjust(this)", @placeholder = Html.DisplayNameFor(model => model.aboutEN) })
+                        @Html.ValidationMessageFor(model => model.aboutEN)
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.address, new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.address, new { @class = "form-control", @onkeyup = "textAreaAdjust(this)", @placeholder = Html.DisplayNameFor(model => model.address) })
+                        @Html.ValidationMessageFor(model => model.address)
+                    </div>
+
+                    <div class="form-group col-md-6 dirltr">
+                        @Html.LabelFor(model => model.addressEN, new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.addressEN, new { @class = "form-control", @onkeyup = "textAreaAdjust(this)", @placeholder = Html.DisplayNameFor(model => model.addressEN) })
+                        @Html.ValidationMessageFor(model => model.addressEN)
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        @Html.LabelFor(model => model.companySize, new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.companySize, ViewBag.CoSizeDropdown as SelectList, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.companySize)
+                    </div>
+
+
+                    <div class="form-group col-md-4">
+                        <label class="control-label"> @Resource.country</label>
+                        @Html.DropDownList("countries", ViewBag.CountryDropDown as SelectList, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label"> @Resource.state</label>
+                        @Html.DropDownListFor(model => model.stateID, ViewBag.StateDropDown as SelectList, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.stateID)
+                    </div>
+
+                    
+
+                    <div class="form-group col-md-4 dirltr">
+                        @Html.LabelFor(model => model.countryCode, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.countryCode, new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.countryCode) })
+                        @Html.ValidationMessageFor(model => model.countryCode)
+                    </div>
+
+                    <div class="form-group col-md-4 dirltr">
+                        @Html.LabelFor(model => model.stateCode, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.stateCode, new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.stateCode) })
+                        @Html.ValidationMessageFor(model => model.stateCode)
+                    </div>
+
+                    <div class="form-group col-md-4 dirltr">
+                        @Html.LabelFor(model => model.regCode, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.regCode, new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.regCode) })
+                        @Html.ValidationMessageFor(model => model.regCode)
+                    </div>
+
+                    <div class="form-group col-md-4 dirltr">
+                        @Html.LabelFor(model => model.iranCode, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.iranCode, new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.iranCode) })
+                        @Html.ValidationMessageFor(model => model.iranCode)
+                    </div>
+
+                    <div class="form-group col-md-4 dirltr">
+                        @Html.LabelFor(model => model.phoneNo, new { @class = "control-label" })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.phoneNo, "Tel", new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.email) })
+                            @Html.ValidationMessageFor(model => model.phoneNo)
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4 dirltr">
+                        @Html.LabelFor(model => model.faxNo, new { @class = "control-label" })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.faxNo, "Fax", new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.email) })
+                            @Html.ValidationMessageFor(model => model.faxNo)
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6 dirltr">
+                        @Html.LabelFor(model => model.email, new { @class = "control-label" })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.email,"Email", new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.email) })
+                            @Html.ValidationMessageFor(model => model.email)
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6 dirltr">
+                        @Html.LabelFor(model => model.website, new { @class = "control-label" })
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.website, "Web", new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.website) })
+                            @Html.ValidationMessageFor(model => model.website)
+                        </div>
+                    </div>
+
+                    <div class="bg-default col-md-12 margin-top-bot-md">
+                        <div class="col-md-12 margin-top-bot-md">
+                            <div id="SelectedCategories">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <strong>
+                                            @Resource.selectedCategories
+                                        </strong>
+                                    </div>
+                                    <div class="panel-body">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-border-blue">
+                            @Resource.categoryChooseHelp
+                        </div>
+
+                        @Html.AjaxPrtialLoader(Url.Action("CategoryTags", "Category"), true)
+                    </div>
+                    @Html.Hidden("Cats", ViewData["Cats"] != null ? ViewData["Cats"] : null)
+                    <input type="submit" value='@Resource.editCompany' class="btn btn-primary col-md-12" data-loading-text="@Resource.loading" />
+                </fieldset>
+            </div>
+
+
+
+        }
+    </div>
+    </div>
+
+    @section scripts{
+        @Scripts.Render("~/bundles/CountryDropDown")
+        @Scripts.Render("~/bundles/Company")
+        @Scripts.Render("~/bundles/Category")
+        <script>
+            $(document).ready(function () {
+
+                GategoryTags('@IndustryTower.App_Start.ITTConfig.MaxCategoryTagsLimit',
+                    '@ModelValidation.YouCanChooseMaxCategories',
+                    '@ModelValidation.categoryParentIsChoosed'
+                    );
+
+                AjaxStateDropDown('@Url.Action("populateDopDownStates", "Home")', '@Resource.selectState');
+            });
+        </script>
+    }

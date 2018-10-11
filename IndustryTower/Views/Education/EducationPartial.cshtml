@@ -1,0 +1,30 @@
+﻿@model IndustryTower.Models.Education
+
+<div id="eduItem" class="list-group-item">
+
+       
+
+
+    <strong>
+        @if (AuthorizationHelper.isRelevant(Model.userID))
+        {
+                @Html.ModifyIcons("Edit", "Delete", "Education", new { eduID = EncryptionHelper.Protect(Model.educationID) })
+        }
+        @Html.Raw(EnumTypes.ResourceManager.GetString(Model.degree.ToString()))
+    </strong>
+    <strong>
+        @Html.DisplayFor(model => Model.CulturefieldOfStudy)
+    </strong>
+    <div>
+        <strong>
+            @Resource.school:
+        </strong> @Html.DisplayFor(model => Model.CultureSchool)
+    </div>
+    <div>
+        <small>
+            @Html.DatePeriod(Model.attendDate, Model.untilDate)
+        </small>
+    </div>
+</div>
+
+      

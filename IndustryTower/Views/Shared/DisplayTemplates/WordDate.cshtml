@@ -1,0 +1,8 @@
+﻿@model DateTime 
+@if (Model != null)
+{
+ 
+        @Model.Date.ToLocalTime().ToString("D");
+    
+}
+else { <p></p> }

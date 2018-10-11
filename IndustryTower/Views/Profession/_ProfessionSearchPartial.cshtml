@@ -1,0 +1,12 @@
+﻿@model IEnumerable<IndustryTower.ViewModels.ProfessionSearchViewModel>
+
+@foreach (var item in Model)
+{
+    <div class="search-nano-item" data-id="@item.professionResult.profID">
+        @Html.DisplayFor(model => item.professionResult.CultureProfessionName)
+    </div>
+}
+
+
+
+

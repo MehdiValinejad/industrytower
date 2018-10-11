@@ -1,0 +1,92 @@
+﻿@model IndustryTower.Models.Answer
+@{
+    var aid = EncryptionHelper.Protect(Model.answerID);
+
+    var containerClass = "notacc-ans-box";
+    var btnClass = "btn-default";
+    var btnText = Resource.NotmarkedAsAnswer;
+    if (Model.accept)
+    {
+        containerClass = "acc-ans-box";
+        btnClass = "btn-success";
+        btnText = Resource.markedAsAnswer;
+    }
+}
+<div id="answerBodyDisplay" class="col-md-12 panel panel-default @containerClass">
+    <div id="answerDetail">
+        @if (AuthorizationHelper.isRelevant(Model.answererID))
+        {
+            @Html.ModifyIcons("Edit", "Delete", "Answer", new { AId = aid })
+        }
+        <div class="margin-top-bot-md">
+            @Html.DisplayTextFor(model => model.answerBody)
+        </div>
+        <small class="margin-lf-r8-md">
+            @Html.DisplayFor(model => model.answerDate)
+        </small>
+    </div>
+    <div class="row margin-top-bot-md">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="dirltr col-md-8 col-xs-6 margin-top-bot-md">
+                    <ul id="answerLike" class="nav nav-pills nav-stacked inline-block no-pad">
+                        @{Html.RenderAction("Like", "Like", new { model = new IndustryTower.ViewModels.likeVars { elemId = Model.answerID,typ = IndustryTower.ViewModels.LikeType.LikeAnswer } });}
+                    </ul>
+                    <div class="inline-block">
+                        @if (AuthorizationHelper.isRelevant(Model.Question.questionerID))
+                        {
+                            <div id="markAsAnswer">
+                                @using (Html.BeginForm("AnswerAccept", "Answer",
+                                            new { AId = aid }, FormMethod.Post,
+                                            new { @class = "accept-nswer" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <button type="button" class="btn  btn-xs @btnClass" data-marked="@Resource.markedAsAnswer" data-notmarked="@Resource.NotmarkedAsAnswer">
+                                        <span class="glyphicon glyphicon-ok"></span> @btnText
+                                    </button>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            if (Model.accept)
+                            {
+                                <div id="markAsAnswer" class="marked btn btn-success disabled">
+
+                                    @Resource.markedAsAnswer
+
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-8  pull-right">
+                    @{Html.RenderPartial("~/Views/UserProfile/AvatarPartial.cshtml", Model.Answerer);}
+                </div>
+            </div>
+            
+            
+
+            
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div id="offerComments" class="col-md-12 col-xs-12 bg-default">
+            @{
+                var se = new MvcSerializer();
+                var mod = new IndustryTower.ViewModels.commentVars
+                {
+                    elemId = Model.answerID ,
+                    typ = IndustryTower.ViewModels.CommentType.CommentAnswer
+                };
+                var tt = se.Serialize(mod, SerializationMode.Plaintext);
+            }
+            @{Html.RenderAction("Comments", "Comment", new { model = tt });}
+        </div>
+    </div>
+
+
+
+</div>

@@ -1,0 +1,108 @@
+﻿@model IList<IndustryTower.ViewModels.GSOViewModel>
+@using PagedList.Mvc;
+@{
+
+}
+@if (Model.Count > 0)
+{
+    var isGroupAdmin = (int)ViewData["isAdmin"] == 1;
+    foreach (var item in Model)
+    {
+        string acceptionText = Resource.acceptedNotSessionOffer;
+        string acceptionClass = "btn-default";
+        if (item.isaccepted)
+        {
+            acceptionText = Resource.acceptedSessionOffer;
+            acceptionClass = "accepted-offer btn-success";
+        }
+        var protectedOID = EncryptionHelper.Protect(item.offerid);
+
+        var isOffererHimSelf = item.offerid == WebSecurity.CurrentUserId;
+
+        <li class="row">
+            <div class="panel panel-default col-md-12">
+                <div id="answerDetail" class="row">
+                    <div class="col-md-12">
+                        <div id="offerDesc" class=" margin-top-bot-md">
+                            @if (isOffererHimSelf || isGroupAdmin)
+                            {
+                                <div class="inline-block">
+                                    @Html.ModifyIcons("Edit", "Delete", "GroupSessionOffer", new { GSOId = protectedOID })
+                                </div>
+                            }
+                            @Html.DisplayTextFor(model => item.offer)
+                        </div>
+                        <small class="margin-lf-r8-md">
+                            @Html.DisplayFor(model => item.offerdate)
+                        </small>
+                    </div>
+                    
+                </div>
+
+                <div class="row margin-top-bot-md">
+                    <div class="col-md-7 col-xs-6 dirltr">
+                        @{Html.RenderPartial("~/Views/Score/Main.cshtml", new IndustryTower.ViewModels.ScoreVars
+                            {
+                                elemId = item.offerid,
+                                type = IndustryTower.Models.ScoreType.GSOvote,
+                                count = item.Scores == null ? 0 : (int)item.Scores
+                            });}
+                        <ul id="offerLike" class="nav nav-pills nav-stacked dirltr inline-block">
+                            @{Html.RenderAction("Like", "Like", new { model = new IndustryTower.ViewModels.likeVars { elemId = item.offerid,typ= IndustryTower.ViewModels.LikeType.LikeGSO } });}
+                        </ul>
+                        <div class="inline-block">
+                            @if (isGroupAdmin)
+                            {
+                                <div id="offerAcception">
+                                    @using (Html.BeginForm("AcceptOffer", "GroupSessionOffer"))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.Hidden("GSOId", protectedOID)
+                                        <button type="button" id="offacc" data-acc="@Resource.markedAsAnswer" data-notacc="@Resource.NotmarkedAsAnswer" class="pos-rel btn  btn-xs @acceptionClass">
+                                            <span class="glyphicon glyphicon-ok"></span> <i>@acceptionText</i>
+                                        </button>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <div id="offerAcception" class="btn btn-xs disabled @acceptionClass">
+                                    @acceptionText
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-xs-6">
+                        @{Html.RenderPartial("~/Views/UserProfile/AvatarPartial.cshtml", item.offerer);}
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="offerComments" class="col-md-12 col-xs-12 bg-default">
+                        @{
+                          var se = new MvcSerializer();
+                          var mod = new IndustryTower.ViewModels.commentVars
+                          {
+                              elemId = item.offerid,
+                              typ = IndustryTower.ViewModels.CommentType.CommentGSO
+                          };
+                          var tt = se.Serialize(mod, SerializationMode.Plaintext);
+                        }
+                        @Html.AjaxPrtialLoader(Url.Action("Comments", "Comment", new { model = tt }))
+                    </div>
+                </div>
+            </div>
+        </li>
+    }
+    <li id="nextOffers" class="col-md-12 col-xs-12 list-unstyled">
+
+        @if ((bool)ViewData["finalPage"] == false)
+        {
+            var pagenumber = (int)ViewData["pageNum"];
+            @Html.NextItems("PartialOffers", "GroupSessionOffer", new
+           {
+               SsId = ViewData["SsId"],
+               page = pagenumber + 1
+           }, "next-offers-link btn btn-default col-md-12 btn btn-default btn-xs text-center")
+        }
+    </li>
+}

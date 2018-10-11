@@ -1,0 +1,197 @@
+﻿@model IndustryTower.ViewModels.SearchAllMini
+
+@if (Model.users.Count > 0)
+{
+    <div class="bottom-border-blue dir">
+        @EnumTypes.People
+    </div>
+    foreach (var item in Model.users)
+    {
+        <div class="row cursor-point" data-link="@Url.Action("UProfile", "UserProfile", new { UId = item.UserId, UName = StringHelper.URLName(item.firstName) })">
+            <div class="col-md-1">
+                @Html.ProfilePic(user: item)
+            </div>
+            <div class="col-md-11">
+                @Html.DisplayFor(model => item.firstName)
+                <div class="overflow-hidden">
+                    <small>@Html.AboutUser(item)</small>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@if (Model.companies.Count > 0)
+{
+    <div class="bottom-border-blue dir">
+        @Resource.companies
+    </div>
+    foreach (var item in Model.companies)
+    {
+        <div class="row cursor-point" data-link="@Url.Action("CProfile", "Company", new { CoId = item.coID, CoName = StringHelper.URLName(item.coName) })">
+            <div class="col-md-1">
+                @Html.ProfilePic(company: item)
+            </div>
+            <div class="col-md-11">
+                @Html.DisplayFor(model => item.coName)
+                <div>
+                    <small>@Html.Raw(EnumTypes.ResourceManager.GetString(item.companySize.ToString()))</small>
+                </div>
+
+            </div>
+        </div>
+    }
+}
+
+@if (Model.products.Count > 0)
+{
+    <div class="bottom-border-blue dir">
+        @Resource.products
+    </div>
+    foreach (var item in Model.products)
+    {
+        <div class="row cursor-point" data-link="@Url.Action("Detail", "Product", new { PrId = item.productID, PrName = StringHelper.URLName(item.productName) })">
+            <div class="col-md-1">
+                @Html.ProfilePic(product: item))
+            </div>
+            <div class="col-md-11">
+                @Html.DisplayFor(model => item.productName) 
+                @*<div>
+                    <small>
+                        @String.Format("{0} - {1}",
+                                    EnumTypes.ResourceManager.GetString(item.PorT.ToString()),
+                                    item.productResult.productionCountry.CultureFullState)
+                </small>
+            </div>*@
+
+            </div>
+        </div>
+    }
+}
+
+@if (Model.services.Count > 0)
+{
+
+    <div class="bottom-border-blue dir">
+        @Resource.services
+    </div>
+
+    foreach (var item in Model.services)
+    {
+        <div class="cursor-point row" data-link="@Url.Action("Detail", "Service", new { SrId = item.serviceID, SrName = StringHelper.URLName(item.serviceName) })">
+            <div class="col-md-1">
+                @Html.ProfilePic(service: item))
+            </div>
+            <div class="col-md-11">
+                @Html.DisplayFor(model => item.serviceName)
+                @*<div>
+                    <small>
+                        @Html.DisplayFor(model => item.serviceCountry.CultureFullState)
+                    </small>
+                </div>*@
+
+            </div>
+        </div>
+    }
+}
+
+@if (Model.questions.Count > 0)
+{
+    <div class="bottom-border-blue dir">
+        @Resource.questions
+    </div>
+    foreach (var item in Model.questions)
+    {
+        <a href="@Url.Action("Detail", "Question", new { QId = item.questionID, QName = StringHelper.URLName(item.questionSubject) })" class="dir">
+            <div class="search-mini-item col-md-12" data-id="@item.questionID">
+                    <div>
+                        @Html.DisplayFor(model => item.questionSubject)
+                    </div>
+                    @*<div>
+                        <small>@String.Format("{1} {0}", Resource.answers, item.questionResult.Answers.Where(f => f.accept == true).Count())</small>
+                    </div>*@
+            </div>
+        </a>
+    }
+}
+
+@if (Model.books.Count > 0)
+{
+    <div class="bottom-border-blue dir">
+        @EnumTypes.Book
+    </div>
+    foreach (var item in Model.books)
+    {
+        <div class="row cursor-point" data-link="@Url.Action("Detail", "Book", new { BId = item.BookId, BName = StringHelper.URLName(item.title) })">
+            <div class="col-md-1">
+                @Html.ProfilePic(book: item)
+            </div>
+            <div class="col-md-11">
+                @Html.DisplayFor(model => item.title)
+            </div>
+        </div>
+    }
+}
+
+
+@if (Model.groups.Count > 0)
+{
+    <div class="bottom-border-blue dir">
+        @Resource.groups
+    </div>
+    foreach (var item in Model.groups)
+    {
+        <a href="@Url.Action("GroupPage", "Group", new { GId = item.groupId, GName = StringHelper.URLName(item.groupName) })" class="dir">
+            <div class="search-mini-cat col-md-12">
+                @Html.DisplayFor(model => item.groupName)
+            </div>
+        </a>
+    }
+}
+
+@if (Model.dicts.Count > 0)
+{
+    <div class="bottom-border-blue dir">
+        @Resource.dicts
+    </div>
+    foreach (var item in Model.dicts)
+    {
+        <a href="@Url.Action("Dictionary", "Dict", new { DId = item.dicId, DName = StringHelper.URLName(item.name) })" class="dir">
+            <div class="search-mini-cat col-md-12">
+                @Html.DisplayFor(model => item.name)
+            </div>
+        </a>
+    }
+}
+
+@if (Model.categories.Count > 0)
+{
+    <div class="bottom-border-blue dir">
+        @Resource.categories
+    </div>
+    foreach (var item in Model.categories)
+    {
+        <a href="@Url.Action("Main", "Category", new { CId = item.catID, CtName = StringHelper.URLName(item.catName) })" class="dir">
+            <div class="search-mini-cat col-md-12">
+                @Html.DisplayFor(model => item.CultureCatName)
+            </div>
+        </a>
+    }
+}
+
+@if (Model.professions.Count > 0)
+{
+    <div class="bottom-border-blue dir">
+        @Resource.professions
+    </div>
+    foreach (var item in Model.professions)
+    {
+        <a href="@Url.Action("Main", "Profession", new { ProfId = item.profID , PsName = StringHelper.URLName(item.professionName) })" class="dir">
+            <div class="search-mini-cat col-md-12">
+
+                @Html.DisplayFor(model => item.professionName)
+
+            </div>
+        </a>
+    }
+}

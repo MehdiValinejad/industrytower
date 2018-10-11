@@ -1,0 +1,42 @@
+﻿@model IndustryTower.ViewModels.FriendRequestViewModel
+<div id="friendRequest" class="dropdown dirltr">
+    <button class="btn btn-default btn-xs dropdown-toggle pull-left" type="button" id="dropdownMenu1" data-toggle="dropdown">
+        @Resource.friendRequestAdd
+        <span class="caret"></span>
+    </button>
+
+    <ul class="dropdown-menu col-md-12 dir" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation" class="col-md-12">
+            @using (Html.BeginForm("AddFriend", "FriendRequest", FormMethod.Post, new { @Class = "friendRequest-form", @style = "width:99%" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+
+                @Html.Hidden("user", Model.user)
+                @Html.TextAreaFor(model => Model.message, new { @class = "form-control ", @placeholder = Resource.frieanRequestMessage, @onkeyup = "textAreaAdjust(this)" })
+
+
+    <input type="submit" value="@Resource.friendRequestAdd" id="friensRequest-botton" class="btn btn-primary btn-xs col-md-12" data-loading-text="@Resource.loading" />
+
+            }
+        </li>
+    </ul>
+    @*<div id="addFriendBottun" class="friensRequest-botton btn btn-default">
+            @Resource.friendRequestAdd
+        </div>*@
+    @*<div id="addFriendContainer">
+           @using (Html.BeginForm("AddFriend", "FriendRequest", FormMethod.Post, new { @Class = "friendRequest-form", @style = "width:99%" }))
+           {
+                       @Html.AntiForgeryToken()
+                       @Html.ValidationSummary()
+
+                       @Html.Hidden("user", Model.user)
+                       <div>
+                           @Html.TextAreaFor(model => Model.message, new { @placeholder = Resource.frieanRequestMessage, @onkeyup = "textAreaAdjust(this)" })
+                       </div>
+                       <div>
+                           <input type="submit" value="@Resource.friendRequestAdd" id="friensRequest-botton"/>
+                       </div>
+           }
+        </div>*@
+</div>

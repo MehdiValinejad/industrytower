@@ -1,0 +1,34 @@
+﻿@model IndustryTower.Models.Company
+
+@{
+    var coid = EncryptionHelper.Protect(Model.coID);
+    bool isAdmin = Model.Admins.Any(u => AuthorizationHelper.isRelevant(u.UserId));
+}
+    <div class="row dir margin-top-bot-md">
+        <div class="col-md-4">
+            @Html.ProfilePic(company: Model)
+        </div>
+        <div class="col-md-8">
+                <h1>
+                    @Html.ActionLink(Model.CultureCoName, "CProfile", new { CoId = Model.coID, CoName = StringHelper.URLName(Model.CultureCoName) }) 
+                </h1>
+            <p>
+                @Html.DisplayAbstractFor(Model.CultureAbout)
+            </p>
+            <div class="btn-group">
+                <a href="@Url.Action("CompanyProducts", "Product", new { CoId = Model.coID })" class="btn btn-default">@Resource.products</a>
+                @if (isAdmin)
+                {
+                    @Html.CreateIcon("Create", "Product", new { CoId = coid }, dataAjax: false, Class: "btn btn-default dropdown-toggle")
+                }
+            </div>
+            <div class="btn-group">
+                <a href="@Url.Action("CompanyServices", "Service", new { CoId = Model.coID })" class="btn btn-default">@Resource.services</a>
+                @if (isAdmin)
+                {
+                    @Html.CreateIcon("Create", "Service", new { CoId = coid }, dataAjax: false, Class: "btn btn-default dropdown-toggle")
+                }
+            </div>
+        </div>
+    </div>
+    

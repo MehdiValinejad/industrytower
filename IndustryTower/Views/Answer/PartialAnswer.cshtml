@@ -1,0 +1,42 @@
+﻿@model IndustryTower.Models.Answer
+
+<div class="col-md-12 col-xs-12">
+    @Html.ActionLink(Model.Question.questionSubject,
+                    "Detail", "Question",
+                    new { QId = Model.questionID, QName = StringHelper.URLName(Model.Question.questionSubject) }, null)
+    <div>
+        <u>@Resource.answers <span class="badge">@Html.DisplayFor(model => model.Answerer.Answers.Count) </span></u>
+    </div>
+
+
+    @if (Model.Question.questionBody.Length > 150)
+    {
+        <div id="questionAbstract">
+            @Html.DisplayFor(model => Model.Question.questionBody).ToString().Substring(0, 150)...
+        </div>
+    }
+    else
+    {
+        <div id="questionAbstract">
+            @Html.DisplayFor(model => Model.Question.questionBody)
+        </div>
+    }
+    <div>
+        <strong>@Resource.answer</strong>
+        @if (Model.answerBody.Length > 150)
+        {
+            <div id="questionAbstract">
+                @Html.DisplayFor(model => Model.answerBody).ToString().Substring(0, 150)...
+            </div>
+        }
+        else
+        {
+            <div id="questionAbstract">
+                @Html.DisplayFor(model => Model.answerBody)
+            </div>
+        }
+
+    </div>
+</div>
+
+

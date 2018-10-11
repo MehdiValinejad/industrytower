@@ -1,0 +1,32 @@
+﻿@{DateTime? modelDate = (Model == null) ? (DateTime?)null : Model;}
+@{
+    string Class = "";
+    string PlaceHolder = "date";
+    if (ViewData["Class"] != null)
+    {
+        Class = Class + ViewData["Class"].ToString();
+    }
+    if (ViewData["Placeholder"] != null)
+    {
+        PlaceHolder = ViewData["Placeholder"].ToString();
+    }
+}
+@if (modelDate != null)
+{
+
+        <div class="input-group dirltr">
+           @Html.TextBox("", String.Format(modelDate.Value.Date.ToLocalTime().ToShortDateString())
+                             , htmlAttributes: new { @class = Class, @placeholder = PlaceHolder, @readonly = "readonly" })
+            <div class="dpickerSign input-group-addon cursor-point"><span class="glyphicon glyphicon-calendar"></span></div>
+        </div>
+        <span class="form-control-feedback glyphicon glyphicon-remove clear-input"></span>
+
+}
+else
+{
+    <div class="input-group dirltr">
+        @Html.TextBox("", null, htmlAttributes: new { @class = Class, @placeholder = PlaceHolder, @readonly = "readonly" })
+        <div class="dpickerSign input-group-addon cursor-point"><span class="glyphicon glyphicon-calendar"></span></div>
+    </div>
+    <span class="form-control-feedback glyphicon glyphicon-remove clear-input"></span>
+}

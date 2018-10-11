@@ -1,0 +1,32 @@
+﻿@model PagedList.IPagedList<IndustryTower.Models.CompanyNotExpired>
+@using PagedList.Mvc;
+
+@foreach (var item in Model)
+{
+    <div id="companyRow" class="search-grid-box">
+        <div class="search-grid-logo">
+            @Html.ProfilePic(company: item)
+        </div>
+        <div class="search-box-body overflow-hidden">
+            @Html.ActionLink(item.CultureCoName, "CProfile", "Company", new { CoId = item.coID, CoName = StringHelper.URLName(item.CultureCoName) }, null)
+            <p>
+                @Html.DisplayAbstractFor(item.CultureAbout)
+            </p>
+        </div>
+        <div class="search-box-categories">
+           <span>@Resource.categories:</span>@Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { CoId = item.coID }))
+        </div>
+    </div>
+}
+@if (Model.PageCount > Model.PageNumber)
+{
+    <div id="nextCompanies">
+        @Html.NextItems("AllCompanies", "Company", new
+           {
+               cat = ViewData["currentCat"],
+               page = Model.PageNumber + 1,
+               sortOrder = ViewData["currentSort"],
+               currentFilter = ViewData["currentFilter"]
+           })
+    </div>
+}

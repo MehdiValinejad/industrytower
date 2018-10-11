@@ -1,0 +1,90 @@
+﻿@model IndustryTower.Models.ActiveUser
+
+@{
+    ViewBag.Title = Model.CultureFullName;
+    var type = ViewContext.RouteData.Values["RType"].ToString();
+    string controller = "Badge",
+            action = "UserBadges";
+            
+    switch (type)
+    {
+        case "questions":
+            controller = "Question";
+            action = "UserQuestions";
+            break;
+        case "groups":
+            controller = "Group";
+            action = "UserInfoGroups";
+            break;
+        case "answers":
+            controller = "Answer";
+            action = "UserAnswers";
+            break;
+        case "dicts":
+            controller = "Word";
+            action = "UserWords";
+            break;
+    }
+}
+
+@section head{
+    <meta name="keywords" content="@String.Join(",", Model.CultureFullName.Split(new char [] {' '}))">
+    @if (ViewContext.RouteData.Values["UName"].ToString() != StringHelper.URLName(Model.CultureFullName)
+        || ViewContext.RouteData.Values["RType"].ToString() != type)
+    {
+        <link rel="canonical" href="@Url.Action("UserInfo", "UserProfile", new { UId = Model.UserId, UName = StringHelper.URLName(Model.CultureFullName), RType = type })" />
+    }
+}
+    <div class="row dir">
+        <div class="col-md-2 margin-top-bot-md">
+            @Html.ProfilePic(user: Model)
+            <h1>
+                @Html.ActionLink(Model.CultureFullName, "UProfile", new { UId = Model.UserId })
+            </h1>
+            <h5>
+                @Html.AboutUser(user: Model)
+            </h5>
+            <div>
+                @Html.DisplayFor(model=>model.CultureAbout)
+            </div>
+        </div>
+        <div class="col-md-10">
+            <ul class="nav nav-tabs nav-justified uinfo-tabs">
+                <li role="presentation" data-tab="badges">
+                    <a href="@Url.Action("UserInfo", "UserProfile", new { UId = Model.UserId, UName = StringHelper.URLName(Model.CultureFullName), RType = "badges" })">
+                        @Resource.badges
+                    </a>
+                </li>
+                <li role="presentation" data-tab="questions">
+                    <a href="@Url.Action("UserInfo", "UserProfile", new { UId = Model.UserId, UName = StringHelper.URLName(Model.CultureFullName), RType = "questions" })">
+                        @Resource.questions
+                    </a>
+                </li>
+                <li role="presentation" data-tab="answers">
+                    <a href="@Url.Action("UserInfo", "UserProfile", new { UId = Model.UserId, UName = StringHelper.URLName(Model.CultureFullName), RType = "answers" })">
+                        @Resource.answers
+                    </a>
+                </li>
+                <li role="presentation" data-tab="groups">
+                    <a href="@Url.Action("UserInfo", "UserProfile", new { UId = Model.UserId, UName = StringHelper.URLName(Model.CultureFullName), RType = "groups" })">
+                        @Resource.groups
+                    </a>
+                </li>
+                <li role="presentation" data-tab="dicts">
+                    <a href="@Url.Action("UserInfo", "UserProfile", new { UId = Model.UserId, UName = StringHelper.URLName(Model.CultureFullName), RType = "dicts" })">
+                        @Resource.dicts
+                    </a>
+                </li>
+            </ul>
+
+            <div id="InfoContainer" class="list-group active" data-type="@type">
+                <div class="margin-top-bot-md">
+                    @{Html.RenderAction(action, controller, new { UId = Model.UserId });}
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/UserProfile")
+    }

@@ -1,0 +1,115 @@
+﻿@model IndustryTower.ViewModels.BDetailViewModel
+@using IndustryTower.Models
+@{
+    ViewBag.Title = Model.title;
+    var ext = Model.image.Substring(Model.image.LastIndexOf('.') + 1);
+    var userIDs = Model.UserIds.Split(new char [] { ',' }).Select(d=>int.Parse(d));
+}
+
+@section head{
+    <meta name="description" content="@Model.abtrct">
+    <meta name="keywords" content="@String.Join(",", Model.title.Split(new char [] {' '}))">
+    <meta prefix="og: http://ogp.me/ns#" property="og:title" content="@Model.title" />
+    <meta prefix="og: http://ogp.me/ns#" property="og:type" content="@Resource.books" />
+    <meta prefix="og: http://ogp.me/ns#" property="og:image" content="@Url.Abs("Uploads/" + ext + "/Book/" + Model.image)" />
+    <meta prefix="og: http://ogp.me/ns#" property="og:url" content="@Url.Action("Detail", "Book", new { BId = Model.BookId, BName = StringHelper.URLName(Model.title) }, "http")" />
+    @if (ViewContext.RouteData.Values["BName"] as string != StringHelper.URLName(Model.title))
+    {
+        <link rel="canonical" href="@Url.Action("Detail", "Book", new { BId = Model.BookId, BName = StringHelper.URLName(Model.title) })" />
+    }
+}
+
+<div class="row">
+    <div class="col-md-8 dir">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1>
+                    @Model.title
+                     @if (userIDs.Any(u => AuthorizationHelper.isRelevant(u)))
+                     { 
+                         @Html.ModifyIcons("edit", "", "Book", new { BId = Model.BookId },deleteClass:"display-none",editAjax:false)
+                     }
+                </h1>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-8 col-md-offset-2 margin-top-bot-md">
+                    @Html.ProfilePic(book: new Book{BookId = Model.BookId,title = Model.title,image=Model.image} )
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <strong>@ModelDisplayName.bookWriter</strong>: @Model.writer
+                        </div>
+                        <div>
+                            <strong>@ModelDisplayName.bookTranslator</strong>: @Model.translator
+                        </div>
+                        <p>
+                            @Model.abtrct
+                        </p>
+                        <div>
+                            <strong>@ModelDisplayName.bookPrint</strong>: @Model.print
+                        </div>
+                        <div class="margin-top-bot-md text-center">
+                            <a class="btn btn-success" href="@Url.Action("GetBook", "Download", new { name  = Model.file, title = Model.title })">@Resource.download</a>
+                        </div>
+                        @{Html.RenderPartial("~/Views/Score/Main.cshtml", new IndustryTower.ViewModels.ScoreVars
+                            {
+                                elemId = Model.BookId,
+                                type = IndustryTower.Models.ScoreType.BCreate,
+                                count = Model.Scores == null ? 0 : (int)Model.Scores
+                            });}
+                        <ul id="offerLike" class="nav nav-pills nav-stacked inline-block">
+                            @Html.Action("Like", "Like", new { model = new IndustryTower.ViewModels.likeVars { elemId = Model.BookId, typ = IndustryTower.ViewModels.LikeType.LikeBook } })
+                        </ul>
+                        <div class="margin-lf-r8-md margin-top-bot-xs inline-block">
+                            <div class="g-plusone" data-annotation="inline" data-width="150" data-href="@Url.Action("Detail", "Book", new { BId = Model.BookId, BName = StringHelper.URLName(Model.title) }, "http")"></div>
+                            <script type="IN/Share" data-url="@Url.Action("Detail", "Book", new { BId = Model.BookId, BName = StringHelper.URLName(Model.title) }, "http")" data-counter="right">
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @{Html.RenderAction("_Reviews", "Review", new { BId = Model.BookId });}
+            </div>
+        </div>
+    </div>
+   <div class="col-md-4">
+       <div class="row dir">
+           <div class="col-md-12">
+               <div class="panel panel-default">
+                   <div class="panel-heading">
+                       <h4>@Resource.contributors</h4>
+                   </div>
+                   <div class="panel-body">
+                       @foreach (var userid in userIDs)
+                       {
+                           <div class="col-md-12 ">
+                               @{Html.RenderAction("AvatarPartial", "UserProfile", new { UId = userid });}
+                           </div>
+                       }
+                   </div>
+               </div>
+               <div class="panel panel-default">
+                   <div class="panel-heading">
+                       @Resource.relatedProfessions
+                   </div>
+                   <div class="panel-body">
+                       @Html.AjaxPrtialLoader(Url.Action("RelatedProfessions", "Profession", new { BId = Model.BookId }))
+                   </div>
+               </div>
+               <div class="text-center">
+                   @Html.ActionLink(Resource.createBookReview, "Upsert", "Review", new { BId = Model.BookId }, new { @class = "btn btn-primary" })
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/Social")
+    @Scripts.Render("~/bundles/Score")
+}

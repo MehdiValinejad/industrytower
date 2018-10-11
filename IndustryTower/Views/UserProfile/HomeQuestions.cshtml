@@ -1,0 +1,103 @@
+﻿@model IndustryTower.ViewModels.HomeFeedQuestionsClassified
+
+<div class="panel panel-default">
+    <div class="panel-heading ">
+        @Html.CreateIcon("Create", "Question", dataAjax: false, Class: "pull-right")
+        <h3 class="panel-title">
+            <span class="icon-Question icn-25"></span>
+            @Resource.homefeedQuestions
+        </h3>
+       
+        
+    </div>
+
+
+    <div id="tabChangerContainer" class="QSlider panel-body dir">
+        <div id="tabChanger">
+            @if (Model.answered.Count() > 0)
+            {
+                <div class="tab header-box label label-info cursor-point">
+                    @Resource.answered
+                </div>
+            }
+            @if (Model.unAnswered.Count() > 0)
+            {
+                <div class="tab header-box  label label-info cursor-point" style="opacity:0.5">
+                    @Resource.unAnswered
+                </div>
+            }
+            @if (Model.old.Count() > 0)
+            {
+                <div class="tab header-box  label label-info cursor-point" style="opacity:0.5">
+                    @Resource.old
+                </div>
+            }
+        </div>
+        @if (Model.answered.Count() > 0)
+        {
+
+            <div class="tab-content list-group" >
+                @foreach (var item in Model.answered)
+                {
+                    <a class="list-group-item" href="@Url.Action("Detail", "Question", new { QId = item.Question.questionID, QName = StringHelper.URLName(item.Question.questionSubject) })">
+                        <div>
+                            <div>
+                                @Html.DisplayFor(model => item.Question.questionSubject)
+                            </div>
+
+                            <div class="text-left">
+                                <small>@Html.DisplayFor(model => item.Question.questionDate, "WordDate")</small>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+
+        }
+        @if (Model.unAnswered.Count() > 0)
+        {
+            <div class="tab-content list-group display-none">
+                @foreach (var item in Model.unAnswered)
+                {
+                    <a class="list-group-item" href="@Url.Action("Detail", "Question", new { QId = item.Question.questionID, QName = StringHelper.URLName(item.Question.questionSubject) })">
+                        <div>
+                            <div>
+                                @Html.DisplayFor(model => item.Question.questionSubject)
+                            </div>
+
+                            <div class="text-left">
+                                <small>@Html.DisplayFor(model => item.Question.questionDate, "WordDate")</small>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        }
+        @if (Model.old.Count() > 0)
+        {
+            <div class="tab-content list-group display-none">
+                @foreach (var item in Model.old)
+                {
+                    <a class="list-group-item" href="@Url.Action("Detail", "Question", new { QId = item.Question.questionID, QName = StringHelper.URLName(item.Question.questionSubject) })">
+                        <div>
+                            <div>
+                                @Html.DisplayFor(model => item.Question.questionSubject)
+                            </div>
+
+                            <div class="text-left">
+                                <small>@Html.DisplayFor(model => item.Question.questionDate, "WordDate")</small>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        }
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        TabChanger($(".QSlider"), "QSlider", 3000);
+    })
+</script>

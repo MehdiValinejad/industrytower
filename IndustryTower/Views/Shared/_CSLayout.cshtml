@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+            <div id="CSTop">
+            @RenderSection("TOP", required: true)
+            </div>
+
+            <div id="CSPost">
+            @RenderSection("Post", required: false)
+            </div>
+
+            <div id="CSProject" class="CSLeftContent">
+            @RenderSection("Project", required: false)
+            </div>
+
+            <div id="CSJob" class="CSLeftContent">
+            @RenderSection("Certificate", required: false)
+            </div>
+
+            <div id="CSEvents" class="CSLeftContent">
+            @RenderSection("Events", required: false)
+            </div>

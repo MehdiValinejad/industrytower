@@ -1,0 +1,15 @@
+﻿@model IEnumerable<IndustryTower.ViewModels.RelatedQuestionViewModel>
+
+@foreach (var item in Model)
+{
+    <a class="list-group-item" href="@Url.Action("Detail", "Question", new { QId = item.question.questionID, QName = StringHelper.URLName(item.question.questionSubject) })">
+        @item.question.questionSubject
+        <div>
+            <small>
+                @Html.DisplayFor(model => item.question.questionDate, "WordDate")
+            </small>
+        </div>
+    </a>
+}
+
+

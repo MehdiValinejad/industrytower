@@ -1,0 +1,19 @@
+﻿@model IndustryTower.ViewModels.MailNewPassConfirmationViewModel
+
+<h4 style="font-weight:bold">
+    @Model.UserName,
+</h4>
+<p>
+    @Emails.newpassword
+    <span style="background-color:#75d1ff;font-size:1.2em;font-weight:bold;border-radius:3px; padding:5px 10px ;">
+        @Model.NewPass
+    </span>
+</p>
+<p style="text-align:center;">
+    <a href="@Url.Abs(Url.Action("Index", "Home"))">
+        @Resource.title
+    </a>
+</p>
+
+
+

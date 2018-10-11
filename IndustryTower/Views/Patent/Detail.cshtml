@@ -1,0 +1,96 @@
+﻿@model IndustryTower.Models.Patent
+@{
+    ViewBag.Title = Resource.patent + " - " + Model.CulturePatentTitle;
+}
+
+@section head{
+    <meta name="description" content="@Model.CultureDescription">
+<meta name="keywords" content="@String.Join(",", Model.CulturePatentTitle.Split(new char [] {' '}))">
+}
+
+<div class="row dir">
+    <div class="col-md-7">
+        <div class="">
+            @*@if (Model.Inventors.Any(u => AuthorizationHelper.isRelevant(u.UserId)))
+            {
+                @Html.ModifyIcons("Edit", "Delete", "Patent", new { patID = EncryptionHelper.Protect(Model.patentID) })
+            }*@
+
+                <h1>
+                    @Html.ActionLink(Model.CulturePatentTitle, "Detail", "Patent",
+            new
+            {
+                patId = Model.patentID,
+                PtName = StringHelper.URLName(Model.CulturePatentTitle)
+            },
+                null)
+                </h1>
+
+
+            <div class="margin-top-bot-md">
+                <big class="label label-info margin-lf-r8-md">
+                    @ModelDisplayName.patentDescription
+                </big>
+                <span class="inline-block">
+                    @Html.DisplayTextFor(model => model.CultureDescription)
+                </span>
+
+            </div>
+            <div class="margin-top-bot-md">
+                <big class="label label-info margin-lf-r8-md">
+                    @ModelDisplayName.patentNo
+                </big>
+                @Html.DisplayFor(model => model.patentNo)
+            </div>
+            <div class="margin-top-bot-md">
+                <big class="label label-info margin-lf-r8-md">
+                    @ModelDisplayName.patentissueDate
+                </big>
+                <span class="inline-block">
+                    @Html.DisplayFor(model => model.issueDate, "WordDate")
+                </span>
+            </div>
+            <div class="margin-top-bot-md">
+                <big class="label label-info margin-lf-r8-md">
+                    @ModelDisplayName.PatentStatus
+                </big>
+                <span class="inline-block">
+                    @EnumTypes.ResourceManager.GetString(Model.status.ToString())
+                </span>
+            </div>
+            <div class="margin-top-bot-md margin-lf-r8-md">
+                <a href="@Model.patentURL">
+                    <span class="glyphicon glyphicon-globe"> </span>
+                    @ModelDisplayName.patentURL
+                </a>
+            </div>
+
+        </div>
+
+        
+    </div>
+    <div class="col-md-5">
+        <div class="patent-detail-avatars float-left">
+            <div class="bottom-border-blue">
+                @ModelDisplayName.inventors
+            </div>
+            @foreach (var item in Model.Inventors)
+            {
+                <div class="text-center">
+                    @Html.ProfilePic(user: item)
+                    <div class="margin-top-bot-md">
+                        <div>
+                            <big class="label label-info margin-lf-r8-md">
+                                @Resource.patentsCount
+                            </big>
+                            <span class="badge">
+                                @item.Patents.Count
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

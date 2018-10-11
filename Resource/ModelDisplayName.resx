@@ -1,0 +1,744 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="aboutCo" xml:space="preserve">
+    <value>About Company (Not English)</value>
+  </data>
+  <data name="aboutCoEN" xml:space="preserve">
+    <value>About Company (English)</value>
+  </data>
+  <data name="abuseDesc" xml:space="preserve">
+    <value>Abuse description</value>
+  </data>
+  <data name="address" xml:space="preserve">
+    <value>Address (Not English)</value>
+  </data>
+  <data name="addressEN" xml:space="preserve">
+    <value>Address (English)</value>
+  </data>
+  <data name="answerBody" xml:space="preserve">
+    <value>Answer</value>
+  </data>
+  <data name="answerer" xml:space="preserve">
+    <value>Answer by</value>
+  </data>
+  <data name="niocAVL" xml:space="preserve">
+    <value>NIOC Aproved Vendor List</value>
+  </data>
+  <data name="Catalog" xml:space="preserve">
+    <value>Catalog</value>
+  </data>
+  <data name="catName" xml:space="preserve">
+    <value>Category (Not English)</value>
+  </data>
+  <data name="catNameEN" xml:space="preserve">
+    <value>Category (English)</value>
+  </data>
+  <data name="certificate" xml:space="preserve">
+    <value>Certificate name (Not English)</value>
+  </data>
+  <data name="certificateEN" xml:space="preserve">
+    <value>Certificate name (English)</value>
+  </data>
+  <data name="certificator" xml:space="preserve">
+    <value>Enter authority (Not English)</value>
+  </data>
+  <data name="certificatorEN" xml:space="preserve">
+    <value>Enter authority (English)</value>
+  </data>
+  <data name="comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="coName" xml:space="preserve">
+    <value>Company name (Not English)</value>
+  </data>
+  <data name="coNameEN" xml:space="preserve">
+    <value>Company name (English)</value>
+  </data>
+  <data name="country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="countryCode" xml:space="preserve">
+    <value>Country code</value>
+  </data>
+  <data name="cover" xml:space="preserve">
+    <value>Cover photo</value>
+  </data>
+  <data name="createDate" xml:space="preserve">
+    <value>Creation Date</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Description(Not English)</value>
+  </data>
+  <data name="descriptionEN" xml:space="preserve">
+    <value>Description(English)</value>
+  </data>
+  <data name="ecoCode" xml:space="preserve">
+    <value>Economic code</value>
+  </data>
+  <data name="email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="eventDate" xml:space="preserve">
+    <value>Event Initiation date</value>
+  </data>
+  <data name="eventSubj" xml:space="preserve">
+    <value>Event Subject (Not English)</value>
+  </data>
+  <data name="eventSubjEN" xml:space="preserve">
+    <value>Event Subject (English)</value>
+  </data>
+  <data name="faxNo" xml:space="preserve">
+    <value>Fax No.</value>
+  </data>
+  <data name="image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="iranCode" xml:space="preserve">
+    <value>Iran code</value>
+  </data>
+  <data name="isUseful" xml:space="preserve">
+    <value>Answer is useful</value>
+  </data>
+  <data name="jobCompany" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="jobDescription" xml:space="preserve">
+    <value>Job Description</value>
+  </data>
+  <data name="JobOffers" xml:space="preserve">
+    <value>Job Offers</value>
+  </data>
+  <data name="Jobprofesstions" xml:space="preserve">
+    <value>Professions Related</value>
+  </data>
+  <data name="markedAsAnswer" xml:space="preserve">
+    <value>Marked as answer</value>
+  </data>
+  <data name="message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="notUseful" xml:space="preserve">
+    <value>Answer is not useful</value>
+  </data>
+  <data name="phoneNo" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="professionDescription" xml:space="preserve">
+    <value>Decription (Not English)</value>
+  </data>
+  <data name="professionDescriptionEN" xml:space="preserve">
+    <value>Decription (English)</value>
+  </data>
+  <data name="professionName" xml:space="preserve">
+    <value>Profession (Not English)</value>
+  </data>
+  <data name="professionNameEN" xml:space="preserve">
+    <value>Profession (English)</value>
+  </data>
+  <data name="question" xml:space="preserve">
+    <value>Question</value>
+  </data>
+  <data name="regCode" xml:space="preserve">
+    <value>Registration code</value>
+  </data>
+  <data name="state" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="stateCode" xml:space="preserve">
+    <value>State code</value>
+  </data>
+  <data name="stateName" xml:space="preserve">
+    <value>State (Not English)</value>
+  </data>
+  <data name="stateNameEN" xml:space="preserve">
+    <value>State (English)</value>
+  </data>
+  <data name="Video" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="website" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="certificateLicence" xml:space="preserve">
+    <value>Licence No.</value>
+  </data>
+  <data name="certificateURL" xml:space="preserve">
+    <value>Certificate or authority website address</value>
+  </data>
+  <data name="educationDegree" xml:space="preserve">
+    <value>Education degree</value>
+  </data>
+  <data name="eduStartDate" xml:space="preserve">
+    <value>Attend date</value>
+  </data>
+  <data name="eduUntilDate" xml:space="preserve">
+    <value>Until date</value>
+  </data>
+  <data name="fieldOfStudy" xml:space="preserve">
+    <value>Field of study (Not English)</value>
+  </data>
+  <data name="fieldOfStudyEN" xml:space="preserve">
+    <value>Field of study (English)</value>
+  </data>
+  <data name="patentDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="patentDescriptionEN" xml:space="preserve">
+    <value>Description (English)</value>
+  </data>
+  <data name="patentissueDate" xml:space="preserve">
+    <value>Issue date...</value>
+  </data>
+  <data name="patentNo" xml:space="preserve">
+    <value>Patent No.</value>
+  </data>
+  <data name="PatentStatus" xml:space="preserve">
+    <value>Patent status</value>
+  </data>
+  <data name="patentTitle" xml:space="preserve">
+    <value>Enter patent title (Not English)</value>
+  </data>
+  <data name="patentTitleEN" xml:space="preserve">
+    <value>Enter patent title (English)</value>
+  </data>
+  <data name="patentURL" xml:space="preserve">
+    <value>URL of patent...</value>
+  </data>
+  <data name="payAmount" xml:space="preserve">
+    <value>Pay Amount</value>
+  </data>
+  <data name="payBank" xml:space="preserve">
+    <value>Bank</value>
+  </data>
+  <data name="payCode" xml:space="preserve">
+    <value>Pay Code</value>
+  </data>
+  <data name="payDate" xml:space="preserve">
+    <value>Pay Date</value>
+  </data>
+  <data name="payType" xml:space="preserve">
+    <value>Pay Type</value>
+  </data>
+  <data name="school" xml:space="preserve">
+    <value>School (Not English)</value>
+  </data>
+  <data name="schoolEN" xml:space="preserve">
+    <value>School (English)</value>
+  </data>
+  <data name="aboutPlanReq" xml:space="preserve">
+    <value>Enter some information about firm you want to register...</value>
+  </data>
+  <data name="aboutProduct" xml:space="preserve">
+    <value>Description  (Not English)</value>
+  </data>
+  <data name="aboutProductEN" xml:space="preserve">
+    <value>Description (English)</value>
+  </data>
+  <data name="aboutService" xml:space="preserve">
+    <value>Description  (Not English)</value>
+  </data>
+  <data name="acceptedProjectOffer" xml:space="preserve">
+    <value>Project offer acception</value>
+  </data>
+  <data name="afterSale" xml:space="preserve">
+    <value>After sale Services (Months)</value>
+  </data>
+  <data name="brandName" xml:space="preserve">
+    <value>Brand name (Not English)</value>
+  </data>
+  <data name="brandNameEN" xml:space="preserve">
+    <value>Brand name (English)</value>
+  </data>
+  <data name="guarantee" xml:space="preserve">
+    <value>Guarantee (Months)</value>
+  </data>
+  <data name="height" xml:space="preserve">
+    <value>Height (cm)</value>
+  </data>
+  <data name="language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="length" xml:space="preserve">
+    <value>Length (cm)</value>
+  </data>
+  <data name="namePlanReq" xml:space="preserve">
+    <value>Enter the name of firm you want to register...</value>
+  </data>
+  <data name="packCount" xml:space="preserve">
+    <value>Pack Count</value>
+  </data>
+  <data name="PorT" xml:space="preserve">
+    <value>Production or trade...</value>
+  </data>
+  <data name="post" xml:space="preserve">
+    <value>Post</value>
+  </data>
+  <data name="power" xml:space="preserve">
+    <value>Power (kw)</value>
+  </data>
+  <data name="price" xml:space="preserve">
+    <value>Price in Rls</value>
+  </data>
+  <data name="productionCountry" xml:space="preserve">
+    <value>Production country</value>
+  </data>
+  <data name="productName" xml:space="preserve">
+    <value>Product name (Not English)</value>
+  </data>
+  <data name="productNameEN" xml:space="preserve">
+    <value>Product name (English)</value>
+  </data>
+  <data name="projectDescription" xml:space="preserve">
+    <value>Project description</value>
+  </data>
+  <data name="projectName" xml:space="preserve">
+    <value>Project title</value>
+  </data>
+  <data name="projectValue" xml:space="preserve">
+    <value>Project value</value>
+  </data>
+  <data name="questionBody" xml:space="preserve">
+    <value>Question body</value>
+  </data>
+  <data name="questionSubject" xml:space="preserve">
+    <value>Question subject</value>
+  </data>
+  <data name="regDate" xml:space="preserve">
+    <value>Register date</value>
+  </data>
+  <data name="servicebrandName" xml:space="preserve">
+    <value>Service brand name (Not English)</value>
+  </data>
+  <data name="servicebrandNameEN" xml:space="preserve">
+    <value>Service brand name (English)</value>
+  </data>
+  <data name="serviceCountry" xml:space="preserve">
+    <value>Service provider company</value>
+  </data>
+  <data name="serviceEra" xml:space="preserve">
+    <value>Time of Service (Months)</value>
+  </data>
+  <data name="serviceName" xml:space="preserve">
+    <value>Service name (Not English)</value>
+  </data>
+  <data name="serviceNameEN" xml:space="preserve">
+    <value>Service name (English)</value>
+  </data>
+  <data name="shabnam" xml:space="preserve">
+    <value>Shabnam code</value>
+  </data>
+  <data name="shareNote" xml:space="preserve">
+    <value>Share note</value>
+  </data>
+  <data name="shipFree" xml:space="preserve">
+    <value>Ship Free</value>
+  </data>
+  <data name="weight" xml:space="preserve">
+    <value>Weight (kg)</value>
+  </data>
+  <data name="width" xml:space="preserve">
+    <value>Width (cm)</value>
+  </data>
+  <data name="wuarantee" xml:space="preserve">
+    <value>Wuarantee (Months)</value>
+  </data>
+  <data name="aboutStore" xml:space="preserve">
+    <value>Description  (Not English)</value>
+  </data>
+  <data name="storeName" xml:space="preserve">
+    <value>Store name (Not English)</value>
+  </data>
+  <data name="storeNameEN" xml:space="preserve">
+    <value>Store name (English)</value>
+  </data>
+  <data name="planRequestCoStoreAbout" xml:space="preserve">
+    <value>Description about your company or store name</value>
+  </data>
+  <data name="planRequestCoStoreName" xml:space="preserve">
+    <value>Your company or store name</value>
+  </data>
+  <data name="approve" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="plan" xml:space="preserve">
+    <value>PLan</value>
+  </data>
+  <data name="planType" xml:space="preserve">
+    <value>Plan Type</value>
+  </data>
+  <data name="payAcceptDate" xml:space="preserve">
+    <value>Pay acception date</value>
+  </data>
+  <data name="aboutUser" xml:space="preserve">
+    <value>About you (Not English)</value>
+  </data>
+  <data name="aboutUserEN" xml:space="preserve">
+    <value>About you (English)</value>
+  </data>
+  <data name="birthday" xml:space="preserve">
+    <value>Birthday</value>
+  </data>
+  <data name="confirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="userName" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="rememberMe" xml:space="preserve">
+    <value>Remember me?</value>
+  </data>
+  <data name="currentPass" xml:space="preserve">
+    <value>Current Password</value>
+  </data>
+  <data name="firstName" xml:space="preserve">
+    <value>First Name (Not English)</value>
+  </data>
+  <data name="firstNameEN" xml:space="preserve">
+    <value>First Name (English)</value>
+  </data>
+  <data name="lastName" xml:space="preserve">
+    <value>Last Name (Not English)</value>
+  </data>
+  <data name="lastNameEN" xml:space="preserve">
+    <value>Last Name (English)</value>
+  </data>
+  <data name="companySize" xml:space="preserve">
+    <value>Company Size</value>
+  </data>
+  <data name="experienceDescription" xml:space="preserve">
+    <value>Experience description (Not English)</value>
+  </data>
+  <data name="experienceDescriptionEN" xml:space="preserve">
+    <value>Experience description (English)</value>
+  </data>
+  <data name="experienceState" xml:space="preserve">
+    <value>Experience State</value>
+  </data>
+  <data name="experienceTitle" xml:space="preserve">
+    <value>Experience title (Not English)</value>
+  </data>
+  <data name="experienceTitleEN" xml:space="preserve">
+    <value>Experience title (English)</value>
+  </data>
+  <data name="expStartDate" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="expUntilDate" xml:space="preserve">
+    <value>Until date</value>
+  </data>
+  <data name="aboutServiceEN" xml:space="preserve">
+    <value>Description  (English)</value>
+  </data>
+  <data name="aboutStoreEN" xml:space="preserve">
+    <value>Description  (English)</value>
+  </data>
+  <data name="age" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="cultureAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="cultureAddress" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="cultureBrandName" xml:space="preserve">
+    <value>Brand</value>
+  </data>
+  <data name="cultureCertificateName" xml:space="preserve">
+    <value>Certificate title</value>
+  </data>
+  <data name="cultureCertificator" xml:space="preserve">
+    <value>Certificate authority</value>
+  </data>
+  <data name="cultureCoName" xml:space="preserve">
+    <value>Company Name</value>
+  </data>
+  <data name="cultureDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="cultureEventSubj" xml:space="preserve">
+    <value>Event title</value>
+  </data>
+  <data name="culturefieldOfStudy" xml:space="preserve">
+    <value>Field of study</value>
+  </data>
+  <data name="cultureFullName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="culturePatentTitle" xml:space="preserve">
+    <value>Patent title</value>
+  </data>
+  <data name="cultureProductName" xml:space="preserve">
+    <value>Product name</value>
+  </data>
+  <data name="cultureProfessionDesc" xml:space="preserve">
+    <value>Profession Description</value>
+  </data>
+  <data name="cultureProfessionName" xml:space="preserve">
+    <value>Profession title</value>
+  </data>
+  <data name="cultureSchool" xml:space="preserve">
+    <value>School</value>
+  </data>
+  <data name="cultureServiceName" xml:space="preserve">
+    <value>Service name</value>
+  </data>
+  <data name="cultureStateName" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="cultureStoreName" xml:space="preserve">
+    <value>Store name</value>
+  </data>
+  <data name="cultureTitle" xml:space="preserve">
+    <value>Culture title</value>
+  </data>
+  <data name="patentOfficeCountry" xml:space="preserve">
+    <value>Office country</value>
+  </data>
+  <data name="mobile" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="reqDate" xml:space="preserve">
+    <value>Request Date</value>
+  </data>
+  <data name="eventUntilDate" xml:space="preserve">
+    <value>Event until Date</value>
+  </data>
+  <data name="inventors" xml:space="preserve">
+    <value>Inventor(s)</value>
+  </data>
+  <data name="groupDesc" xml:space="preserve">
+    <value>Group description</value>
+  </data>
+  <data name="groupName" xml:space="preserve">
+    <value>Group title</value>
+  </data>
+  <data name="offerDate" xml:space="preserve">
+    <value>Offer date</value>
+  </data>
+  <data name="offerIsAccepted" xml:space="preserve">
+    <value>Acception</value>
+  </data>
+  <data name="sessionDesc" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="sessionEndDate" xml:space="preserve">
+    <value>End date</value>
+  </data>
+  <data name="sessionOffer" xml:space="preserve">
+    <value>Offer</value>
+  </data>
+  <data name="sessionStartDate" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="sessionSubject" xml:space="preserve">
+    <value>Session subject</value>
+  </data>
+  <data name="groupIsPublic" xml:space="preserve">
+    <value>Public group</value>
+  </data>
+  <data name="melliCode" xml:space="preserve">
+    <value>Melli Code</value>
+  </data>
+  <data name="semDate" xml:space="preserve">
+    <value>Date and time</value>
+  </data>
+  <data name="semDesc" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="semDuraion" xml:space="preserve">
+    <value>Duration(minute)</value>
+  </data>
+  <data name="semIsPublic" xml:space="preserve">
+    <value>Public webinar</value>
+  </data>
+  <data name="semMaxAudience" xml:space="preserve">
+    <value>Max audiences</value>
+  </data>
+  <data name="semTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="semPrice" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="sessionResult" xml:space="preserve">
+    <value>Result</value>
+  </data>
+  <data name="creationDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="dicDesc" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="dicName" xml:space="preserve">
+    <value>Dictionary title</value>
+  </data>
+  <data name="word" xml:space="preserve">
+    <value>Word</value>
+  </data>
+  <data name="wordDesc" xml:space="preserve">
+    <value>Word description</value>
+  </data>
+  <data name="wordDescEn" xml:space="preserve">
+    <value>English description related to this dictionary and word</value>
+  </data>
+  <data name="wordDescFa" xml:space="preserve">
+    <value>Not English description related to this dictionary and word</value>
+  </data>
+  <data name="wordEn" xml:space="preserve">
+    <value>English word</value>
+  </data>
+  <data name="wordFa" xml:space="preserve">
+    <value>Not English word</value>
+  </data>
+  <data name="badgeColor" xml:space="preserve">
+    <value>Gear color</value>
+  </data>
+  <data name="badgeDesc" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="badgeName" xml:space="preserve">
+    <value>Gear name</value>
+  </data>
+  <data name="badgeDescEN" xml:space="preserve">
+    <value>Gear description in english</value>
+  </data>
+  <data name="badgeNameEN" xml:space="preserve">
+    <value>Gear name in english</value>
+  </data>
+  <data name="bookAbstract" xml:space="preserve">
+    <value>Abstract</value>
+  </data>
+  <data name="bookPrint" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="bookTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="bookTranslator" xml:space="preserve">
+    <value>Translator</value>
+  </data>
+  <data name="bookWriter" xml:space="preserve">
+    <value>Writer</value>
+  </data>
+</root>

@@ -1,0 +1,64 @@
+﻿@model IList<IndustryTower.ViewModels.wordByLetterVM>
+@using IndustryTower.Models
+@if(Model.Count > 0)
+{bool isadmin = (bool)ViewData["isAdmin"];
+
+    foreach (var item in Model)
+    {
+        var dir = "";
+        var dirLtr = "dir";
+        if (item.lang == lang.fa)
+        {
+            dir = "dir";
+            dirLtr = "dirltr";
+        }
+    
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary @dir">
+                    <div class="panel-heading ">
+                        <div class="@dirLtr">
+                            @if (isadmin)
+                            {
+                            <small>
+                                @Html.ActionLink(Resource.addTranslate, "AddTranslate", "Word", new { WId = item.id, DId = Request.QueryString["DId"] }, new { @class = "text-white" }) - 
+                            </small>
+                            }
+                               
+                                    <small>
+                                         @Html.ActionLink(Resource.improveWord, "Edit", "Word", new { WId = item.id, DId = Request.QueryString["DId"] }, new { @class = "text-white" })
+                                    </small>
+                                
+                        </div>
+
+                        <h3>
+                            @item.translate
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        @item.desc
+                        <div class="@dirLtr">
+                            <small>
+                                @Html.ActionLink(Resource.details, "Detail", "Word", new { WId = item.id }, null)
+                                - @Html.ActionLink(Resource.ImproveDesc, "Edit", "WordDesc", new { WdId = item.descId },null)
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+    @Html.ActionLink(Resource.details, "Detail", "Word", new { WId = Request.QueryString["WId"] }, new { @class = "btn btn-info btn-xs col-md-12 margin-top-bot-md" })
+    
+    if (isadmin)
+    {
+     @Html.ActionLink(Resource.addTranslate, "AddTranslate", "Word", new { WId = Request.QueryString["WId"], DId = Request.QueryString["DId"] }, new { @class = "btn btn-xs btn-primary col-md-12 margin-top-bot-md" })
+    }
+
+}else
+{ 
+    @Html.ActionLink(Resource.addTranslate, "AddTranslate", "Word", new { WId = Request.QueryString["WId"], DId = Request.QueryString["DId"] }, new { @class = "btn btn-xs btn-primary col-md-12 margin-top-bot-md" })
+}
+    

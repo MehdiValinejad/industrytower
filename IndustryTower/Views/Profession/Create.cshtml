@@ -1,0 +1,44 @@
+﻿@model IndustryTower.Models.Profession
+@using (Html.BeginForm())
+{
+     @Html.AntiForgeryToken()
+     @Html.ValidationSummary(true)
+
+        <fieldset>
+        <legend>@Resource.addCategory</legend>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.professionName, new { @placeholder = Html.DisplayNameFor(model => model.professionName) })
+                @Html.ValidationMessageFor(model=>model.professionName)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.professionNameEN, new { @placeholder = Html.DisplayNameFor(model => model.professionNameEN) })
+                @Html.ValidationMessageFor(model=>model.professionNameEN)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.professionDescription, new { @placeholder = Html.DisplayNameFor(model => model.professionName), @onkeyup = "textAreaAdjust(this)" })
+                @Html.ValidationMessageFor(model=>model.professionDescription)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.professionDescriptionEN, new { @placeholder = Html.DisplayNameFor(model => model.professionNameEN), @onkeyup = "textAreaAdjust(this)" })
+                @Html.ValidationMessageFor(model=>model.professionDescriptionEN)
+            </div>
+
+
+            <div>
+                @Html.Action("MainCatsCreate", "Profession")
+            </div>
+
+                <div class="submitContainer">
+                    <input type="submit" value=@Resource.save />
+                </div>
+        </fieldset>
+
+
+}
+@Scripts.Render("~/bundles/Category")
+
+<script>
+    $(document).ready(function () {
+        CatsColor()
+    })
+</script>

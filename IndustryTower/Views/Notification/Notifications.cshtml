@@ -1,0 +1,366 @@
+﻿@model IEnumerable<IndustryTower.ViewModels.NotificationViewModelNew>
+@using IndustryTower.Models;
+@if (Model.Count() > 0)
+{
+    <div class="Notifs-bar dir margin-top-bot-xs cursor-point">
+        <a class="markAllRead">@Resource.markAllRead</a>
+    </div>
+
+    <div class="viewport">
+        <div class="overview dir">
+
+            @foreach (var notif in Model)
+            {
+                MvcHtmlString profilepic = Html.ProfilePic(user: new ActiveUser
+                {
+                    firstName = notif.senderUser,
+                    lastName = " ",
+                    firstNameEN = notif.senderUser,
+                    lastNameEN = " ",
+                    image = notif.image
+                });
+
+
+                int? id = null;
+                string link = null;
+                string readLink = null;
+                string description = null;
+                string notiferText = null;
+                string image_name = null;
+                var readClass = notif.read == 1 ? "read_notif" : "";
+                //var dt = notif.data != null ? Newtonsoft.Json.JsonConvert.DeserializeObject<IndustryTower.ViewModels.NotifTmpt>(notif.data) : null ;
+
+                switch (notif.notifType)
+                {
+                    case NotificationType.Post:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.Post });
+                        link = Url.Action("SinglePost", "Post", new { PId = id });
+                        description = notif.brief;
+                        image_name = "I_Notif_Post";
+
+                        if (notif.data != null)
+                        {
+                            var pstrdt = Newtonsoft.Json.JsonConvert.DeserializeObject<IndustryTower.ViewModels.PosterCoNotif>(notif.data);
+                            if (pstrdt.coid != null)
+                            {
+                                notiferText = String.Concat(Resource.postedAsCo,Resource.on, Resource.yourProfile, Resource.postedOnlyFa);
+                            }
+                            else if (pstrdt.stid != null)
+                            {
+                                notiferText = String.Concat(Resource.postedAsSt, Resource.on, Resource.yourProfile, Resource.postedOnlyFa);
+                            }
+
+                        }
+                        else
+                        {
+                            notiferText = String.Concat(Resource.postedOnOnlyEn, Resource.yourProfile, Resource.postedOnlyFa);
+                        }
+                        //if (notif.senderCo != null)
+                        //{
+
+                        //    profilepic = Html.ProfilePic(company: new Company { logo = notif.senderCostoreIMG });
+                        //    if (notif.recCo != null)
+                        //    {
+                        //        notiferText = Resource.postedAs + " <b>" + notif.senderCo + " </b> " + Resource.on + " <b>" + notif.recCo + " </b> " + Resource.postedOnlyFa;
+                        //    }
+                        //    else if (notif.recSt != null)
+                        //    {
+                        //        notiferText = Resource.postedAs + " <b>" + notif.senderCo + " </b> " + Resource.on + " <b>" + notif.recSt + " </b> " + Resource.postedOnlyFa;
+                        //    }
+                        //    else
+                        //    {
+                        //        notiferText = Resource.postedAs + " <b>" + notif.senderCo + " </b> " + Resource.on + " " + Resource.yourProfile;
+                        //    }
+                        //}
+                        //else if (notif.senderSt != null)
+                        //{
+                        //    profilepic = Html.ProfilePic(store: new Store { logo = notif.senderCostoreIMG });
+                        //    if (notif.recCo != null)
+                        //    {
+                        //        notiferText = Resource.postedAs + " <b>" + notif.senderSt + " </b> " + Resource.on + " <b>" + notif.recCo + " </b> " + Resource.postedOnlyFa;
+                        //    }
+                        //    else if (notif.recSt != null)
+                        //    {
+                        //        notiferText = Resource.postedAs + " <b>" + notif.senderSt + " </b> " + Resource.on + " <b>" + notif.recSt + " </b> " + Resource.postedOnlyFa;
+                        //    }
+                        //    else
+                        //    {
+                        //        notiferText = Resource.postedAs + " <b>" + notif.senderSt + " </b> " + Resource.on + " " + Resource.yourProfile;
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    if (notif.recCo != null)
+                        //    {
+                        //        notiferText = Resource.postedOnOnlyEn + " <b>" + notif.recCo + " </b> " + Resource.postedOnlyFa;
+                        //    }
+                        //    else if (notif.recSt != null)
+                        //    {
+                        //        notiferText = Resource.postedOnOnlyEn + " <b>" + notif.recSt + " </b> " + Resource.postedOnlyFa;
+                        //    }
+                        //    else
+                        //    {
+                        //        notiferText = Resource.posted;
+                        //    }
+                        //}
+                        break;
+                    case NotificationType.PostCo:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.PostCo });
+                        link = Url.Action("SinglePost", "Post", new { PId = id });
+                        description = notif.brief;
+                        image_name = "I_Notif_Post";
+                        if (notif.data != null)
+                        {
+                            var pstrdt = Newtonsoft.Json.JsonConvert.DeserializeObject<IndustryTower.ViewModels.PosterCoNotif>(notif.data);
+                            if (pstrdt.coid != null)
+                            {
+                                notiferText = String.Concat(Resource.postedAsCo, Resource.postedOnOnlyEn, Resource.onYourCo, Resource.postedOnlyFa); 
+                            }
+                            else if (pstrdt.stid != null)
+                            {
+                                notiferText = String.Concat(Resource.postedAsSt, Resource.postedOnOnlyEn, Resource.onYourCo, Resource.postedOnlyFa);
+                            }
+                            else
+                            {
+                                notiferText = String.Concat(Resource.postedOnOnlyEn, Resource.onYourCo,  Resource.postedOnlyFa);
+                            }
+                        }
+                        else
+                        {
+                            notiferText = String.Concat(Resource.postedOnOnlyEn,Resource.onYourCo, Resource.postedOnlyFa);
+                        }
+                        
+                        break;
+                    case NotificationType.PostSt:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.PostSt });
+                        link = Url.Action("SinglePost", "Post", new { PId = id });
+                        description = notif.brief;
+                        image_name = "I_Notif_Post";
+                        if (notif.data != null)
+                        {
+                            var pstrdt = Newtonsoft.Json.JsonConvert.DeserializeObject<IndustryTower.ViewModels.PosterCoNotif>(notif.data);
+                            if (pstrdt.coid != null)
+                            {
+                                notiferText = String.Concat(Resource.postedAsCo, Resource.postedOnOnlyEn, Resource.onYourSt, Resource.postedOnlyFa); 
+                            }
+                            else if (pstrdt.stid != null)
+                            {
+                                notiferText = String.Concat(Resource.postedAsSt, Resource.postedOnOnlyEn, Resource.onYourSt, Resource.postedOnlyFa); 
+                            }
+                            else
+                            {
+                                notiferText = String.Concat(Resource.postedOnOnlyEn, Resource.onYourSt, Resource.postedOnlyFa);
+                            }
+                        }
+                        else
+                        {
+                            notiferText = String.Concat(Resource.postedOnOnlyEn,Resource.onYourSt, Resource.postedOnlyFa);
+                        }
+                        break;
+                    case NotificationType.PostLike:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.PostLike });
+                        link = Url.Action("SinglePost", "Post", new { PId = id });
+                        description = notif.brief;
+                        notiferText = Resource.likedPost;
+                        //image_name = "I_Notif_Like";
+                        image_name = "glyphicon glyphicon-thumbs-up";
+                        break;
+                    case NotificationType.PostComment:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.PostComment });
+                        link = Url.Action("SinglePost", "Post", new { PId = id });
+                        description = notif.brief;
+                        notiferText = Resource.commentedPost;
+                        image_name = "glyphicon glyphicon-comment";
+                        break;
+                    case NotificationType.QuestionLike:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.QuestionLike });
+                        link = Url.Action("Detail", "Question", new { QId = id, QName = StringHelper.URLName(notif.brief) });
+                        description = notif.brief;
+                        notiferText = Resource.likedQuestion;
+                        //image_name = "I_Notif_Like";
+                        image_name = "glyphicon glyphicon-thumbs-up";
+                        break;
+                    case NotificationType.QuestionComment:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.QuestionComment });
+                        link = Url.Action("Detail", "Question", new { QId = id, QName = StringHelper.URLName(notif.brief) });
+                        description = notif.brief;
+                        notiferText = Resource.commentedQuestion;
+                        image_name = "glyphicon glyphicon-comment";
+                        break;
+                    case NotificationType.QuestionAnswer:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.QuestionAnswer });
+                        link = Url.Action("Detail", "Question", new { QId = id, QName = StringHelper.URLName(notif.brief) });
+                        description = notif.brief;
+                        notiferText = Resource.answeredQuestion;
+                        image_name = "icon-Question";
+                        break;
+                    case NotificationType.AnswerLike:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.AnswerLike });
+                        link = Url.Action("Detail", "Question", new { QId = notif.data, QName = StringHelper.URLName(notif.brief) });
+                        description = notif.brief;
+                        notiferText = Resource.likedAnswer;
+                        //image_name = "I_Notif_Like";
+                        image_name = "glyphicon glyphicon-thumbs-up";
+                        break;
+                    case NotificationType.AnswerComment:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.AnswerComment });
+                        link = Url.Action("Detail", "Question", new { QId = notif.data, QName = StringHelper.URLName(notif.brief) });
+                        description = notif.brief;
+                        notiferText = Resource.commentedAnswer;
+                        image_name = "glyphicon glyphicon-comment";
+                        break;
+                    case NotificationType.AnswerAccept:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.AnswerAccept });
+                        link = Url.Action("Detail", "Question", new { QId = notif.data, QName = StringHelper.URLName(notif.brief) });
+                        description = notif.brief;
+                        notiferText = Resource.acceptedAnswer;
+                        image_name = "glyphicon glyphicon-ok";
+                        break;
+                    case NotificationType.ProductLike:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.ProductLike });
+                        link = Url.Action("Detail", "Product", new { PrId = id, PrName = StringHelper.URLName(notif.brief) });
+                        description = notif.brief;
+                        notiferText = Resource.likedProduct;
+                        //image_name = "I_Notif_Like";
+                        image_name = "glyphicon glyphicon-thumbs-up";
+                        break;
+                    case NotificationType.ProductComment:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.ProductComment });
+                        link = Url.Action("Detail", "Product", new { PrId = id, PrName = StringHelper.URLName(notif.brief) });
+                        description = notif.brief;
+                        notiferText = Resource.commentedProduct;
+                        image_name = "glyphicon glyphicon-comment";
+                        break;
+                    case NotificationType.ServiceLike:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.ServiceLike });
+                        link = Url.Action("Detail", "Service", new { SrId = id, SrName = StringHelper.URLName(notif.brief) });
+                        description = notif.brief;
+                        notiferText = Resource.likedService;
+                        //image_name = "I_Notif_Like";
+                        image_name = "glyphicon glyphicon-thumbs-up";
+                        break;
+                    case NotificationType.ServiceComment:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.ServiceComment });
+                        link = Url.Action("Detail", "Service", new { SrId = id, SrName = StringHelper.URLName(notif.brief) });
+                        description = notif.brief;
+                        notiferText = Resource.commentedService;
+                        image_name = "glyphicon glyphicon-comment";
+                        break;
+                    case NotificationType.SessionOfferLike:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.SessionOfferLike });
+                        link = Url.Action("Detail", "GroupSession", new { SsId = notif.data, GSName = StringHelper.URLName(notif.brief) });
+                        description = notif.brief;
+                        notiferText = Resource.likedOffer;
+                        image_name = "glyphicon glyphicon-thumbs-up";
+                        //image_name = "I_Notif_Like";
+                        break;
+                    case NotificationType.SessionOfferComment:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.SessionOfferComment });
+                        link = Url.Action("Detail", "GroupSession", new { SsId = notif.data, GSName = StringHelper.URLName(notif.brief) });
+                        description = notif.brief;
+                        notiferText = Resource.commentedOffer;
+                        image_name = "glyphicon glyphicon-comment";
+                        break;
+                    case NotificationType.SessionOfferAccept:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.SessionOfferAccept });
+                        link = Url.Action("Detail", "GroupSession", new { SsId = notif.data, GSName = StringHelper.URLName(notif.brief) });
+                        description = notif.brief;
+                        notiferText = Resource.acceptedYourGsOffer;
+                        image_name = "glyphicon glyphicon-ok";
+                        break;
+                    case NotificationType.FriendRequestAccept:
+                        id = notif.elemId;
+                        readLink = Url.Action("NotificationRead", "Notification", new { elem = id, nType = NotificationType.FriendRequestAccept });
+                        link = Url.Action("UProfile", "UserProfile", new { UId = notif.data, UName = StringHelper.URLName("accepted") });
+                        description = String.Empty;
+                        notiferText = Resource.acceptedFR;
+                        image_name = "icon-Friends";
+                        break;
+                }
+
+                <div class="notif @readClass row well-sm" data-read="@readLink" data-link="@link">
+                    <div class="notif-list-icon col-md-1 col-xs-1">
+                        <span class="IGMDIV @image_name"></span>
+                    </div>
+
+                    @if (notif.count > 1)
+                    {
+                        var othersCount = notif.count - 1;
+
+                        <div class="notif-list-text col-md-9 col-xs-9">
+                            <span>
+                                <b>
+                                    @notif.senderUser
+                                </b>
+                            </span>
+                            @Resource.and @othersCount @Resource.otherPeople @Html.Raw(notiferText): @Html.Raw(description)
+                            <div class="dimDate">
+                                <small>@Html.DisplayFor(f => notif.occurDate)</small>
+
+                            </div>
+                        </div>
+                        <div class="notif-list-avatar col-md-2 col-xs-9">
+                            @profilepic
+                        </div>
+                    }
+                    else
+                    {
+
+                        <div class=" notif-list-text col-md-9 col-xs-9">
+                            <span>
+                                <b>
+                                    @notif.senderUser
+                                </b>
+                            </span>
+
+                            @Html.Raw(notiferText): @Html.Raw(description)
+                            <div class="dimDate margin-topbot-medium ">
+                                <small>
+                                    @Html.DisplayFor(f => notif.occurDate, "RelativeDate")
+                                </small>
+
+                            </div>
+                        </div>
+                        <div class="  notif-list-avatar  col-md-2 col-xs-2">
+                            @profilepic
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+
+
+
+    <script>
+        //$(document).ready(function () {
+        //    notifMenuScrollSize("div#allNotifs.hasScrolBar", ".notif", 7);
+        //});
+    </script>
+
+}
+else
+{
+    <div style="width:363px;background-color:white;">
+        @Resource.noResult
+    </div>
+}

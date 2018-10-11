@@ -1,0 +1,267 @@
+﻿@{
+    ViewBag.Title = Resource.homeTitle;
+}
+
+@section head{
+    <meta name="description" content="@Resource.homeDesc">
+    <meta name="keywords" content="شبکه اجتماعی, مدیریت دانش, برج صنعت, گروه های تخصصی, وبینار, باشگاه, Social Network, صنعت">
+}
+
+<div class="row bg-black pos-rel" style="margin-top:-10px" >
+    <img class="col-md-12 col-xs-12 no-pad" src="../../Images/Home-top.jpg" alt="" />
+    <div class="home-logo ">
+        <div class="col-md-12 col-xs-12 margin-top-bot-md inline-block text-center">
+            <span class="icon-LogoBig icn-90 transparent-white"></span>
+        </div>
+        <div class="col-md-4 col-md-offset-4 margin-top-bot-md">
+            @Html.ActionLink(Resource.register, "register", "Account", null, new { @class = "btn btn-default col-md-5 col-xs-5 margin-top-bot-md btn-lg pull-right" })
+            @Html.ActionLink(Resource.logIn, "Login", "Account", null, new { @class = "btn btn-default col-md-5 col-xs-5 margin-top-bot-md btn-lg" })
+        </div>
+    </div>
+</div>
+
+@*<div class="row bg-black">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner main-carr">
+            <div class="item active">
+                <div class="row dir">
+                    <div class="col-md-3 col-md-offset-1 pull-right">
+                        <div class="margin-top-bot-md text-white col-md-12">
+                            <h2 class="margin-top-bot-md">@Html.Raw(Resource.Home_IEC)</h2>
+                            <p class="margin-top-bot-md">
+                                <big>@Html.Raw(Resource.Home_IEC_desc)</big>
+                            </p>
+                        </div>
+                    </div>
+                    <img src="~/Images/News/IEC.jpg" class=" col-md-7 col-xs-12" alt="@Resource.Home_IEC"/>
+                </div>
+
+            </div>
+            <div class="item">
+                <div class="row dir">
+                    <div class="col-md-4 col-md-offset-1">
+                        <div class="margin-top-bot-md text-white col-md-12">
+                            <h2 class="margin-top-bot-md">@Html.Raw(Resource.Home_Responsive)</h2>
+                            <p class="margin-top-bot-md">
+                                <big>@Html.Raw(Resource.Home_Responsive_desc)</big>
+                            </p>
+                        </div>
+                    </div>
+                    <img src="~/Images/News/Responsive.jpg" class=" col-md-7 col-xs-12" alt="@Resource.Home_Responsive" />
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+
+</div>*@
+
+@*<div class="row dir bg-black">
+    <div class="col-md-12">
+        <h1 class="bottom-border-blue">@Resource.features</h1>
+    </div>
+</div>*@
+
+
+<div class="row dir bg-black text-white">
+    <div class="col-md-5 col-md-offset-1 text-center margin-top-bot-lg">
+        <span class="icon-Question icn-index"></span>
+    </div>
+    <div class="col-md-5 margin-top-bot-lg">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>
+                    @Html.Raw(Resource.Home_FindAnswer)
+                </h2>
+                <p>
+                    <big>@Html.Raw(Resource.Home_FindAnswer_desc)</big>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row dir bg-black text-white">
+    <div class="col-md-6  pull-right text-center margin-top-bot-lg">
+        <span class="icon-Webinar icn-index"></span>
+    </div>
+    <div class="col-md-5 col-md-offset-1 margin-top-bot-lg">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>
+                    @Html.Raw(Resource.Home_Webinar)
+                    
+                </h2>
+                <p>
+                    <big>@Html.Raw(Resource.Home_Webinar_Desc)</big>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row dir bg-black text-white">
+    <div class="col-md-5 col-md-offset-1 text-center margin-top-bot-lg">
+        <span class="icon-Group icn-index"></span>
+    </div>
+    <div class="col-md-5 margin-top-bot-lg">
+        <div class="home-item-desc-out float-left clear-left glass-white">
+            <h2>
+                @Html.Raw(Resource.Home_Group)
+            </h2>
+            <p>
+                <big>@Html.Raw(Resource.Home_Group_desc)</big>
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<div class="row dir bg-black text-white">
+    <div class="col-md-6 pull-right text-center margin-top-bot-lg">
+        <span class="glyphicon glyphicon-star-empty icn-index"></span>
+    </div>
+    <div class="col-md-5 col-md-offset-1 margin-top-bot-lg">
+        <div class="home-item-desc-out float-left clear-left glass-white">
+            <h2>
+                @Html.Raw(Resource.Home_BeInsight)
+            </h2>
+            <p>
+                <big>@Html.Raw(Resource.Home_BeInsight_desc)</big>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<div class="row dir">
+    <div class="col-md-5 col-md-offset-1 pull-left text-center margin-top-bot-lg">
+        @Html.Sprite("H_Home_Professions", new { @class = "inline-block" })
+    </div>
+    <div class="col-md-5 margin-top-bot-lg">
+        <div class="home-item-desc-out float-left clear-left glass-white">
+            <h2>
+                @Html.Raw(Resource.Home_ProfClassification)
+            </h2>
+            <p>
+                <big>@Html.Raw(Resource.Home_ProfClassification_desc)</big>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row dir">
+    <div class="col-md-6 pull-right text-center margin-top-bot-lg">
+        @Html.Sprite("H_Home_Categories", new { @class = "inline-block" })
+    </div>
+    <div class="col-md-5 col-md-offset-1 margin-top-bot-lg">
+        <div class="home-item-desc-out float-left clear-left glass-white">
+            <h2>
+                @Html.Raw(Resource.Home_CatClassification)
+            </h2>
+            <p>
+                <big>@Html.Raw(Resource.Home_CatClassification_desc)</big>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<div class="row dir">
+    <div class="col-md-5 col-md-offset-1 pull-left text-center margin-top-bot-lg">
+        @Html.Sprite("H_Home_CopmanyProfile", new { @class = "inline-block" })
+    </div>
+    <div class="col-md-5 margin-top-bot-lg">
+        <div class="home-item-desc-out float-left clear-left glass-white">
+            <h2>
+                @Html.Raw(Resource.Home_CoProfile)
+            </h2>
+            <p>
+                <big>@Html.Raw(Resource.Home_CoProfile_desc)</big>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<div class="row dir bg-black text-white">
+    <div class="col-md-6 pull-right text-center margin-top-bot-lg">
+        <span class="glyphicon glyphicon-search icn-index"></span>
+    </div>
+    <div class="col-md-5 col-md-offset-1 margin-top-bot-lg">
+        <div class="home-item-desc-out float-left clear-left glass-white">
+            <h2>
+                @Html.Raw(Resource.Home_Search)
+            </h2>
+            <p>
+                <big>@Html.Raw(Resource.Home_Search_desc)</big>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row dir bg-black text-white">
+    <div class="col-md-5 col-md-offset-1 pull-left text-center margin-top-bot-lg">
+        <span class="glyphicon glyphicon-globe icn-index"></span>
+    </div>
+    <div class="col-md-5 margin-top-bot-lg">
+        <div class="home-item-desc-out float-left clear-left glass-white">
+            <h2>
+                @Html.Raw(Resource.Home_Content)
+            </h2>
+            <p>
+                <big>@Html.Raw(Resource.Home_Content_desc)</big>
+                
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row dir bg-black text-white">
+    <div class="col-md-6 pull-right text-center margin-top-bot-lg">
+        <span class="icon-Admin icn-index"></span>
+    </div>
+    <div class="col-md-5 col-md-offset-1 margin-top-bot-lg">
+        <div class="home-item-desc-out float-left clear-left glass-white">
+            <h2>
+                @Html.Raw(Resource.Home_UProfile)
+            </h2>
+            <p>
+                <big>@Html.Raw(Resource.Home_UProfile_desc)</big>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

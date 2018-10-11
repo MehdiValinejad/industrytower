@@ -1,0 +1,31 @@
+﻿@model IndustryTower.Models.GroupSesssionResult
+@{
+    ViewBag.Title = Resource.createSesseionResult;
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default dir">
+            <div class="panel-heading">
+                <h4>
+                    @Resource.createSesseionResult
+                </h4>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.Hidden("S",ViewData["SsId"])
+                    <div class="form-group">
+                        @Html.TextAreaFor(model => model.SessionResult, new { @class = "form-control", @onkeyup = "textAreaAdjust(this)", placeholder = ModelDisplayName.sessionResult })
+                        @Html.ValidationMessageFor(model => model.SessionResult, "", new { @class = "text-danger" })
+                    </div>
+                    <input type="submit" class="btn btn-primary col-md-10 col-md-offset-1" value="@Resource.create"/>
+                }
+            </div>
+        </div>
+       
+    </div>
+</div>
+

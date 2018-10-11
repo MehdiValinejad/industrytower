@@ -1,0 +1,16 @@
+﻿@model String
+@{
+    string Class = "";
+    string PlaceHolder = "date";
+    if (ViewData["Class"] != null)
+    {
+        Class = Class + ViewData["Class"].ToString();
+    }
+    if (ViewData["Placeholder"] != null)
+    {
+        PlaceHolder = ViewData["Placeholder"].ToString();
+    }
+}
+
+@Html.TextBox("", Model, new { @class = "form-control " + Class, @placeholder = PlaceHolder })
+<div class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></div>

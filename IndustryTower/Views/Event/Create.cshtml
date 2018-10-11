@@ -1,0 +1,134 @@
+﻿@model IndustryTower.Models.Event
+@{
+    ViewBag.Title = Resource.create;
+}
+
+<div class="row ">
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.AjaxPrtialLoader(Url.Action("HomeEvents", "UserProfile"))
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 dir">
+        <div id="EventCreatEdit" class="hasUpload">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+                    <legend>@Resource.Event <span class="icon-Event pull-left"></span></legend>
+
+                    @Html.Hidden("filesToUpload")
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.eventSubj, new { @placeholder = Html.DisplayNameFor(Model => Model.eventSubj), @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.eventSubj)
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.eventSubjEN, new { @placeholder = Html.DisplayNameFor(Model => Model.eventSubjEN), @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.eventSubjEN)
+                    </div>
+                    <div class="form-group">
+                        @Html.TextAreaFor(model => model.description, new { @placeholder = Html.DisplayNameFor(Model => Model.description), @class = "form-control", @onkeyup = "textAreaAdjust(this)" })
+                        @Html.ValidationMessageFor(model => model.description)
+                    </div>
+                    <div class="form-group">
+                        @Html.TextAreaFor(model => model.descriptionEN, new { @placeholder = Html.DisplayNameFor(Model => Model.descriptionEN), @class = "form-control", @onkeyup = "textAreaAdjust(this)" })
+                        @Html.ValidationMessageFor(model => model.descriptionEN)
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.DropDownList("countries", ViewBag.CountryDropDown as SelectList, Resource.selectCountry, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.DropDownListFor(model => model.stateID, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.stateID)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.TextAreaFor(model => model.address, new { @placeholder = Html.DisplayNameFor(Model => Model.address), @class = "form-control", @onkeyup = "textAreaAdjust(this)" })
+                        @Html.ValidationMessageFor(model => model.address)
+                    </div>
+                    <div class="form-group">
+                        @Html.TextAreaFor(model => model.addressEN, new { @placeholder = Html.DisplayNameFor(Model => Model.addressEN), @class = "form-control", @onkeyup = "textAreaAdjust(this)" })
+                        @Html.ValidationMessageFor(model => model.addressEN)
+
+                    </div>
+                    @*<div class="editor-field">
+                        @Html.EditorFor(model => model.eventDate, "{0:yyyy/MM/dd}", new { Placeholder = Html.DisplayNameFor(Model => Model.eventDate) })
+                        @Html.ValidationMessageFor(model => model.eventDate)
+                    </div>*@
+                    <div class="form-group col-md-6">
+
+                            @Html.EditorFor(model => model.eventDate, "{0:yyyy/MM/dd}", new { @placeholder = Html.DisplayNameFor(model => Model.eventDate), @class = "hasDatePick form-control" })
+
+                        @Html.ValidationMessageFor(model => model.eventDate, ModelValidation.datetime)
+                    </div>
+                    <div class="form-group col-md-6">
+
+                            @Html.EditorFor(model => model.untilDate, "{0:yyyy/MM/dd}", new { @placeholder = Html.DisplayNameFor(model => Model.untilDate), @class = "hasDatePickUntil form-control" })
+
+                            @Html.ValidationMessageFor(model => model.untilDate, ModelValidation.datetime)
+                        </div>
+                    <div class="bg-default col-md-12 margin-top-bot-md">
+                        <div class="col-md-12 margin-top-bot-md">
+                            <div id="SelectedCategories">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <strong>
+                                            @Resource.selectedCategories
+                                        </strong>
+                                    </div>
+                                    <div class="panel-body">
+                                        @*@foreach (var cat in Model.Categories)
+                                        {
+                                            <div id='selectedProf' class='green-tag inline-block' data-value="@cat.catID">
+                                                @Html.DisplayFor(model => cat.CultureCatName)
+                                                <button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                            </div>
+                                        }*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-border-blue">
+                            @Resource.categoryChooseHelp
+                        </div>
+
+                        @Html.AjaxPrtialLoader(Url.Action("CategoryTags", "Category"), true)
+                    </div>
+
+
+                    @Html.Hidden("Cats", ViewData["Cats"] != null ? ViewData["Cats"] : null)
+                    <input type="submit" value='@Resource.create' id="askButton" class="btn btn-primary col-md-12" data-loading-text="@Resource.loading" />
+
+
+                </fieldset>
+            }
+
+        </div>
+    </div>
+</div>
+
+    
+
+
+    @section scripts{
+        @Scripts.Render("~/bundles/CountryDropDown")
+        @Scripts.Render("~/bundles/Event")
+        @Scripts.Render("~/bundles/Category")
+        @Scripts.Render("~/bundles/DatePicker")
+        <script type="text/javascript">
+    $(document).ready(function () {
+        AjaxStateDropDown('@Url.Action("populateDopDownStates", "Home")', '@Resource.selectState');
+
+        GategoryTags('@IndustryTower.App_Start.ITTConfig.MaxCategoryTagsLimit',
+            '@ModelValidation.YouCanChooseMaxCategories',
+            '@ModelValidation.categoryParentIsChoosed'
+                    );
+
+            });
+
+        </script>
+    }

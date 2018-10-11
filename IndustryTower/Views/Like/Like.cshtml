@@ -1,0 +1,58 @@
+﻿@*@model IEnumerable<IndustryTower.Models.Like>*@
+@model IndustryTower.ViewModels.LikeViewModel
+
+<li id="likeContainer" class="active inline-block pos-rel">
+    @{
+        string LikeOrUnlike = Resource.like;
+        if (User.Identity.IsAuthenticated && Model.likerIds.Any(t => t == WebSecurity.CurrentUserId))
+        {
+            LikeOrUnlike = Resource.unlike;
+        }
+        var action = Model.prams.typ == IndustryTower.ViewModels.LikeType.LikeComment ? "LikeCmtInsert" : "LikeInsert";
+    }
+    
+
+    @if (Request.IsAuthenticated)
+    {
+        <a id="likeButton" href="#" class="pull-left">
+            @using (Html.BeginForm(action, "Like",
+                                    FormMethod.Post,
+                                    new { @class = "like-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                 
+                
+                @Html.Serialize("model", Model.prams, SerializationMode.Encrypted)
+
+                <span id="likeCount" class="badge pull-right margin-lf-r8-md" data-url="@Url.Action("Likes", new
+                                {
+                                    elemId = Model.prams.elemId,
+                                    type = Model.prams.typ
+                                })" itemprop="upvoteCount">
+
+                    @Model.likerIds.Count
+                </span>
+                <span>
+                    @LikeOrUnlike
+                </span>
+                
+                 @*<input type="submit" value="@LikeOrUnlike" class="@likeClass" name="likeButton" />*@
+
+            }
+        </a>
+    }
+    else
+    {
+        <a href="@Url.Action("Register", "Account")" class="pull-left">
+            <span id="likeCount" class="badge pull-right" data-url="@Url.Action("Likes", new
+                {
+                    elemId = Model.prams.elemId,
+                    type = Model.prams.typ
+                })">
+                <i>@Model.likerIds.Count</i>
+            </span>
+            @Resource.like
+        </a>
+    }
+</li>

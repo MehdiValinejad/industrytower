@@ -1,0 +1,39 @@
+﻿@model IEnumerable<IndustryTower.Models.ActiveUser>
+
+
+    @foreach (var item in Model)
+    {
+        <div id="avatarContainer" class="col-md-4 margin-lf-r8-md" itemscope itemtype="http://schema.org/Person">
+            <span class="display-none" itemprop="name">@item.CultureFullName</span>
+
+            <div id="avatarPic" class="avatar inline-block">
+                @Html.ProfilePic(user: item)
+            </div>
+            <div class="inline-block">
+                <table class="text-center">
+                    <tr>
+                        <td colspan="3">
+                            @Html.ActionLink(item.CultureFullName, "UProfile", "UserProfile", new { UId = item.UserId, UName = StringHelper.URLName(item.CultureFullName) }, null)
+                        </td>
+                        <td title="@Resource.score">
+                            (@item.ScoresSum)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@item.Bdg_Golds</td>
+                        <td>@item.Bdg_Silvers</td>
+                        <td>@item.Bdg_Bronzes</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><span title="@Resource.bdgGoldTitle" class="glyphicon glyphicon-cog bdg_Gold"></span></td>
+                        <td><span title="@Resource.bdgSilverTitle" class="glyphicon glyphicon-cog bdg_Silver"></span></td>
+                        <td><span title="@Resource.bdgBronzeTitle" class="glyphicon glyphicon-cog bdg_Bronze"></span></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    }
+

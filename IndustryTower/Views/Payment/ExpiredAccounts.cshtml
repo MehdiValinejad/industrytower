@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "ExpiredAccounts";
+}
+
+<h2>ExpiredAccounts</h2>
+
+    <div>
+        @Html.TextBox("expiredSearch")
+    </div>
+<div id="expiredList">
+</div>
+
+<script>
+    $(document).ready(function () {
+        $.get('@Url.Action("ExpiredSearch")',
+                  {q: searchText},
+                  function (data) {
+                      $("#expiredList").html(data);
+                  })
+        $("input#expiredSearch").keyup(function () {
+            var searchText = $(this).val();
+            $.get('@Url.Action("ExpiredSearch")',
+                  {q: searchText},
+                  function (data) {
+                      $("#expiredList").html(data);
+                  })
+        });
+    });
+</script>

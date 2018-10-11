@@ -1,0 +1,18 @@
+﻿@model IndustryTower.Models.GroupSessionOffer
+
+<div id="editOfferForm" class="margin-top-bot-md col-md-12">
+    @using (Html.BeginForm("Edit", "GroupSessionOffer", FormMethod.Post, new { @class = "edit-offer-form" }))
+    {
+        @Html.Hidden("GSOId", EncryptionHelper.Protect(Model.sessionId))
+        @Html.AntiForgeryToken()
+        <div class="col-md-12">
+            @Html.TextAreaFor(model => model.offer, new { @class="form-control", placeholder = ModelDisplayName.sessionOffer, @onkeyup = "textAreaAdjust(this)" })
+            @Html.ValidationMessageFor(model => model.offer)
+        </div>
+
+    <div id="sendofferbutton" class="col-md-12 col-xc-12">
+        <input type="submit" value="@Resource.edit" data-loading-text="@Resource.loading" class="btn btn-primary col-md-12 col-xc-12" />
+    </div>
+    }
+</div>
+

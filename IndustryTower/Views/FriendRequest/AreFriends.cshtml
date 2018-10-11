@@ -1,0 +1,14 @@
+﻿<div id="friendRequest" class="dirltr">
+    @using (Html.BeginForm("UnFriend", "FriendRequest",
+                            FormMethod.Post,
+                            new { @Class = "friendRequest-form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+
+        @Html.Hidden("UTU", ViewData["userToUnfriend"])
+
+    <input type="submit" value="@Resource.unFriend" id="friensRequest-botton" class="btn btn-primary btn-xs" data-loading-text="@Resource.loading" />
+
+    }
+</div>

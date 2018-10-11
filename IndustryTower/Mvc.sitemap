@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+  <mvcSiteMapNode title="Home" controller="Home" action="Index" key="Home" canonicalUrl="~/fa/Home/Index">
+    <mvcSiteMapNode title="Home" url="http://www.industrytower.com"  canonicalKey="Homefa"/>
+    <mvcSiteMapNode title="Home" url="http://www.industrytower.com/fa/Home/Index"  canonicalKey="Homefa"/>
+    
+    <mvcSiteMapNode title="Register" controller="Account" action="Register"/>
+    <mvcSiteMapNode title="Login" controller="Account" action="Login"/>
+    
+    <mvcSiteMapNode title="" dynamicNodeProvider="IndustryTower.Helpers.UserDynamicNodeProvider, IndustryTower"/>
+  </mvcSiteMapNode>
+
+</mvcSiteMap>

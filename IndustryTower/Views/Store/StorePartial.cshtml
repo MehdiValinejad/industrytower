@@ -1,0 +1,27 @@
+﻿@model IndustryTower.Models.Store
+
+<div class="proserv-list-company middle-shadow float-left">
+    <div class="proserv-list-company-avatar avatar-box float-left">
+        @Html.ProfilePic(store: Model)
+    </div>
+    <div class="proserv-list-company-detail neat-box overflow-hidden">
+        <p>
+            <h1>
+                @Html.ActionLink(Model.CultureStoreName, "SProfile", new { StId = Model.storeID, StName = StringHelper.URLName(Model.CultureStoreName) }) @Resource.products
+            </h1>
+        </p>
+        <p>
+            @Html.DisplayAbstractFor(Model.CultureAbout)
+        </p>
+    </div>
+    <div class="proserv-list-menu gradient-box float-left">
+        <div class="neat-button">
+            @Html.ActionLink(Resource.products, "CompanyProducts", "Product", new { StId = Model.storeID }, null)
+        </div>
+        <div class ="neat-button">
+            @Html.ActionLink(Resource.services, "CompanyServices", "Service", new { StId = Model.storeID }, null)
+        </div>
+    </div>
+</div>
+
+

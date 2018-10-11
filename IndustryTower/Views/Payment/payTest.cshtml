@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "payTest";
+}
+
+
+<div class="row">
+    @if (@ViewData["errorMessage"] != null)
+    {
+        <div class="col-md-2">
+            <div class="alert alert-danger text-center col-md-10 col-md-offset-1">
+                @ViewData["errorMessage"]
+            </div>
+        </div>
+    }
+    
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 panel panel-default">
+            <div class="">
+
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.TextBox("uniq")
+                @Html.TextBox("money")
+                <input type="submit" value="Pay" class="btn btn-primary col-md-8 " />
+            }
+        </div>
+    </div>
+</div>
+
+
+
+

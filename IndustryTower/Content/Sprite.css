@@ -1,0 +1,42 @@
+﻿/*
+This is an example of how to use the image sprite in your own CSS files
+*/
+.H_BG_Registration {
+/* You may have to set 'display: block' */
+	width: 830px;
+	height: 550px;
+	background: url(../Images/Sprite.home.jpg) -1px -1px;
+}
+.H_Home_Categories {
+/* You may have to set 'display: block' */
+	width: 300px;
+	height: 300px;
+	background: url(../Images/Sprite.home.jpg) -1px -552px;
+}
+.H_Home_CopmanyProfile {
+/* You may have to set 'display: block' */
+	width: 300px;
+	height: 300px;
+	background: url(../Images/Sprite.home.jpg) -1px -853px;
+}
+.H_Home_Professions {
+/* You may have to set 'display: block' */
+	width: 300px;
+	height: 300px;
+	background: url(../Images/Sprite.home.jpg) -1px -1154px;
+}
+/*
+This is an example of how to use the image sprite in your own CSS files
+*/
+.O_Company_Luxury {
+/* You may have to set 'display: block' */
+	width: 800px;
+	height: 499px;
+	background: url(../Images/Sprite.office.jpg) 0 0;
+}
+.O_Store_FirstFloor {
+/* You may have to set 'display: block' */
+	width: 700px;
+	height: 459px;
+	background: url(../Images/Sprite.office.jpg) 0 -500px;
+}

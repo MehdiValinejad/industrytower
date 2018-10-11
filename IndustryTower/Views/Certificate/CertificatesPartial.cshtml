@@ -1,0 +1,45 @@
+﻿@model IEnumerable<IndustryTower.Models.Certificate>
+
+<div id="UPCertificate" class=" panel panel-default">
+
+    <div class="panel-heading dirltr">
+        @if ((bool)ViewData["isAdmin"])
+        {
+            @Html.CreateIcon("Create", "Certificate", new { CoId = ViewData["company"] }, Class: "pull-right create-Certificate")
+        }
+        <h3 class="panel-title">
+            <span class="glyphicon glyphicon-certificate"></span> @Resource.certificates
+        </h3>
+    </div>
+    <div class="panel-body dir list-group">
+        @foreach (var certificateItem in Model)
+        {
+            <div id="certificateItem" class="list-group-item">
+                @if ((certificateItem.coID != null && certificateItem.Company.Admins.Any(a => a.UserId == WebSecurity.CurrentUserId))
+                    || WebSecurity.CurrentUserId == certificateItem.userID)
+                {
+                    @Html.ModifyIcons("Edit", "Delete", "Certificate", new { CertID = EncryptionHelper.Protect(certificateItem.certID) })
+                }
+
+                <strong>
+                    @Html.DisplayFor(model => certificateItem.CultureCertificateName)
+                </strong>
+                <div>
+                    <strong>
+                        @Resource.authority:
+                    </strong>  @Html.DisplayFor(model => certificateItem.CultureCertificator)
+                </div>
+                <div>
+                    <small>
+                        @Html.DisplayFor(model => certificateItem.certificationDate, "MonthYearOnly")
+                    </small>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+
+
+

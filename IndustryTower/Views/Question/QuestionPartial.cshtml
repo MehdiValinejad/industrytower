@@ -1,0 +1,21 @@
+﻿@model IndustryTower.Models.Question
+
+
+<div class="col-md-12 col-xs-12">
+    @Html.ActionLink(Model.questionSubject, "Detail",
+                    "Question",
+                            routeValues: new { QId = Model.questionID, QName = StringHelper.URLName(Model.questionSubject) },
+                    htmlAttributes: new { @class = "" })
+    <div>
+        <u>@Resource.answers <span class="badge">@Html.DisplayFor(model => model.Answers.Count)</span></u>
+    </div>
+
+    <div>
+        @Html.DisplayAbstractFor(Model.questionBody)
+    </div>
+</div>
+    
+
+
+
+

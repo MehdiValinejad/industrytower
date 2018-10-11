@@ -1,0 +1,98 @@
+﻿@model IEnumerable<IndustryTower.Models.Product>
+
+<div id="SlideShow" class="pos-rel no-pad bg-default proserv-sld" data-ld="">
+    <ul id="Slides" class="full-height pos-rel no-pad">
+        @foreach (var prd in Model)
+        {
+            if (!String.IsNullOrEmpty(prd.image))
+            {
+                HashSet<string> files = new HashSet<string>(prd.image.Split(new char[] { ',' }));
+                foreach (var file in files)
+                {
+                    var filepath = String.Concat("~/Uploads/", file.Substring(file.LastIndexOf('.') + 1), "/Product/", file);
+                    <li class="pos-abs overflow-hidden display-none no-pad full-height  full-width" data-url="@Url.Content(filepath)"></li>
+                }
+            }
+            else
+            {
+                    <li class="pos-abs overflow-hidden display-none no-pad full-height  full-width" data-url="no">
+                        <a href="@Url.Action("Detail", "Product", new { PrId = prd.productID, PrName = StringHelper.URLName(prd.CultureProductName) })">
+                            <img class="center-image" src="@Url.Content("~/Images/Icons/Product.png")" />
+                            <div class="bg-default pos-abs col-md-8 slide-desc">
+                                <div class="margin-top-bot-md">
+                                    <div class="bottom-border-blue margin-top-bot-xs">
+                                        sgsrsr
+                                    </div>
+                                    <div class="">
+
+                                        @prd.CultureProductName
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        
+                    </li>
+            }
+        }
+    </ul>
+
+    <!-- Arrow Left -->
+    <a id="arrowleft" class="left carousel-control">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <!-- Arrow Right -->
+    <a id="arrowright" class="right carousel-control">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+    <!-- navigator container -->
+    @*<ul id="slideNavigator"></ul>*@
+    <ol id="slideNavigator" class="carousel-indicators" dir="ltr"></ol>
+    <!-- Navigator Skin End -->
+</div>
+
+
+
+
+
+
+
+@*<div id="tabChangerContainer">
+    <div id="tabChanger" class=" left-box overflow-hidden">
+        @foreach (var item in Model)
+        {
+            <div class="tab  left-box-item">
+
+                @Html.ProfilePic(product: item)
+            </div>
+        }
+    </div>
+
+    @foreach (var item in Model)
+    {
+
+        <div class="tab-content hasleftbox proserv-left-box-avatar">
+
+            @Html.ProfilePic(product: item)
+            <div class="proserv-left-box-detail">
+                <p class="glass-gray medium-padding max-margin">
+                    @Html.ActionLink(item.CultureProductName, "Detail", "Product", new { PrId = EncryptionHelper.Protect(item.productID), PrName = StringHelper.URLName(item.CultureProductName) }, null)
+                </p>
+                @if (item.wuarantee != null)
+                {
+                    <p class="glass-gray medium-padding max-margin">
+                        @Html.DisplayNameFor(model => model.wuarantee) :
+                        @Html.DisplayFor(model => item.wuarantee)
+                    </p>
+                }
+                else if (item.guarantee != null)
+                {
+                    <p class="glass-gray medium-padding max-margin">
+                        @Html.DisplayNameFor(model => model.guarantee) :
+                        @Html.DisplayFor(model => item.guarantee)
+                    </p>
+                }
+
+            </div>
+        </div>
+    }
+</div>*@

@@ -1,0 +1,31 @@
+﻿@model IList<IndustryTower.Models.GroupSession>
+@using PagedList.Mvc;
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <a class="list-group-item" href="@Url.Action("Detail", "GroupSession", new { SsId = item.sessionId, GSName = StringHelper.URLName(item.sessionSubject) })">
+            <h4 class="list-group-item-heading">@Html.DisplayFor(model => item.sessionSubject)</h4>
+            <p class="list-group-item-text">
+                @Html.DisplayTextFor(model => item.sessionDesc)
+            </p>
+            <small>
+                @Html.DisplayFor(model => item.startDate, "WordDate") @if (item.endDate != null)
+                {<text>-</text> @Html.DisplayFor(model => item.startDate, "WordDate")}
+            </small>
+        </a>
+    }
+<a href="#" id="nextSessions">
+
+    @if ((bool)ViewData["finalPage"] == false)
+    {
+        var pagenumber = (int)ViewData["pageNum"];
+        @Html.NextItems("PartialList", "GroupSession", new
+           {
+               GId = ViewData["GId"],
+               sessionType = ViewData["sessionType"],
+               page = pagenumber + 1
+           }, "next-sessions-link")
+    }
+</a>
+}

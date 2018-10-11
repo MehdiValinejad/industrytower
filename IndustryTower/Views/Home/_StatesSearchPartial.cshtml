@@ -1,0 +1,12 @@
+﻿@model IEnumerable<IndustryTower.Models.CountState>
+
+@foreach (var item in Model)
+{
+    <div class="search-nano-item" data-id="@item.stateID">
+        <div class="float-left">
+            @Html.DisplayFor(model => item.CultureFullState)
+        </div>
+    </div>
+}
+
+

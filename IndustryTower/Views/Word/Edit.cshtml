@@ -1,0 +1,103 @@
+﻿@model IndustryTower.ViewModels.WordEditVars
+@using IndustryTower.Models
+@{
+    ViewBag.Title = Resource.edit;
+    string dir = "dirltr",
+           placeholder = ModelDisplayName.wordEn;
+
+    if (Model.lang == lang.fa)
+    {
+        dir = "dir";
+        placeholder = ModelDisplayName.wordFa;
+    }
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-warning">
+        @TempData["Message"]
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 dir">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="text-center">
+                    <strong>@Resource.improveWord</strong>
+                </div>
+                <div>
+                    <strong>@ModelDisplayName.word:</strong> @Model.word
+                </div>
+                <div>
+                    <strong>@ModelDisplayName.dicName:</strong> @Model.dicInfo.name
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                     @foreach (var item in Model.wordEditgs)
+                     {
+                         <div class="col-md-6">
+                             <div class="panel panel-default">
+                                 <div class="panel-body @dir ">
+                                     <div class="pull-left margin-lf-r8-md">
+                                         @{Html.RenderPartial("~/Views/Score/Main.cshtml", new IndustryTower.ViewModels.ScoreVars
+                                    {
+                                        elemId = item.editId,
+                                        type = IndustryTower.Models.ScoreType.WEditvote,
+                                        count = item.Score == null ? 0 : (int)item.Score
+                                    });}
+                                     </div>
+                                     @item.text<br /> - <small>@Html.ActionLink(item.editorName, "UProfile", "UserProfile", new { UId = item.editorId, UName = StringHelper.URLName(item.editorName) }, null)</small>
+                                     
+                                    
+                                 </div>
+                             </div>
+                         </div>
+                     }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-md-offset-2 dir">
+        <div id="wordEdit" class="panel panel-primary">
+            <div class="panel-heading">
+                @Resource.edit
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Serialize("mdl", new IndustryTower.ViewModels.WordEditVars
+                       {
+                           DId = Model.DId,
+                           mainWId = Model.mainWId
+                       }, SerializationMode.Plaintext)
+
+                    <div id="wordChoose" class="form-group pos-rel">
+                        <input type="hidden" name="WId" id="WId" value="@Model.WId" />
+                        @*@Html.HiddenFor(model => model.WId, new { @class = "form-control" })*@
+                        @Html.TextBoxFor(model => model.edited, new { @class = "form-control hasWordShearch " + dir, data_prv = "prv-en", placeholder = placeholder, autocomplete = "off", @style = "padding-right:30px" })
+
+                        <span class="form-control-feedback glyphicon glyphicon-refresh enable-input display-none" title="@Resource.edit"></span>
+                        @Html.ValidationMessageFor(model => model.edited)
+                        <div class="currentwords panel panel-default pos-rel col-md-12">
+                            <div id="loading"></div>
+                        </div>
+                    </div>
+
+                    <input type="submit" value="@Resource.edit" class="final-submit btn btn-primary col-md-12 display-none" data-loading-text="@Resource.loading" />
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/Dict")
+    @Scripts.Render("~/bundles/Score")
+}

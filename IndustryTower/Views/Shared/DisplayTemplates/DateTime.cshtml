@@ -1,0 +1,10 @@
+﻿@model DateTime 
+@if (Model != null)
+{
+    DateTime runtimeKnowsThisIsUtc = DateTime.SpecifyKind(Model, DateTimeKind.Utc);
+    DateTime localVersion = runtimeKnowsThisIsUtc.ToLocalTime();
+
+        @localVersion;
+
+}
+else { <span></span> }

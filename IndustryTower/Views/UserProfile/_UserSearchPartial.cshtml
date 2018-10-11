@@ -1,0 +1,24 @@
+﻿@model IEnumerable<IndustryTower.Models.ActiveUser>
+@foreach (var item in Model)
+{
+    
+
+    <div class="search-mini-item btn btn-default cursor-point" data-id="@EncryptionHelper.Protect(item.UserId)">
+        <div class="inline-block">
+            <span class="us-text" data-name="@Html.DisplayFor(model => item.CultureFullName)">
+                <strong>@Html.DisplayFor(model => item.CultureFullName)</strong>
+            </span>
+            <div class="overflow-hidden" style="max-width:200px">
+                <small>
+                    @Html.AboutUser(item)
+                </small>
+            </div>
+           
+        </div>
+        <div class="inline-block">
+            @Html.ProfilePic(user: item, imghtmlAttributes: new { @class = "min-img" })
+        </div>
+    </div>
+}
+
+

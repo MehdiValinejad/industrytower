@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sprite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://vswebessentials.com/schemas/v1/sprite.xsd">
+  <settings>
+    <!--Determines if the sprite image should be automatically optimized after creation/update.-->
+    <optimize>false</optimize>
+    <!--Determines the orientation of images to form this sprite. The value must be vertical or horizontal.-->
+    <orientation>vertical</orientation>
+    <!--File extension of sprite image.-->
+    <outputType>png</outputType>
+    <!--Determin whether to generate/re-generate this sprite on building the solution.-->
+    <runOnBuild>false</runOnBuild>
+    <!--Use full path to generate unique class or mixin name in CSS, LESS and SASS files. Consider disabling this if you want class names to be filename only.-->
+    <fullPathForIdentifierName>false</fullPathForIdentifierName>
+    <!--Use absolute path in the generated CSS-like files. By default, the URLs are relative to sprite image file (and the location of CSS, LESS and SCSS).-->
+    <useAbsoluteUrl>false</useAbsoluteUrl>
+    <!--Specifies a custom subfolder to save CSS files to. By default, compiled output will be placed in the same folder and nested under the original file.-->
+    <outputDirectoryForCss />
+    <!--Specifies a custom subfolder to save LESS files to. By default, compiled output will be placed in the same folder and nested under the original file.-->
+    <outputDirectoryForLess />
+    <!--Specifies a custom subfolder to save SCSS files to. By default, compiled output will be placed in the same folder and nested under the original file.-->
+    <outputDirectoryForScss />
+  </settings>
+  <!--The order of the <file> elements determines the order of the images in the sprite.-->
+  <files>
+    <file>/Images/Icons/I_Add.png</file>
+    <file>/Images/Icons/I_AddNotif.png</file>
+    <file>/Images/Icons/I_Admin.png</file>
+    <file>/Images/Icons/I_ArrowDown.png</file>
+    <file>/Images/Icons/I_attachment.png</file>
+    <file>/Images/Icons/I_Certificate.png</file>
+    <file>/Images/Icons/I_CertificateLarge.png</file>
+    <file>/Images/Icons/I_close.png</file>
+    <file>/Images/Icons/I_CompanySize.png</file>
+    <file>/Images/Icons/I_Education.png</file>
+    <file>/Images/Icons/I_Email.png</file>
+    <file>/Images/Icons/I_Event.png</file>
+    <file>/Images/Icons/I_Eventlight.png</file>
+    <file>/Images/Icons/I_Experience.png</file>
+    <file>/Images/Icons/I_ExperienceLarge.png</file>
+    <file>/Images/Icons/I_Fax.png</file>
+    <file>/Images/Icons/I_Free.png</file>
+    <file>/Images/Icons/I_Freefa.png</file>
+    <file>/Images/Icons/I_Friends.png</file>
+    <file>/Images/Icons/I_Group.png</file>
+    <file>/Images/Icons/I_Home.png</file>
+    <file>/Images/Icons/I_Job.png</file>
+    <file>/Images/Icons/I_Logo.png</file>
+    <file>/Images/Icons/I_Logout.png</file>
+    <file>/Images/Icons/I_MarkedAsAnswer.png</file>
+    <file>/Images/Icons/I_Money.png</file>
+    <file>/Images/Icons/I_More.png</file>
+    <file>/Images/Icons/I_Notif_AnswerAcept.png</file>
+    <file>/Images/Icons/I_Notif_Comment.png</file>
+    <file>/Images/Icons/I_Notif_Follow.png</file>
+    <file>/Images/Icons/I_Notif_FriendReq.png</file>
+    <file>/Images/Icons/I_Notif_Like.png</file>
+    <file>/Images/Icons/I_Notif_Post.png</file>
+    <file>/Images/Icons/I_Notif_QAnswer.png</file>
+    <file>/Images/Icons/I_Notifications.png</file>
+    <file>/Images/Icons/I_NotificationsFA.png</file>
+    <file>/Images/Icons/I_Office.png</file>
+    <file>/Images/Icons/I_Patent.png</file>
+    <file>/Images/Icons/I_Pencil.png</file>
+    <file>/Images/Icons/I_Question.png</file>
+    <file>/Images/Icons/I_Question_Purple.png</file>
+    <file>/Images/Icons/I_QuestionAsked.png</file>
+    <file>/Images/Icons/I_QuestionsAnswered.png</file>
+    <file>/Images/Icons/I_QuestionsAnsweredLarge.png</file>
+    <file>/Images/Icons/I_QuestionUP.png</file>
+    <file>/Images/Icons/I_RecycleBin.png</file>
+    <file>/Images/Icons/I_Search.png</file>
+    <file>/Images/Icons/I_Search_All.png</file>
+    <file>/Images/Icons/I_Search_ArrowDown.png</file>
+    <file>/Images/Icons/I_Search_Company.png</file>
+    <file>/Images/Icons/I_Search_Event.png</file>
+    <file>/Images/Icons/I_Search_Group.png</file>
+    <file>/Images/Icons/I_Search_Job.png</file>
+    <file>/Images/Icons/I_Search_People.png</file>
+    <file>/Images/Icons/I_Search_Product.png</file>
+    <file>/Images/Icons/I_Search_project.png</file>
+    <file>/Images/Icons/I_Search_Question.png</file>
+    <file>/Images/Icons/I_Search_Services.png</file>
+    <file>/Images/Icons/I_Search_Store.png</file>
+    <file>/Images/Icons/I_Search_Webinar.png</file>
+    <file>/Images/Icons/I_Settings.png</file>
+    <file>/Images/Icons/I_Telephone.png</file>
+    <file>/Images/Icons/I_WebSite.png</file>
+  
+  </files>
+</sprite>

@@ -1,0 +1,46 @@
+﻿@model IndustryTower.ViewModels.UserQuestionsViewmodel
+
+<div id="UPQuestions" class=" panel panel-default">
+    <div class ="panel-heading dirltr">
+        <h3 class="panel-title"><span class="icon-Question"></span> @Resource.homefeedQuestions</h3>
+    </div>
+    <div id="tabChangerContainer" class="QSlider panel-body dir">
+        <div id="tabChanger">
+            <div class="tab header-box UQuestion-header label label-info">
+                @Resource.lastAnswers
+            </div>
+            <div class="tab header-box UQuestion-header label label-info">
+                @Resource.lastQuestions
+            </div>
+        </div>
+
+        @if (Model.Questions != null)
+        {
+            <div class="tab-content  list-group">
+                @foreach (var questionItem in Model.Questions)
+                {
+
+                    @Html.ActionLink(questionItem.questionSubject, "Detailes", "Question", new { QId = questionItem.questionID , QName = StringHelper.URLName(questionItem.questionSubject) }, new { @class = "list-group-item" })
+
+                }
+            </div>
+        }
+        @if (Model.QuestionsAnswered != null)
+        {
+            <div class="tab-content">
+                @foreach (var questionItem in Model.QuestionsAnswered)
+                {
+
+                    @Html.ActionLink(questionItem.questionSubject, "Detailes", "Question", new { QId = questionItem.questionID, QName = StringHelper.URLName(questionItem.questionSubject) }, new { @class = "list-group-item" })
+
+                }
+            </div>
+        }
+
+    </div>
+</div>
+    <script>
+        $(document).ready(function () {
+            TabChanger($("#tabChangerContainer"), "UPQuestions", 3000);
+        })
+    </script>

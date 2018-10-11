@@ -1,0 +1,60 @@
+﻿@model IEnumerable<IndustryTower.Models.Category>
+
+    <ul id="childsContainer" class="CatColor list-unstyled ">
+        @foreach (var child in Model.Where(p => p.parent1ID == null))
+        {
+            <li id="childCat" class="CatColor list-unstyled " data-value="@child.catID" data-url="@Url.Action("CategoryTags", new { parentId = child.catID })">
+                <span>
+                    @Html.DisplayFor(model => child.CultureCatName)
+                </span>
+                <ul id="childsContainer" class="CatColor list-unstyled ">
+                    @foreach (var childone in Model.Where(f => f.parent1ID == child.catID))
+                    {
+
+                        <li id="childCat" class="CatColor list-unstyled " data-value="@childone.catID" data-url="@Url.Action("CategoryTags", new { parentId = childone.catID })">
+                            <span>
+                                @Html.DisplayFor(model => childone.CultureCatName)
+                            </span>
+                            <ul id="childsContainer" class="CatColor list-unstyled ">
+                                @foreach (var childtwo in Model.Where(f => f.parent1ID == childone.catID))
+                                {
+
+                                    <li id="childCat" class="CatColor list-unstyled " data-value="@childtwo.catID" data-url="@Url.Action("CategoryTags", new { parentId = childtwo.catID })">
+                                        <span>
+                                            @Html.DisplayFor(model => childtwo.CultureCatName)
+                                        </span>
+                                        <ul id="childsContainer" class="CatColor list-unstyled ">
+                                            @foreach (var childthree in Model.Where(f => f.parent1ID == childtwo.catID))
+                                            {
+
+                                                <li id="childCat" class="CatColor list-unstyled " data-value="@childthree.catID" data-url="@Url.Action("CategoryTags", new { parentId = childthree.catID })">
+                                                    <span>
+                                                        @Html.DisplayFor(model => childthree.CultureCatName)
+                                                    </span>
+                                                    <ul id="childsContainer" class="CatColor list-unstyled ">
+                                                        @foreach (var childfour in Model.Where(f => f.parent1ID == childthree.catID))
+                                                        {
+
+                                                            <li id="childCat" class="CatColor list-unstyled " data-value="@childfour.catID" data-url="@Url.Action("CategoryTags", new { parentId = childfour.catID })">
+                                                                <span>
+                                                                    @Html.DisplayFor(model => childfour.CultureCatName)
+                                                                </span>
+                                                            </li>
+
+                                                        }
+                                                    </ul>
+                                                </li>
+
+                                            }
+                                        </ul>
+                                    </li>
+
+                                }
+                            </ul>
+                        </li>
+
+                    }
+                </ul>
+            </li>
+        }
+    </ul> 

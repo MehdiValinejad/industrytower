@@ -1,0 +1,30 @@
+﻿
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">
+        @Resource.deleteCurrentPic
+    </h4>
+</div>
+
+@using (Html.BeginForm("LogoPicDelete", "Store", FormMethod.Post, new { @class = "deletLogo-pic" }))
+{
+    <div class="modal-body dir">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.Hidden("store", ViewData["StId"])
+        <h3>
+            @Resource.areYouSure
+        </h3>
+    </div>
+    <div class="modal-footer dir">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resource.close</button>
+        <input type="submit" value="@Resource.deleteCurrentPic" class="btn btn-primary" data-loading-text="@Resource.loading" />
+    </div>
+}
+
+
+
+
+
+
+

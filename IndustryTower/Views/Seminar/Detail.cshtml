@@ -1,0 +1,153 @@
+﻿@model IndustryTower.Models.Seminar
+@using IndustryTower.Models
+@{
+    ViewBag.Title = Model.title;
+    var isModerator = AuthorizationHelper.isRelevant(Model.moderatorId);
+    var AudiencesLink = isModerator ? Url.Action("AddAudience", "Seminar", new { SnId = EncryptionHelper.Protect(Model.seminarId) }) : Url.Action("Audiences", "Seminar", new { SnId = EncryptionHelper.Protect(Model.seminarId) });
+    var remainingseat = Model.maxAudiences - Model.Audiences.Count;
+}
+@section head{
+    <meta name="description" content="@Model.desc">
+    <meta name="keywords" content="@String.Join(",", Model.title.Split(new char [] {' '}))">
+}
+
+<div class="row dir">
+    @if (ViewData["message"] != null)
+    {
+        <div class="col-md-12">
+            <div class="alert alert-warning text-center">
+                @ViewData["message"]
+            </div>
+        </div>
+    }
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+
+                <div class="text-center">
+                    @Html.ProfilePic(user: Model.Moderator, linkhtmlAttributes: new { @class = "inline-block" })
+                </div>
+            </div>
+            <div class="panel-body">
+                <strong>
+                    <big>
+                        @Model.Moderator.CultureFullName
+                    </big>
+                </strong>
+                <div>
+                    @Html.AboutUser(user: Model.Moderator)
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                @Resource.relatedProfessions
+            </div>
+            <div class="panel-body">
+                @Html.AjaxPrtialLoader(Url.Action("RelatedProfessions", "Profession", new { SnId = Model.seminarId }))
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                @Resource.relatedCategories
+            </div>
+            <div class="panel-body">
+                @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { SnId = Model.seminarId }))
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8 ">
+        @if (AuthorizationHelper.isAdmin())
+        {
+            @Html.ModifyIcons("Edit", "Delete", "Seminar", new { SnId = EncryptionHelper.Protect(Model.seminarId) }, editAjax: false, deleteAjax: false)
+        }
+        <h1 class="titr">
+            @Html.ActionLink(Model.title, "Detail", "Seminar", new { SnId = Model.seminarId, SnName = StringHelper.URLName(Model.title) }, null)
+            @if (Model.price == 0)
+            {
+                <span class="alert alert-success pull-left">
+                    @Resource.free
+                </span>
+            }
+        </h1>
+
+        <div class="bg-default col-md-12 col-xs-12">
+            @Html.DisplayFor(model => model.desc)
+        </div>
+        <div class="col-md-12 col-xs-12 margin-top-bot-md">
+            <big class="col-md-10 col-md-offset-1 col-xs-12 alert alert-info text-center">
+                <strong>
+                    @Resource.time
+                </strong>
+                @Html.DisplayFor(model => model.date, "WordDateTime")
+                <div>
+                    <strong>
+                        @Resource.semRemainingSeat
+                    </strong>
+                    <span class="badge">@remainingseat</span>
+                </div>
+            </big>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @if (Model.isPublic && Model.Audiences.Any(a => a.UserId == WebSecurity.CurrentUserId))
+                {
+                    @Html.ActionLink(Resource.webinarNotAttend, "Attendance", "Seminar", new { SnId = EncryptionHelper.Protect(Model.seminarId) }, new { @class = "pull-left btn btn-primary" })
+                }
+                else if (Model.moderatorId == WebSecurity.CurrentUserId)
+                {
+                    <button class="pull-left btn btn-success" disabled>
+                        @Resource.webinarModerator
+                    </button>
+                }
+                else if (Model.Broadcasters.Any(a => a.UserId == WebSecurity.CurrentUserId))
+                {
+                    <button class="pull-left btn btn-success" disabled>
+                        @Resource.webinarBroadcasting
+                    </button>
+                }
+                else if (Model.isPublic)
+                {
+                    @Html.ActionLink(Resource.webinarAttending, "Attendance", "Seminar", new { SnId = EncryptionHelper.Protect(Model.seminarId) }, new { @class = "pull-left btn btn-primary" })
+                }
+                <a id="seminarAudiences" href="@AudiencesLink" title="@Resource.audiences" class="pull-right icn-30" data-ajax="@(isModerator ? "false" : "true")">
+                    <span class="icon-Group inline-block"></span>
+                    <span class="badge inline-block">
+                        @if (Model is Webinar)
+                        {
+                            @Model.Audiences.Count
+                            <strong> - @EnumTypes.Webinar</strong>
+                        }
+                        else
+                        {
+                            
+                            @Model.Broadcasters.Count
+                            <strong> - @EnumTypes.Workshop</strong>
+                            
+                        }
+                    </span>
+
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<div class="sem-detail middle-shadow float-right">
+
+
+
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/Seminar")
+}

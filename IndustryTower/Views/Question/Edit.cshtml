@@ -1,0 +1,155 @@
+﻿@model IndustryTower.Models.Question
+
+@{
+    ViewBag.Title = Resource.edit + " " + Resource.question + Model.questionSubject;
+    var imgs = Model.image != null ? Model.image.Split(new char[] { ',' }).Where(f => !String.IsNullOrEmpty(f)) : Enumerable.Empty<string>();
+    var docs = Model.docuoment != null ? Model.docuoment.Split(new char[] { ',' }).Where(f => !String.IsNullOrEmpty(f)) : Enumerable.Empty<string>();
+}
+<div class="row">
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.AjaxPrtialLoader(Url.Action("HomeQuestions", "UserProfile"))
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 dir bg-default">
+        <div id="questionEdit" class="hasUpload  margin-top-bot-md">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+                    <legend>@Resource.edit @Resource.question</legend>
+
+                    @Html.Hidden("questionID", EncryptionHelper.Protect(Model.questionID))
+                    @Html.Hidden("filesToUpload", String.Join(",", imgs.Concat(docs)))
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.questionSubject, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.questionSubject, new
+                       {
+                           @class = "form-control",
+                           @placeholder = Resource.questionSubject
+                       })
+                        @Html.ValidationMessageFor(model => model.questionSubject)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.questionBody, new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.questionBody, new { @class = "form-control", @placeholder = Resource.questionBody, @onkeyup = "textAreaAdjust(this)" })
+                        @Html.ValidationMessageFor(model => model.questionBody)
+                    </div>
+
+
+                    <div class="row bg-darkgray padding-top-bot-md">
+                        <div class="col-md-12 col-xs-12">
+                            @Resource.bookUploadHelp
+                            <div id="uploadButton" class="fileUpload-button glyphicon glyphicon-upload btn btn-lg btn-default" title="@Resource.upload" data-placement="bottom">
+                                @Html.TextBox("bookFiles", null, new { @type = "file", @name = "files[]", @class = "post-files" })
+                            </div>
+                            <div class="progress col-md-12">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                    <span class="sr-only">0% complete</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul id="uploadedFiles" class="col-md-12 no-margin">
+                            @foreach (var image in imgs)
+                            {
+                                var ext = image.Substring(image.LastIndexOf('.') + 1);
+                                <li data-file="@image">
+                                    <button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                    <img src="~/Uploads/@ext/Question/@image" class='full-height thumbnail' />
+                                </li>
+                            }
+                            @foreach (var file in docs)
+                            {
+                                var ext = file.Substring(file.LastIndexOf('.') + 1);
+                                <li data-file="@file">
+                                    <button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                    <a href="~/Uploads/@ext/Question/@file">
+                                        <span class="@String.Concat("icon-", ext) thumbnail"></span>
+                                        @*@Html.Sprite(String.Concat("F_", ext), new { @class = "thumbnail" })*@
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+
+
+                    @Html.Hidden("professionTags", String.Join(",", Model.Professions.Select(p => p.profID)))
+                    <div class="bg-info row">
+                        <div class="col-md-12">
+                            <div id="selectedProfs" class="margin-top-bot-md">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <strong>
+                                            @Resource.selectedProfessions
+                                        </strong>
+
+                                    </div>
+                                    <div class="panel-body">
+                                        @foreach (var prof in Model.Professions)
+                                        {
+                                            <div id='selectedProf' class='pink-tag inline-block' data-id="@prof.profID">
+                                                @Html.DisplayFor(model => prof.CultureProfessionName)
+                                                <button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            @Resource.professionChooseHelp
+                            <div class="form-group">
+                                <input type="text" id="ProfessionSearchBox" value="" placeholder="@Resource.professionTagChoose" class="form-control" />
+                            </div>
+                            <div class="professtionTags-container panel panel-default pos-rel">
+                                <div id="loading">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="padding-top-bot-md">
+                        <input type="submit" value='@Resource.edit' id="askButton" class="btn btn-primary col-md-8" data-loading-text="@Resource.loading" />
+                        <div class="col-md-4">
+                            @*@Html.DisplayNameFor(model => model.language)*@
+                            @Html.DropDownList("language", ViewBag.languages as SelectList, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.language)
+                        </div>
+                    </div>
+                    
+                </fieldset>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+@Scripts.Render("~/bundles/Question")
+@Scripts.Render("~/bundles/Profession")
+@Scripts.Render("~/bundles/Upload")
+@Scripts.Render("~/bundles/TabChanger")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //CallDatePicker();
+        ProfessionsTag('@IndustryTower.App_Start.ITTConfig.MaxProfessionTagsLimit',
+                       '@ModelValidation.YouCanChooseMax5Professions')
+
+        $("body").delegate("div#uploadShortcut", 'click', function () {
+            $(this).next("#uploadedFiles").slideDown();
+        })
+
+        UploadFile('@IndustryTower.App_Start.ITTConfig.FileSizeLimit',
+                           '@IndustryTower.App_Start.ITTConfig.MaxFilesCountPost',
+                           '@ModelValidation.maxUploadFileLimit',
+                           '@ModelValidation.maxUploadFileCount',
+                           '@ModelValidation.fileTypeLimit');
+    });
+
+</script>

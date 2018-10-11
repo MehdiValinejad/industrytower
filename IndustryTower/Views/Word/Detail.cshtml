@@ -1,0 +1,114 @@
+﻿@model IndustryTower.ViewModels.WordViewModel
+@using IndustryTower.Models
+@{
+    var dir = "dirltr";
+    var dirBack = "dir";
+    if (Model.word.lang == lang.fa)
+    {
+        dir = "dir";
+        dirBack = "dirltr";
+    }
+    int dicId = 0;
+    bool hasMeanningInDic = false;
+    if (Request.QueryString["DId"] != null)
+    {
+        dicId = int.Parse(Request.QueryString["DId"]);
+    }
+    else
+    {
+        hasMeanningInDic = true;
+    }
+    
+}
+
+@section head{
+    <meta name="keywords" content="@String.Join(",", Model.word.word.Split(new char [] {' '}))">
+    @if (ViewContext.RouteData.Values["WName"] as string != StringHelper.URLName(Model.word.word))
+    {
+        <link rel="canonical" href="@Url.Action("Detail", "Word", new { WId = Model.word.wordId, WName = StringHelper.URLName(Model.word.word) })" />
+    }
+}
+
+
+@if (TempData["Message"] != null)
+{
+    <div class="col-md-8 col-md-offset-2">
+        <div class="alert alert-warning">
+            @TempData["Message"]
+        </div>
+    </div>
+}
+
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-primary">
+            <div class="panel-heading @dir">
+                <div class="@dirBack">
+                    <small>
+                        @Html.ActionLink(Model.word.Creator.firstName, "UProfile", "UserProfile", new { UId = Model.word.creatorId, UName = StringHelper.URLName(Model.word.Creator.firstName) }, new { @class = "text-white" })
+                    </small>
+                </div>
+                <h1>
+                    @Model.word.word
+                </h1>
+            </div>
+            <div class="panel-body @dirBack">
+                <div class="row">
+                    @foreach (var trans in Model.Translates)
+                    {
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="@dir">
+                                        <small>@Html.ActionLink(trans.Creator.firstName, "UProfile", "UserProfile", new { UId = trans.creatorId, UName = StringHelper.URLName(trans.Creator.firstName) }, null)</small>
+                                    </div>
+                                    <h2>
+                                        @trans.word
+                                    </h2>
+                                </div>
+                                <div class="panel-body">
+                                    @foreach (var desc in Model.Descs.Where(d => d.wordId == trans.wordId))
+                                    {
+                                        if (desc.dicId == dicId) { hasMeanningInDic = true; }
+                                        <div class="row bg-default margin-top-bot-md">
+                                            <div class="margin-lf-r8-md">
+                                                <div>
+                                                    @desc.desc
+                                                </div>
+                                                <div class="@dir">
+                                                    <small>
+                                                        @Html.ActionLink(desc.Dict.name, "Dictionary", "Dict", new { DId = desc.dicId, DName = StringHelper.URLName(desc.Dict.name) }, null)
+                                                    </small> -
+                                                    <small>@Html.ActionLink(desc.Creator.firstName, "UProfile", "UserProfile", new { UId = desc.creatorId, UName = StringHelper.URLName(desc.Creator.firstName) }, null)</small> -
+                                                    <small>@Html.ActionLink(Resource.edit, "Edit", "WordDesc", new { WdId = desc.descId }, null)</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    @if (!hasMeanningInDic)
+                    {
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                        @Resource.wordMeanningNotFound
+                                </div>
+                                <div class="panel-body">
+                                    <span class="text-danger">
+                                        @Resource.wordMeanningNotFoundHelp
+                                    </span>
+                                    @Html.ActionLink(Resource.addTranslate, "AddTranslate", "Word", new { WId = Model.word.wordId, DId = dicId }, new { @class = "btn btn-xs btn-primary col-md-12 margin-top-bot-md" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

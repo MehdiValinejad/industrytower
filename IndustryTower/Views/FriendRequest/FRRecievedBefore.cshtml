@@ -1,0 +1,33 @@
+﻿@model IndustryTower.ViewModels.FriendRequestViewModel
+
+<div id="friendRequest" class="dirltr">
+    @using (Html.BeginForm("ConfirmFriendRequest", "FriendRequest",
+                            FormMethod.Post,
+                            new { @Class = "friendRequest-form inline-block" })) 
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+            
+                @Html.Hidden("user", Model.user)
+                @Html.Hidden("request", Model.request)
+
+    <input type="submit" value="@Resource.friendRequestConfirm" id="friensRequest-botton" class="btn btn-primary btn-xs" data-loading-text="@Resource.loading" />
+
+            }
+
+
+
+    @using (Html.BeginForm("DenyFriendRequest", "FriendRequest",
+                            FormMethod.Post,
+                            new { @Class = "friendRequest-form inline-block" })) 
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+            
+                @Html.HiddenFor(model=>Model.user)
+                @Html.HiddenFor(model=>Model.request)
+
+    <input type="submit" value="@Resource.friendRequestDeny" id="friensRequest-botton" class="btn btn-primary btn-xs" data-loading-text="@Resource.loading" />
+
+            }
+</div>

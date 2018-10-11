@@ -1,0 +1,204 @@
+﻿@model IndustryTower.Models.Book
+@{
+    ViewBag.Title = Resource.edit;
+    var imgs = Model.image != null ? Model.image.Split(new char[] { ',' }).Where(f => !String.IsNullOrEmpty(f)) : Enumerable.Empty<string>();
+    var docs = Model.file != null ? Model.file.Split(new char[] { ',' }).Where(f => !String.IsNullOrEmpty(f)) : Enumerable.Empty<string>();
+}
+
+<div class="row ">
+    <div class="col-md-8 col-md-offset-2 dir bg-default">
+        <div class="similar-Books margin-top-bot-md">
+            <div class="alert alert-info">
+                @Resource.searchBeforeBook
+            </div>
+            <ul></ul>
+        </div>
+        <div id="bookCreate" class="hasUpload margin-top-bot-md">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+                    <legend>@Resource.createBook</legend>
+
+                    @Html.Hidden("filesToUpload", String.Join(",", imgs.Concat(docs)))
+
+                    <div class="group-admin-choose hasUserChoose row form-group bg-info padding-top-bot-md">
+                       
+                        <ul id="choosedUsers" class="col-md-12 list-unstyled">
+                            @if (Model.Users.Count > 0)
+                            {
+                                foreach (var item in Model.Users)
+                                {
+                                    <li class="btn btn-default" data-id="@EncryptionHelper.Protect(item.UserId)">
+                                        <button type="button" class="close pull-right"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <div class="inline-block">
+                                            <span class="us-txt" data-name="@Html.DisplayFor(model => item.CultureFullName)">
+                                                <strong>@Html.DisplayFor(model => item.CultureFullName)</strong>
+                                            </span>
+                                            <div class="overflow-hidden" style="max-width:200px">
+                                                <small>
+                                                    @Html.AboutUser(item)
+                                                </small>
+                                            </div>
+
+                                        </div>
+                                        <div class="inline-block">
+                                            @Html.ProfilePic(user: item, imghtmlAttributes: new { @class = "min-img" })
+                                        </div>
+                                    </li>
+                                }
+                            }
+                            @Html.Hidden("UserTags")
+                        </ul>
+
+                        <div class="form-group col-md-12">
+                            @Html.TextBox("newUser", null, new
+                            {
+                                @class = "has-mini-search form-control",
+                                data_minisearch = Url.Action("_UserSearchPartial", "UserProfile"),
+                                placeholder = Resource.typeToSearchUsersForBook,
+                                autocomplete = "Off"
+
+                            })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.title, new
+                           {
+                               @placeholder = ModelDisplayName.bookTitle,
+                               @class = "form-control has-mini-search",
+                               data_minisearch = Url.Action("_BookSearchPartial", "Book")
+
+                           })
+                        @Html.ValidationMessageFor(model => model.title)
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.TextBoxFor(model => model.writer, new { @placeholder = ModelDisplayName.bookWriter, @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.writer)
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.TextBoxFor(model => model.translator, new { @placeholder = ModelDisplayName.bookTranslator, @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.translator)
+                    </div>
+                    <div class="form-group col-md-6 col-md-offset-3">
+                        @Html.TextBoxFor(model => model.print, new { @placeholder = ModelDisplayName.bookPrint, @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.print)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.TextAreaFor(model => model.abtrct, new { @placeholder = ModelDisplayName.bookAbstract, @class = "form-control scroll-y", rows = "15" })
+                        @Html.ValidationMessageFor(model => model.abtrct)
+                    </div>
+
+
+                    <div class="row bg-darkgray padding-top-bot-md">
+
+                        <div class="col-md-12 col-xs-12">
+                            @Resource.bookUploadHelp
+                            <div id="uploadButton" class="fileUpload-button glyphicon glyphicon-upload btn btn-lg btn-default" title="@Resource.upload" data-placement="bottom">
+                                @Html.TextBox("bookFiles", null, new { @type = "file", @name = "files[]", @class = "post-files" })
+                            </div>
+                            <div class="progress col-md-12">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                    <span class="sr-only">0% complete</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul id="uploadedFiles" class="col-md-12 no-margin">
+                            @foreach (var image in imgs)
+                            {
+                                var ext = image.Substring(image.LastIndexOf('.') + 1);
+                                <li data-file="@image">
+                                    <button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                    <img src="~/Uploads/@ext/Book/@image" class='full-height thumbnail' />
+                                </li>
+                            }
+                            @foreach (var file in docs)
+                            {
+                                var ext = file.Substring(file.LastIndexOf('.') + 1);
+                                <li data-file="@file">
+                                    <button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                    <a href="~/Uploads/@ext/Book/@file">
+                                        <span class="@String.Concat("icon-", ext) thumbnail"></span>
+                                        @*@Html.Sprite(String.Concat("F_", ext), new { @class = "thumbnail" })*@
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+
+
+                    @Html.Hidden("professionTags", String.Join(",", Model.Professions.Select(p => p.profID)))
+                    <div class="bg-info row">
+                        <div class="col-md-12">
+                            <div id="selectedProfs" class="margin-top-bot-md">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <strong>
+                                            @Resource.selectedProfessions
+                                        </strong>
+
+                                    </div>
+                                    <div class="panel-body">
+                                        @foreach (var prof in Model.Professions)
+                                        {
+                                            <div id='selectedProf' class='pink-tag inline-block' data-id="@prof.profID">
+                                                @Html.DisplayFor(model => prof.CultureProfessionName)
+                                                <button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            @Resource.professionChooseHelp
+                            <div class="form-group">
+                                <input type="text" id="ProfessionSearchBox" value="" placeholder="@Resource.professionTagChoose" class="form-control" />
+                            </div>
+                            <div class="professtionTags-container panel panel-default pos-rel">
+                                <div id="loading">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <input type="submit" value='@Resource.edit' id="askButton" class="btn btn-primary col-md-8 col-md-offset-2" data-loading-text="@Resource.loading" />
+
+                </fieldset>
+            }
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/UserTags")
+    @Scripts.Render("~/bundles/Book")
+    @Scripts.Render("~/bundles/Upload")
+    @Scripts.Render("~/bundles/Profession")
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            ProfessionsTag('@IndustryTower.App_Start.ITTConfig.MaxProfessionTagsLimit',
+                      '@ModelValidation.YouCanChooseMax5Professions');
+
+
+            $("body").delegate("div#uploadShortcut", 'click', function () {
+                $(this).next("#uploadedFiles").slideDown();
+            })
+
+            UploadFile('@IndustryTower.App_Start.ITTConfig.FileSizeLimitBook',
+                               '@IndustryTower.App_Start.ITTConfig.MaxFilesCountBook',
+                               '@ModelValidation.maxUploadFileLimit',
+                               '@ModelValidation.maxUploadFileCount',
+                               '@ModelValidation.fileTypeLimit');
+        });
+    </script>
+}
+

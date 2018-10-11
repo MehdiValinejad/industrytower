@@ -1,0 +1,61 @@
+﻿@model IEnumerable<IndustryTower.Models.Experience>
+
+
+
+<div id="experienceContainer" class=" panel panel-default">
+    <div class="panel-heading dirltr">
+        @if ((int)ViewData["UId"] == WebSecurity.CurrentUserId)
+        {
+            @Html.CreateIcon("Create", "Experience", Class: "pull-right")
+        }
+        <h3 class="panel-title">
+            <span class="glyphicon glyphicon-briefcase"></span> @Resource.experience
+        </h3>
+    </div>
+    <div class="panel-body dir list-group">
+        @foreach (var experienceItem in Model)
+        {
+            <div id="expItem" class="list-group-item">
+                
+
+                <div>
+                    @if (AuthorizationHelper.isRelevant(experienceItem.userID))
+                    {
+                        @Html.ModifyIcons("Edit", "Delete", "Experience", new { expID = EncryptionHelper.Protect(experienceItem.experienceID) })
+                    }
+                    <strong>
+                        @Html.DisplayFor(model => experienceItem.CultureTitle)
+                    </strong>
+                    @Resource.at
+                    @if (experienceItem.CoId != null)
+                    {
+
+                        <strong>
+                            @Html.ActionLink(experienceItem.Company.CultureCoName, "CProfile", "Company", new { CoId = experienceItem.Company.coID, CoName = StringHelper.URLName(experienceItem.Company.CultureCoName) }, null)
+                        </strong>
+                    }
+                    else
+                    {
+                        <strong>
+                            @Html.DisplayFor(model => experienceItem.CultureCoName)
+                        </strong>
+                    }
+                </div>
+
+                
+                <div>
+                    @Html.DisplayFor(model => experienceItem.State.CultureFullState)
+                </div>
+                <div>
+                    <small>
+                        @Html.DatePeriod(experienceItem.attendDate, experienceItem.untilDate)
+                    </small>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+

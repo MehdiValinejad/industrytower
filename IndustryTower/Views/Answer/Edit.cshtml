@@ -1,0 +1,36 @@
+﻿@model IndustryTower.Models.Answer
+
+<div id="questionAnswer">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>
+                @Resource.answer - @Resource.edit
+            </strong>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginForm("Edit", "Answer",
+                        new { ATE = EncryptionHelper.Protect(Model.answerID) },
+                        FormMethod.Post,
+                        htmlAttributes: new { @class = "editAnswer-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.Hidden("A", EncryptionHelper.Protect(Model.answerID))
+
+                @Html.ValidationMessageFor(model => model.answerBody)
+                @Html.TextAreaFor(model => model.answerBody, new { @class = "form-control", @placeholder = Resource.answerPost, @onkeyup = "textAreaAdjust(this)" })
+
+
+                <input type="submit" value='@Resource.edit' id="answerToQuestion" class="btn btn-primary col-md-12" data-loading-text="@Resource.loading" />
+
+            }
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+

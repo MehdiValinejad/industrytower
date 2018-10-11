@@ -1,0 +1,20 @@
+﻿@model IEnumerable<IndustryTower.Models.CompanyNotExpired>
+
+    @foreach (var item in Model)
+    {
+        <div class="search-mini-item btn btn-default cursor-point" data-id="@item.coID">
+            <div class="inline-block">
+                <span class="us-text" data-name="@Html.DisplayFor(model => item.CultureCoName)">
+                    @Html.DisplayFor(model => item.CultureCoName)
+
+                </span>
+                <small>
+                   @Html.Raw(EnumTypes.ResourceManager.GetString(item.companySize.ToString()))
+                </small>
+            </div>
+            <div class="inline-block">
+                @Html.ProfilePic(company: item, imghtmlAttributes: new { @class = "min-img" })
+                
+            </div>
+        </div>
+    }

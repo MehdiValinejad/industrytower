@@ -1,0 +1,143 @@
+﻿@model IndustryTower.Models.ActiveUser
+@using IndustryTower
+@using IndustryTower.Models
+
+@if (Model != null)
+{
+    <li id="user-setting" class="dropdown" data-toggle="dropdown">
+        <a class="inline-block dropdown-toggle cursor-point" data-toggle="dropdown" data-placement="bottom" title="@Resource.userMenu">
+            <span class="glyphicon glyphicon-list "></span>
+            <span class="caret"></span>
+        </a>
+        @Html.ProfilePic(user: Model, linkhtmlAttributes: new { @class = "navbar-pic", data_placement="bottom", data_content=Resource.tourProfilePic , onclick="javascrpt:location.replace($(this).attr('href'))"})
+        @*<a href="#" class="dropdown-toggle" data-toggle="dropdown"></a>*@
+        <ul class="dropdown-menu dir user-menu" role="menu">
+            <li>
+                <a href="@Url.Action("UserPayments", "Payment", routeValues: null)">
+                    <i class="glyphicon glyphicon-shopping-cart">
+
+                    </i>
+                    @Resource.payments
+                    
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Manage", "Account", routeValues: null)">
+                    <i class="glyphicon glyphicon-cog">
+
+                    </i>
+                    @Resource.setting
+                </a>
+            </li>
+            <li class="cursor-point nored">
+                <a  onclick="javascript:document.getElementById('logoutForm').submit();" href="#">
+                    <i class="glyphicon glyphicon-log-out logout"></i>
+                    @Resource.logOut
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        
+                    }
+                </a>
+                
+            </li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation" class="dropdown-header">@Resource.coANDst</li>
+            @if (Model.adminCompanies.Count > 0)
+            {
+                    foreach (var co in Model.adminCompanies)
+                    {
+                        <li>
+                            @if (co is CompanyExpired)
+                            {
+                                <a href="@Url.Action("Choose", "PlanRequest", new { CoId = co.coID })">
+                                    <span class="label label-danger">@Resource.expired</span>
+                                </a>
+
+                            }
+                            @Html.ProfilePic(company: co, imghtmlAttributes: new { @class="user-menu-img" })
+                        </li>
+                    }
+
+            }
+                        @if (Model.adminStores.Count > 0)
+            {
+
+                    foreach (var st in Model.adminStores)
+                    {
+                        <li class="text-center">
+                            @if (st is StoreExpired)
+                            {
+                                <a href="@Url.Action("Choose", "PlanRequest", new { StId = st.storeID })">
+                                    <span class="label label-danger">@Resource.expired</span>
+                                </a>
+
+                            }
+                            @Html.ProfilePic(store: st, imghtmlAttributes: new { @class = "user-menu-img" })
+                        </li>
+                    }
+
+            }
+            <li role="presentation" class="divider"></li>
+            <li class="well-sm">
+                <a href="@Url.Action("Choose", "PlanRequest")" class="btn btn-aqua btn-lg">
+                    @Resource.reqisterFirm
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li id="homeFeedNotif" class="notif-icon" title="@Resource.homeFeed" data-placement="bottom">
+        <a href="@Url.Action("Home", "UserProfile")">
+            <span class="icon-Feed icn-30"></span>
+        </a>
+    </li>
+    <li id="allNotif" class="notif-popover popover-dismiss" data-url="@Url.Action("Notifications","notification")" data-toggle="popover" data-placement="bottom" title="@Resource.notifications">
+        <a href="#">
+            <span class="icon-Notif-L icn-30"></span>
+        </a>
+        <span id="NF" class="pull-right">
+
+        </span>
+        <div class="loaded"></div>
+    </li>
+    <li id="addFriendNotif" class="notif-popover popover-dismiss" data-url="@Url.Action("FRNotifications", "FriendRequest")" data-toggle="popover" data-placement="bottom" title="@Resource.friendReauestsReceived">
+        <a href="#">
+            <span class="icon-AddFriend icn-30"></span>
+        </a>
+        <div id="FR" class="pull-right">
+
+        </div>
+        <div class="loaded"></div>
+    </li>
+
+    <li id="allGroup" class="notif-popover popover-dismiss" data-url="@Url.Action("UserGroups", "Group")" data-toggle="popover" data-placement="bottom" title="@Resource.groups">
+        <a href="#">
+            <span class="icon-Group icn-30"></span>
+        </a>
+        <div class="loaded" ></div>
+    </li>
+
+
+
+    <li id="addEvent" class="notif-icon  " title="@Resource.addEvent" data-placement="bottom">
+        <a href="@Url.Action("Create","Event")">
+            <span class="icon-Event icn-30"></span>
+        </a>
+    </li>
+
+    <li id="askQuestion" class="notif-icon  " title="@Resource.askQuestion" data-placement="bottom">
+        <a href="@Url.Action("Create","Question")">
+            <span class="icon-Question icn-30"></span>
+        </a>
+    </li>
+
+}
+else
+{
+
+    <li>@Html.ActionLink(Resource.register, "Register", "Account", routeValues: null, htmlAttributes: new { @class="icn-20" })</li>
+    <li>@Html.ActionLink(Resource.logIn, "Login", "Account", routeValues: null, htmlAttributes: new { @class = "icn-20" })</li>
+    <li>@Html.ActionLink(Resource.home, "Index", "Home", routeValues: null, htmlAttributes: new { @class = "icn-20" })</li>
+}
+

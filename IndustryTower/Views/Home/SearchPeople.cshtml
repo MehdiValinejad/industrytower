@@ -1,0 +1,40 @@
+﻿@model List<IndustryTower.ViewModels.SearchViewModel>
+@foreach (var item in Model)
+{
+    <div class="row margin-top-bot-md bg-default border-radius">
+        <div class="col-md-12 margin-top-bot-md">
+            <div class=" col-md-2 col-xs-4">
+                @Html.ProfilePic(user: item.user)
+            </div>
+            <strong>
+                @Html.ActionLink(item.user.CultureFullName, "UProfile", "UserProfile", new { UId = item.user.UserId, UName = StringHelper.URLName(item.user.CultureFullName) }, null)
+            </strong>
+            <div class="margin-top-bot-md">
+                <div>
+                    @Html.PresentExperience(item.user.UserId)
+                </div>
+                <div>
+                    @Html.DisplayFor(model=>item.user.State.CultureFullState)
+                </div>
+            </div>
+            <div class=" margin-top-bot-md">
+                <div class="inline-block bottom-border-blue">
+                    @Resource.professions
+                </div>
+                @Html.AjaxPrtialLoader(Url.Action("RelatedProfessions", "Profession", new { UId = item.user.UserId }))
+            </div>
+        </div>
+    </div>
+
+}
+@if ((bool)ViewData["finalPage"] == false)
+{
+    var pagenumber = (int)ViewData["pageNum"];
+    <div id="nextSearchResults" data-nextpage="@( pagenumber + 1)">
+        @Html.NextItems("TotalSearch", "Home", new
+   {
+       page = pagenumber + 1,
+       currentFilter = ViewData["currentFilter"]
+   })
+    </div>
+}

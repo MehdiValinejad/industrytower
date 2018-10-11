@@ -1,0 +1,35 @@
+﻿@model IndustryTower.ViewModels.CommentEach
+
+<li id="comment" class="comment-cont col-md-12 col-xs-12">
+    <div id="commentBody" class="row">
+        <div class="col-md-12">
+            <blockquote id="commentBody" class="blockquote-reverse font-mini col-md-12 col-xs-12">
+                <div class="row">
+                    @Html.ProfilePic(user: Model.CommenterUser, linkhtmlAttributes: new { @class = "col-md-1 col-xs-2 margin-lf-r8-md" })
+                    <div class="comment-text dir">
+                        <p>
+                            @if (AuthorizationHelper.isRelevant(Model.CommenterUser.UserId))
+                            {
+                                @Html.ModifyIcons("", "Delete", "Comment", new { CmtId = EncryptionHelper.Protect(Model.cmtID) }, "display-none", editvis: false)
+                            }
+                            <span>
+                                @Html.ActionLink(Model.CommenterUser.CultureFullName, "UProfile", "UserProfile", new { UId = Model.CommenterUser.UserId, UName = StringHelper.URLName(Model.CommenterUser.CultureFullName) })
+                            </span>
+                            @Html.DisplayFor(model => Model.comment)
+                        </p>
+                    </div>
+                    <footer class="comment-date">
+                        @Html.DisplayFor(model => Model.date, "RelativeDate")
+                        <div id="commentLike" class="inline-block">
+                            @{ Html.RenderAction("LikeComment", "Like", new { model = new IndustryTower.ViewModels.likeVars { elemId = Model.cmtID, typ = IndustryTower.ViewModels.LikeType.LikeComment } }); }
+                        </div>
+                    </footer>
+                </div>
+
+            </blockquote>
+        </div>
+
+    </div>
+</li>
+
+

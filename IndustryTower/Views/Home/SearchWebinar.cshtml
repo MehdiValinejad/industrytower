@@ -1,0 +1,75 @@
+﻿@model List<IndustryTower.ViewModels.WebinarSearchViewModel>
+@using IndustryTower.Models
+@foreach (var item in Model)
+{
+    <div class="search-grid-box row margin-top-bot-md bg-default border-radius">
+
+        <div class="col-md-2 margin-top-bot-md">
+            @if (item.Discriminator == "Workshop")
+            {
+                <div class="col-md-12 text-center no-wrap margin-top-bot-xs label label-info">
+                    @EnumTypes.Workshop
+                </div>
+            }
+            @if (item.seminarResult.price == 0)
+            {
+                <div class="col-md-12 text-center no-wrap margin-top-bot-md label label-success">
+                    @Resource.free
+                </div>
+            }
+            @if (item.seminarResult.isPublic)
+            {
+                <div class="col-md-12 text-center no-wrap margin-top-bot-md label label-success">
+                    @ModelDisplayName.semIsPublic
+                </div>
+
+            }
+            <div class="col-md-12 col-xs-6 text-center no-wrap margin-top-bot-md">
+                @ModelDisplayName.semMaxAudience
+                <span class="badge">
+                    @Html.DisplayFor(model => item.seminarResult.maxAudiences)
+                </span>
+            </div>
+           
+            
+        </div>
+
+        <div class="col-md-10 margin-top-bot-md">
+            <strong>
+                @Html.ActionLink(item.seminarResult.title, "Detail", "Seminar", new { SnId = item.seminarResult.seminarId, SnName = StringHelper.URLName(item.seminarResult.title) }, new { @class = "questionLink" })
+            </strong>
+
+            <div>
+                @Html.DisplayAbstractFor(item.seminarResult.desc, 150)
+            </div>
+            <div class="margin-top-bot-md">
+                <div class="col-md-12">
+                    <div class="inline-block bottom-border-blue">
+                        @Resource.professions
+                    </div>
+
+                    @Html.AjaxPrtialLoader(Url.Action("RelatedProfessions", "Profession", new { SnId = item.seminarResult.seminarId }))
+                </div>
+                <div class="col-md-12">
+                    <div class="inline-block bottom-border-blue">
+                        @Resource.categories
+                    </div>
+
+                    @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { SnId = item.seminarResult.seminarId }))
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+@if ((bool)ViewData["finalPage"] == false)
+{
+    var pagenumber = (int)ViewData["pageNum"];
+    <div id="nextSearchResults" data-nextpage="@(pagenumber + 1)">
+        @Html.NextItems("TotalSearch", "Home", new
+   {
+       page = pagenumber + 1,
+       currentFilter = ViewData["currentFilter"]
+   })
+    </div>
+}

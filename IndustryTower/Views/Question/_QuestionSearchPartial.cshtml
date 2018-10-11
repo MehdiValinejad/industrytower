@@ -1,0 +1,12 @@
+﻿@model IEnumerable<IndustryTower.ViewModels.QuestionSearchViewModel>
+
+@foreach (var item in Model)
+{
+    <div class="search-nano-item">
+        @Html.ActionLink(item.questionResult.questionSubject, "Detail", "Question", new { QId = item.questionResult.questionID }, new { })
+    </div>
+}
+ 
+
+
+

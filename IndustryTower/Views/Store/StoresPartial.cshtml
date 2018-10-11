@@ -1,0 +1,7 @@
+﻿@model IEnumerable<IndustryTower.Models.Store>
+<div id="storesPartialContainer" class="margin-top-bot-md col-md-12 col-xs-12">
+    @foreach (var st in Model)
+    {
+        @Html.ProfilePic(store: st, linkhtmlAttributes: new { @class = "col-md-1 col-xs-2" })
+    }
+</div>

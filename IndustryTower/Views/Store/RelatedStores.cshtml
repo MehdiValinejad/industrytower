@@ -1,0 +1,19 @@
+﻿@model IEnumerable<IndustryTower.ViewModels.RelatedStoreViewModel>
+           
+@if (Model.Count() > 0)
+{
+    <p class="neat-title">
+        @Resource.relatedCompanies
+    </p>
+    <div class="similar-products">
+        @foreach (var item in Model)
+        {
+            <div class="similar-product-container neat-box">
+                @Html.ProfilePic(store: item.store)
+                <span>
+                    @Html.ActionLink(item.store.CultureStoreName, "Sprofile", "Store", new { StId = item.store.storeID, StName = StringHelper.URLName(item.store.CultureStoreName) }, null)
+                </span>
+            </div>
+        }
+    </div>
+}

@@ -1,0 +1,179 @@
+﻿@model IndustryTower.ViewModels.GSDetailViewModel
+@{
+    ViewBag.Title = Model.sessionSubject;
+
+    var protectedSSID = EncryptionHelper.Protect(Model.sessionid);
+
+}
+@section head{
+    <meta name="description" content="@Model.sessionDesc">
+    <meta name="keywords" content="@String.Join(",", Model.sessionSubject.Split(new char [] {' '}))">
+
+}
+
+
+
+<div class="row">
+    <div class=" col-md-4 col-xs-12">
+        <div class="panel panel-default dir">
+            <div class="panel-heading">
+                @Resource.group:
+                @Html.ActionLink(Model.groupName, "GroupPage", "Group", new { GId = Model.groupid, GName = StringHelper.URLName(Model.groupName) }, null)
+            </div>
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            @Resource.sessionOfferCount
+                        </th>
+                        <th class="text-center">
+                            @Resource.sessionOfferAcceptedCount
+                        </th>
+                        <th class="text-center">
+                            @Resource.sessionOfferState
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            @Model.Offers
+                        </td>
+
+                        <td>
+                            @Model.AcceptedOffers
+                        </td>
+
+                        <td>
+                            @if (Model.endDate < DateTime.UtcNow)
+                            { @Resource.groupSessionExpired }
+                            else
+                            { @Resource.groupSessionNotExpired}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        @if (ViewData["res"] != null)
+        {
+            <div class="row dir">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            @Resource.groupSessionResult
+                        </div>
+                        <div class="panel-body">
+
+                            @ViewData["res"]
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+        @if (Model.isAdmin)
+        {
+            var act = "Create";
+            var btnText = Resource.createSesseionResult;
+            if (ViewData["res"] != null)
+            {
+                act = "Edit";
+                btnText = Resource.edditSesseionResult;
+            }
+            <div class="row">
+                <a href="@Url.Action(act, "GroupSessionResult", new { SsId = protectedSSID })" class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 margin-top-bot-md btn btn-primary btn-lg">
+                    @btnText
+                </a>
+            </div>
+        }
+
+    </div>
+
+    <div class="col-md-8 col-xs-12 dir">
+        <div class="col-md-12 col-xs-12 panel panel-default ">
+
+            <h3>
+                @Html.ActionLink(Model.sessionSubject, "Detail", "GroupSession", new { SsId = protectedSSID, GSName = StringHelper.URLName(Model.sessionSubject) }, null)
+                @if (Model.isAdmin)
+                {
+                    <span class="pull-left">
+                        @Html.ModifyIcons("Edit", "Delete", "GroupSession", new { SsId = protectedSSID }, editAjax: false)
+                    </span>
+                    <a class="btn btn-primary btn-md icon-xls" href="@Url.Action("ExportSessionToXL", "GroupSession", new { SsId = protectedSSID })" title="@Resource.excelExport"></a>
+                }
+            </h3>
+            <p>
+                @Html.DisplayTextFor(model => model.sessionDesc)
+            </p>
+
+            <div class="row margin-top-bot-md">
+                @if (Model.image != null)
+                {
+                    Html.RenderAction("FileSlideshow", "Home", new { folder = "GSession", fileNamesString = Model.image });
+                }
+
+
+                @if (Model.doc != null)
+                {
+                    <div class="col-md-12 col-xs-12 margin-top-bot-xs">
+                        @{Html.RenderAction("FileList", "Home", new { folder = "GSession", fileNamesString = Model.doc });}
+                    </div>
+
+                }
+            </div>
+
+
+            <div class="col-md-6 pull-right">
+                <i class="glyphicon glyphicon-calendar"></i>
+                <small class="margin-lf-r8-md">
+                    @Html.DisplayFor(model => model.startDate, "WordDate")
+                    @if (Model.endDate != null)
+                    {<text>-</text> @Html.DisplayFor(model => model.startDate, "WordDate")}
+                </small>
+            </div>
+            <div class="col-md-6 pull-left margin-top-bot-xs">
+                <div class="g-plusone" data-annotation="inline" data-width="150" data-href="@Url.Action("Detail", "GroupSession", new { SsId = Model.sessionid, GSName = StringHelper.URLName(Model.sessionSubject) }, "http")"></div>
+                <script type="IN/Share" data-url="@Url.Action("Detail", "GroupSession", new { SsId = Model.sessionid, GSName = StringHelper.URLName(Model.sessionSubject) }, "http")" data-counter="right">
+                </script>
+            </div>
+        </div>
+        <div class="col-md-12 col-xs-12">
+            @if ((Model.endDate == null || Model.endDate < DateTime.UtcNow) && Model.isMember)
+            {
+                IndustryTower.Models.GroupSessionOffer mod = new IndustryTower.Models.GroupSessionOffer();
+                mod.sessionId = Model.sessionid;
+                Html.RenderPartial("~/Views/GroupSessionOffer/OfferInsert.cshtml", mod);
+            }
+            <div class="bottom-border-blue margin-top-bot-md">
+                @Resource.sessionOffers
+            </div>
+            <ul id="SessionOffers" class="list-unstyled no-pad">
+                @{Html.RenderAction("PartialOffers", "GroupSessionOffer", new { SsId = Model.sessionid });}
+
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="col-md-4 col-xs-12 dir">
+
+    </div>
+</div>
+
+
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/Group")
+    @Scripts.Render("~/bundles/Social")
+    @Scripts.Render("~/bundles/SlideShow")
+    @Scripts.Render("~/bundles/Score")
+
+    <script>
+        $(document).ready(function () {
+            SlideShow();
+            SlideShowArrowKeys();
+        })
+    </script>
+}

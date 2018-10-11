@@ -1,0 +1,203 @@
+﻿@model IndustryTower.Models.Service
+
+@{
+    ViewBag.Title = Resource.editService;
+    var imgs = Model.image != null ? Model.image.Split(new char[] { ',' }).Where(f => !String.IsNullOrEmpty(f)) : Enumerable.Empty<string>();
+    var docs = Model.document != null ? Model.document.Split(new char[] { ',' }).Where(f => !String.IsNullOrEmpty(f)) : Enumerable.Empty<string>();
+}
+
+<div id="serviceCreateEdit" class="row dir">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        @Html.Hidden("service", ViewData["service"])
+        
+        @Html.AntiForgeryToken()
+
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @Resource.createService
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-4 dirltr hasUpload">
+                        <div class="bottom-border-blue">
+                            @Resource.upload
+                        </div>
+                        <div id="uploadButton" class="fileUpload-button glyphicon glyphicon-upload btn btn-lg btn-default" title="@Resource.upload" data-placement="bottom">
+                            @Html.TextBox("ProServFiles", null, new { @type = "file", @name = "files[]", @class = "post-files" })
+                        </div>
+                        <div class="progress col-md-12">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                <span class="sr-only">0% complete</span>
+                            </div>
+                        </div>
+
+                        <div id="uploadedFiles" class="col-md-12">
+                            @Html.Hidden("filesToUpload", String.Join(",", imgs.Concat(docs)))
+                            <ul id="uploadedImages" class="no-pad list-unstyled">
+                                <div class="bottom-border-blue display-none subject-small">
+                                    @Resource.uploadedImages
+                                </div>
+                                @if (Model != null && Model.image != null)
+                                {
+                                    foreach (var image in Model.image.Split(new char[] { ',' }))
+                                    {
+                                        var ext = image.Substring(image.LastIndexOf('.') + 1);
+                                        <li data-file="@image">
+                                            <button type='button' class='close'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button>
+                                            <img src="~/Uploads/@ext/Service/@image" class='thumbnail full-height' />
+
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                            <ul id="uploadedDocuments" class="no-pad list-unstyled">
+                                <div class="bottom-border-blue display-none subject-small">
+                                    @Resource.uploadedDocuments
+                                </div>
+                                @if (Model != null && Model.document != null)
+                                {
+                                    foreach (var file in Model.document.Split(new char[] { ',' }))
+                                    {
+                                        var ext = file.Substring(file.LastIndexOf('.') + 1);
+                                        <li data-file="@file">
+                                            <button type='button' class='close'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button>
+                                            <a href="~/Uploads/@ext/Service/@file">
+                                                <span class="@String.Concat("icon-", ext) thumbnail"></span>
+                                           </a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.serviceName)
+                            @Html.TextBoxFor(model => model.serviceName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.serviceName) })
+                            @Html.ValidationMessageFor(model => model.serviceName)
+                        </div>
+
+                        <div class="form-group col-md-6 dirltr">
+                            @Html.LabelFor(model => model.serviceNameEN)
+                            @Html.TextBoxFor(model => model.serviceNameEN, new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.serviceNameEN) })
+                            @Html.ValidationMessageFor(model => model.serviceNameEN)
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.brandName)
+                            @Html.TextBoxFor(model => model.brandName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.brandName) })
+                            @Html.ValidationMessageFor(model => model.brandName)
+                        </div>
+
+                        <div class="form-group col-md-6 dirltr">
+                            @Html.LabelFor(model => model.brandNameEN)
+                            @Html.TextBoxFor(model => model.brandNameEN, new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.brandNameEN) })
+                            @Html.ValidationMessageFor(model => model.brandNameEN)
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            @Html.LabelFor(model => model.about)
+                            @Html.TextAreaFor(model => model.about, new { @class = "form-control", @onkeyup = "textAreaAdjust(this)", @placeholder = Html.DisplayNameFor(model => model.about) })
+                            @Html.ValidationMessageFor(model => model.about)
+                        </div>
+
+                        <div class="form-group col-md-12 dirltr">
+                            @Html.LabelFor(model => model.aboutEN)
+                            @Html.TextAreaFor(model => model.aboutEN, new { @class = "form-control", @onkeyup = "textAreaAdjust(this)", @placeholder = Html.DisplayNameFor(model => model.aboutEN) })
+                            @Html.ValidationMessageFor(model => model.aboutEN)
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.serviceCountryID)
+                            @Html.DropDownList("serviceCountryID", ViewBag.CountryDropDown as SelectList, ModelDisplayName.serviceCountry, new { @class = "form-control" })
+                            @*<select id="stateId" name="productionCountryID" disabled></select>
+                                @Html.ValidationMessageFor(model => model.productionCountryID)*@
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.price)
+                            @Html.TextBoxFor(model => model.price, new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.price) })
+                            @Html.ValidationMessageFor(model => model.price)
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.serviceEra)
+                            @Html.TextBoxFor(model => model.serviceEra, new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.serviceEra) })
+                            @Html.ValidationMessageFor(model => model.serviceEra)
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.afterSale)
+                            @Html.TextBoxFor(model => model.afterSale, new { @class = "form-control", @placeholder = Html.DisplayNameFor(model => model.afterSale) })
+                            @Html.ValidationMessageFor(model => model.afterSale)
+                        </div>
+
+
+
+                        <div class="bg-default col-md-12 margin-top-bot-md">
+                            <div class="col-md-12 margin-top-bot-md">
+                                <div id="SelectedCategories">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <strong>
+                                                @Resource.selectedCategories
+                                            </strong>
+                                        </div>
+                                        <div class="panel-body">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bottom-border-blue">
+                                @Resource.categoryChooseHelp
+                            </div>
+
+                            @Html.AjaxPrtialLoader(Url.Action("CategoryTags", "Category"), true)
+                        </div>
+                        @Html.Hidden("Cats", ViewData["Cats"] != null ? ViewData["Cats"] : null)
+                        <input type="submit" value='@Resource.editService' id="askButton" class="btn btn-primary col-md-12" data-loading-text="@Resource.loading" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+
+
+
+
+
+
+@section scripts{
+@Scripts.Render("~/bundles/Service")
+@Scripts.Render("~/bundles/Category")
+@Scripts.Render("~/bundles/CountryDropDown")
+@Scripts.Render("~/bundles/Upload")
+ 
+    <script>
+        $(document).ready(function () {
+            
+            GategoryTags('@IndustryTower.App_Start.ITTConfig.MaxCategoryTagsLimit',
+                '@ModelValidation.YouCanChooseMaxCategories',
+                '@ModelValidation.categoryParentIsChoosed'
+                );
+
+            //Call Upload File
+            UploadFile('@IndustryTower.App_Start.ITTConfig.FileSizeLimit',
+                           '@IndustryTower.App_Start.ITTConfig.MaxFilesCountProServ',
+                           '@ModelValidation.maxUploadFileLimit',
+                           '@ModelValidation.maxUploadFileCount',
+                           '@ModelValidation.fileTypeLimit');
+
+            AjaxStateDropDown('@Url.Action("populateDopDownStates", "Home")', '@Resource.selectState');
+        });
+    </script>
+}

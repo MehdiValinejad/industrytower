@@ -1,0 +1,27 @@
+﻿/*
+@import this file directly into your existing Scss files to use these mixins
+*/
+@mixin sprite-H_BG_Registration() {
+/* You may have to set 'display: block' */
+	width: 830px;
+	height: 550px;
+	background: url('Sprite.home.jpg') -1px -1px;
+}
+@mixin sprite-H_Home_Categories() {
+/* You may have to set 'display: block' */
+	width: 300px;
+	height: 300px;
+	background: url('Sprite.home.jpg') -1px -552px;
+}
+@mixin sprite-H_Home_CopmanyProfile() {
+/* You may have to set 'display: block' */
+	width: 300px;
+	height: 300px;
+	background: url('Sprite.home.jpg') -1px -853px;
+}
+@mixin sprite-H_Home_Professions() {
+/* You may have to set 'display: block' */
+	width: 300px;
+	height: 300px;
+	background: url('Sprite.home.jpg') -1px -1154px;
+}

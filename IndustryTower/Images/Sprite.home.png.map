@@ -1,0 +1,32 @@
+{
+  "images": [
+    {
+      "name": "/Images/Home/H_BG_Registration.jpg",
+      "width": 830,
+      "height": 550,
+      "offsetX": 0,
+      "offsetY": 0
+    },
+    {
+      "name": "/Images/Home/H_Home_Categories.jpg",
+      "width": 300,
+      "height": 300,
+      "offsetX": 0,
+      "offsetY": 550
+    },
+    {
+      "name": "/Images/Home/H_Home_CopmanyProfile.jpg",
+      "width": 300,
+      "height": 300,
+      "offsetX": 0,
+      "offsetY": 850
+    },
+    {
+      "name": "/Images/Home/H_Home_Professions.jpg",
+      "width": 300,
+      "height": 300,
+      "offsetX": 0,
+      "offsetY": 1150
+    }
+  ]
+}

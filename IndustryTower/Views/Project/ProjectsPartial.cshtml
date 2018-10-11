@@ -1,0 +1,10 @@
+﻿@model IEnumerable<IndustryTower.Models.Project>
+
+<ul>
+    @foreach (var projectItem in Model)
+    { 
+        <li>
+            @Html.ActionLink("ProjectDetails", "Project", new { PRJId = projectItem.projectID})
+        </li>
+    }
+</ul>

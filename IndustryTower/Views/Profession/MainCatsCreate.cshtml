@@ -1,0 +1,77 @@
+﻿@model IEnumerable<IndustryTower.Models.Category>
+@{
+    var currentSelected = ViewBag.profff as List<int>;
+}
+<ul class="categories-container">
+    @foreach (var item in Model.Where(p => p.parent1ID == null))
+    {
+
+        <li class="category-container">
+            <div>
+                <span class="admin-cat">
+                    @Html.DisplayFor(model => item.CultureCatName)
+                </span>
+                @Html.CheckBox("selectedCategories", currentSelected.Contains(item.catID), new { value = EncryptionHelper.Protect(item.catID) })
+            </div>
+            <ul class="categories-container">
+                @foreach (var item2 in Model.Where(f => f.parent1ID == item.catID))
+                {
+                    <li class="category-container">
+                        <div>
+                            <span class="admin-cat">
+                                @Html.DisplayFor(model => item2.CultureCatName)
+                            </span>
+                            @Html.CheckBox("selectedCategories", currentSelected.Contains(item2.catID), new { value = EncryptionHelper.Protect(item2.catID) })
+
+                        </div>
+                        <ul class="categories-container">
+                            @foreach (var item3 in Model.Where(f => f.parent1ID == item2.catID))
+                            {
+                                <li class="category-container">
+                                    <div>
+                                        <span class="admin-cat">
+                                            @Html.DisplayFor(model => item3.CultureCatName)
+                                        </span>
+                                        @Html.CheckBox("selectedCategories", currentSelected.Contains(item3.catID), new { value = EncryptionHelper.Protect(item3.catID) })
+
+                                    </div>
+                                    <ul class="categories-container">
+                                        @foreach (var item4 in Model.Where(f => f.parent1ID == item3.catID))
+                                        {
+                                            <li class="category-container">
+                                                <div>
+                                                    <span class="admin-cat">
+                                                        @Html.DisplayFor(model => item4.CultureCatName)
+                                                    </span>
+                                                    @Html.CheckBox("selectedCategories", currentSelected.Contains(item4.catID), new { value = EncryptionHelper.Protect(item4.catID) })
+
+                                                </div>
+                                                <ul class="categories-container">
+                                                    @foreach (var item5 in Model.Where(f => f.parent1ID == item4.catID))
+                                                    {
+                                                        <li class="category-container">
+                                                            <div>
+                                                                <span class="admin-cat">
+                                                                    @Html.DisplayFor(model => item5.CultureCatName)
+                                                                </span>
+                                                                @Html.CheckBox("selectedCategories", currentSelected.Contains(item5.catID), new { value = EncryptionHelper.Protect(item5.catID) })
+                                                            </div>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </li>
+
+
+    }
+
+</ul>
+

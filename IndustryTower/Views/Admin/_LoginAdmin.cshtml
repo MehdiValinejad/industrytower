@@ -1,0 +1,12 @@
+﻿@model IndustryTower.Models.AdminUser
+
+<div class="user-menu-item">
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <a href="javascript:document.getElementById('logoutForm').submit()" class="full-height">
+            <span class="vertical-middle inline-block">@Resource.logOut</span>
+        </a>
+    }
+</div>
+

@@ -1,0 +1,130 @@
+﻿@model IndustryTower.Models.GroupSessionOffer
+
+@{
+    var isGroupAdmin = Model.GroupSession.Group.Admins.Any(a => a.UserId == WebSecurity.CurrentUserId);
+    string acceptionText = Resource.acceptedNotSessionOffer;
+    string acceptionClass = "btn-default";
+        if (Model.isAccepted)
+        {
+            acceptionText = Resource.acceptedSessionOffer;
+            acceptionClass = "accepted-offer btn-success";
+        }
+        var protectedOID = EncryptionHelper.Protect(Model.offerId);
+        var isOffererHimSelf = Model.offererId == WebSecurity.CurrentUserId;
+}
+
+<li class="row">
+    <div class="panel panel-default col-md-12">
+            <div id="answerDetail" class="row">
+               <div class="col-md-12">
+                   
+                        <div id="offerDesc" class=" margin-top-bot-md">
+                            @if (isOffererHimSelf || isGroupAdmin)
+                            {
+                                <div class="inline-block">
+                                    @Html.ModifyIcons("Edit", "Delete", "GroupSessionOffer", new { GSOId = protectedOID })
+                                </div>
+                            }
+                            @Html.DisplayTextFor(model => Model.offer)
+                        </div>
+                    </div>
+                <small class="margin-lf-r8-md">
+                    @Html.DisplayFor(model => Model.offerDate)
+                </small>
+            </div>
+
+            <div class="row margin-top-bot-md">
+                
+                <div class="col-md-7 col-xs-6 dirltr">
+                    <div class="col-md-4 col-xs-6">
+                        @if (isGroupAdmin)
+                        {
+                            <div id="offerAcception">
+                                @using (Html.BeginForm("AcceptOffer", "GroupSessionOffer"))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("GSOId", protectedOID)
+                                    <button type="button" id="offacc" data-acc="@Resource.markedAsAnswer" data-notacc="@Resource.NotmarkedAsAnswer" class="pos-rel btn btn-xs @acceptionClass">
+                                        <span class="glyphicon glyphicon-ok"></span> <i>@acceptionText</i>
+                                    </button>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="offerAcception" class="btn btn-xs disabled @acceptionClass">
+                                @acceptionText
+                            </div>
+                        }
+                    </div>
+                    <ul id="offerLike" class="nav nav-pills nav-stacked dirltr">
+                        @{ Html.RenderAction("Like", "Like", new { model = new IndustryTower.ViewModels.likeVars { elemId = Model.offerId ,typ = IndustryTower.ViewModels.LikeType.LikeGSO} }); }
+                    </ul>
+                </div>
+                
+                <div class="col-md-5 col-xs-6">
+                    @{Html.RenderPartial("~/Views/UserProfile/AvatarPartial.cshtml", Model.offerer);}
+                </div>
+                @*<div class="col-md-12">
+                    <div class="pull-left">
+                        <ul id="offerLike" class="nav nav-pills nav-stacked">
+                            @Html.AjaxPrtialLoader(Url.Action("Like", "Like", new { GSOId = protectedOID }))
+                        </ul>
+                    </div>
+                    <div class="col-md-4 col-xs-8  pull-right">
+                        @{Html.RenderPartial("~/Views/UserProfile/AvatarPartial.cshtml", Model.offerer);}
+                    </div>
+
+                    <div class="pull-right">
+                        <small class="margin-lf-r8-md">
+                            @Html.DisplayFor(model => Model.offerDate)
+                        </small>
+                        @if (isGroupAdmin)
+                        {
+                            <div id="offerAcception">
+                                @using (Html.BeginForm("AcceptOffer", "GroupSessionOffer"))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("GSOId", protectedOID)
+                                    <button type="button" id="offacc" data-acc="@Resource.markedAsAnswer" data-notacc="@Resource.NotmarkedAsAnswer" class="pos-rel btn  btn-xs @acceptionClass">
+                                        <span class="glyphicon glyphicon-ok"></span> <i>@acceptionText</i>
+                                    </button>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="offerAcception" class="@acceptionClass">
+                                @acceptionText
+                            </div>
+                        }
+
+                    </div>
+
+                </div>*@
+
+            </div>
+            <div class="row">
+                <div id="offerComments" class="col-md-12 col-xs-12 bg-default">
+                    @{
+                        var se = new MvcSerializer();
+                        var mod = new IndustryTower.ViewModels.commentVars
+                        {
+                            elemId = Model.offerId,
+                            typ = IndustryTower.ViewModels.CommentType.CommentGSO
+                        };
+                        var tt = se.Serialize(mod, SerializationMode.Plaintext);
+                    }
+                    @Html.AjaxPrtialLoader(Url.Action("Comments", "Comment", new { model = tt }))
+
+                </div>
+            </div>
+           
+        </div>
+
+
+</li>
+
+
+
+

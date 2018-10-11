@@ -1,0 +1,55 @@
+﻿@model List<IndustryTower.ViewModels.GroupSearchViewModel>
+@foreach (var item in Model)
+{
+    <div class="search-grid-box row margin-top-bot-md bg-default border-radius">
+        <div class="col-md-2 margin-top-bot-md">
+            <div class="col-md-12 col-xs-6 text-center no-wrap margin-top-bot-md">
+                @Resource.members
+                <span class="badge">
+                    @Html.DisplayFor(model => item.Members)
+                </span>
+            </div>
+            <div class="col-md-12 col-xs-6 text-center no-wrap margin-top-bot-md">
+                @Resource.sessions
+                <span class="badge">
+                    @Html.DisplayFor(model => item.Sessions)
+                </span>
+            </div>
+        </div>
+        <div class="col-md-10 margin-top-bot-md">
+            <strong>
+                @Html.ActionLink(item.groupResult.groupName, "GroupPage", "Group", new { GId = item.groupResult.groupId, GName = StringHelper.URLName(item.groupResult.groupName) }, new { @class = "questionLink" })
+            </strong>
+            <div>
+                @Html.DisplayAbstractFor(item.groupResult.groupDesc, 150)
+            </div>
+            <div class="margin-top-bot-md">
+                <div class="col-md-12">
+                    <div class="inline-block bottom-border-blue">
+                        @Resource.professions
+                    </div>
+
+                    @Html.AjaxPrtialLoader(Url.Action("RelatedProfessions", "Profession", new { GId = item.groupResult.groupId }))
+                </div>
+                <div class="col-md-12">
+                    <div class="inline-block bottom-border-blue">
+                        @Resource.categories
+                    </div>
+
+                    @Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { GId = item.groupResult.groupId }))
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@if ((bool)ViewData["finalPage"] == false)
+{
+    var pagenumber = (int)ViewData["pageNum"];
+    <div id="nextSearchResults" data-nextpage="@(pagenumber + 1)">
+        @Html.NextItems("TotalSearch", "Home", new
+   {
+       page = pagenumber + 1,
+       currentFilter = ViewData["currentFilter"]
+   })
+    </div>
+}

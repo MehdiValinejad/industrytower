@@ -1,0 +1,193 @@
+﻿@model IndustryTower.ViewModels.SentRequests
+@using IndustryTower.ViewModels
+@{
+    ViewBag.Title = Resource.planChoose;
+    var revivalOrNewAction = Model.CoId != null || Model.StId != null ? "RevivalRequest" : "PlanRequest";
+}
+@if (Model.RequestsFoNew.Count() > 0 || Model.RevialRequests.Count() > 0)
+{
+    <table class="table">
+        <caption>@Resource.currentRequests</caption>
+        <tr>
+            <th>
+                @ModelDisplayName.planRequestCoStoreName
+            </th>
+            <th>
+                @ModelDisplayName.planType
+            </th>
+            <th>
+                @ModelDisplayName.plan
+            </th>
+            <th>
+                @ModelDisplayName.reqDate
+            </th>
+            <th>
+                @Resource.status
+            </th>
+        </tr>
+        @if (Model.RequestsFoNew.Count() > 0)
+        {
+            <tr>
+                <td class="bottom-border-blue text-center" colspan="5">
+                    @Resource.requestForNew
+                </td>
+            </tr>
+            foreach (var item in Model.RequestsFoNew)
+            {
+                <tr class="neat-box">
+                    <td>
+                        @item.name
+                    </td>
+                    <td>
+                        @EnumTypes.ResourceManager.GetString(item.planType.ToString().ToLower())
+                    </td>
+                    <td>
+                        @EnumTypes.ResourceManager.GetString(item.plan.ToLower())
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.reqDate)
+                    </td>
+                    <td>
+                        @if (item.payment == null)
+                        {
+                            @Html.ActionLink(Resource.paymentNotPerformed, "PayForPlan", "Payment", new { reqId = EncryptionHelper.Protect(item.reqID) }, null)
+                        }
+                        else
+                        {
+                            @Resource.waitingForAcception
+                        }
+                    </td>
+                </tr>
+            }
+
+        }
+        @if (Model.RevialRequests.Count() > 0)
+        {
+            <tr>
+                <td class="subject">
+                    @Resource.revivalRequest
+                </td>
+            </tr>
+            foreach (var item in Model.RevialRequests)
+            {
+                <tr class="neat-box">
+                    <td>
+                        @if (item.Company != null)
+                        { 
+                            @item.Company.CultureCoName
+                        }
+                        else if (item.Store != null)
+                        {
+                            @item.Store.CultureStoreName
+                        }
+                        else
+                        { 
+                            @item.User.CultureFullName
+                        }
+                    </td>
+                    <td>
+                        @EnumTypes.ResourceManager.GetString(item.planType.ToString().ToLower())
+                    </td>
+                    <td>
+                        @EnumTypes.ResourceManager.GetString(item.plan.ToLower())
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.reqDate)
+                    </td>
+                    <td>
+                        @if (item.payment == null)
+                        {
+                            @Html.ActionLink(Resource.paymentNotPerformed, "PayForPlan", "Payment", new { reqId = EncryptionHelper.Protect(item.reqID) }, null)
+                        }
+                        else
+                        {
+                            @Resource.waitingForAcception
+                        }
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+}
+
+
+<div class="row dir">
+    <div class="margin-top-bot-md col-md-12" style="height:500px;">
+        
+        @Html.Sprite("O_Company_Luxury", new {  @class = "pull-left full-height hidden-xs" })
+        <div class="col-md-5 col-xs-12 pull-right full-height bg-black text-white" style="margin-left:-100%;">
+            <h1 class="bottom-border-blue">
+                @Plan.companyPlan
+            </h1>
+            <big>
+                <ul>
+
+                    <li>
+                        @Plan.OwnCompanyProfile
+                    </li>
+                    <li>
+                        @Plan.insertProduct
+                    </li>
+                    <li>
+                        @Plan.classifyCompany.
+                    </li>
+                    <li>
+                        @Plan.beInSight
+                    </li>
+                    <li>
+                        @Plan.searchResult
+                    </li>
+                    <li>
+                        @Plan.findCompanies
+                    </li>
+                    <li>
+                        @Plan.attendEvents
+                    </li>
+                    <li>
+                        @Plan.postNews
+                    </li>
+                </ul>
+                
+            </big>
+            @Html.ActionLink(Plan.registerFor + PlansPrices.CompanyPlans["Luxury"].ToString("n0") + Plan.perYear, revivalOrNewAction, "PlanRequest", new { planType = "Company", plan = "Luxury", CoId = EncryptionHelper.Protect(Model.CoId) }, new { @class = "btn btn-lg btn-aqua center-block margin-top-bot-md" })
+        </div>
+    </div>
+</div>
+<div class="row dir">
+    <div class="margin-top-bot-md col-md-12" style="height:459px;">
+
+        @Html.Sprite("O_Store_FirstFloor", new { @class = "pull-right" })
+        <div class="col-md-5 col-xs-12 full-height bg-black text-white " style="margin-right:-100%;">
+            <h1 class="bottom-border-blue">
+                @Plan.storePlan
+            </h1>
+            <big>
+                <ul>
+                    <li>
+                        @Plan.OwnStoreProfile
+                    </li>
+                    <li>
+                        @Plan.classifyStore.
+                    </li>
+                    <li>
+                        @Plan.beInSight
+                    </li>
+                    <li>
+                        @Plan.searchResult
+                    </li>
+                    <li>
+                        @Plan.findStores
+                    </li>
+                    <li>
+                        @Plan.postNews
+                    </li>
+                </ul>
+
+            </big>
+            @Html.ActionLink(Plan.registerFor + PlansPrices.StorePlans["FirstFloor"].ToString("n0") + Plan.perYear, revivalOrNewAction, "PlanRequest", new { planType = "Store", plan = "SecondFloor", StId = EncryptionHelper.Protect(Model.StId) }, new { @class = "btn btn-lg btn-aqua center-block margin-top-bot-md" })
+        </div>
+
+    </div>
+</div>
+

@@ -1,0 +1,88 @@
+{
+  "images": [
+    {
+      "name": "/Images/FileTypes/F_accdb.png",
+      "width": 48,
+      "height": 48,
+      "offsetX": 0,
+      "offsetY": 0
+    },
+    {
+      "name": "/Images/FileTypes/F_DB.png",
+      "width": 48,
+      "height": 48,
+      "offsetX": 0,
+      "offsetY": 48
+    },
+    {
+      "name": "/Images/FileTypes/F_doc.png",
+      "width": 48,
+      "height": 48,
+      "offsetX": 0,
+      "offsetY": 96
+    },
+    {
+      "name": "/Images/FileTypes/F_docx.png",
+      "width": 48,
+      "height": 48,
+      "offsetX": 0,
+      "offsetY": 144
+    },
+    {
+      "name": "/Images/FileTypes/F_mda.png",
+      "width": 48,
+      "height": 48,
+      "offsetX": 0,
+      "offsetY": 192
+    },
+    {
+      "name": "/Images/FileTypes/F_mdb.png",
+      "width": 48,
+      "height": 48,
+      "offsetX": 0,
+      "offsetY": 240
+    },
+    {
+      "name": "/Images/FileTypes/F_pdf.png",
+      "width": 48,
+      "height": 48,
+      "offsetX": 0,
+      "offsetY": 288
+    },
+    {
+      "name": "/Images/FileTypes/F_pps.png",
+      "width": 48,
+      "height": 48,
+      "offsetX": 0,
+      "offsetY": 336
+    },
+    {
+      "name": "/Images/FileTypes/F_ppsx.png",
+      "width": 48,
+      "height": 48,
+      "offsetX": 0,
+      "offsetY": 384
+    },
+    {
+      "name": "/Images/FileTypes/F_ppt.png",
+      "width": 48,
+      "height": 48,
+      "offsetX": 0,
+      "offsetY": 432
+    },
+    {
+      "name": "/Images/FileTypes/F_xls.png",
+      "width": 48,
+      "height": 48,
+      "offsetX": 0,
+      "offsetY": 480
+    },
+    {
+      "name": "/Images/FileTypes/F_xlsx.png",
+      "width": 48,
+      "height": 48,
+      "offsetX": 0,
+      "offsetY": 528
+    }
+  ]
+}

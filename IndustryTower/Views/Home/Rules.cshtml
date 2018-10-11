@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = Resource.rules;
+}
+
+<div class="row dir">
+    
+    <div class="col-md-8 col-md-offset-2 panel panel-default">
+        <h2 class="bottom-border-blue">@Resource.rules</h2>
+        <p>
+            <h3>@Resource.Rules_agreement</h3>
+            <ul>
+                @Html.Raw(Resource.Rules_agreementText)
+            </ul>
+        </p>
+        <p>
+            <h3>@Resource.Rules_registration</h3>
+            <ul>
+                @Html.Raw(Resource.Rules_registrationText)
+            </ul>
+        </p>
+        <p>
+            <h3>@Resource.Rules_privacy</h3>
+            <ul>
+                @Html.Raw(Resource.Rules_privacyText)
+            </ul>
+        </p>
+        <p>
+            <h3>@Resource.Rules_activity</h3>
+            <ul>
+                @Html.Raw(Resource.Rules_activityText)
+            </ul>
+        </p>
+        <p>
+            <h3>@Resource.Rules_copyright</h3>
+            <ul>
+                @Html.Raw(Resource.Rules_copyrightText)
+            </ul>
+        </p>
+        <p>
+            <h3>@Resource.Rules_criminalContent</h3>
+            <div>
+                <p>
+                    @Html.Raw(Resource.Rules_criminalContentText)<br />
+                </p>
+                
+
+            </div>
+        </p>
+    </div>
+</div>
+
+

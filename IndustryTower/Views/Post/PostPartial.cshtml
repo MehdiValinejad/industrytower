@@ -1,0 +1,145 @@
+﻿@model IndustryTower.Models.Post
+@{
+    var postid = EncryptionHelper.Protect(Model.postID);
+    bool isEditable = false;
+    //Posters
+    if (Model.posterCoID != null)
+    {
+        if (Model.PosterCompany.Admins.Any(u => AuthorizationHelper.isRelevant(u.UserId)))
+        {
+            isEditable = true;
+        }
+    }
+    else if (Model.posterStoreID != null)
+    {
+        if (Model.PosterStore.Admins.Any(u => AuthorizationHelper.isRelevant(u.UserId)))
+        {
+            isEditable = true;
+        }
+    }
+    else if (Model.posterUserID != null && AuthorizationHelper.isRelevant((int)Model.posterUserID))
+    {
+        isEditable = true;
+    }
+    //Receivers
+    if (Model.postedCoID != null)
+    {
+        if (Model.PostedCompany.Admins.Any(u => AuthorizationHelper.isRelevant(u.UserId)))
+        {
+            isEditable = true;
+        }
+    }
+    else if (Model.postedStoreID != null)
+    {
+        if (Model.PostedStore.Admins.Any(u => AuthorizationHelper.isRelevant(u.UserId)))
+        {
+            isEditable = true;
+        }
+    }
+    else if (Model.postedUserID != null && AuthorizationHelper.isRelevant((int)Model.postedUserID))
+    {
+        isEditable = true;
+    }
+}
+<div id="postContainer" class="panel panel-default col-xs-12 col-md-12">
+    <div id="postDetails" class="row dir">
+        <div id="postAvatar" class="col-md-2 col-xs-4 margin-top-bot-md">
+            @if (Model.posterCoID != null)
+            {
+                @Html.ProfilePic(company: Model.PosterCompany)
+            }
+            else if (Model.posterStoreID != null)
+            {
+                @Html.ProfilePic(store: Model.PosterStore)
+            }
+            else
+            {
+                @Html.ProfilePic(user: Model.PosterUser)
+            }
+        </div>
+        <div class="col-md-10 col-xs-8 margin-top-bot-md">
+            @if (Model.posterCoID != null)
+            {
+                @Html.ActionLink(Model.PosterCompany.CultureCoName,
+                                                "CProfile",
+                                                "Company",
+                                                     new { CoId = Model.posterCoID, CoName = StringHelper.URLName(Model.PosterCompany.CultureCoName) },
+                                                null)
+            }
+            else if (Model.posterStoreID != null)
+            {
+                @Html.ActionLink(Model.PosterStore.CultureStoreName,
+                                                "SProfile",
+                                                "Store",
+                                                          new { StId = Model.posterStoreID , StName = StringHelper.URLName(Model.PosterStore.CultureStoreName) },
+                                                null)
+            }
+            else
+            {
+                @Html.ActionLink(Model.PosterUser.CultureFullName,
+                                                "UProfile",
+                                                "UserProfile",
+                                                     new { UId = Model.posterUserID, UName = StringHelper.URLName(Model.PosterUser.CultureFullName) },
+                                                null)
+            }
+            <div>
+                <small>@Html.DisplayFor(model => model.insertDate, "RelativeDate")</small>
+            </div>
+            <p id="postPassage" class="expandable">
+                @if (isEditable)
+                {
+                    <div class="inline-block">
+                        @Html.ModifyIcons("Edit", "Delete", "Post", new { PId = postid })
+                    </div>
+                }
+                @Html.DisplayFor(model => Model.post)
+            </p>
+
+        </div>
+        
+
+
+                @if (Model.image != null)
+                {
+                    <div class="col-md-12 col-xs-12 margin-top-bot-md">
+                        <div class="row">
+                            @{Html.RenderAction("FileSlideshow", "Home", new { folder = "Post", fileNamesString = Model.image });}
+                        </div>
+                    </div>
+                }
+
+                @if (Model.document != null)
+                {
+                    <div class="col-md-12 col-xs-12 margin-top-bot-xs">
+                            @{Html.RenderAction("FileList", "Home", new { folder = "Post", fileNamesString = Model.document });}
+                    </div>
+      
+                }
+
+
+
+        <div id="postSocials" class="col-md-12 col-xs-12">
+            <ul class=" nav nav-pills nav-stacked no-pad dirltr">
+                @{Html.RenderAction("Like", "Like", new { model = new IndustryTower.ViewModels.likeVars { elemId = Model.postID,typ = IndustryTower.ViewModels.LikeType.LikePost } });}
+                @*<li class="inline-block">
+                    @Ajax.ActionLink(Resource.share, "Share", "Share", new { PId = EncryptionHelper.Protect(Model.postID) }, new AjaxOptions { }, new { @class = "sharepost-link" })
+                </li>*@
+            </ul>
+        </div>
+        
+        <div id="postComments" class="col-md-12 col-xs-12 bg-default">
+            @{
+                var se = new MvcSerializer();
+                var mod = new IndustryTower.ViewModels.commentVars
+                {
+                    elemId = Model.postID,
+                    typ = IndustryTower.ViewModels.CommentType.CommentPost
+                };
+                var tt = se.Serialize(mod, SerializationMode.Plaintext);
+            }
+            @Html.AjaxPrtialLoader(Url.Action("Comments", "Comment", new { model = tt }))
+        </div>
+    </div>
+
+</div>
+

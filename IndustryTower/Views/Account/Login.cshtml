@@ -1,0 +1,59 @@
+﻿@model IndustryTower.Models.LoginModel
+
+@{
+    ViewBag.Title = Resource.logIn;
+}
+
+<div class="row dir">
+    <div class="col-md-offset-4 col-md-4 margin-top-bot-lg">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+               <strong>@Resource.logIn</strong> 
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.UserName, new { @placeholder = Html.DisplayNameFor(model => model.UserName), @class = "form-control dirltr" })
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(m => m.Password, new { @placeholder = Html.DisplayNameFor(model => model.Password), @class = "form-control dirltr" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-inline">
+                           @Html.CheckBoxFor(m => m.RememberMe)  @Html.DisplayNameFor(m => m.RememberMe) 
+                        </label>
+                    </div>
+                        <input type="submit" id="loginButton" class=" btn btn-primary col-md-12 col-xs-12" value="@Resource.logIn" />
+                    
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row dir margin-top-bot-md"  role="alert">
+    <div class="text-center">
+        @Html.ActionLink(Resource.forgotPass, "ForgotPassword") @Resource.ForgotPassCaution
+    </div>
+    <div class="text-center">
+        @Html.ActionLink(Resource.register, "Register") @Resource.registerCaution
+    </div>
+
+</div>
+
+
+
+@*<section class="social" id="socialLoginForm">
+    <h2>Use another service to log in.</h2>
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+</section>*@
+
+@section Scripts {
+    
+}

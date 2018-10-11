@@ -1,0 +1,154 @@
+﻿@model IndustryTower.Models.Book
+@{
+    ViewBag.Title = Resource.createBook;
+}
+
+<div class="row ">
+    <div class="col-md-8 col-md-offset-2 dir bg-default">
+        <div class="similar-Books margin-top-bot-md">
+            <div class="alert alert-info">
+                @Resource.searchBeforeBook
+            </div>
+            <ul></ul>
+        </div>
+        <div id="bookCreate" class="hasUpload margin-top-bot-md">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+                    <legend>@Resource.createBook</legend>
+
+                    @Html.Hidden("filesToUpload")
+
+                    <div class="group-admin-choose hasUserChoose row form-group bg-info padding-top-bot-md">
+                        <div id="loadChooseUser" class="btn btn-default col-md-6 col-md-offset-3" >
+                            @Resource.bookCoworkers
+                        </div>
+                        <ul id="choosedUsers" class="col-md-12 list-unstyled display-none">
+                            @Html.Hidden("UserTags")
+                        </ul>
+
+                        <div class="form-group col-md-12 display-none">
+                            @Html.TextBox("newUser", null, new
+                            {
+                                @class = "has-mini-search form-control",
+                                data_minisearch = Url.Action("_UserSearchPartial", "UserProfile"),
+                                placeholder = Resource.typeToSearchUsersForBook,
+                                autocomplete = "Off"
+                            
+                            })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.title, new
+                           {
+                               @placeholder = ModelDisplayName.bookTitle,
+                               @class = "form-control has-mini-search",
+                               data_minisearch = Url.Action("_BookSearchPartial", "Book")
+                               
+                           })
+                        @Html.ValidationMessageFor(model => model.title)
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.TextBoxFor(model => model.writer, new { @placeholder = ModelDisplayName.bookWriter,  @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.writer)
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.TextBoxFor(model => model.translator, new { @placeholder = ModelDisplayName.bookTranslator, @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.translator)
+                    </div>
+                    <div class="form-group col-md-6 col-md-offset-3">
+                        @Html.TextBoxFor(model => model.print, new { @placeholder = ModelDisplayName.bookPrint, @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.print)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.TextAreaFor(model => model.abtrct, new { @placeholder = ModelDisplayName.bookAbstract, @class = "form-control scroll-y", rows = "15" })
+                        @Html.ValidationMessageFor(model => model.abtrct)
+                    </div>
+
+                    
+                    <div class="row bg-darkgray padding-top-bot-md">
+                        <div class="col-md-12 col-xs-12">
+                            @Resource.bookUploadHelp
+                            <div id="uploadButton" class="fileUpload-button glyphicon glyphicon-upload btn btn-lg btn-default" title="@Resource.upload" data-placement="bottom">
+                                @Html.TextBox("bookFiles", null, new { @type = "file", @name = "files[]", @class = "post-files" })
+                            </div>
+                            <div class="progress col-md-12">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                    <span class="sr-only">0% complete</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul id="uploadedFiles" class="col-md-12 no-margin"></ul>
+                    </div>
+                    
+
+                    @Html.Hidden("professionTags")
+                    <div class="bg-info row">
+                        <div class="col-md-12">
+                            <div id="selectedProfs" class="margin-top-bot-md">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <strong>
+                                            @Resource.selectedProfessions
+                                        </strong>
+
+                                    </div>
+                                    <div class="panel-body">
+
+                                    </div>
+                                </div>
+                            </div>
+                            @Resource.professionChooseHelp
+                            <div class="form-group">
+                                <input type="text" id="ProfessionSearchBox" value="" placeholder="@Resource.professionTagChoose" class="form-control" />
+                            </div>
+                            <div class="professtionTags-container panel panel-default pos-rel">
+                                <div id="loading">
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <input type="submit" value='@Resource.create' id="askButton" class="btn btn-primary col-md-8 col-md-offset-2" data-loading-text="@Resource.loading" />
+
+                </fieldset>
+            }
+
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/UserTags")
+    @Scripts.Render("~/bundles/Book")
+@Scripts.Render("~/bundles/Upload")
+    @Scripts.Render("~/bundles/Profession")
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            
+            ProfessionsTag('@IndustryTower.App_Start.ITTConfig.MaxProfessionTagsLimit',
+                      '@ModelValidation.YouCanChooseMax5Professions');
+
+
+            $("body").delegate("div#uploadShortcut", 'click', function () {
+                $(this).next("#uploadedFiles").slideDown();
+            })
+
+            UploadFile('@IndustryTower.App_Start.ITTConfig.FileSizeLimitBook',
+                               '@IndustryTower.App_Start.ITTConfig.MaxFilesCountBook',
+                               '@ModelValidation.maxUploadFileLimit',
+                               '@ModelValidation.maxUploadFileCount',
+                               '@ModelValidation.fileTypeLimit');
+        });
+    </script>
+}

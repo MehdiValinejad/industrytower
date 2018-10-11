@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ajaxError" xml:space="preserve">
+    <value>An error occured, sorry for that!</value>
+  </data>
+  <data name="ajaxErrorAnswerAcception" xml:space="preserve">
+    <value>An error occurred while accepting or disaccepting the answer...</value>
+  </data>
+  <data name="ajaxErrorAnswerDelete" xml:space="preserve">
+    <value>An error occurred while deleting answer... Sorry!</value>
+  </data>
+  <data name="ajaxErrorAnswerEdit" xml:space="preserve">
+    <value>An error occurred while editing answer... Sorry!</value>
+  </data>
+  <data name="ajaxErrorAnswerInsert" xml:space="preserve">
+    <value>An error occurred while inserting answer... Sorry!</value>
+  </data>
+  <data name="ajaxErrorCertificateCoAdmin" xml:space="preserve">
+    <value>You are not admin of this company... </value>
+  </data>
+  <data name="ajaxErrorCertificateDelete" xml:space="preserve">
+    <value>An error occurred while deleting certificate... Sorry!</value>
+  </data>
+  <data name="ajaxErrorCertificateEdit" xml:space="preserve">
+    <value>An error occurred while editing Certificate... Sorry!</value>
+  </data>
+  <data name="ajaxErrorComment" xml:space="preserve">
+    <value>An error occurred while inserting comment... Sorry!</value>
+  </data>
+  <data name="ajaxErrorEducationCreate" xml:space="preserve">
+    <value>An error occurred while creating Education... Sorry!</value>
+  </data>
+  <data name="ajaxErrorEducationDelete" xml:space="preserve">
+    <value>An error occurred while deleting Education... Sorry!</value>
+  </data>
+  <data name="ajaxErrorEducationEdit" xml:space="preserve">
+    <value>An error occurred while editing Education... Sorry!</value>
+  </data>
+  <data name="ajaxErrorEducationUser" xml:space="preserve">
+    <value>You are not admin of this item.</value>
+  </data>
+  <data name="ajaxErrorEventCreate" xml:space="preserve">
+    <value>An error occurred while creating event... Sorry!</value>
+  </data>
+  <data name="ajaxErrorEventDelete" xml:space="preserve">
+    <value>An error occurred while deleting event... Sorry!</value>
+  </data>
+  <data name="ajaxErrorEventEdit" xml:space="preserve">
+    <value>An error occurred while editing event... Sorry!</value>
+  </data>
+  <data name="ajaxErrorEventUser" xml:space="preserve">
+    <value>You are not admin of this item.</value>
+  </data>
+  <data name="ajaxErrorFollowing" xml:space="preserve">
+    <value>An error occurred while following...</value>
+  </data>
+  <data name="ajaxErrorFriendRequest" xml:space="preserve">
+    <value>Sorry! an error occured,Try again Later Please...</value>
+  </data>
+  <data name="ajaxErrorFriendRequestAdd" xml:space="preserve">
+    <value>Sorry! An error occured while sending friend request...</value>
+  </data>
+  <data name="ajaxErrorFriendRequestDeny" xml:space="preserve">
+    <value>Sorry! An error occured while dening friend request...</value>
+  </data>
+  <data name="ajaxErrorFriendRequestIgnore" xml:space="preserve">
+    <value>Sorry! An error occured while ignoring user...</value>
+  </data>
+  <data name="ajaxErrorLike" xml:space="preserve">
+    <value>An error occurred while inserting like... Sorry!</value>
+  </data>
+  <data name="ajaxErrorModelState" xml:space="preserve">
+    <value>Your values are not valid...</value>
+  </data>
+  <data name="ajaxErrorPatentCreate" xml:space="preserve">
+    <value>An error occurred while creating patent... Sorry!</value>
+  </data>
+  <data name="ajaxErrorPatentDelete" xml:space="preserve">
+    <value>An error occurred while deleting patent... Sorry!</value>
+  </data>
+  <data name="ajaxErrorPatentEdit" xml:space="preserve">
+    <value>An error occurred while edit patent... Sorry!</value>
+  </data>
+  <data name="ajaxErrorPatentUser" xml:space="preserve">
+    <value>You are not admin of this item.</value>
+  </data>
+  <data name="ajaxErrorPostDelete" xml:space="preserve">
+    <value>An error occurred while deleting post... Sorry!</value>
+  </data>
+  <data name="ajaxErrorPostEdit" xml:space="preserve">
+    <value>An error occurred while editing post... Sorry!</value>
+  </data>
+  <data name="ajaxErrorPostInsert" xml:space="preserve">
+    <value>An error occurred while inserting post... Sorry!</value>
+  </data>
+  <data name="ajaxErrorProductAdmin" xml:space="preserve">
+    <value>You are not admin of this company...</value>
+  </data>
+  <data name="ajaxErrorProductDelete" xml:space="preserve">
+    <value>An error occurred while deleting product... Sorry!</value>
+  </data>
+  <data name="ajaxErrorProfilePicDelete" xml:space="preserve">
+    <value>An error occurred while deleting profile pic... Sorry!</value>
+  </data>
+  <data name="ajaxErrorProfilePicUpload" xml:space="preserve">
+    <value>An error occurred while uploading profile pic... Sorry!</value>
+  </data>
+  <data name="ajaxErrorQuestionAdmin" xml:space="preserve">
+    <value>You are not admin of this question...</value>
+  </data>
+  <data name="ajaxErrorQuestionDelete" xml:space="preserve">
+    <value>An error occurred while deleting question... Sorry!</value>
+  </data>
+  <data name="ajaxErrorShare" xml:space="preserve">
+    <value>Sorry! An error occured while sharing...</value>
+  </data>
+  <data name="emailWasNotFound" xml:space="preserve">
+    <value>The email you entered not found.</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="errorGlobal" xml:space="preserve">
+    <value>An error occurred while processing your request, if this persists, Contact the administrator...</value>
+  </data>
+  <data name="errorNotFound" xml:space="preserve">
+    <value>Error, The resource you want not found...</value>
+  </data>
+  <data name="MembershipError_DuplicateEmail" xml:space="preserve">
+    <value>A username for that e-mail address already exists. Please enter a different e-mail address.</value>
+  </data>
+  <data name="MembershipError_DuplicateUserName" xml:space="preserve">
+    <value>Username already exists. Please enter a different user name.</value>
+  </data>
+  <data name="MembershipError_GeneralError" xml:space="preserve">
+    <value>An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.</value>
+  </data>
+  <data name="MembershipError_InvalidAnswer" xml:space="preserve">
+    <value>The password retrieval answer provided is invalid. Please check the value and try again.</value>
+  </data>
+  <data name="MembershipError_InvalidEmail" xml:space="preserve">
+    <value>The e-mail address provided is invalid. Please check the value and try again.</value>
+  </data>
+  <data name="MembershipError_InvalidPassword" xml:space="preserve">
+    <value>The password provided is invalid. Please enter a valid password value.</value>
+  </data>
+  <data name="MembershipError_InvalidQuestion" xml:space="preserve">
+    <value>The password retrieval question provided is invalid. Please check the value and try again.</value>
+  </data>
+  <data name="MembershipError_InvalidUserName" xml:space="preserve">
+    <value>The user name provided is invalid. Please check the value and try again.</value>
+  </data>
+  <data name="MembershipError_ProviderError" xml:space="preserve">
+    <value>The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.</value>
+  </data>
+  <data name="MembershipError_UserRejected" xml:space="preserve">
+    <value>The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.</value>
+  </data>
+  <data name="modelstateError" xml:space="preserve">
+    <value>Sorry! an error occurred while processing your request. check your data and retry.</value>
+  </data>
+  <data name="notFound" xml:space="preserve">
+    <value>Not found</value>
+  </data>
+  <data name="passWordChangeError" xml:space="preserve">
+    <value>The current password is incorrect or the new password is invalid.</value>
+  </data>
+  <data name="planQuery" xml:space="preserve">
+    <value>Plan is Wrong...</value>
+  </data>
+  <data name="resendConfirmationEmailError" xml:space="preserve">
+    <value>An error occurred while resending of confirmation email.</value>
+  </data>
+  <data name="ajaxFileSize" xml:space="preserve">
+    <value>File Size is more than allowed...</value>
+  </data>
+  <data name="ajaxFileType" xml:space="preserve">
+    <value>File is not supported</value>
+  </data>
+  <data name="ajaxFileUploadError" xml:space="preserve">
+    <value>File Upload error...</value>
+  </data>
+  <data name="ajaxImageCropError" xml:space="preserve">
+    <value>An error occurred while cropping image...</value>
+  </data>
+  <data name="ajaxImageResizeError" xml:space="preserve">
+    <value>An error occurred while resizing image...</value>
+  </data>
+  <data name="nameOrPassIncorrect" xml:space="preserve">
+    <value>Username or password is wrong!</value>
+  </data>
+  <data name="registerActivationEmailError" xml:space="preserve">
+    <value>Reqistration successfull, but an error occurred while sending email, please click on link below to retry.</value>
+  </data>
+  <data name="OldBrowserHelp" xml:space="preserve">
+    <value>Sorry, Your web browser is too old!
+please click on links below to download the latest browser.</value>
+  </data>
+  <data name="ajaxErrorGroupAdminDelete" xml:space="preserve">
+    <value>Your are deleting all admins! the group should have at lease one admin</value>
+  </data>
+  <data name="ajaxErrorSemAdmin" xml:space="preserve">
+    <value>Webinar moderator should be choosed.</value>
+  </data>
+  <data name="ajaxErrorWordDuplicateEn" xml:space="preserve">
+    <value>The english word is duplicate, try to edit word or choose from list apeared while typing.</value>
+  </data>
+  <data name="ajaxErrorWordDuplicateFa" xml:space="preserve">
+    <value>The not english word is duplicate, try to edit word or choose from list apeared while typing.</value>
+  </data>
+  <data name="wordIsPresentInDic" xml:space="preserve">
+    <value>The word you are going to add to this dictionary, is present as following, you can edit this word description instead.</value>
+  </data>
+  <data name="ajaxErrorWordDuplicate" xml:space="preserve">
+    <value>Your word is present in the words list, please try again and choose from list.</value>
+  </data>
+  <data name="bookMustUpload" xml:space="preserve">
+    <value>File(s) must be uploaded</value>
+  </data>
+  <data name="bookMustUploadOneDoc" xml:space="preserve">
+    <value>A document file must be uploaded at least.</value>
+  </data>
+  <data name="bookMustUploadOneDocAndImage" xml:space="preserve">
+    <value>A document file must be uploaded, you can upload an image too.</value>
+  </data>
+  <data name="fileCountExceeded" xml:space="preserve">
+    <value>So many files uploaded</value>
+  </data>
+</root>

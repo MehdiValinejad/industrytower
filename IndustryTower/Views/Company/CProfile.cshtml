@@ -1,0 +1,219 @@
+﻿@model IndustryTower.Models.CompanyNotExpired
+@{
+    ViewBag.Title = Model.CultureCoName;
+
+    var coid = EncryptionHelper.Protect(Model.coID);
+    bool isAdmin = Model.Admins.Any(u => AuthorizationHelper.isRelevant(u.UserId));
+}
+
+@section head{
+<meta name="description" content="@Model.CultureAbout">
+<meta name="keywords" content="@String.Join(",",Model.Categories.Select(d=>d.CultureCatName))">
+    }
+
+<div class="row">
+    <div class="col-md-5 col-xs-12 dir">
+
+        @if (isAdmin)
+        {
+            @Html.ModifyIcons("LogoPic", "LogoPicDelete", "Company", new { CoId = coid }, "changeCoLogo-link", "deleteCoLogo-link")
+        }
+        @Html.ProfilePic(company: Model)
+
+        <div class="margin-top-bot-md">
+            @Html.AjaxPrtialLoader(Url.Action("CertificatesPartial", "Certificate", new { CoId = Model.coID }))
+            @Html.AjaxPrtialLoader(Url.Action("EventsPartial", "Event", new { CoId = Model.coID }))
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @Resource.products
+                    @Html.ActionLink(Resource.all, "CompanyProducts", "Product", new { CoId = Model.coID }, null)
+                </div>
+                <div class="panel-body">
+                    
+                    @{Html.RenderPartial("~/Views/Product/_CompanyProductsPartial.cshtml", Model.Products.Take(8));}
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @Resource.services
+                    @Html.ActionLink(Resource.all, "CompanyServices", "Service", new { CoId = Model.coID }, null)
+                </div>
+                <div class="panel-body">
+
+                    @{Html.RenderPartial("~/Views/Service/_CompanyServicesPartial.cshtml", Model.Services.Take(8));}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-7 col-xs-12">
+
+
+        <div class="col-md-12 dir">
+            @if (isAdmin)
+            {
+                @Html.ModifyIcons("Edit", "Edit", "Company", new { CoId = coid }, "edit-CoStor", "display-none", editAjax: false)
+            }
+            <h4>
+                @Html.ActionLink(Model.CultureCoName,
+                         "CProfile",
+                         "Company",
+                         new { CoId = Model.coID, CoName = StringHelper.URLName(Model.CultureCoName) },
+                         null)
+            </h4>
+            
+        </div>
+
+
+        <div class="col-md-12 dir">
+            <div>
+                <span class="icon-Company icn-20"></span>
+                @Html.DisplayFor(model => model.State.CultureFullState) -
+                @Html.DisplayFor(model => model.CultureAddress)
+            </div>
+            <div>
+                <span class="glyphicon glyphicon-phone-alt icn-25"></span>
+                @Html.DisplayFor(model => model.phoneNo)
+            </div>
+            @if (Model.faxNo != null)
+            {
+                <div>
+                    <span class="glyphicon glyphicon glyphicon-print icn-20"></span>
+                    @Html.DisplayFor(model => model.faxNo)
+                </div>
+            }
+            @if (Model.email != null)
+            {
+                <div>
+                    <span class="glyphicon glyphicon-envelope icn-20"></span>
+                    @Html.DisplayFor(model => model.email)
+                </div>
+            }
+
+            <div>
+                <span class="icon-Group icn-20"></span>
+                <span class="inline-block">
+                    @Html.Raw(EnumTypes.ResourceManager.GetString(Model.companySize.ToString()))
+                </span>
+                
+            </div>
+            @if (Model.ecoCode != null)
+            {
+                <div>
+                    <span class="glyphicon glyphicon-credit-card icn-20"></span>
+                    @Html.DisplayFor(model => model.ecoCode)
+                </div>
+            }
+            @if (Model.website != null)
+            {
+                <div class="about-item">
+                    <span class="glyphicon glyphicon-globe icn-20"></span>
+                    <a href="@Model.website">
+                        @Html.DisplayFor(model => model.CultureCoName)
+                    </a>
+                </div>
+            }
+        </div>
+
+        <div class="col-md-6 col-xs-12 margin-top-bot-md dir">
+            <ul class="nav nav-pills nav-stacked">
+                @{Html.RenderAction("Follow", "Following", new { CoId = coid });}
+            </ul>
+        </div>
+        <div class="col-md-6 margin-top-bot-md dir">
+            <div class="btn-group">
+                <a href="@Url.Action("CompanyProducts", "Product", new { CoId = Model.coID })" class="btn btn-default">@Resource.products</a>
+                @if (isAdmin)
+                {
+                    @Html.CreateIcon("Create", "Product", new { CoId = coid }, dataAjax: false, Class: "btn btn-default dropdown-toggle")
+                }
+            </div>
+            <div class="btn-group">
+                <a href="@Url.Action("CompanyServices", "Service", new { CoId = Model.coID })" class="btn btn-default">@Resource.services</a>
+                @if (isAdmin)
+                {
+                    @Html.CreateIcon("Create", "Service", new { CoId = coid }, dataAjax: false, Class: "btn btn-default dropdown-toggle")
+                }
+            </div>
+        </div>
+
+        <div class="col-md-12 col-xs-12 dir">
+            <div class="panel panel-default">
+                <div class="panel-heading">@Resource.activityCategories</div>
+                <div class="panel-body">
+                    @if (isAdmin)
+                    {
+                        @Html.ModifyIcons("Edit", "Edit", "Company", new { CoId = coid }, "edit-CoStor", "display-none", editAjax: false)
+                    }
+
+                    @if (Model.Categories.Count != 0)
+                    {
+                        Html.RenderAction("RelatedCategories", "Category", new { CoId = Model.coID });
+                    }
+                    else if (isAdmin)
+                    {
+                        <span class="text-danger">@Html.Raw(Resource.noProffSelected)</span>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                @if (Model.Followers.Any(f => f.followerUserID == WebSecurity.CurrentUserId))
+                {
+                    Html.RenderAction("Create", "Post", new
+                    {
+                        model = new IndustryTower.ViewModels.postVars
+                        {
+                            CoId = Model.coID
+                        }
+                    });
+                }
+            </div>
+            
+        </div>
+
+
+        <div id="postsContainer" class="col-md-12 col-xs-12 dir">
+            <div class="bottom-border-blue dir">
+                @Resource.posts
+            </div>
+            @Html.AjaxPrtialLoader(Url.Action("ProfilePostFeed", "Post", new { CoId = Model.coID }))
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/Upload")
+       @Scripts.Render("~/bundles/Certificate")
+    @Scripts.Render("~/bundles/Social")
+    @Scripts.Render("~/bundles/Company")
+    @Scripts.Render("~/bundles/Following")
+    @Scripts.Render("~/bundles/TabChanger")
+    @Scripts.Render("~/bundles/SlideShow")
+    @Scripts.Render("~/bundles/CountryDropDown")
+
+
+
+    <script>
+        $(document).ready(function () {
+            SlideShowArrowKeys();
+            //Call Upload File
+            UploadFile('@IndustryTower.App_Start.ITTConfig.FileSizeLimit',
+                           '@IndustryTower.App_Start.ITTConfig.MaxFilesCountPost',
+                           '@ModelValidation.maxUploadFileLimit',
+                           '@ModelValidation.maxUploadFileCount',
+                           '@ModelValidation.fileTypeLimit');
+
+
+            TabChanger($("#PRR").find("#tabChangerContainer"), "PRR", 4000);
+            TabChanger($("#SRR").find("#tabChangerContainer"), "SRR", 5000);
+        });
+
+    </script>
+}

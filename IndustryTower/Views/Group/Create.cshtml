@@ -1,0 +1,147 @@
+﻿@model IndustryTower.Models.Group
+@{
+    ViewBag.Title = Resource.create;
+}
+
+
+
+<div class="row">
+    <div id="groupCreateEdit" class="col-md-offset-2 col-md-8 dir">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>
+                    @Resource.create
+                    <span class="pull-left">
+                        <span class="icon-Group"></span>
+                    </span>
+                </h3>
+
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary()
+                    <div class="group-admin-choose hasUserChoose row form-group">
+                        <ul id="choosedUsers" class="col-md-12 list-unstyled">
+                            @Html.Hidden("UserTags")
+                        </ul>
+
+                        <div class="form-group col-md-12">
+                            @Html.TextBox("newUser", null, new
+                            {
+                                @class = "has-mini-search form-control",
+                                data_minisearch = Url.Action("_UserSearchPartial", "UserProfile"),
+                                placeholder = Resource.typeToSearchUser
+                            })
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        @Html.DisplayNameFor(model => model.groupName)
+                        @Html.TextBoxFor(model => model.groupName, new { @class = "form-control", placeholder = ModelDisplayName.groupName })
+                        @Html.ValidationMessageFor(model => model.groupName)
+                    </div>
+                    <div class="form-group col-md-12">
+                        @Html.DisplayNameFor(model => model.groupDesc)
+                        @Html.TextAreaFor(model => model.groupDesc, new { @class = "form-control", placeholder = ModelDisplayName.groupDesc, @onkeyup = "textAreaAdjust(this)" })
+                        @Html.ValidationMessageFor(model => model.groupDesc)
+                    </div>
+
+
+
+                    <div class="bg-default col-md-12 margin-top-bot-md">
+                        <div class="col-md-12 margin-top-bot-md">
+                            <div id="SelectedCategories">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <strong>
+                                            @Resource.selectedCategories
+                                        </strong>
+                                    </div>
+                                    <div class="panel-body">
+                                        @*@foreach (var cat in Model.Categories)
+                                            {
+                                                <div id='selectedProf' class='green-tag inline-block' data-value="@cat.catID">
+                                                    @Html.DisplayFor(model => cat.CultureCatName)
+                                                    <button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                </div>
+                                            }*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-border-blue">
+                            @Resource.categoryChooseHelp
+                        </div>
+
+                        @Html.AjaxPrtialLoader(Url.Action("CategoryTags", "Category"), true)
+                    </div>
+                    <div>
+                        @Html.DisplayNameFor(model => model.isPublic):
+                        @Resource.no
+                        @Html.RadioButtonFor(model => model.isPublic, false)
+                        @Resource.yes
+                        @Html.RadioButtonFor(model => model.isPublic, true, new { @checked = "checked" })
+                    </div>
+
+
+                    <div class="bg-default col-md-12 margin-top-bot-md">
+                        @Html.Hidden("professionTags")
+                        <div id="selectedProfs" class="col-md-12 margin-top-bot-md">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <strong>
+                                        @Resource.selectedProfessions
+                                    </strong>
+                                </div>
+                                <div class="panel-body">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 margin-top-bot-md">
+                            <div class="bottom-border-blue">
+                                @Resource.professionChooseHelp
+                            </div>
+                            <div class="form-group">
+                                @*@Html.TextBox("ProfessionSearchBox", null, htmlAttributes: new { @placeholder = Resource.professionTagChoose, @class="form-control" })*@
+                                <input type="text" id="ProfessionSearchBox" value="" placeholder="@Resource.professionTagChoose" class="form-control" />
+                            </div>
+                            <div class="professtionTags-container panel panel-default pos-rel">
+                                <div id="loading">
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        @Html.Hidden("Cats", ViewData["Cats"] != null ? ViewData["Cats"] : null)
+                    </div>
+                    <input type="submit" value="@Resource.create" class="btn btn-primary col-md-4 col-md-offset-4" data-loading-text="@Resource.loading" />
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/UserTags")
+    @Scripts.Render("~/bundles/Group")
+    @Scripts.Render("~/bundles/Category")
+    @Scripts.Render("~/bundles/Profession")
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            GategoryTags('@IndustryTower.App_Start.ITTConfig.MaxCategoryTagsLimit',
+                '@ModelValidation.YouCanChooseMaxCategories',
+                '@ModelValidation.categoryParentIsChoosed'
+                );
+            ProfessionsTag('@IndustryTower.App_Start.ITTConfig.MaxProfessionTagsLimit',
+                      '@ModelValidation.YouCanChooseMax5Professions');
+        });
+    </script>
+}

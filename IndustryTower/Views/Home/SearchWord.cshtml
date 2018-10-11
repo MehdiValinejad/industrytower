@@ -1,0 +1,25 @@
+﻿@model List<IndustryTower.ViewModels.WordSearchViewModel>
+@foreach (var item in Model)
+{
+    <div class="search-grid-box row margin-top-bot-md bg-default border-radius">
+
+
+        <div class="col-md-12 margin-top-bot-md">
+            <strong>
+                @Html.ActionLink(item.wordResult.word, "Detail", "Word", new { WId = item.wordResult.wordId, WName = StringHelper.URLName(item.wordResult.word) }, new { @class = "questionLink" })
+            </strong>
+        </div>
+    </div>
+}
+
+@if ((bool)ViewData["finalPage"] == false)
+{
+    var pagenumber = (int)ViewData["pageNum"];
+    <div id="nextSearchResults" data-nextpage="@(pagenumber + 1)">
+        @Html.NextItems("TotalSearch", "Home", new
+   {
+       page = pagenumber + 1,
+       currentFilter = ViewData["currentFilter"]
+   })
+    </div>
+}

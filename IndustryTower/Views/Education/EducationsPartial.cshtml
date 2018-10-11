@@ -1,0 +1,47 @@
+﻿@model IEnumerable<IndustryTower.Models.Education>
+
+<div id="UPEducation" class=" panel panel-default">
+
+    <div class="panel-heading dirltr">
+        @if ((int)ViewData["UId"] == WebSecurity.CurrentUserId)
+        {
+            @Html.CreateIcon("Create", "Education", Class: "pull-right")
+        }
+        <h3 class="panel-title">
+            <span class="glyphicon glyphicon-book"></span> @Resource.education
+        </h3>
+    </div>
+    <div class="panel-body dir list-group">
+        @foreach (var certificateItem in Model)
+        {
+            <div id="eduItem" class="list-group-item" >
+                
+
+                <strong>
+                    @if (AuthorizationHelper.isRelevant(certificateItem.userID))
+                    {
+                        @Html.ModifyIcons("Edit", "Delete", "Education", new { eduID = EncryptionHelper.Protect(certificateItem.educationID) })
+                    }
+                    @Html.Raw(EnumTypes.ResourceManager.GetString(certificateItem.degree.ToString()))
+                </strong>
+                <strong>
+                    @Html.DisplayFor(model => certificateItem.CulturefieldOfStudy)
+                </strong>
+                <div>
+                    <strong>
+                        @Resource.school:
+                    </strong> @Html.DisplayFor(model => certificateItem.CultureSchool)
+                </div>
+                <div>
+                    <small>
+                        @Html.DatePeriod(certificateItem.attendDate, certificateItem.untilDate)
+                    </small>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+
+

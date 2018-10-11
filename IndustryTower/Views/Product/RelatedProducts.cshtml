@@ -1,0 +1,12 @@
+﻿@model IEnumerable<IndustryTower.ViewModels.RelatedProductViewModel>
+
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-12 list-group-item">
+                @Html.ProfilePic(product: item.product, imghtmlAttributes: new { @class = "min-img" }, linkhtmlAttributes: new { @class = "inline-block" })
+                <span class="inline-block">
+                    @Html.ActionLink(item.product.CultureProductName, "Detail", "Prodcut", new { PrId = item.product.productID, PrName = StringHelper.URLName(item.product.CultureProductName) }, null)
+                </span>
+            </div>
+        }

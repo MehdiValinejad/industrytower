@@ -1,0 +1,55 @@
+﻿
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">
+        @Resource.uploadNewPic
+    </h4>
+</div>
+
+@using (Html.BeginForm("LogoPic", "Store", FormMethod.Post, new { @class = "newStore-pic" }))
+{
+    <div id="picChangeContainer" class="modal-body dir row hasUpload">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.Hidden("store", ViewData["StId"])
+        @Html.Hidden("picToUpload")
+        @Html.Hidden("x")
+        @Html.Hidden("y")
+        @Html.Hidden("w")
+        @Html.Hidden("h")
+        <div class="crop-help alert alert-warning display-none">
+            @Resource.cropHelp
+        </div>
+        <div id="newProfilePic">
+
+            <div class="col-md-12 col-xs-12">
+                <div id="uploadButton" class="fileUpload-button glyphicon glyphicon-upload btn btn-lg btn-default">
+                    @Html.TextBox("profilePic", null, new { @type = "file", @name = "files[]", @class = "post-files" })
+                </div>
+                <div class="progress col-md-12">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                        <span class="sr-only">0% complete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer dir">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Resource.close</button>
+        <input type="submit" value="@Resource.save" class="btn btn-primary" data-loading-text="@Resource.loading" />
+    </div>
+}
+
+
+@Scripts.Render("~/bundles/Crop")
+@Scripts.Render("~/bundles/Company")
+
+<script>
+        UploadFile('@IndustryTower.App_Start.ITTConfig.FileSizeLimit',
+                           '@IndustryTower.App_Start.ITTConfig.MaxFilesCountPost',
+                           '@ModelValidation.maxUploadFileLimit',
+                           '@ModelValidation.maxUploadFileCount',
+                           '@ModelValidation.fileTypeLimit');
+</script>
+

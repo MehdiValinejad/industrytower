@@ -1,0 +1,15 @@
+﻿/*
+This is an example of how to use the image sprite in your own CSS files
+*/
+.O_Company_Luxury {
+/* You may have to set 'display: block' */
+	width: 800px;
+	height: 499px;
+	background: url('Sprite.office.jpg') 0 0;
+}
+.O_Store_FirstFloor {
+/* You may have to set 'display: block' */
+	width: 700px;
+	height: 459px;
+	background: url('Sprite.office.jpg') 0 -500px;
+}

@@ -1,0 +1,51 @@
+﻿@model IList<IndustryTower.Models.Profession>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+
+
+        <div id="relatedProffession" class="dropdown inline-block margin-top-bot-xs">
+            <button type="button" class="btn btn-xs btn-default pink-tag dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-wrench"></span>
+                <strong>@item.CultureProfessionName</strong>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" >
+                <li role="presentation">
+                    @Html.ActionLink(EnumTypes.Total, "TotalSearch", "Home", new
+                                                                   {
+                                                                       searchType = "All",
+                                                                       searchProfessions = item.profID
+                                                                   }, null)
+                </li>
+                <li>
+                    @Html.ActionLink(EnumTypes.People, "TotalSearch", "Home", new
+                                                                   {
+                                                                       searchType = "People",
+                                                                       searchProfessions = item.profID
+                                                                   }, null)
+                </li>
+                <li>
+                    @Html.ActionLink(EnumTypes.Question, "TotalSearch", "Home", new
+                                                                   {
+                                                                       searchType = "Question",
+                                                                       searchProfessions = item.profID
+                                                                   }, null)
+                </li>
+                <li>
+                    @Html.ActionLink(EnumTypes.Event, "TotalSearch", "Home", new
+                                                                   {
+                                                                       searchType = "Event",
+                                                                       searchProfessions = item.profID
+                                                                   }, null)
+                </li>
+
+            </ul>
+        </div>
+
+    }
+}
+
+

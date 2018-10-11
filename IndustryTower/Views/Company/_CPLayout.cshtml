@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "_UPLayout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="CPTop">
+    @RenderSection("TOP", required: true)
+</div>
+<div id="CPRight">
+    <div id="CPPost">
+        @RenderSection("Post", required: true)
+    </div>
+</div>
+
+<div id="CPLeft">
+    @RenderSection("Categories", required: false)
+    @RenderSection("Product", required: false)
+    @RenderSection("Service", required: false)
+    @RenderSection("Certificate", required: false)
+    @RenderSection("Job", required: false)
+    @RenderSection("Project", required: false)
+    @RenderSection("Events", required: false)
+</div>
+
+@section scripts{
+    @RenderSection("scripts", required: false)
+}

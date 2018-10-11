@@ -1,0 +1,66 @@
+﻿@model IndustryTower.Models.Seminar
+@{
+    ViewBag.Title = Resource.addAudience;
+}
+
+<div class="single-page-form" id="SeminarAudienceEdit">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("S", EncryptionHelper.Protect(Model.seminarId))
+        <fieldset>
+            <legend>
+                @Resource.edit - @Model.title
+                <span class="icon-Event"></span>
+            </legend>
+            <div class="group-member-choose hasUserChoose">
+                <div>
+
+                    <div class="submitContainer full-width" style="margin:6px 0">
+                        @Html.TextBox("newUser", null, new
+                {
+                    @class = "has-mini-search medium-input inline-block vertical-middle max-margin",
+                    data_minisearch = Url.Action("_UserSearchPartial", "UserProfile"),
+                    placeholder = Resource.typeToSearchUser
+                })
+                        <input value="@Resource.edit" type="submit" class="inline-block vertical-middle" />
+                    </div>
+                </div>
+
+                <div id="choosedUsers">
+                    <ul>
+                        @if (Model.Audiences.Count > 0)
+                        {
+                            foreach (var item in Model.Audiences)
+                            {
+                                <li data-id="@EncryptionHelper.Protect(item.UserId)">
+                                    <div class='I_close'></div>
+                                    <div class="mini-avatar-container float-left">
+                                        @Html.ProfilePic(user: item)
+                                    </div>
+
+                                    <div class="float-left">
+                                        <span>
+                                            @Html.DisplayFor(model => item.CultureFullName)
+                                        </span>
+                                        <p class="overflow-hidden" style="max-width:200px">
+                                            @Html.AboutUser(item)
+                                        </p>
+                                    </div>
+                                </li>
+                            }
+                        }
+                        @Html.Hidden("UserTags")
+                    </ul>
+                </div>
+            </div>
+
+        </fieldset>
+    }
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/UserTags")
+    @Scripts.Render("~/bundles/Seminar")
+}

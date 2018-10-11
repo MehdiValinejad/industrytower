@@ -1,0 +1,11 @@
+﻿@model IEnumerable<IndustryTower.ViewModels.RelatedServiceViewModel>
+
+@foreach (var item in Model)
+{
+    <div class="col-md-12 list-group-item">
+        @Html.ProfilePic(service: item.service, imghtmlAttributes: new { @class = "min-img" }, linkhtmlAttributes: new { @class = "inline-block" })
+        <span class="inline-block">
+            @Html.ActionLink(item.service.CultureServiceName, "Detail", "Prodcut", new { PrId = item.service.serviceID, PrName = StringHelper.URLName(item.service.CultureServiceName) }, null)
+        </span>
+    </div>
+}

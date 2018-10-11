@@ -1,0 +1,109 @@
+﻿@model IndustryTower.ViewModels.AdminViewModel
+@{
+    //ViewBag.Title = "MainMenu";
+}
+
+<div class="row dir">
+    <div class="col-md-8 ">
+        <table class="table">
+            <thead>
+
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="label label-info">
+                            @Model.Users
+                        </div>
+                    </td>
+                    <td class="text-left">Users</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="label label-info">
+    @Model.ExpiredCompanies
+</div>
+                    </td>
+                    <td class="text-left">Expired Companies</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="label label-info">
+                            @Model.NotExpiredCompanies
+                        </div>
+                    </td>
+                    <td class="text-left">Not Expired Companies</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="label label-info">
+                            @Model.ExpiredStores
+                        </div>
+                    </td>
+                    <td class="text-left">Expired Stores</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="label label-info">
+                            @Model.NotExpiredStores
+                        </div>
+                    </td>
+                    <td class="text-left">Not Expired Stores</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="label label-info">
+                            @Model.Services
+                        </div>
+                    </td>
+                    <td class="text-left">Services</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="label label-info">
+                            @Model.Products
+                        </div>
+                    </td>
+                    <td class="text-left">Products</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="label label-info">
+                            @Model.Questions
+                        </div>
+                    </td>
+                    <td class="text-left">Questions</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="label label-info">
+                            @Model.ExpiredEvents
+                        </div>
+                    </td>
+                    <td class="text-left">Expired Events</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="label label-info">
+                            @Model.UpcomingEvents
+                        </div>
+                    </td>
+                    <td class="text-left">Upcoming Events</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="admin-menu col-md-4">
+        <div class="list-group">
+            @Html.ActionLink(Resource.categories, "Management", "Category",null, new { @class = "list-group-item" })
+            @Html.ActionLink(Resource.professions, "Index", "Profession", null, new { @class = "list-group-item" })
+            @Html.ActionLink(Resource.allRequests, "AllRequests", "PlanRequest", null, new { @class = "list-group-item" })
+            @Html.ActionLink(Resource.webinar, "Create", "Seminar", null, new { @class = "list-group-item" })
+            <a href="~/elmah" class="list-group-item">@Resource.errors</a>
+        </div>
+    </div>
+
+</div>
+
+
+

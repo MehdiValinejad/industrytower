@@ -1,0 +1,1599 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="addCategory" xml:space="preserve">
+    <value>Add Category</value>
+  </data>
+  <data name="categoryManagement" xml:space="preserve">
+    <value>Category Management</value>
+  </data>
+  <data name="comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="creatChild" xml:space="preserve">
+    <value>Create Child</value>
+  </data>
+  <data name="create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="editCategory" xml:space="preserve">
+    <value>Edit Category</value>
+  </data>
+  <data name="english" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="hello" xml:space="preserve">
+    <value>Hello, </value>
+  </data>
+  <data name="lastAnswers" xml:space="preserve">
+    <value>Last Answers</value>
+  </data>
+  <data name="lastQuestions" xml:space="preserve">
+    <value>Last Questions</value>
+  </data>
+  <data name="like" xml:space="preserve">
+    <value>Like</value>
+  </data>
+  <data name="likes" xml:space="preserve">
+    <value>Likes</value>
+  </data>
+  <data name="logIn" xml:space="preserve">
+    <value>Log In</value>
+  </data>
+  <data name="logOut" xml:space="preserve">
+    <value>Log Out</value>
+  </data>
+  <data name="persian" xml:space="preserve">
+    <value>Persian</value>
+  </data>
+  <data name="post" xml:space="preserve">
+    <value>Post</value>
+  </data>
+  <data name="professionManagement" xml:space="preserve">
+    <value>ProfessionManagement</value>
+  </data>
+  <data name="register" xml:space="preserve">
+    <value>Registeration</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="sharedBefore" xml:space="preserve">
+    <value>Shared Before</value>
+  </data>
+  <data name="title" xml:space="preserve">
+    <value>Industry Tower</value>
+  </data>
+  <data name="unlike" xml:space="preserve">
+    <value>Unlike</value>
+  </data>
+  <data name="Internet" xml:space="preserve">
+    <value>Internet</value>
+  </data>
+  <data name="selectState" xml:space="preserve">
+    <value>Please choose state</value>
+  </data>
+  <data name="companies" xml:space="preserve">
+    <value>Companies</value>
+  </data>
+  <data name="events" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="homeFeed" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="jobs" xml:space="preserve">
+    <value>Jobs</value>
+  </data>
+  <data name="products" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="projects" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="questions" xml:space="preserve">
+    <value>Questions</value>
+  </data>
+  <data name="services" xml:space="preserve">
+    <value>Services</value>
+  </data>
+  <data name="stores" xml:space="preserve">
+    <value>Stores</value>
+  </data>
+  <data name="moreComments" xml:space="preserve">
+    <value>More comments</value>
+  </data>
+  <data name="morePosts" xml:space="preserve">
+    <value>More posts</value>
+  </data>
+  <data name="moreQuestions" xml:space="preserve">
+    <value>More questions</value>
+  </data>
+  <data name="noOtherPosts" xml:space="preserve">
+    <value>No other posts</value>
+  </data>
+  <data name="noOtherQuestions" xml:space="preserve">
+    <value>No other questions</value>
+  </data>
+  <data name="answer" xml:space="preserve">
+    <value>Answer</value>
+  </data>
+  <data name="question" xml:space="preserve">
+    <value>Question</value>
+  </data>
+  <data name="areYouSure" xml:space="preserve">
+    <value>Are you sure you want to do that?</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="sharedSuccessfully" xml:space="preserve">
+    <value>The post has shared successfully</value>
+  </data>
+  <data name="writeYourComment" xml:space="preserve">
+    <value>Write your comment here...</value>
+  </data>
+  <data name="allComments" xml:space="preserve">
+    <value>All comments</value>
+  </data>
+  <data name="newComments" xml:space="preserve">
+    <value>Your new comments</value>
+  </data>
+  <data name="popularComments" xml:space="preserve">
+    <value>Popular comments</value>
+  </data>
+  <data name="files" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="hasSharedThis" xml:space="preserve">
+    <value>Has shared this...</value>
+  </data>
+  <data name="shareNote" xml:space="preserve">
+    <value>Note about this post</value>
+  </data>
+  <data name="answers" xml:space="preserve">
+    <value>Answers</value>
+  </data>
+  <data name="recentAnswered" xml:space="preserve">
+    <value>Recent answered</value>
+  </data>
+  <data name="recentQuestions" xml:space="preserve">
+    <value>Recent questions</value>
+  </data>
+  <data name="unAnswered" xml:space="preserve">
+    <value>Unanswered questions</value>
+  </data>
+  <data name="askQuestion" xml:space="preserve">
+    <value>Ask a Question</value>
+  </data>
+  <data name="questionBody" xml:space="preserve">
+    <value>Question body ...</value>
+  </data>
+  <data name="professionTagChoose" xml:space="preserve">
+    <value>Type to choose professions</value>
+  </data>
+  <data name="questionSubject" xml:space="preserve">
+    <value>Question Subject...</value>
+  </data>
+  <data name="ask" xml:space="preserve">
+    <value>Ask your question</value>
+  </data>
+  <data name="answeredQuestions" xml:space="preserve">
+    <value>Answered questions</value>
+  </data>
+  <data name="askedBy" xml:space="preserve">
+    <value>Asked by</value>
+  </data>
+  <data name="answerPost" xml:space="preserve">
+    <value>Post your answer here...</value>
+  </data>
+  <data name="relatedProfessions" xml:space="preserve">
+    <value>Related professions</value>
+  </data>
+  <data name="friendRequestAdd" xml:space="preserve">
+    <value>Add as friend</value>
+  </data>
+  <data name="friendRemove" xml:space="preserve">
+    <value>Unfriend</value>
+  </data>
+  <data name="friendRequestCancel" xml:space="preserve">
+    <value>Cancel friend request</value>
+  </data>
+  <data name="friendRequestConfirm" xml:space="preserve">
+    <value>Confirm friend request</value>
+  </data>
+  <data name="friendRequestDeny" xml:space="preserve">
+    <value>Deny</value>
+  </data>
+  <data name="frieanRequestMessage" xml:space="preserve">
+    <value>Write your request message here...</value>
+  </data>
+  <data name="authority" xml:space="preserve">
+    <value>Authority</value>
+  </data>
+  <data name="certificates" xml:space="preserve">
+    <value>Certificates</value>
+  </data>
+  <data name="addCertificate" xml:space="preserve">
+    <value>Add new certificate</value>
+  </data>
+  <data name="deletedSuccessfully" xml:space="preserve">
+    <value>Successfully deleted.</value>
+  </data>
+  <data name="editedSuccessfully" xml:space="preserve">
+    <value>Successfully edited.</value>
+  </data>
+  <data name="friendRequestCanceled" xml:space="preserve">
+    <value>Friend Request Canceled.</value>
+  </data>
+  <data name="friendRequestConfirmed" xml:space="preserve">
+    <value>Friend Request Confirmed.</value>
+  </data>
+  <data name="friendRequestDenied" xml:space="preserve">
+    <value>Friend Request Denied.</value>
+  </data>
+  <data name="friendRequestIgnore" xml:space="preserve">
+    <value>The user has ignored.</value>
+  </data>
+  <data name="friendRequestSent" xml:space="preserve">
+    <value>Friend Request Sent.</value>
+  </data>
+  <data name="createdSuccessfully" xml:space="preserve">
+    <value>Created Successfully</value>
+  </data>
+  <data name="present" xml:space="preserve">
+    <value>Present</value>
+  </data>
+  <data name="school" xml:space="preserve">
+    <value>School</value>
+  </data>
+  <data name="education" xml:space="preserve">
+    <value>Education</value>
+  </data>
+  <data name="until" xml:space="preserve">
+    <value>Until</value>
+  </data>
+  <data name="issueStatus" xml:space="preserve">
+    <value>Issue status</value>
+  </data>
+  <data name="patent" xml:space="preserve">
+    <value>Patent</value>
+  </data>
+  <data name="categoryChooseHelp" xml:space="preserve">
+    <value>Choose relevant category from below menu to add to selected categories...</value>
+  </data>
+  <data name="createdBy" xml:space="preserve">
+    <value>Created By:</value>
+  </data>
+  <data name="selectedCategories" xml:space="preserve">
+    <value>Selected categories</value>
+  </data>
+  <data name="all" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="eventAttendors" xml:space="preserve">
+    <value>Attentors</value>
+  </data>
+  <data name="address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="attend" xml:space="preserve">
+    <value>You are attending</value>
+  </data>
+  <data name="notAttend" xml:space="preserve">
+    <value>You are not attending</value>
+  </data>
+  <data name="deleteCurrentPic" xml:space="preserve">
+    <value>Delete current pic</value>
+  </data>
+  <data name="uploadNewPic" xml:space="preserve">
+    <value>Upload your new photo</value>
+  </data>
+  <data name="likesThis" xml:space="preserve">
+    <value>Likes this...</value>
+  </data>
+  <data name="answered" xml:space="preserve">
+    <value>Answered</value>
+  </data>
+  <data name="asked" xml:space="preserve">
+    <value>Asked</value>
+  </data>
+  <data name="commentedOnThis" xml:space="preserve">
+    <value>Has commented on this</value>
+  </data>
+  <data name="addedCertificate" xml:space="preserve">
+    <value>Added certificate...</value>
+  </data>
+  <data name="certificateURL" xml:space="preserve">
+    <value>Certificate Link</value>
+  </data>
+  <data name="certificateAutority" xml:space="preserve">
+    <value>Chertificate authority</value>
+  </data>
+  <data name="follow" xml:space="preserve">
+    <value>Follow</value>
+  </data>
+  <data name="unFollow" xml:space="preserve">
+    <value>Unfollow</value>
+  </data>
+  <data name="fax" xml:space="preserve">
+    <value>Fax No</value>
+  </data>
+  <data name="officeAddress" xml:space="preserve">
+    <value>Office Address</value>
+  </data>
+  <data name="tel" xml:space="preserve">
+    <value>Phone No</value>
+  </data>
+  <data name="categories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="nextItems" xml:space="preserve">
+    <value>Next Items</value>
+  </data>
+  <data name="addProduct" xml:space="preserve">
+    <value>Add Product</value>
+  </data>
+  <data name="uploadedDocuments" xml:space="preserve">
+    <value>Uploaded Documents</value>
+  </data>
+  <data name="uploadedImages" xml:space="preserve">
+    <value>Uploaded Images</value>
+  </data>
+  <data name="resendEmailConfirmation" xml:space="preserve">
+    <value>Email confirmation resend email.</value>
+  </data>
+  <data name="reReceiveEmailConfirmation" xml:space="preserve">
+    <value>If you registered before and do not receive confirmation email click here.</value>
+  </data>
+  <data name="searchEveryThing" xml:space="preserve">
+    <value>Search for all...</value>
+  </data>
+  <data name="no" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="createProduct" xml:space="preserve">
+    <value>Add new product...</value>
+  </data>
+  <data name="payForPlan" xml:space="preserve">
+    <value>Payment information you had entered</value>
+  </data>
+  <data name="cashPayHelp" xml:space="preserve">
+    <value>By choosing this method, our staff will come to your place...</value>
+  </data>
+  <data name="pay" xml:space="preserve">
+    <value>Pay</value>
+  </data>
+  <data name="planRequest" xml:space="preserve">
+    <value>Plan request</value>
+  </data>
+  <data name="revivalRequest" xml:space="preserve">
+    <value>Revial request</value>
+  </data>
+  <data name="allRequests" xml:space="preserve">
+    <value>All Requests</value>
+  </data>
+  <data name="approve" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="notApprove" xml:space="preserve">
+    <value>Not approve</value>
+  </data>
+  <data name="requestAudit" xml:space="preserve">
+    <value>Request Audit</value>
+  </data>
+  <data name="lastPlan" xml:space="preserve">
+    <value>Last plan</value>
+  </data>
+  <data name="revivalRequestInsert" xml:space="preserve">
+    <value>If you are sure about plan, Click to redirect to the payment section...</value>
+  </data>
+  <data name="completeRegistrationProcess" xml:space="preserve">
+    <value>Complete Registration Process</value>
+  </data>
+  <data name="paySuccess" xml:space="preserve">
+    <value>Your payment information has successfully saved, our financial department will accept your payment...</value>
+  </data>
+  <data name="paySuccessfull" xml:space="preserve">
+    <value>Payment Successfull</value>
+  </data>
+  <data name="details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="specs" xml:space="preserve">
+    <value>Specs</value>
+  </data>
+  <data name="support" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="economic" xml:space="preserve">
+    <value>Economic</value>
+  </data>
+  <data name="markedAsAnswer" xml:space="preserve">
+    <value>Marked as answer</value>
+  </data>
+  <data name="professionChooseHelp" xml:space="preserve">
+    <value>Start typing in textbox below then choose from loaded professions...</value>
+  </data>
+  <data name="writeYourPost" xml:space="preserve">
+    <value>Write yourpost here...</value>
+  </data>
+  <data name="NotmarkedAsAnswer" xml:space="preserve">
+    <value>Mark as answer</value>
+  </data>
+  <data name="editProduct" xml:space="preserve">
+    <value>Edit Product</value>
+  </data>
+  <data name="deleteProduct" xml:space="preserve">
+    <value>Delete product</value>
+  </data>
+  <data name="deleteProductCaution" xml:space="preserve">
+    <value>Are you sure you want to delete this product? this will erase all information about this product including comments, likes and pictures...</value>
+  </data>
+  <data name="brandName" xml:space="preserve">
+    <value>Brand</value>
+  </data>
+  <data name="relatedCategories" xml:space="preserve">
+    <value>Related categories</value>
+  </data>
+  <data name="similarProducts" xml:space="preserve">
+    <value>Similar products</value>
+  </data>
+  <data name="seeAll" xml:space="preserve">
+    <value>See all</value>
+  </data>
+  <data name="relatedProducts" xml:space="preserve">
+    <value>Related Products</value>
+  </data>
+  <data name="companyName" xml:space="preserve">
+    <value>Company names</value>
+  </data>
+  <data name="findByName" xml:space="preserve">
+    <value>Find By Name</value>
+  </data>
+  <data name="recentCompanies" xml:space="preserve">
+    <value>Recent added companies</value>
+  </data>
+  <data name="sortOrder" xml:space="preserve">
+    <value>Sort By</value>
+  </data>
+  <data name="changePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="extenralLognRemoved" xml:space="preserve">
+    <value>The external login was removed.</value>
+  </data>
+  <data name="female" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="manageAccount" xml:space="preserve">
+    <value>Account Setting</value>
+  </data>
+  <data name="passwordChanged" xml:space="preserve">
+    <value>Your password has been changed.</value>
+  </data>
+  <data name="passwordHasBeenSet" xml:space="preserve">
+    <value>Your password has been set.</value>
+  </data>
+  <data name="registerCaution" xml:space="preserve">
+    <value>if you don't have an account.</value>
+  </data>
+  <data name="registrationForm" xml:space="preserve">
+    <value>Registration Form</value>
+  </data>
+  <data name="youAreLogedInAs" xml:space="preserve">
+    <value>You're logged in as</value>
+  </data>
+  <data name="professions" xml:space="preserve">
+    <value>Professions</value>
+  </data>
+  <data name="at" xml:space="preserve">
+    <value> at </value>
+  </data>
+  <data name="companySize" xml:space="preserve">
+    <value>Company Size</value>
+  </data>
+  <data name="location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="experience" xml:space="preserve">
+    <value>Experience</value>
+  </data>
+  <data name="records" xml:space="preserve">
+    <value>Records</value>
+  </data>
+  <data name="typeToSearchCategory" xml:space="preserve">
+    <value>Find category...</value>
+  </data>
+  <data name="typeToSearchExpco" xml:space="preserve">
+    <value>Company has experience</value>
+  </data>
+  <data name="typeToSearchProfession" xml:space="preserve">
+    <value>Find Profession...</value>
+  </data>
+  <data name="typeToSearchState" xml:space="preserve">
+    <value>Find country or city...</value>
+  </data>
+  <data name="setting" xml:space="preserve">
+    <value>Setting</value>
+  </data>
+  <data name="createService" xml:space="preserve">
+    <value>Create Service</value>
+  </data>
+  <data name="editService" xml:space="preserve">
+    <value>Edit Service</value>
+  </data>
+  <data name="addedExperience" xml:space="preserve">
+    <value>Add Experience...</value>
+  </data>
+  <data name="addedNewProduct" xml:space="preserve">
+    <value>Added new product</value>
+  </data>
+  <data name="company" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="store" xml:space="preserve">
+    <value>Store</value>
+  </data>
+  <data name="addedNewService" xml:space="preserve">
+    <value>adden new service</value>
+  </data>
+  <data name="unFriend" xml:space="preserve">
+    <value>Unfriend</value>
+  </data>
+  <data name="friendRemoved" xml:space="preserve">
+    <value>Friend has removed from your friend list</value>
+  </data>
+  <data name="friendReauestsReceived" xml:space="preserve">
+    <value>Received friend requests</value>
+  </data>
+  <data name="noResult" xml:space="preserve">
+    <value>No result...</value>
+  </data>
+  <data name="relatedEvents" xml:space="preserve">
+    <value>Relatd Events</value>
+  </data>
+  <data name="relatedCompanies" xml:space="preserve">
+    <value>Related Companies</value>
+  </data>
+  <data name="eventCoAttendors" xml:space="preserve">
+    <value>Attendor companies</value>
+  </data>
+  <data name="eventStAttendors" xml:space="preserve">
+    <value>Attendor stores</value>
+  </data>
+  <data name="isAttending" xml:space="preserve">
+    <value>Is attending</value>
+  </data>
+  <data name="isNotAttending" xml:space="preserve">
+    <value>Is not attending</value>
+  </data>
+  <data name="relatedQuestions" xml:space="preserve">
+    <value>Related Questions</value>
+  </data>
+  <data name="questionsAnswered" xml:space="preserve">
+    <value>Questions answered right...</value>
+  </data>
+  <data name="activityCategories" xml:space="preserve">
+    <value>Activity Categories</value>
+  </data>
+  <data name="editCompany" xml:space="preserve">
+    <value>Edit company</value>
+  </data>
+  <data name="nextComments" xml:space="preserve">
+    <value>Next Comments</value>
+  </data>
+  <data name="confirmationAlreadyConfirmed" xml:space="preserve">
+    <value>This Account has confirmed before.</value>
+  </data>
+  <data name="confirmationComplete" xml:space="preserve">
+    <value>You have completed the registration process. You can now logon to the system by clicking on the logon link.
+On the right of top main bar of the site you can see a question sign, in som pages it will changes it's color to purple, this mean current page has tour and you can access it by clicking the first item of dropdown.</value>
+  </data>
+  <data name="confirmationEmialConfirmation" xml:space="preserve">
+    <value>To complete the registration process look for an email in your inbox or spam folder that provides further instructions. </value>
+  </data>
+  <data name="confirmationEmialSent" xml:space="preserve">
+    <value>Thank you for registering. Please check your email for a confirmation
+    request with a link that will confirm your account. Once you click the
+    link, your registration will be complete.</value>
+  </data>
+  <data name="confirmationError" xml:space="preserve">
+    <value>There was an error confirming your email. Please try again.</value>
+  </data>
+  <data name="resendConfirmationEmail" xml:space="preserve">
+    <value>Resend confirmation email</value>
+  </data>
+  <data name="webSiteDescription" xml:space="preserve">
+    <value>The First &lt;br&gt;
+Iranian industry  &lt;br&gt;
+Social Network  &lt;br&gt;
+&amp; Information Center.</value>
+  </data>
+  <data name="Home_BeInsight" xml:space="preserve">
+    <value>Be In sight</value>
+  </data>
+  <data name="Home_BeInsight_desc" xml:space="preserve">
+    <value>Be in sight of professional people, Companies, Stores.
+&lt;br&gt; 
+The advanced dynamic search system, Brings apportunity of being in sight of right people based on it's heuristic procedure...</value>
+  </data>
+  <data name="Home_FindAnswer" xml:space="preserve">
+    <value>Find your answers</value>
+  </data>
+  <data name="Home_FindAnswer_desc" xml:space="preserve">
+    <value>Have questions?
+Yes, this is the right place! &lt;br&gt;
+Ask your questions, &lt;br&gt; find answers and get answers from professionals like you...</value>
+  </data>
+  <data name="searchCompany" xml:space="preserve">
+    <value>Search for companies...</value>
+  </data>
+  <data name="searchEvent" xml:space="preserve">
+    <value>Search for events...</value>
+  </data>
+  <data name="searchJob" xml:space="preserve">
+    <value>Search for jobs...</value>
+  </data>
+  <data name="searchPeople" xml:space="preserve">
+    <value>Search for people...</value>
+  </data>
+  <data name="searchProduct" xml:space="preserve">
+    <value>Search for products...</value>
+  </data>
+  <data name="searchProject" xml:space="preserve">
+    <value>Search for projects...</value>
+  </data>
+  <data name="searchQuestions" xml:space="preserve">
+    <value>Search for questions...</value>
+  </data>
+  <data name="searchService" xml:space="preserve">
+    <value>Search for services...</value>
+  </data>
+  <data name="searchStore" xml:space="preserve">
+    <value>Search for stores...</value>
+  </data>
+  <data name="Home_ProfClassification" xml:space="preserve">
+    <value>Professions Classification</value>
+  </data>
+  <data name="Home_ProfClassification_desc" xml:space="preserve">
+    <value>Categorization of Proffessions based on ISOC(International Standard Classification of Occupations).
+Thease proffessions are related to category classifications, so you are connected to other people, Companies, Stores that have same professions with you...</value>
+  </data>
+  <data name="Home_CoProfile" xml:space="preserve">
+    <value>Company Profile, Store Profile</value>
+  </data>
+  <data name="Home_CoProfile_desc" xml:space="preserve">
+    <value>Create your company or store profile, create your own posts, upload files, comment out on others posts, questions and ...
+&lt;br&gt; enter your company certificates, products and services...</value>
+  </data>
+  <data name="features" xml:space="preserve">
+    <value>Features</value>
+  </data>
+  <data name="Home_CatClassification" xml:space="preserve">
+    <value>Category Classification</value>
+  </data>
+  <data name="Home_CatClassification_desc" xml:space="preserve">
+    <value>Categorization of Companies, Stores, Products, Services, Events and... Based on ISIC (International Standard Industrial Classification)</value>
+  </data>
+  <data name="Home_Content" xml:space="preserve">
+    <value>Multilingual Content</value>
+  </data>
+  <data name="Home_Content_desc" xml:space="preserve">
+    <value>You  have two separate multilingual contents, English and Not English, if a visitor comes to your profile, Will see your contents in his/her language...</value>
+  </data>
+  <data name="Home_Search" xml:space="preserve">
+    <value>Advanced Dynamic Search</value>
+  </data>
+  <data name="Home_Search_desc" xml:space="preserve">
+    <value>Search through Questions, Answers, Companies, Products, Services, Projects, Jobs and etc.
+dynamic and userfriendly search system helps you find relevant items belongs to your requests.
+</value>
+  </data>
+  <data name="Home_UProfile" xml:space="preserve">
+    <value>User Profile</value>
+  </data>
+  <data name="Home_UProfile_desc" xml:space="preserve">
+    <value>Create your own Profile, connect with friends, meet new professionals, Follow desired companies and stores...
+Add your work experiences, Certificates, Patents, Education...
+Be up to date with your news feed, get latest friends actiities, latest products and so on...</value>
+  </data>
+  <data name="cropHelp" xml:space="preserve">
+    <value>Drag handlers to choose appropriate dimentions... </value>
+  </data>
+  <data name="postPassage" xml:space="preserve">
+    <value>Post Passage</value>
+  </data>
+  <data name="relatedServices" xml:space="preserve">
+    <value>Related Services</value>
+  </data>
+  <data name="emailFrom" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="emailSubject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="emailTo" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="friends" xml:space="preserve">
+    <value>Friends</value>
+  </data>
+  <data name="homefeedEvents" xml:space="preserve">
+    <value>Relevant Events</value>
+  </data>
+  <data name="homefeedQuestions" xml:space="preserve">
+    <value>Relevant Questions</value>
+  </data>
+  <data name="old" xml:space="preserve">
+    <value>Old</value>
+  </data>
+  <data name="paymentBefore" xml:space="preserve">
+    <value>Payment for this request had taken place before...</value>
+  </data>
+  <data name="paymentBeforeTitle" xml:space="preserve">
+    <value>Payment had took place before...</value>
+  </data>
+  <data name="paymentSuccess" xml:space="preserve">
+    <value>Payment has successfully done, Our staff will check your payment information and create your firm page within next 24 hours...</value>
+  </data>
+  <data name="paymentSuccessTitle" xml:space="preserve">
+    <value>Payment Successful</value>
+  </data>
+  <data name="selectCountry" xml:space="preserve">
+    <value>Select Country</value>
+  </data>
+  <data name="resendPassWord" xml:space="preserve">
+    <value>Resend Password</value>
+  </data>
+  <data name="newPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="forgotPass" xml:space="preserve">
+    <value>Forgot Password</value>
+  </data>
+  <data name="ForgotPassCaution" xml:space="preserve">
+    <value>If you forgot your password click here.</value>
+  </data>
+  <data name="forgotHelp" xml:space="preserve">
+    <value>If you forgot your password, please write down your username and click on recover.</value>
+  </data>
+  <data name="recover" xml:space="preserve">
+    <value>Recover</value>
+  </data>
+  <data name="newPassMailSent" xml:space="preserve">
+    <value>An email sent to your email, please check for new password</value>
+  </data>
+  <data name="passReset" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="passResetMailError" xml:space="preserve">
+    <value>An error accurred while sending email, please try again.</value>
+  </data>
+  <data name="passResetMailSent" xml:space="preserve">
+    <value>An email sent to your inbox, check for password reset link.</value>
+  </data>
+  <data name="passResetTokenNotMatch" xml:space="preserve">
+    <value>Username and Token do not match.</value>
+  </data>
+  <data name="userNotExist" xml:space="preserve">
+    <value>User Not exist.</value>
+  </data>
+  <data name="addEvent" xml:space="preserve">
+    <value>Create Event</value>
+  </data>
+  <data name="home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="userInfo" xml:space="preserve">
+    <value>User Information</value>
+  </data>
+  <data name="notifications" xml:space="preserve">
+    <value>Notification</value>
+  </data>
+  <data name="and" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="camma" xml:space="preserve">
+    <value>, </value>
+  </data>
+  <data name="commentedPost" xml:space="preserve">
+    <value>commented on this post</value>
+  </data>
+  <data name="likedPost" xml:space="preserve">
+    <value>liked this post</value>
+  </data>
+  <data name="posted" xml:space="preserve">
+    <value> posted on your profile </value>
+  </data>
+  <data name="commentedQuestion" xml:space="preserve">
+    <value>commented on your question.</value>
+  </data>
+  <data name="likedQuestion" xml:space="preserve">
+    <value>liked your question</value>
+  </data>
+  <data name="otherPeople" xml:space="preserve">
+    <value>other people</value>
+  </data>
+  <data name="acceptedAnswer" xml:space="preserve">
+    <value>accepted your answer</value>
+  </data>
+  <data name="answeredQuestion" xml:space="preserve">
+    <value>answered to your question</value>
+  </data>
+  <data name="commentedAnswer" xml:space="preserve">
+    <value>commented on your anwser</value>
+  </data>
+  <data name="commentedProduct" xml:space="preserve">
+    <value>commented on your product</value>
+  </data>
+  <data name="commentedService" xml:space="preserve">
+    <value>commented on your service</value>
+  </data>
+  <data name="followedCompany" xml:space="preserve">
+    <value>followed your company</value>
+  </data>
+  <data name="followedStore" xml:space="preserve">
+    <value>followed your store</value>
+  </data>
+  <data name="likedAnswer" xml:space="preserve">
+    <value>liked your answer</value>
+  </data>
+  <data name="likedProduct" xml:space="preserve">
+    <value>liked your product</value>
+  </data>
+  <data name="likedService" xml:space="preserve">
+    <value>liked your service</value>
+  </data>
+  <data name="on" xml:space="preserve">
+    <value>on</value>
+  </data>
+  <data name="postedAs" xml:space="preserve">
+    <value> posted as </value>
+  </data>
+  <data name="postedOnlyFa" xml:space="preserve">
+    <value />
+  </data>
+  <data name="yourProfile" xml:space="preserve">
+    <value> your profile </value>
+  </data>
+  <data name="acceptedFR" xml:space="preserve">
+    <value>accepted your friend request</value>
+  </data>
+  <data name="NotificationsICON" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="planChoose" xml:space="preserve">
+    <value>Plan Choose</value>
+  </data>
+  <data name="reqisterFirm" xml:space="preserve">
+    <value>Register new firm</value>
+  </data>
+  <data name="status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="waitingForAcception" xml:space="preserve">
+    <value>Waiting For Acception</value>
+  </data>
+  <data name="paymentNotPerformed" xml:space="preserve">
+    <value>Payment not performed yet</value>
+  </data>
+  <data name="requestForNew" xml:space="preserve">
+    <value>Requests for new firm</value>
+  </data>
+  <data name="currentRequests" xml:space="preserve">
+    <value>Your current requests</value>
+  </data>
+  <data name="expired" xml:space="preserve">
+    <value>Expired</value>
+  </data>
+  <data name="searchBeforeQuestion" xml:space="preserve">
+    <value>Please search for your question using search box on the top, if not found ask. similar questions to yours are below:</value>
+  </data>
+  <data name="selectedProfessions" xml:space="preserve">
+    <value>Selected Professions</value>
+  </data>
+  <data name="markAllRead" xml:space="preserve">
+    <value>Mark all as read</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>Event</value>
+  </data>
+  <data name="patentsCount" xml:space="preserve">
+    <value>Patents count</value>
+  </data>
+  <data name="postedOnOnlyEn" xml:space="preserve">
+    <value>posted on</value>
+  </data>
+  <data name="confirmation" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="resetPassEmialSent" xml:space="preserve">
+    <value>Password reset email sent</value>
+  </data>
+  <data name="resetPassEmialSentPassage" xml:space="preserve">
+    <value>an email including password reset link was sent to your email address, please check for next operations.</value>
+  </data>
+  <data name="errors" xml:space="preserve">
+    <value>errors</value>
+  </data>
+  <data name="oldBrowser" xml:space="preserve">
+    <value>Old web browser</value>
+  </data>
+  <data name="noProffSelected" xml:space="preserve">
+    <value>You had not selected any professions yet, so your connections will not performed... &lt;/br&gt; For selecting professions please click on the pen icon on the top right corner of this box.</value>
+  </data>
+  <data name="designedBy" xml:space="preserve">
+    <value>Designed by</value>
+  </data>
+  <data name="designedByText" xml:space="preserve">
+    <value>Aabandad Information Technology Engineers</value>
+  </data>
+  <data name="groupLeave" xml:space="preserve">
+    <value>Leave</value>
+  </data>
+  <data name="groupMembership" xml:space="preserve">
+    <value>Join</value>
+  </data>
+  <data name="groupLeaveMessage" xml:space="preserve">
+    <value>You leaved this group.</value>
+  </data>
+  <data name="groupMembershipMessage" xml:space="preserve">
+    <value>You are a member of this group now.</value>
+  </data>
+  <data name="likedOffer" xml:space="preserve">
+    <value>liked your offer</value>
+  </data>
+  <data name="commentedOffer" xml:space="preserve">
+    <value>commented on this offer</value>
+  </data>
+  <data name="acceptedNotSessionOffer" xml:space="preserve">
+    <value>Not accepted offer</value>
+  </data>
+  <data name="acceptedSessionOffer" xml:space="preserve">
+    <value>Accepted offer</value>
+  </data>
+  <data name="acceptedNotSessionOfferMessage" xml:space="preserve">
+    <value>This offer marked as not accepted.</value>
+  </data>
+  <data name="acceptedSessionOfferMessage" xml:space="preserve">
+    <value>This offer marked as accepted.</value>
+  </data>
+  <data name="sessionOffer" xml:space="preserve">
+    <value>Offer</value>
+  </data>
+  <data name="groupSessionExpired" xml:space="preserve">
+    <value>Expired</value>
+  </data>
+  <data name="group" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="groupSessionNotExpired" xml:space="preserve">
+    <value>Working...</value>
+  </data>
+  <data name="sessionOfferAcceptedCount" xml:space="preserve">
+    <value>Accepted</value>
+  </data>
+  <data name="sessionOfferCount" xml:space="preserve">
+    <value>Offers</value>
+  </data>
+  <data name="sessionOfferState" xml:space="preserve">
+    <value>Session state</value>
+  </data>
+  <data name="groups" xml:space="preserve">
+    <value>Groups</value>
+  </data>
+  <data name="searchGroup" xml:space="preserve">
+    <value>Search for professional groups...</value>
+  </data>
+  <data name="members" xml:space="preserve">
+    <value>Members</value>
+  </data>
+  <data name="sessions" xml:space="preserve">
+    <value>Sessions</value>
+  </data>
+  <data name="typeToSearchUser" xml:space="preserve">
+    <value>Type to choose admins</value>
+  </data>
+  <data name="newSession" xml:space="preserve">
+    <value>New session</value>
+  </data>
+  <data name="sessionOffers" xml:space="preserve">
+    <value>Offers</value>
+  </data>
+  <data name="groupIsPublicHelp" xml:space="preserve">
+    <value>In public groups anyone can join but non-public groups admins can add users to group.</value>
+  </data>
+  <data name="advReg" xml:space="preserve">
+    <value>Advanced registration info</value>
+  </data>
+  <data name="addFile" xml:space="preserve">
+    <value>Add files</value>
+  </data>
+  <data name="webinar" xml:space="preserve">
+    <value>Webinar</value>
+  </data>
+  <data name="webinars" xml:space="preserve">
+    <value>Webinars</value>
+  </data>
+  <data name="searchWebinar" xml:space="preserve">
+    <value>Search for webinars...</value>
+  </data>
+  <data name="audiences" xml:space="preserve">
+    <value>Audiences</value>
+  </data>
+  <data name="broadcasters" xml:space="preserve">
+    <value>Broadcasters</value>
+  </data>
+  <data name="date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="semModerator" xml:space="preserve">
+    <value>Moderator (Head lecturer)</value>
+  </data>
+  <data name="semOtherBroadcasters" xml:space="preserve">
+    <value>Other lecturers</value>
+  </data>
+  <data name="typeToSearchlecturer" xml:space="preserve">
+    <value>Type to choose main lecurer.</value>
+  </data>
+  <data name="typeToSearchlecturers" xml:space="preserve">
+    <value>Type to choose other lecturers.</value>
+  </data>
+  <data name="sendOffer" xml:space="preserve">
+    <value>Send Offer</value>
+  </data>
+  <data name="aboutUs" xml:space="preserve">
+    <value>About us</value>
+  </data>
+  <data name="contactUs" xml:space="preserve">
+    <value>Contact us</value>
+  </data>
+  <data name="ITaddress" xml:space="preserve">
+    <value>No.5 Mahbod ale. Shokrollah st. Kargar Ave.</value>
+  </data>
+  <data name="obligation" xml:space="preserve">
+    <value>This website activities is under Islamic Republic of Iran rules.</value>
+  </data>
+  <data name="rules" xml:space="preserve">
+    <value>Terms</value>
+  </data>
+  <data name="Rules_activity" xml:space="preserve">
+    <value>Acitvity</value>
+  </data>
+  <data name="Rules_activityText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Rules_agreement" xml:space="preserve">
+    <value>Licence agreement</value>
+  </data>
+  <data name="Rules_agreementText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Rules_copyright" xml:space="preserve">
+    <value>Copywrite</value>
+  </data>
+  <data name="Rules_copyrightText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Rules_criminalContent" xml:space="preserve">
+    <value>Criminal content</value>
+  </data>
+  <data name="Rules_criminalContentText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Rules_privacy" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="Rules_privacyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Rules_registration" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="Rules_registrationText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="payments" xml:space="preserve">
+    <value>Payments</value>
+  </data>
+  <data name="pocket" xml:space="preserve">
+    <value>Pocket</value>
+  </data>
+  <data name="webinarAttending" xml:space="preserve">
+    <value>Attending</value>
+  </data>
+  <data name="webinarAttendingText" xml:space="preserve">
+    <value>You are going to attend in this Webinar, after completing this step you will become an attendor of this webinar.&lt;br&gt;
+You can try for cancelling your attendance until 96 hours to the webinar time, if you pay for any webinar and then cancel your attendance, your paid money will save in your account, the money will not pay back.</value>
+  </data>
+  <data name="webinarBroadcasting" xml:space="preserve">
+    <value>You are coworker</value>
+  </data>
+  <data name="webinarModerator" xml:space="preserve">
+    <value>You are Moderator</value>
+  </data>
+  <data name="webinarNotAttend" xml:space="preserve">
+    <value>Not Attend</value>
+  </data>
+  <data name="webinarNotAttendText" xml:space="preserve">
+    <value>You are going to cancel your attendance in this Webinar, after completing this step you will remove from attendors list of this webinar.&lt;br&gt;
+if you have paid for this webinar,  your paid money will save in your account, the money will not pay back.</value>
+  </data>
+  <data name="semFreeIcon" xml:space="preserve">
+    <value>I_Free</value>
+  </data>
+  <data name="advRegText" xml:space="preserve">
+    <value>In order to be attended in the webinars, you should enter advanced registration information.</value>
+  </data>
+  <data name="homefeedWebinars" xml:space="preserve">
+    <value>Upcoming Webinars</value>
+  </data>
+  <data name="occurring" xml:space="preserve">
+    <value>Is broadcasting</value>
+  </data>
+  <data name="upComming" xml:space="preserve">
+    <value>Upcoming</value>
+  </data>
+  <data name="addAudience" xml:space="preserve">
+    <value>Add audiences</value>
+  </data>
+  <data name="addUser" xml:space="preserve">
+    <value>Add users</value>
+  </data>
+  <data name="insert" xml:space="preserve">
+    <value>Insert</value>
+  </data>
+  <data name="semAttendcancelSuccess" xml:space="preserve">
+    <value>You have successfuly canceled your attendance to this Webinar.</value>
+  </data>
+  <data name="semAttendSuccess" xml:space="preserve">
+    <value>You have successfuly added to the audiences lists of this Webinar.</value>
+  </data>
+  <data name="tourProfilePic" xml:space="preserve">
+    <value>By clicking on the man avatar on the gray bar under the top menu, you can access to your Profile.</value>
+  </data>
+  <data name="userMenu" xml:space="preserve">
+    <value>User Menu</value>
+  </data>
+  <data name="semMenu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="semShareFile" xml:space="preserve">
+    <value>File Sharing</value>
+  </data>
+  <data name="semWebAud" xml:space="preserve">
+    <value>Audiences Messages</value>
+  </data>
+  <data name="semWebBrod" xml:space="preserve">
+    <value>Assistant Messaging</value>
+  </data>
+  <data name="semWebInit" xml:space="preserve">
+    <value>Lecturer Messaging</value>
+  </data>
+  <data name="semWebInitChat" xml:space="preserve">
+    <value>Ask question from lecturer</value>
+  </data>
+  <data name="semRemainingSeat" xml:space="preserve">
+    <value>Remaining seats</value>
+  </data>
+  <data name="coANDst" xml:space="preserve">
+    <value>Companies &amp; Stores</value>
+  </data>
+  <data name="close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="free" xml:space="preserve">
+    <value>Free</value>
+  </data>
+  <data name="loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="posts" xml:space="preserve">
+    <value>Posts</value>
+  </data>
+  <data name="deleteService" xml:space="preserve">
+    <value>Delete Service</value>
+  </data>
+  <data name="upload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="state" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="Home_Group" xml:space="preserve">
+    <value>Professional groups</value>
+  </data>
+  <data name="Home_Group_desc" xml:space="preserve">
+    <value>In the professional groups, members can have integrated professional sessions, admins can choose best sugestions as the accepted sugestions.</value>
+  </data>
+  <data name="Home_IEC" xml:space="preserve">
+    <value>International Energy Conference Tehran-Iran 2014</value>
+  </data>
+  <data name="Home_IEC_desc" xml:space="preserve">
+    <value>Industry Tower attended in the IEC 2014</value>
+  </data>
+  <data name="Home_Responsive" xml:space="preserve">
+    <value>Mobile </value>
+  </data>
+  <data name="Home_Responsive_desc" xml:space="preserve">
+    <value>Check your profile on your phone or tablet.</value>
+  </data>
+  <data name="Home_Webinar" xml:space="preserve">
+    <value>Webinar, Right in your browser</value>
+  </data>
+  <data name="Home_Webinar_Desc" xml:space="preserve">
+    <value>We have a new generation system for webinars without need of installing third party softwares, right in your updated browser.</value>
+  </data>
+  <data name="sendAsChoose" xml:space="preserve">
+    <value>Send as</value>
+  </data>
+  <data name="searchTypeChoose" xml:space="preserve">
+    <value>Search type choose</value>
+  </data>
+  <data name="payTransactionError" xml:space="preserve">
+    <value>Transaction error occured.</value>
+  </data>
+  <data name="rls" xml:space="preserve">
+    <value>Rials</value>
+  </data>
+  <data name="paymentRedirect" xml:space="preserve">
+    <value>Redirecting to the bank payment gate...</value>
+  </data>
+  <data name="admins" xml:space="preserve">
+    <value>Admins</value>
+  </data>
+  <data name="homeDesc" xml:space="preserve">
+    <value>The First Iranian Insutrial Social Network, Knowledge management, Q&amp;A, Professional groups and session.</value>
+  </data>
+  <data name="homeTitle" xml:space="preserve">
+    <value>The First Iranian Insutrial Social Network</value>
+  </data>
+  <data name="chat" xml:space="preserve">
+    <value>Chat</value>
+  </data>
+  <data name="requestForSpeak" xml:space="preserve">
+    <value>Request for speaking</value>
+  </data>
+  <data name="workshopStreamingUsers" xml:space="preserve">
+    <value>Speaking</value>
+  </data>
+  <data name="workshopStreamRequesters" xml:space="preserve">
+    <value>Waiting</value>
+  </data>
+  <data name="people" xml:space="preserve">
+    <value>People</value>
+  </data>
+  <data name="excelExport" xml:space="preserve">
+    <value>Export To Excel</value>
+  </data>
+  <data name="createSesseionResult" xml:space="preserve">
+    <value>Add Result</value>
+  </data>
+  <data name="edditSesseionResult" xml:space="preserve">
+    <value>Edit Result</value>
+  </data>
+  <data name="groupSessionResult" xml:space="preserve">
+    <value>Result</value>
+  </data>
+  <data name="answerGotAccepted" xml:space="preserve">
+    <value>answer accepted</value>
+  </data>
+  <data name="offerGotAccepted" xml:space="preserve">
+    <value>offer accepted</value>
+  </data>
+  <data name="onYourCo" xml:space="preserve">
+    <value> your company </value>
+  </data>
+  <data name="onYourSt" xml:space="preserve">
+    <value> your store </value>
+  </data>
+  <data name="postedAsCo" xml:space="preserve">
+    <value> Posted as company </value>
+  </data>
+  <data name="postedAsSt" xml:space="preserve">
+    <value> Posted as store </value>
+  </data>
+  <data name="acceptedYourGsOffer" xml:space="preserve">
+    <value>Accepted your offer</value>
+  </data>
+  <data name="votedBefore" xml:space="preserve">
+    <value>You have voted before for this item.</value>
+  </data>
+  <data name="voteLow" xml:space="preserve">
+    <value>You should have at least 20 points to add vote.</value>
+  </data>
+  <data name="voteDn" xml:space="preserve">
+    <value>This item is not useful and may be duplicate.</value>
+  </data>
+  <data name="voteUp" xml:space="preserve">
+    <value>This item is useful, has not dupplicate.</value>
+  </data>
+  <data name="bdgBronzeTitle" xml:space="preserve">
+    <value>Bronze gears</value>
+  </data>
+  <data name="bdgGoldTitle" xml:space="preserve">
+    <value>Gold gears</value>
+  </data>
+  <data name="bdgSilverTitle" xml:space="preserve">
+    <value>Silver gears</value>
+  </data>
+  <data name="score" xml:space="preserve">
+    <value>Scores</value>
+  </data>
+  <data name="searchDictionary" xml:space="preserve">
+    <value>Search dictionaries...</value>
+  </data>
+  <data name="words" xml:space="preserve">
+    <value>Words</value>
+  </data>
+  <data name="dicts" xml:space="preserve">
+    <value>Dictionaries</value>
+  </data>
+  <data name="preview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="wordNew" xml:space="preserve">
+    <value>No such word found, click here for adding new word</value>
+  </data>
+  <data name="wordSearchHelp" xml:space="preserve">
+    <value>Duplicate words will not be inserted, If the word you are going to add is inthe following list, please choose.</value>
+  </data>
+  <data name="createWord" xml:space="preserve">
+    <value>Create word</value>
+  </data>
+  <data name="createWordANDTranslate" xml:space="preserve">
+    <value>Create word and Translate</value>
+  </data>
+  <data name="ImproveDesc" xml:space="preserve">
+    <value>Improve this description</value>
+  </data>
+  <data name="improveWord" xml:space="preserve">
+    <value>Improve this word</value>
+  </data>
+  <data name="addTranslate" xml:space="preserve">
+    <value>Add new meanning</value>
+  </data>
+  <data name="meanning" xml:space="preserve">
+    <value>Translation and Description</value>
+  </data>
+  <data name="topContributors" xml:space="preserve">
+    <value>Top contributors</value>
+  </data>
+  <data name="wordNewIfnotDesire" xml:space="preserve">
+    <value>If the list does not contain your desired word click here</value>
+  </data>
+  <data name="addTranslateHelp" xml:space="preserve">
+    <value>Pay attention! the improvement of current translations is prefered, so if you can improve current meannings, you will be able to earn much score than creating new translation.</value>
+  </data>
+  <data name="searchWord" xml:space="preserve">
+    <value>Search for words...</value>
+  </data>
+  <data name="badge" xml:space="preserve">
+    <value>Gear</value>
+  </data>
+  <data name="usersHaveBadge" xml:space="preserve">
+    <value>Users that have this Gear</value>
+  </data>
+  <data name="badges" xml:space="preserve">
+    <value>Gears</value>
+  </data>
+  <data name="UIWordAdded" xml:space="preserve">
+    <value>New word</value>
+  </data>
+  <data name="UIWordDescAdded" xml:space="preserve">
+    <value>New description</value>
+  </data>
+  <data name="UIWordDescEdit" xml:space="preserve">
+    <value>Word description edit</value>
+  </data>
+  <data name="UIWordEdit" xml:space="preserve">
+    <value>Word edit</value>
+  </data>
+  <data name="thisPageHelp" xml:space="preserve">
+    <value>This page tour</value>
+  </data>
+  <data name="help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="newWordHelp" xml:space="preserve">
+    <value>Please enter just one word (single or compound)</value>
+  </data>
+  <data name="wordMeanningNotFound" xml:space="preserve">
+    <value>The word meanning not found</value>
+  </data>
+  <data name="wordMeanningNotFoundHelp" xml:space="preserve">
+    <value>The word meanning for requested word was not found choosed dictionary, if you have meanning for it, please click on link below.</value>
+  </data>
+  <data name="download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="searchBeforeBook" xml:space="preserve">
+    <value>Please search books before adding new one for duplicates. in this form, you can see the duplicates after typing the title.</value>
+  </data>
+  <data name="createBook" xml:space="preserve">
+    <value>Create book</value>
+  </data>
+  <data name="typeToSearchUsersForBook" xml:space="preserve">
+    <value>Type to search for your cooperators</value>
+  </data>
+  <data name="bookCoworkers" xml:space="preserve">
+    <value>If you had coworkers while making abstract, click here.</value>
+  </data>
+  <data name="bookUploadHelp" xml:space="preserve">
+    <value>You can upload a book (Word,Excel, Powerpoint, PDF) and a firstpage image.</value>
+  </data>
+  <data name="contributors" xml:space="preserve">
+    <value>Contributors</value>
+  </data>
+  <data name="searchBook" xml:space="preserve">
+    <value>Search books...</value>
+  </data>
+  <data name="books" xml:space="preserve">
+    <value>Books</value>
+  </data>
+  <data name="CSS" xml:space="preserve">
+    <value>css</value>
+  </data>
+  <data name="addReviewBook" xml:space="preserve">
+    <value>Add book review</value>
+  </data>
+  <data name="createBookReview" xml:space="preserve">
+    <value>You've read this book? create a review!</value>
+  </data>
+  <data name="reviewedBy" xml:space="preserve">
+    <value>Reviewed by</value>
+  </data>
+  <data name="reviews" xml:space="preserve">
+    <value>Reviews</value>
+  </data>
+  <data name="youWroteReviewBefore" xml:space="preserve">
+    <value>You had written a review before, you can edit it now!</value>
+  </data>
+</root>

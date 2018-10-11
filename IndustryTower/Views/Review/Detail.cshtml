@@ -1,0 +1,55 @@
+﻿@model IndustryTower.ViewModels.ReviewBookViewModel
+@{
+    
+    ViewBag.Title = String.Concat(Resource.reviewedBy, ": ", Model.review.ActiveUser.firstName, " - ", Model.book.title);
+}
+
+@section head{
+    <meta name="description" content="@Model.review.review">
+    <meta name="keywords" content="@String.Join(",", Model.review.review.Take(100).ToString().Split(new char [] {' '}))">
+
+}
+
+<div class="row dir">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                @Html.ActionLink(Model.book.title, "Detail", "Book", new { BId = Model.book.BookId, BName= StringHelper.URLName(Model.book.title) },null)
+            </div>
+            <div class="panel-body">
+                @Html.ProfilePic(book: Model.book)
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="bottom-border-gray">
+                    @Model.review.review
+                </div>
+                <div class="col-md-4 margin-top-bot-md">
+                    @{Html.RenderAction("AvatarPartial", "UserProfile", new { UId = Model.review.ActiveUser.UserId });}
+                </div>
+                <div class="col-md-8 margin-top-bot-md">
+                    @{Html.RenderPartial("~/Views/Score/Main.cshtml", new IndustryTower.ViewModels.ScoreVars
+                            {
+                                elemId = Model.book.BookId,
+                                type = IndustryTower.Models.ScoreType.BReview,
+                                count = Model.Scores == null ? 0 : (int)Model.Scores
+                            });}
+                    <ul id="offerLike" class="nav nav-pills nav-stacked inline-block">
+                        @Html.Action("Like", "Like", new { model = new IndustryTower.ViewModels.likeVars { elemId = Model.book.BookId, typ = IndustryTower.ViewModels.LikeType.LikeReviewBook } })
+                    </ul>
+                    <div class="margin-lf-r8-md margin-top-bot-xs inline-block">
+                        <div class="g-plusone" data-annotation="inline" data-width="150" data-href="@Url.Action("Detail", "Review", new { RvId = Model.review.revId }, "http")"></div>
+                        <script type="IN/Share" data-url="@Url.Action("Detail", "Review", new { RvId = Model.book.BookId }, "http")" data-counter="right">
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/Social")
+    @Scripts.Render("~/bundles/Score")
+}

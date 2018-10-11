@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = ViewData["errorMess"];
+}
+
+<div class="alert alert-danger text-center dir">
+    @ViewData["errorMess"]<br />
+    @if (ViewData["link"] != null)
+    {
+        <a href="@ViewData["link"]">
+            @Resource.confirmation
+        </a>
+    }
+</div>
+

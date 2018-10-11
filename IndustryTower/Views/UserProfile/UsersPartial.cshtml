@@ -1,0 +1,10 @@
+﻿@model IEnumerable<IndustryTower.Models.ActiveUser>
+    
+<div id="usersPartialContainer" class="margin-top-bot-md col-md-12 col-xs-12">
+    <div class="row">
+        @foreach (var user in Model)
+        {
+            @Html.ProfilePic(user: user, linkhtmlAttributes: new { @class = "col-md-2 col-xs-2" })
+        }
+    </div>
+</div>

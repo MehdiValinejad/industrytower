@@ -1,0 +1,11 @@
+﻿@model IList<IndustryTower.Models.Word>
+
+<div class="list-group"> 
+    @foreach (var item in Model)
+    {
+        <a class="search-mini-item list-group-item" href="@Url.Action("Detail", "Word", new { WId = item.wordId, DId = Request.QueryString["DId"], WName = StringHelper.URLName(item.word) })">
+            @item.word
+        </a>
+    }
+</div>
+    

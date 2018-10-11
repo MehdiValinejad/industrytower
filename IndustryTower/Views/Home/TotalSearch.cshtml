@@ -1,0 +1,214 @@
+﻿@using IndustryTower.ViewModels
+@{
+    ViewBag.Title = Resource.search + "-" + ViewData["currentFilter"];
+}
+
+
+
+    <div class="row dir">
+        <div id="SearchPanel" class="col-md-3 ">
+            <div class="search-menu ">
+                <ul class="nav nav-pills nav-stacked margin-top-bot-md  hidden-xs">
+                    <li>
+                        @Html.ActionLink(EnumTypes.Total, "TotalSearch", "Home",
+                                                        new
+                                                          {
+                                                              searchtype = SearchType.ALL,
+                                                              currentFilter = ViewData["currentFilter"],
+                                                              sortOrder = ViewData["sortOrder"]
+                                                          }, new { data_searchtype = "ALL" })
+                    </li>
+                    <li>
+                        @Html.ActionLink(EnumTypes.People, "TotalSearch", "Home",
+                                                        new
+                                                          {
+                                                              searchType = SearchType.People,
+                                                              currentFilter = ViewData["currentFilter"],
+                                                              sortOrder = ViewData["sortOrder"]
+                                                          }, new { data_searchtype = "People" })
+                    </li>
+                    <li>
+                        @Html.ActionLink(EnumTypes.Dictionary, "TotalSearch", "Home",
+                                                        new
+                                                          {
+                                                              searchType = SearchType.Dictionary,
+                                                              currentFilter = ViewData["currentFilter"],
+                                                              sortOrder = ViewData["sortOrder"]
+                                                          }, new { data_searchtype = "Dictionary" })
+                    </li>
+                    <li>
+                        @Html.ActionLink(EnumTypes.Book, "TotalSearch", "Home",
+                                                        new
+                                                          {
+                                                              searchType = SearchType.Book,
+                                                              currentFilter = ViewData["currentFilter"],
+                                                              sortOrder = ViewData["sortOrder"]
+                                                          }, new { data_searchtype = "Book" })
+                    </li>
+                    <li>
+                        @Html.ActionLink(EnumTypes.Word, "TotalSearch", "Home",
+                                                        new
+                                                          {
+                                                              searchType = SearchType.Word,
+                                                              currentFilter = ViewData["currentFilter"],
+                                                              sortOrder = ViewData["sortOrder"]
+                                                          }, new { data_searchtype = "Word" })
+                    </li>
+                    <li>
+                        @Html.ActionLink(EnumTypes.Question, "TotalSearch", "Home",
+                                                        new
+                                                          {
+                                                              searchType = SearchType.Question,
+                                                              currentFilter = ViewData["currentFilter"],
+                                                              sortOrder = ViewData["sortOrder"]
+                                                          }, new { data_searchtype = "Question" })
+                    </li>
+                    <li>
+                        @*@Html.ActionLink(EnumTypes.Project, "TotalSearch", "Home",
+            new
+              {
+                  searchType = SearchType.Project,
+                  currentFilter = ViewData["currentFilter"],
+                  sortOrder = ViewData["sortOrder"]
+              }, new { searchType = "Project" })*@
+                    </li>
+                    <li>
+                        @*@Html.ActionLink(EnumTypes.Job, "TotalSearch", "Home",
+            new
+              {
+                  searchType = SearchType.Job,
+                  currentFilter = ViewData["currentFilter"],
+                  sortOrder = ViewData["sortOrder"]
+              }, new { searchType = "Job" })*@
+                    </li>
+                    <li>
+                        @Html.ActionLink(EnumTypes.Event, "TotalSearch", "Home",
+                                                        new
+                                                          {
+                                                              searchType = SearchType.Event,
+                                                              currentFilter = ViewData["currentFilter"],
+                                                              sortOrder = ViewData["sortOrder"]
+                                                          }, new { data_searchtype = "Event" })
+                    </li>
+                    <li>
+                        @Html.ActionLink(EnumTypes.group, "TotalSearch", "Home",
+                                                        new
+                                                          {
+                                                              searchType = SearchType.Group,
+                                                              currentFilter = ViewData["currentFilter"],
+                                                              sortOrder = ViewData["sortOrder"]
+                                                          }, new { data_searchtype = "Group" })
+                    </li>
+                    <li>
+                        @Html.ActionLink(EnumTypes.Webinar, "TotalSearch", "Home",
+                                                        new
+                                                          {
+                                                              searchType = SearchType.Webinar,
+                                                              currentFilter = ViewData["currentFilter"],
+                                                              sortOrder = ViewData["sortOrder"]
+                                                          }, new { data_searchtype = "Webinar" })
+                    </li>
+                    <li>
+                        @Html.ActionLink(EnumTypes.company, "TotalSearch", "Home",
+                                                        new
+                                                          {
+                                                              searchType = SearchType.Company,
+                                                              currentFilter = ViewData["currentFilter"],
+                                                              sortOrder = ViewData["sortOrder"]
+                                                          }, new { data_searchtype = "Company" })
+                    </li>
+                    <li>
+                        @Html.ActionLink(EnumTypes.store, "TotalSearch", "Home",
+                                                        new
+                                                          {
+                                                              searchType = SearchType.Store,
+                                                              currentFilter = ViewData["currentFilter"],
+                                                              sortOrder = ViewData["sortOrder"]
+                                                          }, new { data_searchtype = "Store" })
+                    </li>
+                    <li>
+                        @Html.ActionLink(EnumTypes.Product, "TotalSearch", "Home",
+                                                        new
+                                                          {
+                                                              searchType = SearchType.Product,
+                                                              currentFilter = ViewData["currentFilter"],
+                                                              sortOrder = ViewData["sortOrder"]
+                                                          }, new { data_searchtype = "Product" })
+                    </li>
+                    <li>
+                        @Html.ActionLink(EnumTypes.Service, "TotalSearch", "Home",
+                                                        new
+                                                          {
+                                                              searchType = SearchType.Service,
+                                                              currentFilter = ViewData["currentFilter"],
+                                                              sortOrder = ViewData["sortOrder"]
+                                                          }, new { data_searchtype = "Service" })
+                    </li>
+                    
+
+
+                </ul>
+
+
+            </div>
+            
+        </div>
+        <div class="col-md-9">
+            
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="@Url.Action("Create", "Question")" class="search-create btn btn-primary display-none pull-left" data-searchtype="Question"> @Resource.askQuestion <span class="icon-Question"></span></a>
+                        <a href="@Url.Action("Create", "Book")" class="search-create btn btn-primary display-none pull-left" data-searchtype="Book"> @Resource.createBook <span class="glyphicon glyphicon-book"></span></a>
+                        <div class="search-result-count bottom-border-blue">
+                            <span class="badge"></span> <div class="margin-lf-r8-md inline-block">@Resource.records </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="search-results col-md-12">
+                        <div id="searchPartialContent" style="text-align:center" data-url="@Url.Action("TotalSearch","Home",
+                                new
+                                {
+                                    searchType = ViewData["searchType"],
+                                    currentFilter = ViewData["currentFilter"],
+                                    searchCats = ViewData["initialCats"],
+                                    searchProfessions = ViewData["initialProff"],
+                                    page = 1
+                                })">
+                            <div id="loadingHor"></div>
+                        </div>
+                    </div>
+                </div>
+
+            
+        </div>
+    </div>
+
+
+
+@section SearchPanel{
+    
+<div >
+    
+</div>
+
+    <div>
+        @*@if(ViewData["searchType"] == SearchType.Total)*@
+    </div>
+}
+
+@section SearchResult{
+    
+
+
+}
+
+@section scripts{
+
+}
+
+
+
+

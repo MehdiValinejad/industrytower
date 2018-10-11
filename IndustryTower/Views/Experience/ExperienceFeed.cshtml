@@ -1,0 +1,21 @@
+﻿@model IndustryTower.Models.Experience
+<div class="col-md-12 col-xs-12">
+    <p>
+        @Html.DisplayFor(model => model.CultureTitle)
+    </p>
+    <p>
+        <strong><u>@Resource.company</u></strong> 
+        @if (Model.CoId != null)
+        {
+            @Html.DisplayFor(model => model.Company.CultureCoName)
+        }
+        else
+        {
+            @Html.DisplayFor(model => model.CultureCoName)
+        }
+    </p>
+    <p>
+        <span class="glyphicon glyphicon-calendar"></span> @Html.DatePeriod(Model.attendDate, Model.untilDate)
+    </p>
+
+</div>

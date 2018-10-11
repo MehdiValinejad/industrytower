@@ -1,0 +1,19 @@
+﻿@model IndustryTower.Models.GroupSessionOffer
+
+<div id="newOfferForm" class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Create", "GroupSessionOffer", FormMethod.Post, new { @class = "new-offer-form" }))
+        {
+            @Html.Hidden("SsId", EncryptionHelper.Protect(Model.sessionId))
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                @Html.TextAreaFor(model => model.offer, new { @class="form-control", placeholder = ModelDisplayName.sessionOffer, @onkeyup = "textAreaAdjust(this)" })
+                @Html.ValidationMessageFor(model => model.offer)
+                <input type="submit" value="@Resource.sendOffer" class="btn btn-primary col-md-12 col-xs-12" data-loading-text="@Resource.loading" />
+            </div>
+
+                
+        }
+    </div>
+    
+</div>

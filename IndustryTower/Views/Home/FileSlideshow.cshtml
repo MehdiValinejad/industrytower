@@ -1,0 +1,28 @@
+﻿@model IEnumerable<IndustryTower.ViewModels.FilesBarViewModel>
+
+
+<div id="SlideShow" class="pos-rel no-pad bg-default" data-ld="">
+        <ul id="Slides" class="full-height pos-rel no-pad">
+            @foreach(var file in Model)
+            {
+                <li class="pos-abs overflow-hidden display-none no-pad full-height  full-width" data-url="@Url.Content(file.filepath)"></li>
+            }
+        </ul> 
+        <!-- Arrow Left -->
+        <a id="arrowleft" class="left carousel-control">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <!-- Arrow Right -->
+        <a id="arrowright" class="right carousel-control">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+        <!-- navigator container -->
+        @*<ul id="slideNavigator"></ul>*@
+        <ol id="slideNavigator" class="carousel-indicators" dir="ltr" >
+        </ol>
+        <!-- Navigator Skin End -->
+</div>
+        
+ 
+        
+        

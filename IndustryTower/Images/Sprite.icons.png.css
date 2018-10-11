@@ -1,0 +1,381 @@
+﻿/*
+This is an example of how to use the image sprite in your own CSS files
+*/
+.I_Add {
+/* You may have to set 'display: block' */
+	width: 15px;
+	height: 15px;
+	background: url('Sprite.icons.png') -1px -1px;
+}
+.I_AddNotif {
+/* You may have to set 'display: block' */
+	width: 25px;
+	height: 25px;
+	background: url('Sprite.icons.png') -1px -17px;
+}
+.I_Admin {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -43px;
+}
+.I_ArrowDown {
+/* You may have to set 'display: block' */
+	width: 10px;
+	height: 10px;
+	background: url('Sprite.icons.png') -1px -76px;
+}
+.I_attachment {
+/* You may have to set 'display: block' */
+	width: 20px;
+	height: 20px;
+	background: url('Sprite.icons.png') -1px -87px;
+}
+.I_Certificate {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -108px;
+}
+.I_CertificateLarge {
+/* You may have to set 'display: block' */
+	width: 64px;
+	height: 64px;
+	background: url('Sprite.icons.png') -1px -141px;
+}
+.I_close {
+/* You may have to set 'display: block' */
+	width: 15px;
+	height: 15px;
+	background: url('Sprite.icons.png') -1px -206px;
+}
+.I_CompanySize {
+/* You may have to set 'display: block' */
+	width: 17px;
+	height: 17px;
+	background: url('Sprite.icons.png') -1px -222px;
+}
+.I_Education {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -240px;
+}
+.I_Email {
+/* You may have to set 'display: block' */
+	width: 20px;
+	height: 13px;
+	background: url('Sprite.icons.png') -1px -273px;
+}
+.I_Event {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -287px;
+}
+.I_Eventlight {
+/* You may have to set 'display: block' */
+	width: 27px;
+	height: 25px;
+	background: url('Sprite.icons.png') -1px -320px;
+}
+.I_Experience {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -346px;
+}
+.I_ExperienceLarge {
+/* You may have to set 'display: block' */
+	width: 64px;
+	height: 64px;
+	background: url('Sprite.icons.png') -1px -379px;
+}
+.I_Fax {
+/* You may have to set 'display: block' */
+	width: 17px;
+	height: 17px;
+	background: url('Sprite.icons.png') -1px -444px;
+}
+.I_Free {
+/* You may have to set 'display: block' */
+	width: 86px;
+	height: 64px;
+	background: url('Sprite.icons.png') -1px -462px;
+}
+.I_Freefa {
+/* You may have to set 'display: block' */
+	width: 86px;
+	height: 64px;
+	background: url('Sprite.icons.png') -1px -527px;
+}
+.I_Friends {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -592px;
+}
+.I_Group {
+/* You may have to set 'display: block' */
+	width: 25px;
+	height: 25px;
+	background: url('Sprite.icons.png') -1px -625px;
+}
+.I_Home {
+/* You may have to set 'display: block' */
+	width: 26px;
+	height: 26px;
+	background: url('Sprite.icons.png') -1px -651px;
+}
+.I_Job {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -678px;
+}
+.I_Logo {
+/* You may have to set 'display: block' */
+	width: 51px;
+	height: 51px;
+	background: url('Sprite.icons.png') -1px -711px;
+}
+.I_Logout {
+/* You may have to set 'display: block' */
+	width: 16px;
+	height: 16px;
+	background: url('Sprite.icons.png') -1px -763px;
+}
+.I_MarkedAsAnswer {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -780px;
+}
+.I_Money {
+/* You may have to set 'display: block' */
+	width: 16px;
+	height: 16px;
+	background: url('Sprite.icons.png') -1px -813px;
+}
+.I_More {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 10px;
+	background: url('Sprite.icons.png') -1px -830px;
+}
+.I_Notif_AnswerAcept {
+/* You may have to set 'display: block' */
+	width: 20px;
+	height: 20px;
+	background: url('Sprite.icons.png') -1px -841px;
+}
+.I_Notif_Comment {
+/* You may have to set 'display: block' */
+	width: 20px;
+	height: 20px;
+	background: url('Sprite.icons.png') -1px -862px;
+}
+.I_Notif_Follow {
+/* You may have to set 'display: block' */
+	width: 24px;
+	height: 24px;
+	background: url('Sprite.icons.png') -1px -883px;
+}
+.I_Notif_FriendReq {
+/* You may have to set 'display: block' */
+	width: 20px;
+	height: 20px;
+	background: url('Sprite.icons.png') -1px -908px;
+}
+.I_Notif_Like {
+/* You may have to set 'display: block' */
+	width: 20px;
+	height: 20px;
+	background: url('Sprite.icons.png') -1px -929px;
+}
+.I_Notif_Post {
+/* You may have to set 'display: block' */
+	width: 20px;
+	height: 20px;
+	background: url('Sprite.icons.png') -1px -950px;
+}
+.I_Notif_QAnswer {
+/* You may have to set 'display: block' */
+	width: 20px;
+	height: 20px;
+	background: url('Sprite.icons.png') -1px -971px;
+}
+.I_Notifications {
+/* You may have to set 'display: block' */
+	width: 28px;
+	height: 25px;
+	background: url('Sprite.icons.png') -1px -992px;
+}
+.I_NotificationsFA {
+/* You may have to set 'display: block' */
+	width: 28px;
+	height: 25px;
+	background: url('Sprite.icons.png') -1px -1018px;
+}
+.I_Office {
+/* You may have to set 'display: block' */
+	width: 17px;
+	height: 17px;
+	background: url('Sprite.icons.png') -1px -1044px;
+}
+.I_Patent {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -1062px;
+}
+.I_Pencil {
+/* You may have to set 'display: block' */
+	width: 15px;
+	height: 15px;
+	background: url('Sprite.icons.png') -1px -1095px;
+}
+.I_Question {
+/* You may have to set 'display: block' */
+	width: 64px;
+	height: 64px;
+	background: url('Sprite.icons.png') -1px -1111px;
+}
+.I_Question_Purple {
+/* You may have to set 'display: block' */
+	width: 32px;
+	height: 32px;
+	background: url('Sprite.icons.png') -1px -1176px;
+}
+.I_QuestionAsked {
+/* You may have to set 'display: block' */
+	width: 48px;
+	height: 48px;
+	background: url('Sprite.icons.png') -1px -1209px;
+}
+.I_QuestionsAnswered {
+/* You may have to set 'display: block' */
+	width: 26px;
+	height: 26px;
+	background: url('Sprite.icons.png') -1px -1258px;
+}
+.I_QuestionsAnsweredLarge {
+/* You may have to set 'display: block' */
+	width: 48px;
+	height: 48px;
+	background: url('Sprite.icons.png') -1px -1285px;
+}
+.I_QuestionUP {
+/* You may have to set 'display: block' */
+	width: 13px;
+	height: 26px;
+	background: url('Sprite.icons.png') -1px -1334px;
+}
+.I_RecycleBin {
+/* You may have to set 'display: block' */
+	width: 15px;
+	height: 16px;
+	background: url('Sprite.icons.png') -1px -1361px;
+}
+.I_Search {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1378px;
+}
+.I_Search_All {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1401px;
+}
+.I_Search_ArrowDown {
+/* You may have to set 'display: block' */
+	width: 10px;
+	height: 10px;
+	background: url('Sprite.icons.png') -1px -1424px;
+}
+.I_Search_Company {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 23px;
+	background: url('Sprite.icons.png') -1px -1435px;
+}
+.I_Search_Event {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1459px;
+}
+.I_Search_Group {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1482px;
+}
+.I_Search_Job {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1505px;
+}
+.I_Search_People {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1528px;
+}
+.I_Search_Product {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1551px;
+}
+.I_Search_project {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1574px;
+}
+.I_Search_Question {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1597px;
+}
+.I_Search_Services {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1620px;
+}
+.I_Search_Store {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1643px;
+}
+.I_Search_Webinar {
+/* You may have to set 'display: block' */
+	width: 22px;
+	height: 22px;
+	background: url('Sprite.icons.png') -1px -1666px;
+}
+.I_Settings {
+/* You may have to set 'display: block' */
+	width: 16px;
+	height: 16px;
+	background: url('Sprite.icons.png') -1px -1689px;
+}
+.I_Telephone {
+/* You may have to set 'display: block' */
+	width: 17px;
+	height: 16px;
+	background: url('Sprite.icons.png') -1px -1706px;
+}
+.I_WebSite {
+/* You may have to set 'display: block' */
+	width: 17px;
+	height: 17px;
+	background: url('Sprite.icons.png') -1px -1723px;
+}

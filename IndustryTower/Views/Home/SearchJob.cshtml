@@ -1,0 +1,29 @@
+﻿@model PagedList.IPagedList<IndustryTower.ViewModels.SearchViewModel>
+@foreach (var item in Model)
+{
+    var stid = EncryptionHelper.Protect(item.store.storeID);
+        <div class="search-grid-box">
+            <div class="search-grid-logo">
+                @Html.ProfilePic(store: item.store)
+            </div>
+            <div class="search-box-body overflow-hidden">
+                @Html.ActionLink(item.store.CultureStoreName, "SProfile", "Store", new { StId = stid, StName = StringHelper.URLName(item.store.CultureStoreName) }, null)
+                <p>
+                    @Html.DisplayAbstractFor(item.store.CultureAbout)
+                </p>
+            </div>
+            <div class="search-box-categories">
+                <span>@Resource.categories:</span>@Html.AjaxPrtialLoader(Url.Action("RelatedCategories", "Category", new { StId = stid }))
+            </div>
+        </div>
+}
+@if (Model.PageCount > Model.PageNumber)
+{
+    <div id="nextSearchResults" data-nextpage="@(Model.PageNumber + 1)">
+        @Html.NextItems("TotalSearch", "Home", new
+   {
+       page = Model.PageNumber + 1,
+       currentFilter = ViewData["currentFilter"]
+   })
+    </div>
+}

@@ -1,0 +1,97 @@
+﻿@model IndustryTower.ViewModels.PayForPlanViewModel
+@using IndustryTower.Models;
+@using IndustryTower.ViewModels;
+@{
+    ViewBag.Title = Resource.payForPlan;
+}
+
+<div class="row dir">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                @if (Model.PlanRequest != null)
+                {
+                    <h2>@Resource.payForPlan</h2>
+                    <h4>
+                        <strong>
+                            <u>@ModelDisplayName.planType</u>
+                        </strong>
+                        @EnumTypes.ResourceManager.GetString(Model.PlanRequest.planType.ToString().ToLower())
+                    </h4>
+                    <h4>
+                        <strong>
+                            <u>@ModelDisplayName.plan</u>
+                        </strong>
+                        @EnumTypes.ResourceManager.GetString(Model.PlanRequest.plan.ToString().ToLower())
+                    </h4>
+                    <h4>
+                        <strong>
+                            <u>@ModelDisplayName.namePlanReq</u>
+                        </strong>
+                        @Html.DisplayFor(model => model.PlanRequest.name)
+                    </h4>
+                    <h4>
+                        <strong>
+                            <u>@ModelDisplayName.aboutPlanReq</u>
+                        </strong>
+                        @Html.DisplayFor(model => model.PlanRequest.about)
+                    </h4>
+                    <h4>
+                        <strong>
+                            <u>@ModelDisplayName.phoneNo</u>
+                        </strong>
+
+                        @Html.DisplayFor(model => model.PlanRequest.phoneNo)
+                    </h4>
+                    <h4>
+                        <strong>
+                            <u>@ModelDisplayName.regCode</u>
+                        </strong>
+                        @Html.DisplayFor(model => model.PlanRequest.regCode)
+                    </h4>
+                    <h4>
+                        <strong>
+                            <u>@ModelDisplayName.regDate</u>
+                        </strong>
+                        @Html.DisplayFor(model => model.PlanRequest.reqDate)
+                    </h4>
+                }
+                else if (Model.PlanRequestRevival != null)
+                {
+
+                    <h2>@Resource.payForPlan</h2>
+                    <h4>
+                        <strong>
+                            <u>@ModelDisplayName.plan</u>
+                        </strong>
+                        @EnumTypes.ResourceManager.GetString(Model.PlanRequestRevival.plan.ToString().ToLower())
+                    </h4>
+                    <h4>
+                        <strong>
+                            <u>@ModelDisplayName.planType</u>
+                        </strong>
+                        @EnumTypes.ResourceManager.GetString(Model.PlanRequestRevival.planType.ToString().ToLower())
+                    </h4>
+                }
+            </div>
+            <div class="panel-body pos-rel">
+                <a id="internetPay" href="#" class="row" onclick="javascript: $(this).find('form').submit(); loadingBox($(this))">
+                    <div class="col-md-10 col-md-offset-1">
+                       Payment Gateway
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/PlanRequest")
+}
+
